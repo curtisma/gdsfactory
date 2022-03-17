@@ -1,0 +1,2552 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Components with hierarchy" href="04_components_hierarchy.html" /><link rel="prev" title="Paths and straights" href="03_waveguides_paths_crossections.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>Components - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../notebooks.html">Layout Tutorial</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="Components">
+<h1>Components<a class="headerlink" href="#Components" title="Permalink to this headline">#</a></h1>
+<p>gdsfactory provides a generic customizable components library in <code class="docutils literal notranslate"><span class="pre">gf.components</span></code></p>
+<section id="Basic-shapes">
+<h2>Basic shapes<a class="headerlink" href="#Basic-shapes" title="Permalink to this headline">#</a></h2>
+<section id="Rectangle">
+<h3>Rectangle<a class="headerlink" href="#Rectangle" title="Permalink to this headline">#</a></h3>
+<p>To create a simple rectangle, there are two functions:</p>
+<p><code class="docutils literal notranslate"><span class="pre">gf.components.rectangle()</span></code> can create a basic rectangle:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">gf</span><span class="o">.</span><span class="n">CONF</span><span class="o">.</span><span class="n">plotter</span> <span class="o">=</span> <span class="s2">"matplotlib"</span>  <span class="c1"># This notebook rendered with 'holoviews' exceeds the 100MB limit for github pages</span>
+
+<span class="n">r1</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">r1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:25.448 | INFO     | gdsfactory.config:&lt;module&gt;:52 - Load '/home/runner/work/gdsfactory/gdsfactory/gdsfactory' 4.4.12
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__3_1.png" src="../_images/notebooks_04_components__3_1.png"/>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">gf.components.bbox()</span></code> can also create a rectangle based on a bounding box. This is useful if you want to create a rectangle which exactly surrounds a piece of existing geometry. For example, if we have an arc geometry and we want to define a box around it, we can use <code class="docutils literal notranslate"><span class="pre">gf.components.bbox()</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">arc</span> <span class="o">=</span> <span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_circular</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="c1"># Draw a rectangle around the arc we created by using the arc's bounding box</span>
+<span class="n">rect</span> <span class="o">=</span> <span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bbox</span><span class="p">(</span><span class="n">bbox</span><span class="o">=</span><span class="n">arc</span><span class="o">.</span><span class="n">bbox</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__5_0.png" src="../_images/notebooks_04_components__5_0.png"/>
+</div>
+</div>
+</section>
+<section id="Cross">
+<h3>Cross<a class="headerlink" href="#Cross" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.cross()</span></code> function creates a cross structure:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:27.021 | INFO     | gdsfactory.show:show:36 - Klayout show cross_d6e1c0cf: uid 7, ports [], aliases [], 0 polygons, 2 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+cross_d6e1c0cf: uid 7, ports [], aliases [], 0 polygons, 2 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__7_2.png" src="../_images/notebooks_04_components__7_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+cross_d6e1c0cf: uid 7, ports [], aliases [], 0 polygons, 2 references
+</pre></div></div>
+</div>
+</section>
+<section id="Ellipse">
+<h3>Ellipse<a class="headerlink" href="#Ellipse" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.ellipse()</span></code> function creates an ellipse by defining the major and minor radii:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">angle_resolution</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:27.178 | INFO     | gdsfactory.show:show:36 - Klayout show ellipse_dda9d6c4: uid 10, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ellipse_dda9d6c4: uid 10, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__9_2.png" src="../_images/notebooks_04_components__9_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ellipse_dda9d6c4: uid 10, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+</section>
+<section id="Circle">
+<h3>Circle<a class="headerlink" href="#Circle" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.circle()</span></code> function creates a circle:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">angle_resolution</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:27.425 | INFO     | gdsfactory.show:show:36 - Klayout show circle: uid 11, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+circle: uid 11, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__11_2.png" src="../_images/notebooks_04_components__11_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+circle: uid 11, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+</section>
+<section id="Ring">
+<h3>Ring<a class="headerlink" href="#Ring" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.ring()</span></code> function creates a ring. The radius refers to the center radius of the ring structure (halfway between the inner and outer radius).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ring</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">angle_resolution</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:27.548 | INFO     | gdsfactory.show:show:36 - Klayout show ring_212e6ad7: uid 12, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ring_212e6ad7: uid 12, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__13_2.png" src="../_images/notebooks_04_components__13_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ring_212e6ad7: uid 12, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ring_single</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">gap</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">length_x</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">length_y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:27.694 | INFO     | gdsfactory.show:show:36 - Klayout show ring_single_ea4f7b3b: uid 13, ports ['o2', 'o1'], aliases [], 0 polygons, 6 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ring_single_ea4f7b3b: uid 13, ports ['o2', 'o1'], aliases [], 0 polygons, 6 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__14_2.png" src="../_images/notebooks_04_components__14_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ring_single_ea4f7b3b: uid 13, ports ['o2', 'o1'], aliases [], 0 polygons, 6 references
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ring_double</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">gap</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">length_x</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">length_y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:27.883 | INFO     | gdsfactory.show:show:36 - Klayout show ring_double_e8ddd41f: uid 26, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 0 polygons, 4 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ring_double_e8ddd41f: uid 26, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 0 polygons, 4 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__15_2.png" src="../_images/notebooks_04_components__15_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ring_double_e8ddd41f: uid 26, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 0 polygons, 4 references
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ring_double</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">gap</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">radius</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">length_x</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">length_y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">bend</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_circular</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:28.078 | INFO     | gdsfactory.show:show:36 - Klayout show ring_double_a1d9b675: uid 29, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 0 polygons, 4 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ring_double_a1d9b675: uid 29, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 0 polygons, 4 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__16_2.png" src="../_images/notebooks_04_components__16_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ring_double_a1d9b675: uid 29, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 0 polygons, 4 references
+</pre></div></div>
+</div>
+</section>
+<section id="Bend-circular">
+<h3>Bend circular<a class="headerlink" href="#Bend-circular" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.bend_circular()</span></code> function creates an arc. The radius refers to the center radius of the arc (halfway between the inner and outer radius).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_circular</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">npoints</span><span class="o">=</span><span class="mi">720</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:28.270 | INFO     | gdsfactory.show:show:36 - Klayout show bend_circular_468099db: uid 30, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+bend_circular_468099db: uid 30, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__18_2.png" src="../_images/notebooks_04_components__18_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+bend_circular_468099db: uid 30, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+</section>
+<section id="Bend-euler">
+<h3>Bend euler<a class="headerlink" href="#Bend-euler" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.bend_euler()</span></code> function creates an adiabatic bend in which the bend radius changes gradually. Euler bends have lower loss than circular bends.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_euler</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">npoints</span><span class="o">=</span><span class="mi">720</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:28.412 | INFO     | gdsfactory.show:show:36 - Klayout show bend_euler_468099db: uid 32, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+bend_euler_468099db: uid 32, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__20_2.png" src="../_images/notebooks_04_components__20_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+bend_euler_468099db: uid 32, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+</section>
+<section id="Tapers">
+<h3>Tapers<a class="headerlink" href="#Tapers" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">gf.components.taper()</span></code>is defined by setting its length and its start and end length. It has two ports, <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>, on either end, allowing you to easily connect it to other structures.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">taper</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">width1</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">width2</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:28.552 | INFO     | gdsfactory.show:show:36 - Klayout show taper_63241461: uid 34, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+taper_63241461: uid 34, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__22_2.png" src="../_images/notebooks_04_components__22_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+taper_63241461: uid 34, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">gf.components.ramp()</span></code> is a structure is similar to <code class="docutils literal notranslate"><span class="pre">taper()</span></code> except it is asymmetric. It also has two ports, <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>, on either end.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ramp</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">width1</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">width2</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:28.678 | INFO     | gdsfactory.show:show:36 - Klayout show ramp_5d95a730: uid 35, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ramp_5d95a730: uid 35, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__24_2.png" src="../_images/notebooks_04_components__24_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ramp_5d95a730: uid 35, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+</section>
+<section id="Common-compound-shapes">
+<h3>Common compound shapes<a class="headerlink" href="#Common-compound-shapes" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.L()</span></code> function creates a “L” shape with ports on either end named <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">L</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:28.798 | INFO     | gdsfactory.show:show:36 - Klayout show L_09edd815: uid 36, ports ['e1', 'e2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+L_09edd815: uid 36, ports ['e1', 'e2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__27_2.png" src="../_images/notebooks_04_components__27_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+L_09edd815: uid 36, ports ['e1', 'e2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.C()</span></code> function creates a “C” shape with ports on either end named <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">C</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:28.911 | INFO     | gdsfactory.show:show:36 - Klayout show C_5b90909a: uid 37, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+C_5b90909a: uid 37, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__29_2.png" src="../_images/notebooks_04_components__29_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+C_5b90909a: uid 37, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Text">
+<h2>Text<a class="headerlink" href="#Text" title="Permalink to this headline">#</a></h2>
+<p>Gdsfactory has an implementation of the DEPLOF font with the majority of english ASCII characters represented (thanks to phidl)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="n">text</span><span class="o">=</span><span class="s2">"Hello world!</span><span class="se">\n</span><span class="s2">Multiline text</span><span class="se">\n</span><span class="s2">Left-justified"</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">justify</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span>
+    <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="c1"># `justify` should be either 'left', 'center', or 'right'</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:29.033 | INFO     | gdsfactory.show:show:36 - Klayout show text_6aab7251: uid 38, ports [], aliases [], 44 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+text_6aab7251: uid 38, ports [], aliases [], 44 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__31_2.png" src="../_images/notebooks_04_components__31_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+text_6aab7251: uid 38, ports [], aliases [], 44 polygons, 0 references
+</pre></div></div>
+</div>
+</section>
+<section id="Grid-/-packer-/-align-/-distribute">
+<h2>Grid / packer / align / distribute<a class="headerlink" href="#Grid-/-packer-/-align-/-distribute" title="Permalink to this headline">#</a></h2>
+<section id="Grid">
+<h3>Grid<a class="headerlink" href="#Grid" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.grid()</span></code> function can take a list (or 2D array) of objects and arrange them along a grid. This is often useful for making parameter sweeps. If the <code class="docutils literal notranslate"><span class="pre">separation</span></code> argument is true, grid is arranged such that the elements are guaranteed not to touch, with a <code class="docutils literal notranslate"><span class="pre">spacing</span></code> distance between them. If <code class="docutils literal notranslate"><span class="pre">separation</span></code> is false, elements are spaced evenly along a grid. The <code class="docutils literal notranslate"><span class="pre">align_x</span></code>/<code class="docutils literal notranslate"><span class="pre">align_y</span></code> arguments specify intra-row/intra-column alignment. The<code class="docutils literal notranslate"><span class="pre">edge_x</span></code>/<code class="docutils literal notranslate"><span class="pre">edge_y</span></code> arguments
+specify inter-row/inter-column alignment (unused if <code class="docutils literal notranslate"><span class="pre">separation</span> <span class="pre">=</span> <span class="pre">True</span></code>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">components_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">width1</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">width2</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]:</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">taper</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">width1</span><span class="o">=</span><span class="n">width1</span><span class="p">,</span> <span class="n">width2</span><span class="o">=</span><span class="n">width2</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">components_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+    <span class="n">components_list</span><span class="p">,</span>
+    <span class="n">spacing</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">separation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="n">align_x</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span>
+    <span class="n">align_y</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span>
+    <span class="n">edge_x</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span>
+    <span class="n">edge_y</span><span class="o">=</span><span class="s2">"ymax"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__34_0.png" src="../_images/notebooks_04_components__34_0.png"/>
+</div>
+</div>
+</section>
+<section id="Packer">
+<h3>Packer<a class="headerlink" href="#Packer" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.pack()</span></code> function packs geometries together into rectangular bins. If a <code class="docutils literal notranslate"><span class="pre">max_size</span></code> is specified, the function will create as many bins as is necessary to pack all the geometries and then return a list of the filled-bin Devices.</p>
+<p>Here we generate several random shapes then pack them together automatically. We allow the bin to be as large as needed to fit all the Devices by specifying <code class="docutils literal notranslate"><span class="pre">max_size</span> <span class="pre">=</span> <span class="pre">(None,</span> <span class="pre">None)</span></code>. By setting <code class="docutils literal notranslate"><span class="pre">aspect_ratio</span> <span class="pre">=</span> <span class="pre">(2,1)</span></code>, we specify the rectangular bin it tries to pack them into should be twice as wide as it is tall:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">D_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+
+<span class="n">D_packed_list</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+    <span class="n">D_list</span><span class="p">,</span>  <span class="c1"># Must be a list or tuple of Devices</span>
+    <span class="n">spacing</span><span class="o">=</span><span class="mf">1.25</span><span class="p">,</span>  <span class="c1"># Minimum distance between adjacent shapes</span>
+    <span class="n">aspect_ratio</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># (width, height) ratio of the rectangular bin</span>
+    <span class="n">max_size</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>  <span class="c1"># Limits the size into which the shapes will be packed</span>
+    <span class="n">density</span><span class="o">=</span><span class="mf">1.05</span><span class="p">,</span>  <span class="c1"># Values closer to 1 pack tighter but require more computation</span>
+    <span class="n">sort_by_area</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Pre-sorts the shapes by area</span>
+<span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">D_packed_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Only one bin was created, so we plot that</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__36_0.png" src="../_images/notebooks_04_components__36_0.png"/>
+</div>
+</div>
+<p>Say we need to pack many shapes into multiple 500x500 unit die. If we set <code class="docutils literal notranslate"><span class="pre">max_size</span> <span class="pre">=</span> <span class="pre">(500,500)</span></code> the shapes will be packed into as many 500x500 unit die as required to fit them all:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">D_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">D_packed_list</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+    <span class="n">D_list</span><span class="p">,</span>  <span class="c1"># Must be a list or tuple of Devices</span>
+    <span class="n">spacing</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># Minimum distance between adjacent shapes</span>
+    <span class="n">aspect_ratio</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># Shape of the box</span>
+    <span class="n">max_size</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span>  <span class="c1"># Limits the size into which the shapes will be packed</span>
+    <span class="n">density</span><span class="o">=</span><span class="mf">1.05</span><span class="p">,</span>  <span class="c1"># Values closer to 1 pack tighter but require more computation</span>
+    <span class="n">sort_by_area</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Pre-sorts the shapes by area</span>
+<span class="p">)</span>
+
+<span class="c1"># Put all packed bins into a single device and spread them out with distribute()</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="p">[</span><span class="n">F</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="k">for</span> <span class="n">D</span> <span class="ow">in</span> <span class="n">D_packed_list</span><span class="p">]</span>
+<span class="n">F</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">separation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">F</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/runner/work/gdsfactory/gdsfactory/gdsfactory/pack.py:208: UserWarning: unable to pack in one component, creating 4 components
+  warnings.warn(f"unable to pack in one component, creating {groups} components")
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__38_1.png" src="../_images/notebooks_04_components__38_1.png"/>
+</div>
+</div>
+<p>Note that the packing problem is an NP-complete problem, so <code class="docutils literal notranslate"><span class="pre">gf.components.packer()</span></code> may be slow if there are more than a few hundred Devices to pack (in that case, try pre-packing a few dozen at a time then packing the resulting bins). Requires the <code class="docutils literal notranslate"><span class="pre">rectpack</span></code> python package.</p>
+</section>
+<section id="Distribute">
+<h3>Distribute<a class="headerlink" href="#Distribute" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">distribute()</span></code> function allows you to space out elements within a Device evenly in the x or y direction. It is meant to duplicate the distribute functionality present in Inkscape / Adobe Illustrator:</p>
+<p><img alt="image0" src="../_images/inkscape_align.png"/></p>
+<p>Say we start out with a few random-sized rectangles we want to space out:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="c1"># Create different-sized rectangles and add them to D</span>
+<span class="p">[</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span>
+        <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">move</span><span class="p">([</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__43_0.png" src="../_images/notebooks_04_components__43_0.png"/>
+</div>
+</div>
+<p>Oftentimes, we want to guarantee some distance between the objects. By setting <code class="docutils literal notranslate"><span class="pre">separation</span> <span class="pre">=</span> <span class="pre">True</span></code> we move each object such that there is <code class="docutils literal notranslate"><span class="pre">spacing</span></code> distance between them:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="c1"># Create different-sized rectangles and add them to D</span>
+<span class="p">[</span>
+    <span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">]))</span><span class="o">.</span><span class="n">move</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="c1"># Distribute all the rectangles in D along the x-direction with a separation of 5</span>
+<span class="n">D</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span>
+    <span class="n">elements</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span>  <span class="c1"># either 'all' or a list of objects</span>
+    <span class="n">direction</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span>  <span class="c1"># 'x' or 'y'</span>
+    <span class="n">spacing</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">separation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__45_0.png" src="../_images/notebooks_04_components__45_0.png"/>
+</div>
+</div>
+<p>Alternatively, we can spread them out on a fixed grid by setting <code class="docutils literal notranslate"><span class="pre">separation</span> <span class="pre">=</span> <span class="pre">False</span></code>. Here we align the left edge (<code class="docutils literal notranslate"><span class="pre">edge</span> <span class="pre">=</span> <span class="pre">'min'</span></code>) of each object along a grid spacing of 100:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="p">[</span>
+    <span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">]))</span><span class="o">.</span><span class="n">move</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">D</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span>
+    <span class="n">elements</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">separation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="s2">"xmin"</span>
+<span class="p">)</span>  <span class="c1"># edge must be either 'xmin' (left), 'xmax' (right), or 'x' (center)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__47_0.png" src="../_images/notebooks_04_components__47_0.png"/>
+</div>
+</div>
+<p>The alignment can be done along the right edge as well by setting <code class="docutils literal notranslate"><span class="pre">edge</span> <span class="pre">=</span> <span class="pre">'max'</span></code>, or along the center by setting <code class="docutils literal notranslate"><span class="pre">edge</span> <span class="pre">=</span> <span class="pre">'center'</span></code> like in the following:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="p">[</span>
+    <span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">]))</span><span class="o">.</span><span class="n">move</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">D</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span>
+    <span class="n">elements</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">separation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="s2">"x"</span>
+<span class="p">)</span>  <span class="c1"># edge must be either 'xmin' (left), 'xmax' (right), or 'x' (center)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__49_0.png" src="../_images/notebooks_04_components__49_0.png"/>
+</div>
+</div>
+</section>
+<section id="Align">
+<h3>Align<a class="headerlink" href="#Align" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">align()</span></code> function allows you to elements within a Device horizontally or vertically. It is meant to duplicate the alignment functionality present in Inkscape / Adobe Illustrator:</p>
+<p><img alt="image0" src="../_images/inkscape_align.png"/></p>
+<p>Say we <code class="docutils literal notranslate"><span class="pre">distribute()</span></code> a few objects, but they’re all misaligned:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="c1"># Create different-sized rectangles and add them to D then distribute them</span>
+<span class="p">[</span>
+    <span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">]))</span><span class="o">.</span><span class="n">move</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">D</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">separation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__53_0.png" src="../_images/notebooks_04_components__53_0.png"/>
+</div>
+</div>
+<p>we can use the <code class="docutils literal notranslate"><span class="pre">align()</span></code> function to align their top edges (``alignment = ‘ymax’):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="c1"># Create different-sized rectangles and add them to D then distribute them</span>
+<span class="p">[</span>
+    <span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">]))</span><span class="o">.</span><span class="n">move</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">D</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">separation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Align top edges</span>
+<span class="n">D</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="s2">"ymax"</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__55_0.png" src="../_images/notebooks_04_components__55_0.png"/>
+</div>
+</div>
+<p>or align their centers (``alignment = ‘y’):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="c1"># Create different-sized rectangles and add them to D then distribute them</span>
+<span class="p">[</span>
+    <span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">20</span><span class="p">]))</span><span class="o">.</span><span class="n">move</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">D</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">separation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Align top edges</span>
+<span class="n">D</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="s2">"y"</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__57_0.png" src="../_images/notebooks_04_components__57_0.png"/>
+</div>
+</div>
+<p>other valid alignment options include <code class="docutils literal notranslate"><span class="pre">'xmin',</span> <span class="pre">'x',</span> <span class="pre">'xmax',</span> <span class="pre">'ymin',</span> <span class="pre">'y',</span> <span class="pre">and</span> <span class="pre">'ymax'</span></code></p>
+</section>
+</section>
+<section id="Boolean-/-outline-/-offset-/-invert">
+<h2>Boolean / outline / offset / invert<a class="headerlink" href="#Boolean-/-outline-/-offset-/-invert" title="Permalink to this headline">#</a></h2>
+<p>There are several common boolean-type operations available in the geometry library. These include typical boolean operations (and/or/not/xor), offsetting (expanding/shrinking polygons), outlining, and inverting.</p>
+<section id="Boolean">
+<h3>Boolean<a class="headerlink" href="#Boolean" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.boolean.boolean()</span></code> function can perform AND/OR/NOT/XOR operations, and will return a new geometry with the result of that operation.</p>
+<p>Speedup note: The <code class="docutils literal notranslate"><span class="pre">num_divisions</span></code> argument can be used to divide up the geometry into multiple rectangular regions and process each region sequentially (which is more computationally efficient). If you have a large geometry that takes a long time to process, try using <code class="docutils literal notranslate"><span class="pre">num_divisions</span> <span class="pre">=</span> <span class="pre">[10,10]</span></code> to optimize the operation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">E</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">boolean</span><span class="p">(</span>
+    <span class="n">A</span><span class="o">=</span><span class="n">E</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s2">"not"</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">num_divisions</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># Other operations include 'and', 'or', 'xor', or equivalently 'A-B', 'B-A', 'A+B'</span>
+
+<span class="c1"># Plot the originals and the result</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">.</span><span class="n">movey</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">C</span><span class="p">)</span><span class="o">.</span><span class="n">movex</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__61_0.png" src="../_images/notebooks_04_components__61_0.png"/>
+</div>
+</div>
+<p>To learn how booleans work you can try all the different operations <code class="docutils literal notranslate"><span class="pre">not</span></code>, <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, <code class="docutils literal notranslate"><span class="pre">xor</span></code></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">operation</span> <span class="o">=</span> <span class="s2">"not"</span>
+<span class="n">operation</span> <span class="o">=</span> <span class="s2">"and"</span>
+<span class="n">operation</span> <span class="o">=</span> <span class="s2">"or"</span>
+<span class="n">operation</span> <span class="o">=</span> <span class="s2">"xor"</span>
+
+<span class="n">r1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">110</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="n">angle_resolution</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="n">c1</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="n">r1</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">angle_resolution</span><span class="o">=</span><span class="n">angle_resolution</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="n">r2</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">angle_resolution</span><span class="o">=</span><span class="n">angle_resolution</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span>
+
+<span class="n">c3</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">boolean_klayout</span><span class="p">(</span>
+    <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="n">operation</span><span class="p">,</span> <span class="n">layer3</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>  <span class="c1"># klayout booleans</span>
+<span class="n">c3</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:31.716 | INFO     | gdsfactory.component:write_gds:875 - Write GDS to '/tmp/tmpg84efyf2/gdsfactory/ellipse_65c4e6b8.gds'
+2022-03-17 04:12:31.718 | INFO     | gdsfactory.component:write_gds:875 - Write GDS to '/tmp/tmpg84efyf2/gdsfactory/ellipse_cefb2864.gds'
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 2 µs, sys: 0 ns, total: 2 µs
+Wall time: 5.48 µs
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__64_2.png" src="../_images/notebooks_04_components__64_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span>
+<span class="n">c4</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">boolean</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="n">operation</span><span class="p">)</span>
+<span class="n">c4</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 2 µs, sys: 1 µs, total: 3 µs
+Wall time: 5.48 µs
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__65_1.png" src="../_images/notebooks_04_components__65_1.png"/>
+</div>
+</div>
+</section>
+<section id="Offset">
+<h3>Offset<a class="headerlink" href="#Offset" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">offset()</span></code> function takes the polygons of the input geometry, combines them together, and expands/contracts them. The function returns polygons on a single layer – it does not respect layers.</p>
+<p>Speedup note: The <code class="docutils literal notranslate"><span class="pre">num_divisions</span></code> argument can be used to divide up the geometry into multiple rectangular regions and process each region sequentially (which is more computationally efficient). If you have a large geometry that takes a long time to process, try using <code class="docutils literal notranslate"><span class="pre">num_divisions</span> <span class="pre">=</span> <span class="pre">[10,10]</span></code> to optimize the operation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="c1"># Create `T`, an ellipse and rectangle which will be offset (expanded / contracted)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="s2">"ellipse_and_rectangle"</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">T</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">T</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">move</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">])</span>
+
+<span class="n">Texpanded</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span>
+    <span class="n">T</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">join_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">num_divisions</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">Texpanded</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"expanded"</span>
+<span class="n">Tshrink</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span>
+    <span class="n">T</span><span class="p">,</span>
+    <span class="n">distance</span><span class="o">=-</span><span class="mf">1.5</span><span class="p">,</span>
+    <span class="n">join_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">precision</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+    <span class="n">num_divisions</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">Tshrink</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"shrink"</span>
+
+<span class="c1"># Plot the original geometry, the expanded, and the shrunk versions</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="s2">"top"</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">Texpanded</span><span class="p">)</span>
+<span class="n">t3</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">Tshrink</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">distribute</span><span class="p">([</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">],</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__67_0.png" src="../_images/notebooks_04_components__67_0.png"/>
+</div>
+</div>
+</section>
+<section id="Outline">
+<h3>Outline<a class="headerlink" href="#Outline" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">outline()</span></code> function takes the polygons of the input geometry then performs an offset and “not” boolean operation to create an outline. The function returns polygons on a single layer – it does not respect layers.</p>
+<p>Speedup note: The <code class="docutils literal notranslate"><span class="pre">num_divisions</span></code> argument can be used to divide up the geometry into multiple rectangular regions and process each region sequentially (which is more computationally efficient). If you have a large geometry that takes a long time to process, try using <code class="docutils literal notranslate"><span class="pre">num_divisions</span> <span class="pre">=</span> <span class="pre">[10,10]</span></code> to optimize the operation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="c1"># Create a blank device and add two shapes</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">X</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="n">X</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+
+<span class="n">O</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">outline</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Plot the original geometry and the result</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">O</span><span class="p">)</span><span class="o">.</span><span class="n">movex</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__69_0.png" src="../_images/notebooks_04_components__69_0.png"/>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">open_ports</span></code> argument opens holes in the outlined geometry at each Port location.</p>
+<ul class="simple">
+<li><p>If not False, holes will be cut in the outline such that the Ports are not covered.</p></li>
+<li><p>If True, the holes will have the same width as the Ports.</p></li>
+<li><p>If a float, the holes will be widened by that value.</p></li>
+<li><p>If a float equal to the outline <code class="docutils literal notranslate"><span class="pre">distance</span></code>, the outline will be flush with the port (useful positive-tone processes).</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">L</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__71_0.png" src="../_images/notebooks_04_components__71_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Outline the geometry and open a hole at each port</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">outline</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">open_ports</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>  <span class="c1"># No holes</span>
+<span class="n">N</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__72_0.png" src="../_images/notebooks_04_components__72_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">O</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">outline</span><span class="p">(</span>
+    <span class="n">D</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">open_ports</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>  <span class="c1"># Hole is the same width as the port</span>
+<span class="n">O</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__73_0.png" src="../_images/notebooks_04_components__73_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">outline</span><span class="p">(</span>
+    <span class="n">D</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">open_ports</span><span class="o">=</span><span class="mf">2.9</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>  <span class="c1"># Change the hole size by entering a float</span>
+<span class="n">P</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__74_0.png" src="../_images/notebooks_04_components__74_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">outline</span><span class="p">(</span>
+    <span class="n">D</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">open_ports</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>  <span class="c1"># Creates flush opening (open_ports &gt; distance)</span>
+<span class="n">Q</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__75_0.png" src="../_images/notebooks_04_components__75_0.png"/>
+</div>
+</div>
+</section>
+<section id="Invert">
+<h3>Invert<a class="headerlink" href="#Invert" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.boolean.invert()</span></code> function creates an inverted version of the input geometry. The function creates a rectangle around the geometry (with extra padding of distance <code class="docutils literal notranslate"><span class="pre">border</span></code>), then subtract all polygons from all layers from that rectangle, resulting in an inverted version of the geometry.</p>
+<p>Speedup note: The <code class="docutils literal notranslate"><span class="pre">num_divisions</span></code> argument can be used to divide up the geometry into multiple rectangular regions and process each region sequentially (which is more computationally efficient). If you have a large geometry that takes a long time to process, try using <code class="docutils literal notranslate"><span class="pre">num_divisions</span> <span class="pre">=</span> <span class="pre">[10,10]</span></code> to optimize the operation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">E</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__77_0.png" src="../_images/notebooks_04_components__77_0.png"/>
+</div>
+</div>
+</section>
+<section id="Union">
+<h3>Union<a class="headerlink" href="#Union" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">union()</span></code> function is a “join” function, and is functionally identical to the “OR” operation of <code class="docutils literal notranslate"><span class="pre">gf.boolean()</span></code>. The one difference is it’s able to perform this function layer-wise, so each layer can be individually combined.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">e0</span> <span class="o">=</span> <span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">e1</span> <span class="o">=</span> <span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">e3</span> <span class="o">=</span> <span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">e4</span> <span class="o">=</span> <span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">e5</span> <span class="o">=</span> <span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">e1</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">e2</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">e3</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">e4</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">e5</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__79_0.png" src="../_images/notebooks_04_components__79_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We have two options to unioning - take all polygons, regardless of</span>
+<span class="c1"># layer, and join them together (in this case on layer (2,0) like so:</span>
+<span class="n">D_joined</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">by_layer</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">D_joined</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">D_joined</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:33.139 | INFO     | gdsfactory.show:show:36 - Klayout show union_7c1bba66: uid 295, ports [], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__80_1.png" src="../_images/notebooks_04_components__80_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or we can perform the union operate by-layer</span>
+<span class="n">D_joined_by_layer</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">by_layer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">D_joined_by_layer</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__81_0.png" src="../_images/notebooks_04_components__81_0.png"/>
+</div>
+</div>
+</section>
+<section id="XOR-/-diff">
+<h3>XOR / diff<a class="headerlink" href="#XOR-/-diff" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">xor_diff()</span></code> function can be used to compare two geometries and identify where they are different. Specifically, it performs a layer-wise XOR operation. If two geometries are identical, the result will be an empty Device. If they are not identical, any areas not shared by the two geometries will remain.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">A</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="n">A</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">"A"</span><span class="p">))</span><span class="o">.</span><span class="n">move</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">B</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">radii</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span><span class="o">.</span><span class="n">movex</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">"B"</span><span class="p">))</span><span class="o">.</span><span class="n">move</span><span class="p">([</span><span class="mf">3.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">xor_diff</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+
+<span class="c1"># Plot the original geometry and the result</span>
+<span class="c1"># Upper left: A / Upper right: B</span>
+<span class="c1"># Lower left: A and B / Lower right: A xor B "diff" comparison</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">move</span><span class="p">([</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">move</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">movex</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">movex</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">movex</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__83_0.png" src="../_images/notebooks_04_components__83_0.png"/>
+</div>
+</div>
+</section>
+</section>
+<section id="Lithography-structures">
+<h2>Lithography structures<a class="headerlink" href="#Lithography-structures" title="Permalink to this headline">#</a></h2>
+<section id="Step-resolution">
+<h3>Step-resolution<a class="headerlink" href="#Step-resolution" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.litho_steps()</span></code> function creates lithographic test structure that is useful for measuring resolution of photoresist or electron-beam resists. It provides both positive-tone and negative-tone resolution tests.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">litho_steps</span><span class="p">(</span>
+    <span class="n">line_widths</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="n">line_spacing</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__85_0.png" src="../_images/notebooks_04_components__85_0.png"/>
+</div>
+</div>
+</section>
+<section id="Calipers-(inter-layer-alignment)">
+<h3>Calipers (inter-layer alignment)<a class="headerlink" href="#Calipers-(inter-layer-alignment)" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">gf.components.litho_calipers()</span></code> function is used to detect offsets in multilayer fabrication. It creates a two sets of notches on different layers. When an fabrication error/offset occurs, it is easy to detect how much the offset is because both center-notches are no longer aligned.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">litho_calipers</span><span class="p">(</span>
+    <span class="n">notch_size</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="n">notch_spacing</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">num_notches</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">offset_per_notch</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">row_spacing</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">layer1</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">layer2</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__88_0.png" src="../_images/notebooks_04_components__88_0.png"/>
+</div>
+</div>
+</section>
+</section>
+<section id="Paths-/-straights">
+<h2>Paths / straights<a class="headerlink" href="#Paths-/-straights" title="Permalink to this headline">#</a></h2>
+<p>See the <strong>Path tutorial</strong> for more details – this is just an enumeration of the available built-in Path functions</p>
+<section id="Circular-arc">
+<h3>Circular arc<a class="headerlink" href="#Circular-arc" title="Permalink to this headline">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">135</span><span class="p">,</span> <span class="n">npoints</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+<span class="n">gf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__91_0.png" src="../_images/notebooks_04_components__91_0.png"/>
+</div>
+</div>
+</section>
+<section id="Straight">
+<h3>Straight<a class="headerlink" href="#Straight" title="Permalink to this headline">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">P</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">npoints</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">gf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__93_0.png" src="../_images/notebooks_04_components__93_0.png"/>
+</div>
+</div>
+</section>
+<section id="Euler-curve">
+<h3>Euler curve<a class="headerlink" href="#Euler-curve" title="Permalink to this headline">#</a></h3>
+<p>Also known as a straight-to-bend, clothoid, racetrack, or track transition, this Path tapers adiabatically from straight to curved. Often used to minimize losses in photonic straights. If <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&lt;</span> <span class="pre">1.0</span></code>, will create a “partial euler” curve as described in Vogelbacher et. al. <a class="reference external" href="https://dx.doi.org/10.1364/oe.27.031394">https://dx.doi.org/10.1364/oe.27.031394</a>. If the <code class="docutils literal notranslate"><span class="pre">use_eff</span></code> argument is false, <code class="docutils literal notranslate"><span class="pre">radius</span></code> corresponds to minimum radius of curvature of the bend. If <code class="docutils literal notranslate"><span class="pre">use_eff</span></code> is true, <code class="docutils literal notranslate"><span class="pre">radius</span></code> corresponds to the “effective” radius of the
+bend– The curve will be scaled such that the endpoints match an arc with parameters <code class="docutils literal notranslate"><span class="pre">radius</span></code> and <code class="docutils literal notranslate"><span class="pre">angle</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">euler</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">use_eff</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">npoints</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+<span class="n">gf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__95_0.png" src="../_images/notebooks_04_components__95_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;phidl.device_layout.Path at 0x7fdb4c6e4e50&gt;
+</pre></div></div>
+</div>
+</section>
+<section id="Smooth-path-from-waypoints">
+<h3>Smooth path from waypoints<a class="headerlink" href="#Smooth-path-from-waypoints" title="Permalink to this headline">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">20</span><span class="p">)])</span>
+
+<span class="n">P</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">smooth</span><span class="p">(</span>
+    <span class="n">points</span><span class="o">=</span><span class="n">points</span><span class="p">,</span>
+    <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">bend</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">euler</span><span class="p">,</span>
+    <span class="n">use_eff</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">gf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__98_0.png" src="../_images/notebooks_04_components__98_0.png"/>
+</div>
+</div>
+</section>
+<section id="Delay-spiral">
+<h3>Delay spiral<a class="headerlink" href="#Delay-spiral" title="Permalink to this headline">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">spiral</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__100_0.png" src="../_images/notebooks_04_components__100_0.png"/>
+</div>
+</div>
+</section>
+</section>
+<section id="Importing-GDS-files">
+<h2>Importing GDS files<a class="headerlink" href="#Importing-GDS-files" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">gf.import_gds()</span></code> allows you to easily import external GDSII files. It imports a single cell from the external GDS file and converts it into a gdsfactory component.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">()</span>
+<span class="n">D</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="s2">"myoutput.gds"</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">import_gds</span><span class="p">(</span><span class="n">gdspath</span><span class="o">=</span><span class="s2">"myoutput.gds"</span><span class="p">,</span> <span class="n">cellname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:12:35.867 | INFO     | gdsfactory.component:write_gds:875 - Write GDS to 'myoutput.gds'
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__103_1.png" src="../_images/notebooks_04_components__103_1.png"/>
+</div>
+</div>
+</section>
+<section id="LayerSet">
+<h2>LayerSet<a class="headerlink" href="#LayerSet" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">LayerSet</span></code> class allows you to predefine a collection of layers and specify their properties including: gds layer/datatype, name, and color. It also comes with a handy preview function called <code class="docutils literal notranslate"><span class="pre">gf.layers.preview_layerset()</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">lys</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LayerSet</span><span class="p">()</span>
+<span class="n">lys</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="s2">"p"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"lightblue"</span><span class="p">,</span> <span class="n">gds_layer</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">gds_datatype</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lys</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="s2">"p+"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">,</span> <span class="n">gds_layer</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">gds_datatype</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lys</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="s2">"p++"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"darkblue"</span><span class="p">,</span> <span class="n">gds_layer</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">gds_datatype</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lys</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"lightgreen"</span><span class="p">,</span> <span class="n">gds_layer</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">gds_datatype</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lys</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="s2">"n+"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">,</span> <span class="n">gds_layer</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">gds_datatype</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lys</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="s2">"n++"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"darkgreen"</span><span class="p">,</span> <span class="n">gds_layer</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">gds_datatype</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">preview_layerset</span><span class="p">(</span><span class="n">lys</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__105_0.png" src="../_images/notebooks_04_components__105_0.png"/>
+</div>
+</div>
+</section>
+<section id="Useful-contact-pads-/-connectors">
+<h2>Useful contact pads / connectors<a class="headerlink" href="#Useful-contact-pads-/-connectors" title="Permalink to this headline">#</a></h2>
+<p>These functions are common shapes with ports, often used to make contact pads</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">compass</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__107_0.png" src="../_images/notebooks_04_components__107_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">nxn</span><span class="p">(</span><span class="n">north</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">south</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">west</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__108_0.png" src="../_images/notebooks_04_components__108_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">pad</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__109_0.png" src="../_images/notebooks_04_components__109_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">pad_array90</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__110_0.png" src="../_images/notebooks_04_components__110_0.png"/>
+</div>
+</div>
+</section>
+<section id="Chip-/-die-template">
+<h2>Chip / die template<a class="headerlink" href="#Chip-/-die-template" title="Permalink to this headline">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">die</span><span class="p">(</span>
+    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">),</span>  <span class="c1"># Size of die</span>
+    <span class="n">street_width</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>  <span class="c1"># Width of corner marks for die-sawing</span>
+    <span class="n">street_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>  <span class="c1"># Length of corner marks for die-sawing</span>
+    <span class="n">die_name</span><span class="o">=</span><span class="s2">"chip99"</span><span class="p">,</span>  <span class="c1"># Label text</span>
+    <span class="n">text_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>  <span class="c1"># Label text size</span>
+    <span class="n">text_location</span><span class="o">=</span><span class="s2">"SW"</span><span class="p">,</span>  <span class="c1"># Label text compass location e.g. 'S', 'SE', 'SW'</span>
+    <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">bbox_layer</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__112_0.png" src="../_images/notebooks_04_components__112_0.png"/>
+</div>
+</div>
+</section>
+<section id="Optimal-superconducting-curves">
+<h2>Optimal superconducting curves<a class="headerlink" href="#Optimal-superconducting-curves" title="Permalink to this headline">#</a></h2>
+<p>The following structures from phidl are meant to reduce “current crowding” in superconducting thin-film structures (such as superconducting nanowires). They are the result of conformal mapping equations derived in Clem, J. &amp; Berggren, K. “<a class="reference external" href="http://dx.doi.org/10.1103/PhysRevB.84.174510">Geometry-dependent critical currents in superconducting nanocircuits.” Phys. Rev. B 84, 1–27 (2011).</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">phidl.geometry</span> <span class="k">as</span> <span class="nn">pg</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">optimal_hairpin</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">pitch</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">turn_ratio</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_pts</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">from_phidl</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__114_0.png" src="../_images/notebooks_04_components__114_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">phidl.geometry</span> <span class="k">as</span> <span class="nn">pg</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">optimal_step</span><span class="p">(</span>
+    <span class="n">start_width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">end_width</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span>
+    <span class="n">num_pts</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">width_tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+    <span class="n">anticrowding_factor</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+    <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">from_phidl</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__115_0.png" src="../_images/notebooks_04_components__115_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">phidl.geometry</span> <span class="k">as</span> <span class="nn">pg</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">optimal_90deg</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">num_pts</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">length_adjust</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">from_phidl</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__116_0.png" src="../_images/notebooks_04_components__116_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">phidl.geometry</span> <span class="k">as</span> <span class="nn">pg</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">snspd</span><span class="p">(</span>
+    <span class="n">wire_width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">wire_pitch</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="n">num_squares</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">turn_ratio</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">terminals_same_side</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">from_phidl</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__117_0.png" src="../_images/notebooks_04_components__117_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">snspd_expanded</span><span class="p">(</span>
+    <span class="n">wire_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">wire_pitch</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="n">num_squares</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">connector_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">connector_symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">turn_ratio</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">terminals_same_side</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">from_phidl</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__118_0.png" src="../_images/notebooks_04_components__118_0.png"/>
+</div>
+</div>
+</section>
+<section id="Copying-and-extracting-geometry">
+<h2>Copying and extracting geometry<a class="headerlink" href="#Copying-and-extracting-geometry" title="Permalink to this headline">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">E</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">layers</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+<span class="n">D</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__120_0.png" src="../_images/notebooks_04_components__120_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_components__121_0.png" src="../_images/notebooks_04_components__121_0.png"/>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="04_components_hierarchy.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Components with hierarchy</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="03_waveguides_paths_crossections.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Paths and straights</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Components</a><ul>
+<li><a class="reference internal" href="#Basic-shapes">Basic shapes</a><ul>
+<li><a class="reference internal" href="#Rectangle">Rectangle</a></li>
+<li><a class="reference internal" href="#Cross">Cross</a></li>
+<li><a class="reference internal" href="#Ellipse">Ellipse</a></li>
+<li><a class="reference internal" href="#Circle">Circle</a></li>
+<li><a class="reference internal" href="#Ring">Ring</a></li>
+<li><a class="reference internal" href="#Bend-circular">Bend circular</a></li>
+<li><a class="reference internal" href="#Bend-euler">Bend euler</a></li>
+<li><a class="reference internal" href="#Tapers">Tapers</a></li>
+<li><a class="reference internal" href="#Common-compound-shapes">Common compound shapes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Text">Text</a></li>
+<li><a class="reference internal" href="#Grid-/-packer-/-align-/-distribute">Grid / packer / align / distribute</a><ul>
+<li><a class="reference internal" href="#Grid">Grid</a></li>
+<li><a class="reference internal" href="#Packer">Packer</a></li>
+<li><a class="reference internal" href="#Distribute">Distribute</a></li>
+<li><a class="reference internal" href="#Align">Align</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Boolean-/-outline-/-offset-/-invert">Boolean / outline / offset / invert</a><ul>
+<li><a class="reference internal" href="#Boolean">Boolean</a></li>
+<li><a class="reference internal" href="#Offset">Offset</a></li>
+<li><a class="reference internal" href="#Outline">Outline</a></li>
+<li><a class="reference internal" href="#Invert">Invert</a></li>
+<li><a class="reference internal" href="#Union">Union</a></li>
+<li><a class="reference internal" href="#XOR-/-diff">XOR / diff</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Lithography-structures">Lithography structures</a><ul>
+<li><a class="reference internal" href="#Step-resolution">Step-resolution</a></li>
+<li><a class="reference internal" href="#Calipers-(inter-layer-alignment)">Calipers (inter-layer alignment)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Paths-/-straights">Paths / straights</a><ul>
+<li><a class="reference internal" href="#Circular-arc">Circular arc</a></li>
+<li><a class="reference internal" href="#Straight">Straight</a></li>
+<li><a class="reference internal" href="#Euler-curve">Euler curve</a></li>
+<li><a class="reference internal" href="#Smooth-path-from-waypoints">Smooth path from waypoints</a></li>
+<li><a class="reference internal" href="#Delay-spiral">Delay spiral</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Importing-GDS-files">Importing GDS files</a></li>
+<li><a class="reference internal" href="#LayerSet">LayerSet</a></li>
+<li><a class="reference internal" href="#Useful-contact-pads-/-connectors">Useful contact pads / connectors</a></li>
+<li><a class="reference internal" href="#Chip-/-die-template">Chip / die template</a></li>
+<li><a class="reference internal" href="#Optimal-superconducting-curves">Optimal superconducting curves</a></li>
+<li><a class="reference internal" href="#Copying-and-extracting-geometry">Copying and extracting geometry</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

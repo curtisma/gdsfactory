@@ -1,0 +1,591 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="metadata description" lang="en" name="description" xml:lang="en" />
+<meta content="description des métadonnées" lang="fr" name="description" xml:lang="fr" />
+<meta content="Sphinx, MyST" name="keywords" />
+<meta content="en_US" property="og:locale" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Components" href="components.html" /><link rel="prev" title="Routing" href="routing.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>YAML - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="yaml">
+<h1>YAML<a class="headerlink" href="#yaml" title="Permalink to this headline">#</a></h1>
+<p>You can define components, netlists (for circuits) and masks in YAML syntax.</p>
+<section id="netlist">
+<h2>Netlist<a class="headerlink" href="#netlist" title="Permalink to this headline">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gdsfactory.read.from_yaml">
+<span class="sig-prename descclassname"><span class="pre">gdsfactory.read.</span></span><span class="sig-name descname"><span class="pre">from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yaml_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component_factory={'C':</span> <span class="pre">&lt;function</span> <span class="pre">C&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'L':</span> <span class="pre">&lt;function</span> <span class="pre">L&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'add_fidutials':</span> <span class="pre">&lt;function</span> <span class="pre">add_fidutials&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'add_frame':</span> <span class="pre">&lt;function</span> <span class="pre">add_frame&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'align_wafer':</span> <span class="pre">&lt;function</span> <span class="pre">align_wafer&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'array':</span> <span class="pre">&lt;function</span> <span class="pre">array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'array_with_fanout':</span> <span class="pre">&lt;function</span> <span class="pre">array_with_fanout&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'array_with_fanout_2d':</span> <span class="pre">&lt;function</span> <span class="pre">array_with_fanout_2d&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'array_with_via':</span> <span class="pre">&lt;function</span> <span class="pre">array_with_via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'array_with_via_2d':</span> <span class="pre">&lt;function</span> <span class="pre">array_with_via_2d&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'awg':</span> <span class="pre">&lt;function</span> <span class="pre">awg&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bbox':</span> <span class="pre">&lt;function</span> <span class="pre">bbox&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bend_circular':</span> <span class="pre">&lt;function</span> <span class="pre">bend_circular&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bend_circular180':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">bend_circular&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle=180)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bend_circular_heater':</span> <span class="pre">&lt;function</span> <span class="pre">bend_circular_heater&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bend_euler':</span> <span class="pre">&lt;function</span> <span class="pre">bend_euler&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bend_euler180':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">bend_euler&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle=180)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bend_euler_s':</span> <span class="pre">&lt;function</span> <span class="pre">bend_euler_s&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bend_port':</span> <span class="pre">&lt;function</span> <span class="pre">bend_port&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bend_s':</span> <span class="pre">&lt;function</span> <span class="pre">bend_s&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bend_straight_bend':</span> <span class="pre">&lt;function</span> <span class="pre">bend_straight_bend&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cavity':</span> <span class="pre">&lt;function</span> <span class="pre">cavity&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cdc':</span> <span class="pre">&lt;function</span> <span class="pre">cdc&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cdsem_all':</span> <span class="pre">&lt;function</span> <span class="pre">cdsem_all&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'circle':</span> <span class="pre">&lt;function</span> <span class="pre">circle&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'compass':</span> <span class="pre">&lt;function</span> <span class="pre">compass&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'compensation_path':</span> <span class="pre">&lt;function</span> <span class="pre">compensation_path&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'component_lattice':</span> <span class="pre">&lt;function</span> <span class="pre">component_lattice&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'component_sequence':</span> <span class="pre">&lt;function</span> <span class="pre">component_sequence&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'contact':</span> <span class="pre">&lt;function</span> <span class="pre">contact&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'contact_heater_m3':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">contact&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers=((47</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">(45</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">(49</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vias=(functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(44</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enclosure=2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(43</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'contact_slab_m3':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">contact&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers=((3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">(41</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">(45</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">(49</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vias=(functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(44</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enclosure=2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(43</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'contact_slot':</span> <span class="pre">&lt;function</span> <span class="pre">contact_slot&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'contact_slot_m1_m2':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">contact_slot&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers=((41</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">(45</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">via=functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(44</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enclosure=2))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'contact_with_offset':</span> <span class="pre">&lt;function</span> <span class="pre">contact_with_offset&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'copy_layers':</span> <span class="pre">&lt;function</span> <span class="pre">copy_layers&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler':</span> <span class="pre">&lt;function</span> <span class="pre">coupler&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler90':</span> <span class="pre">&lt;function</span> <span class="pre">coupler90&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler90bend':</span> <span class="pre">&lt;function</span> <span class="pre">coupler90bend&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler90circular':</span> <span class="pre">&lt;function</span> <span class="pre">coupler90circular&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler_adiabatic':</span> <span class="pre">&lt;function</span> <span class="pre">coupler_adiabatic&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler_asymmetric':</span> <span class="pre">&lt;function</span> <span class="pre">coupler_asymmetric&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler_full':</span> <span class="pre">&lt;function</span> <span class="pre">coupler_full&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler_ring':</span> <span class="pre">&lt;function</span> <span class="pre">coupler_ring&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler_straight':</span> <span class="pre">&lt;function</span> <span class="pre">coupler_straight&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'coupler_symmetric':</span> <span class="pre">&lt;function</span> <span class="pre">coupler_symmetric&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cross':</span> <span class="pre">&lt;function</span> <span class="pre">cross&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'crossing':</span> <span class="pre">&lt;function</span> <span class="pre">crossing&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'crossing45':</span> <span class="pre">&lt;function</span> <span class="pre">crossing45&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'crossing_arm':</span> <span class="pre">&lt;function</span> <span class="pre">crossing_arm&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'crossing_etched':</span> <span class="pre">&lt;function</span> <span class="pre">crossing_etched&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'crossing_from_taper':</span> <span class="pre">&lt;function</span> <span class="pre">crossing_from_taper&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cutback_bend':</span> <span class="pre">&lt;function</span> <span class="pre">cutback_bend&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cutback_bend180':</span> <span class="pre">&lt;function</span> <span class="pre">cutback_bend180&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cutback_bend180circular':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">cutback_bend180&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bend180=functools.partial(&lt;function</span> <span class="pre">bend_circular&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle=180))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cutback_bend90':</span> <span class="pre">&lt;function</span> <span class="pre">cutback_bend90&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cutback_bend90circular':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">cutback_bend90&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bend90=&lt;function</span> <span class="pre">bend_circular&gt;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cutback_component':</span> <span class="pre">&lt;function</span> <span class="pre">cutback_component&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'cutback_component_mirror':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">cutback_component&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mirror=True)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'dbr':</span> <span class="pre">&lt;function</span> <span class="pre">dbr&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'dbr_tapered':</span> <span class="pre">&lt;function</span> <span class="pre">dbr_tapered&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'delay_snake':</span> <span class="pre">&lt;function</span> <span class="pre">delay_snake&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'delay_snake2':</span> <span class="pre">&lt;function</span> <span class="pre">delay_snake2&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'delay_snake3':</span> <span class="pre">&lt;function</span> <span class="pre">delay_snake3&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'delay_snake_sbend':</span> <span class="pre">&lt;function</span> <span class="pre">delay_snake_sbend&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'dicing_lane':</span> <span class="pre">&lt;function</span> <span class="pre">dicing_lane&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'die':</span> <span class="pre">&lt;function</span> <span class="pre">die&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'die_bbox':</span> <span class="pre">&lt;function</span> <span class="pre">die_bbox&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'die_bbox_frame':</span> <span class="pre">&lt;function</span> <span class="pre">die_bbox_frame&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'disk':</span> <span class="pre">&lt;function</span> <span class="pre">disk&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ellipse':</span> <span class="pre">&lt;function</span> <span class="pre">ellipse&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'extend_port':</span> <span class="pre">&lt;function</span> <span class="pre">extend_port&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'extend_ports':</span> <span class="pre">&lt;function</span> <span class="pre">extend_ports&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'extend_ports_list':</span> <span class="pre">&lt;function</span> <span class="pre">extend_ports_list&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'fiber':</span> <span class="pre">&lt;function</span> <span class="pre">fiber&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'fiber_array':</span> <span class="pre">&lt;function</span> <span class="pre">fiber_array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_array':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_circular':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_circular&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_elliptical':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_elliptical&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_elliptical_arbitrary':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_elliptical_arbitrary&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_elliptical_lumerical':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_elliptical_lumerical&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_elliptical_te':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_elliptical&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_elliptical_tm':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">grating_coupler_elliptical&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grating_line_width=0.707</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fiber_marker_layer=(204</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarization='tm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taper_length=30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slab_xmin=-2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neff=1.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_periods=16)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_elliptical_trenches':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_elliptical_trenches&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_loss_fiber_array':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_loss_fiber_array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_loss_fiber_array4':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_loss_fiber_array4&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_loss_fiber_single':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_loss_fiber_single&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_rectangular':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_rectangular&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_rectangular_arbitrary':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_rectangular_arbitrary&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_rectangular_arbitrary_slab':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_rectangular_arbitrary_slab&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_te':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">grating_coupler_elliptical_trenches&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarization='te'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taper_angle=35)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_tm':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">grating_coupler_elliptical_trenches&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarization='tm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neff=1.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grating_line_width=0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fiber_marker_layer=(204</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'grating_coupler_tree':</span> <span class="pre">&lt;function</span> <span class="pre">grating_coupler_tree&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'hline':</span> <span class="pre">&lt;function</span> <span class="pre">hline&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'litho_calipers':</span> <span class="pre">&lt;function</span> <span class="pre">litho_calipers&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'litho_steps':</span> <span class="pre">&lt;function</span> <span class="pre">litho_steps&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'logo':</span> <span class="pre">&lt;function</span> <span class="pre">logo&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'loop_mirror':</span> <span class="pre">&lt;function</span> <span class="pre">loop_mirror&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'loss_deembedding_ch12_34':</span> <span class="pre">&lt;function</span> <span class="pre">loss_deembedding_ch12_34&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'loss_deembedding_ch13_24':</span> <span class="pre">&lt;function</span> <span class="pre">loss_deembedding_ch13_24&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'loss_deembedding_ch14_23':</span> <span class="pre">&lt;function</span> <span class="pre">loss_deembedding_ch14_23&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mmi1x2':</span> <span class="pre">&lt;function</span> <span class="pre">mmi1x2&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mmi2x2':</span> <span class="pre">&lt;function</span> <span class="pre">mmi2x2&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi':</span> <span class="pre">&lt;function</span> <span class="pre">mzi&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi1x2_2x2':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">mzi&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combiner=&lt;function</span> <span class="pre">mmi2x2&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e1_combiner='o3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e0_combiner='o4')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi2x2_2x2':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">mzi&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splitter=&lt;function</span> <span class="pre">mmi2x2&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combiner=&lt;function</span> <span class="pre">mmi2x2&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e1_splitter='o3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e0_splitter='o4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e1_combiner='o3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e0_combiner='o4')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi_arm':</span> <span class="pre">&lt;function</span> <span class="pre">mzi_arm&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi_arms':</span> <span class="pre">&lt;function</span> <span class="pre">mzi_arms&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi_coupler':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">mzi&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splitter=&lt;function</span> <span class="pre">coupler&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combiner=&lt;function</span> <span class="pre">coupler&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e1_splitter='o3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e0_splitter='o4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e1_combiner='o3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e0_combiner='o4')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi_lattice':</span> <span class="pre">&lt;function</span> <span class="pre">mzi_lattice&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi_pads_center':</span> <span class="pre">&lt;function</span> <span class="pre">mzi_pads_center&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi_phase_shifter':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">mzi&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_x=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzi_phase_shifter_top_heater_metal':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">mzi&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_x=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">straight_x_top=functools.partial(&lt;function</span> <span class="pre">straight_heater_metal_undercut&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_undercut=False))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzit':</span> <span class="pre">&lt;function</span> <span class="pre">mzit&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'mzit_lattice':</span> <span class="pre">&lt;function</span> <span class="pre">mzit_lattice&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'nxn':</span> <span class="pre">&lt;function</span> <span class="pre">nxn&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pad':</span> <span class="pre">&lt;function</span> <span class="pre">pad&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pad_array':</span> <span class="pre">&lt;function</span> <span class="pre">pad_array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pad_gsg_open':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">pad_gsg_short&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short=False)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pad_gsg_short':</span> <span class="pre">&lt;function</span> <span class="pre">pad_gsg_short&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pads_shorted':</span> <span class="pre">&lt;function</span> <span class="pre">pads_shorted&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pixel':</span> <span class="pre">&lt;function</span> <span class="pre">pixel&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'qrcode':</span> <span class="pre">&lt;function</span> <span class="pre">qrcode&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ramp':</span> <span class="pre">&lt;function</span> <span class="pre">ramp&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'rectangle':</span> <span class="pre">&lt;function</span> <span class="pre">rectangle&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'rectangle_with_slits':</span> <span class="pre">&lt;function</span> <span class="pre">rectangle_with_slits&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'resistance_meander':</span> <span class="pre">&lt;function</span> <span class="pre">resistance_meander&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'resistance_sheet':</span> <span class="pre">&lt;function</span> <span class="pre">resistance_sheet&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ring':</span> <span class="pre">&lt;function</span> <span class="pre">ring&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ring_double':</span> <span class="pre">&lt;function</span> <span class="pre">ring_double&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ring_double_heater':</span> <span class="pre">&lt;function</span> <span class="pre">ring_double_heater&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ring_single':</span> <span class="pre">&lt;function</span> <span class="pre">ring_single&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ring_single_array':</span> <span class="pre">&lt;function</span> <span class="pre">ring_single_array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ring_single_dut':</span> <span class="pre">&lt;function</span> <span class="pre">ring_single_dut&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ring_single_heater':</span> <span class="pre">&lt;function</span> <span class="pre">ring_single_heater&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'seal_ring':</span> <span class="pre">&lt;function</span> <span class="pre">seal_ring&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'spiral':</span> <span class="pre">&lt;function</span> <span class="pre">spiral&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'spiral_circular':</span> <span class="pre">&lt;function</span> <span class="pre">spiral_circular&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'spiral_external_io':</span> <span class="pre">&lt;function</span> <span class="pre">spiral_external_io&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'spiral_inner_io':</span> <span class="pre">&lt;function</span> <span class="pre">spiral_inner_io&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'spiral_inner_io_fiber_single':</span> <span class="pre">&lt;function</span> <span class="pre">spiral_inner_io_fiber_single&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'splitter_chain':</span> <span class="pre">&lt;function</span> <span class="pre">splitter_chain&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'splitter_tree':</span> <span class="pre">&lt;function</span> <span class="pre">splitter_tree&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'staircase':</span> <span class="pre">&lt;function</span> <span class="pre">staircase&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight':</span> <span class="pre">&lt;function</span> <span class="pre">straight&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_array':</span> <span class="pre">&lt;function</span> <span class="pre">straight_array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_heater_doped_rib':</span> <span class="pre">&lt;function</span> <span class="pre">straight_heater_doped_rib&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_heater_doped_strip':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">straight_heater_doped_rib&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_section_heater=&lt;cyfunction</span> <span class="pre">strip_heater_doped&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contact=functools.partial(&lt;function</span> <span class="pre">contact&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers=((1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">(24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">(41</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vias=(None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)))))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_heater_meander':</span> <span class="pre">&lt;function</span> <span class="pre">straight_heater_meander&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_heater_metal':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">straight_heater_metal_undercut&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_undercut=False)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_heater_metal_90_90':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">straight_heater_metal_undercut&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_undercut=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_orientation1=90</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_orientation2=90)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_heater_metal_undercut':</span> <span class="pre">&lt;function</span> <span class="pre">straight_heater_metal_undercut&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_heater_metal_undercut_90_90':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">straight_heater_metal_undercut&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_undercut=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_orientation1=90</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_orientation2=90)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_pin':</span> <span class="pre">&lt;function</span> <span class="pre">straight_pin&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_pin_slot':</span> <span class="pre">&lt;function</span> <span class="pre">straight_pin_slot&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_pn':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">straight_pin&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_section=&lt;cyfunction</span> <span class="pre">pn&gt;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_rib':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">straight&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_section=functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections=(slab_6000_3_0_optical_optical</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers_cladding=((3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cladding_offset=0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'straight_rib_tapered':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">extend_ports&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component=functools.partial(&lt;function</span> <span class="pre">straight&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_section=functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections=(slab_6000_3_0_optical_optical</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers_cladding=((3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cladding_offset=0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension_factory=&lt;function</span> <span class="pre">taper_strip_to_ridge&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port1='o2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port2='o1')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'switch_tree':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">splitter_tree&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coupler=functools.partial(&lt;function</span> <span class="pre">mzi&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combiner=&lt;function</span> <span class="pre">mmi2x2&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e1_combiner='o3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_e0_combiner='o4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_length=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">straight_x_top=functools.partial(&lt;function</span> <span class="pre">straight_heater_metal_undercut&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_undercut=False)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_x=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing=(500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">100))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper':</span> <span class="pre">&lt;function</span> <span class="pre">taper&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper2':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">taper&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width2=3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_0p5_to_3_l36':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">taper_from_csv&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath=PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdsfactory/components/csv_data/taper_strip_0p5_3_36.csv'))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_cross_section_linear':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">taper_cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linear=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npoints=2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_cross_section_sine':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">taper_cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linear=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npoints=101)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_from_csv':</span> <span class="pre">&lt;function</span> <span class="pre">taper_from_csv&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_parabolic':</span> <span class="pre">&lt;function</span> <span class="pre">taper_parabolic&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_strip_to_ridge':</span> <span class="pre">&lt;function</span> <span class="pre">taper_strip_to_ridge&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_strip_to_ridge_trenches':</span> <span class="pre">&lt;function</span> <span class="pre">taper_strip_to_ridge_trenches&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_w10_l100':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">taper_from_csv&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath=PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdsfactory/components/csv_data/taper_strip_0p5_10_100.csv'))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_w10_l150':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">taper_from_csv&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath=PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdsfactory/components/csv_data/taper_strip_0p5_10_150.csv'))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_w10_l200':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">taper_from_csv&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath=PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdsfactory/components/csv_data/taper_strip_0p5_10_200.csv'))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_w11_l200':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">taper_from_csv&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath=PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdsfactory/components/csv_data/taper_strip_0p5_11_200.csv'))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'taper_w12_l200':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">taper_from_csv&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath=PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdsfactory/components/csv_data/taper_strip_0p5_12_200.csv'))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'text':</span> <span class="pre">&lt;function</span> <span class="pre">text&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'text_rectangular':</span> <span class="pre">&lt;function</span> <span class="pre">text_rectangular&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'text_rectangular_multi_layer':</span> <span class="pre">&lt;function</span> <span class="pre">text_rectangular_multi_layer&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'triangle':</span> <span class="pre">&lt;function</span> <span class="pre">triangle&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'verniers':</span> <span class="pre">&lt;function</span> <span class="pre">verniers&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'version_stamp':</span> <span class="pre">&lt;function</span> <span class="pre">version_stamp&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'via':</span> <span class="pre">&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'via1':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(44</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enclosure=2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'via2':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(43</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'via_cutback':</span> <span class="pre">&lt;function</span> <span class="pre">via_cutback&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'viac':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">via&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'wire_corner':</span> <span class="pre">&lt;function</span> <span class="pre">wire_corner&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'wire_sbend':</span> <span class="pre">&lt;function</span> <span class="pre">wire_sbend&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'wire_straight':</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">straight&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_cladding_box=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_section=functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(49</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width=10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_names=('e1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'e2')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_types=('electrical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'electrical')))}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">routing_strategy={'get_bundle':</span> <span class="pre">&lt;function</span> <span class="pre">get_bundle&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'get_bundle_from_waypoints':</span> <span class="pre">&lt;function</span> <span class="pre">get_bundle_from_waypoints&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'get_bundle_path_length_match':</span> <span class="pre">&lt;function</span> <span class="pre">get_bundle_path_length_match&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'get_bundle_same_axis_no_grouping':</span> <span class="pre">&lt;function</span> <span class="pre">get_bundle_same_axis_no_grouping&gt;}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_section_factory={'cross_section':</span> <span class="pre">&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'metal1':</span> <span class="pre">functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(41</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width=10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_names=('e1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'e2')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_types=('electrical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'electrical'))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'metal2':</span> <span class="pre">functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(45</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width=10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_names=('e1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'e2')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_types=('electrical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'electrical'))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'metal3':</span> <span class="pre">functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(49</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width=10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_names=('e1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'e2')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port_types=('electrical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'electrical'))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'nitride':</span> <span class="pre">functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer=(34</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width=1.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pin':</span> <span class="pre">&lt;cyfunction</span> <span class="pre">pin&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'rib':</span> <span class="pre">functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections=(slab_6000_3_0_optical_optical</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers_cladding=((3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cladding_offset=0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'rib_heater_doped':</span> <span class="pre">&lt;cyfunction</span> <span class="pre">rib_heater_doped&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'strip':</span> <span class="pre">functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'strip_auto_widen':</span> <span class="pre">functools.partial(&lt;cyfunction</span> <span class="pre">cross_section&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width_wide=0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_widen=True)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'strip_heater_doped':</span> <span class="pre">&lt;cyfunction</span> <span class="pre">strip_heater_doped&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'strip_heater_metal':</span> <span class="pre">&lt;cyfunction</span> <span class="pre">strip_heater_metal&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'strip_heater_metal_undercut':</span> <span class="pre">&lt;cyfunction</span> <span class="pre">strip_heater_metal_undercut&gt;}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_instance_function=&lt;function</span> <span class="pre">add_instance_label&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gdsfactory/read/from_yaml.html#from_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gdsfactory.read.from_yaml" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a Component defined in YAML file or string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>yaml</strong> – YAML IO describing Component file or string (with newlines)
+(instances, placements, routes, ports, connections, names)</p></li>
+<li><p><strong>component_factory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code>, <a class="reference internal" href="api.html#gdsfactory.component.Component" title="gdsfactory.component.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a>]]) – dict of functions {factory_name: factory_function}</p></li>
+<li><p><strong>routing_strategy</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>]) – for links</p></li>
+<li><p><strong>label_instance_function</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>) – to label each instance</p></li>
+<li><p><strong>kwargs</strong> – cache, prefix, autoname … to pass to all factories</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="api.html#gdsfactory.component.Component" title="gdsfactory.component.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Component</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">valid</span> <span class="n">properties</span><span class="p">:</span>
+<span class="n">name</span><span class="p">:</span> <span class="n">Optional</span> <span class="n">Component</span> <span class="n">name</span>
+<span class="nb">vars</span><span class="p">:</span> <span class="n">Optional</span> <span class="n">variables</span>
+<span class="n">info</span><span class="p">:</span> <span class="n">Optional</span> <span class="n">component</span> <span class="n">info</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">just</span> <span class="n">a</span> <span class="n">demo</span>
+    <span class="n">polarization</span><span class="p">:</span> <span class="n">TE</span>
+    <span class="o">...</span>
+<span class="n">instances</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span>
+        <span class="n">component</span><span class="p">:</span> <span class="p">(</span><span class="n">ComponentFactory</span><span class="p">)</span>
+        <span class="n">settings</span> <span class="p">(</span><span class="n">Optional</span><span class="p">)</span>
+            <span class="n">length</span><span class="p">:</span> <span class="mi">10</span>
+            <span class="o">...</span>
+<span class="n">placements</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>  <span class="nb">str</span> <span class="n">can</span> <span class="n">be</span> <span class="n">instanceName</span><span class="p">,</span><span class="n">portName</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+    <span class="n">rotation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+    <span class="n">mirror</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="nb">float</span> <span class="ow">is</span> <span class="n">x</span> <span class="n">mirror</span> <span class="n">axis</span>
+    <span class="n">port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="n">port</span> <span class="n">anchor</span>
+<span class="n">connections</span> <span class="p">(</span><span class="n">Optional</span><span class="p">):</span> <span class="n">between</span> <span class="n">instances</span>
+<span class="n">ports</span> <span class="p">(</span><span class="n">Optional</span><span class="p">):</span> <span class="n">ports</span> <span class="n">to</span> <span class="n">expose</span>
+<span class="n">routes</span> <span class="p">(</span><span class="n">Optional</span><span class="p">):</span> <span class="n">bundles</span> <span class="n">of</span> <span class="n">routes</span>
+    <span class="n">routeName</span><span class="p">:</span>
+    <span class="n">library</span><span class="p">:</span> <span class="n">optical</span>
+    <span class="n">links</span><span class="p">:</span>
+        <span class="n">instance1</span><span class="p">,</span><span class="n">port1</span><span class="p">:</span> <span class="n">instance2</span><span class="p">,</span><span class="n">port2</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>vars:
+    length_mmi: 5
+
+instances:
+    mmi_bot:
+      component: mmi1x2
+      settings:
+        width_mmi: 4.5
+        length_mmi: 10
+    mmi_top:
+      component: mmi1x2
+      settings:
+        width_mmi: 4.5
+        length_mmi: ${vars.length_mmi}
+
+placements:
+    mmi_top:
+        port: o1
+        x: 0
+        y: 0
+    mmi_bot:
+        port: o1
+        x: mmi_top,o2
+        y: mmi_top,o2
+        dx: 30
+        dy: -30
+routes:
+    optical:
+        library: optical
+        links:
+            mmi_top,o3: mmi_bot,o1
+</pre></div>
+</div>
+</dd></dl>
+</section>
+<section id="mask">
+<h2>Mask<a class="headerlink" href="#mask" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>It assumes that each DOE is provided in a folder together with a text file containing the list of each GDS file. (gdsfactory.placer)</p></li>
+<li><p>The placing instructions are taken from a YAML file. Typically the same as the one used for specifying the DOEs</p></li>
+</ul>
+<p>The YAML Placer addresses the following requirements:</p>
+<ul class="simple">
+<li><p>Fast mask assembly</p></li>
+<li><p>Absolute or relative placement</p></li>
+<li><p>Adjustable margins between DOEs and within a DOE</p></li>
+<li><p>multirow / multi-column packing</p></li>
+</ul>
+<p>The YAML Placer does not check for collisions and does not guarantee a valid placing.
+It just puts together a mask allows you to change components placements.</p>
+<p>You can specify DOEs (Design Of Experiments) and placement in a single YAML file.</p>
+<p>In a typical workflow, this file is parsed twice:
+The first time, <code class="docutils literal notranslate"><span class="pre">generate_does</span></code> builds the GDS files for each Design of Experiment variation.
+The second time, <code class="docutils literal notranslate"><span class="pre">place_from_yaml</span></code> reads the placing instructions for every DOE and places them in a new GDS file.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">from</span> <span class="nn">gdsfactory.autoplacer.yaml_placer</span> <span class="kn">import</span> <span class="n">place_from_yaml</span>
+<span class="kn">from</span> <span class="nn">gdsfactory.generate_does</span> <span class="kn">import</span> <span class="n">generate_does</span>
+<span class="kn">from</span> <span class="nn">gdsfactory.mask.merge_metadata</span> <span class="kn">import</span> <span class="n">merge_metadata</span>
+
+
+<span class="k">def</span> <span class="nf">test_mask</span><span class="p">():</span>
+    <span class="sd">"""Returns gdspath for a Mask</span>
+
+<span class="sd">    - Write GDS files defined in does.yml (with JSON metadata)</span>
+<span class="sd">    - place them into a mask following placer information in does.yml</span>
+<span class="sd">    - merge mask JSON metadata into a combined JSON file</span>
+
+<span class="sd">    """</span>
+    <span class="n">cwd</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+    <span class="n">does_path</span> <span class="o">=</span> <span class="n">cwd</span> <span class="o">/</span> <span class="s2">"does.yml"</span>
+    <span class="n">doe_root_path</span> <span class="o">=</span> <span class="n">cwd</span> <span class="o">/</span> <span class="s2">"build"</span> <span class="o">/</span> <span class="s2">"cache_doe_directory"</span>
+    <span class="n">mask_path</span> <span class="o">=</span> <span class="n">cwd</span> <span class="o">/</span> <span class="s2">"build"</span> <span class="o">/</span> <span class="s2">"mask"</span>
+    <span class="n">gdspath</span> <span class="o">=</span> <span class="n">mask_path</span> <span class="o">/</span> <span class="s2">"mask.gds"</span>
+    <span class="n">mask_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">generate_does</span><span class="p">(</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">does_path</span><span class="p">),</span> <span class="n">doe_root_path</span><span class="o">=</span><span class="n">doe_root_path</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">top_level</span> <span class="o">=</span> <span class="n">place_from_yaml</span><span class="p">(</span><span class="n">does_path</span><span class="p">,</span> <span class="n">root_does</span><span class="o">=</span><span class="n">doe_root_path</span><span class="p">)</span>
+    <span class="n">top_level</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">gdspath</span><span class="p">))</span>
+    <span class="n">merge_metadata</span><span class="p">(</span><span class="n">gdspath</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gdspath</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">gdspath</span> <span class="o">=</span> <span class="n">test_mask</span><span class="p">()</span>
+    <span class="n">gf</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">gdspath</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Corresponding YAML</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mask</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10000</span><span class="w"></span>
+<span class="w">    </span><span class="nt">height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10000</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mask2</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1"># Setting cache to `true`: By default, all generated GDS are cached and won't be regenerated</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># This default behaviour can be overwritten within each DOE.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># To rebuild the full mask from scratch, just set this to `false`, and ensure there is no</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># cache: true specified in any other component</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cache</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+
+<span class="c1">## =======================================================================</span><span class="w"></span>
+<span class="c1">## Templates - global settings for DOEs (Optional)</span><span class="w"></span>
+<span class="c1">## =======================================================================</span><span class="w"></span>
+<span class="nt">template_align_east_south</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">template</span><span class="w"></span>
+<span class="w">    </span><span class="nt">placer</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pack_row</span><span class="w"></span>
+<span class="w">        </span><span class="nt">x0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">E</span><span class="w"></span>
+<span class="w">        </span><span class="nt">y0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S</span><span class="w"></span>
+<span class="w">        </span><span class="nt">align_x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W</span><span class="w"></span>
+<span class="w">        </span><span class="nt">align_y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S</span><span class="w"></span>
+<span class="w">        </span><span class="nt">margin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+
+<span class="nt">template_align_south_west</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">template</span><span class="w"></span>
+<span class="w">    </span><span class="nt">placer</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">x0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W</span><span class="w"></span>
+<span class="w">        </span><span class="nt">y0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S</span><span class="w"></span>
+<span class="w">        </span><span class="nt">align_x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W</span><span class="w"></span>
+<span class="w">        </span><span class="nt">align_y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">N</span><span class="w"></span>
+<span class="w">        </span><span class="nt">margin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+
+<span class="nt">template_add_labels</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">template</span><span class="w"></span>
+<span class="w">    </span><span class="nt">add_doe_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">    </span><span class="nt">with_doe_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+
+<span class="c1">## =============================</span><span class="w"></span>
+<span class="c1">## Does (Design Of exeriments)</span><span class="w"></span>
+<span class="c1">## =============================</span><span class="w"></span>
+
+<span class="nt">mmi2x2_width</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mmi2x2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">settings</span><span class="p">:</span><span class="w"> </span><span class="c1"># Uses the combination of settings to produce 9 devices</span><span class="w"></span>
+<span class="w">        </span><span class="nt">width_mmi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">4.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.6</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">        </span><span class="nt">length_mmi</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w"></span>
+<span class="w">    </span><span class="nt">placer</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pack_row</span><span class="w"></span>
+<span class="w">        </span><span class="nt">x0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"> </span><span class="c1"># Absolute coordinate placing</span><span class="w"></span>
+<span class="w">        </span><span class="nt">y0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="nt">align_x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W</span><span class="w"> </span><span class="c1"># x origin is west</span><span class="w"></span>
+<span class="w">        </span><span class="nt">margin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25.</span><span class="w"> </span><span class="c1"># x and y margin between the components within this DOE</span><span class="w"></span>
+<span class="w">        </span><span class="nt">align_y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S</span><span class="w"> </span><span class="c1"># y origin is south</span><span class="w"></span>
+
+<span class="nt">mmi1x2_width_length</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mmi1x2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">do_permutation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="w">    </span><span class="nt">settings</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">length_mmi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">        </span><span class="nt">width_mmi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">placer</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pack_row</span><span class="w"></span>
+<span class="w">        </span><span class="nt">next_to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mmi2x2_width</span><span class="w"></span>
+<span class="c1"># Relative placing: this DOE is using the West South of the previous DOE as the origin</span><span class="w"></span>
+<span class="w">        </span><span class="nt">x0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W</span><span class="w"> </span><span class="c1"># x0 is the west of the DOE specified in next_to</span><span class="w"></span>
+<span class="w">        </span><span class="nt">y0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S</span><span class="w"> </span><span class="c1"># y0 is the south of the DOE specified in next_to</span><span class="w"></span>
+<span class="c1"># The West side of the component is aligned to x0 + margin</span><span class="w"></span>
+<span class="c1"># The North side of the component is aligned to y0 + margin</span><span class="w"></span>
+<span class="w">        </span><span class="nt">align_x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W</span><span class="w"></span>
+<span class="w">        </span><span class="nt">align_y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">N</span><span class="w"></span>
+<span class="w">        </span><span class="nt">inter_margin_y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w"> </span><span class="c1"># y margin between this DOE and the one used for relative placement</span><span class="w"></span>
+<span class="w">        </span><span class="nt">margin_x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.</span><span class="w"> </span><span class="c1"># x margin between the components within this DOE</span><span class="w"></span>
+<span class="w">        </span><span class="nt">margin_y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.</span><span class="w"> </span><span class="c1"># y margin between the components within this DOE</span><span class="w"></span>
+
+<span class="nt">bend_south_west</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bend_circular</span><span class="w"></span>
+<span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">template_align_south_west</span><span class="w"></span>
+<span class="w">    </span><span class="nt">settings</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">radius</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">placer</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pack_col</span><span class="w"> </span><span class="c1"># These devices are packed in a column</span><span class="w"></span>
+
+<span class="nt">ring_with_labels</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ring_single</span><span class="w"></span>
+<span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">template_add_labels</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cache</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="w">    </span><span class="nt">settings</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">bend_radius</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">placer</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">next_to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mmi1x2_width_length</span><span class="w"></span>
+<span class="c1"># Assuming I am working on this DOE, it is convenient to set cache to false here.</span><span class="w"></span>
+<span class="c1"># The full mask rebuilds quickly thanks to</span><span class="w"></span>
+<span class="c1"># the default cahe=true for all other DOEs, but all the changes to</span><span class="w"></span>
+<span class="c1"># this DOE are captured at every iteration</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Placer arguments</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+DOE003:
+	component: mmi1x2
+	settings:
+		length: [5, 10, 15]
+	placer:
+		type: pack_row / pack_col # placer type
+		row_ids / col_ids: list of integers, if specified, should have the same length as the total number of components within the DOE
+			by defaults all devices are in the first column/row (index 0)
+			If we want multiple rows, columns, we need to specify in which column they each go
+			e.g [0, 0, 1]
+
+		x0: &lt;float&gt; /  `E` / `W`
+		y0: &lt;float&gt; / `S` / `N`
+		align_x: `E` / `W`
+		align_y: `S` / `N`
+		margin: &lt;float&gt;
+		margin_x: &lt;float&gt;
+		margin_y: &lt;float&gt;
+		inter_margin_x: &lt;float&gt;
+		inter_margin_y: &lt;float&gt;
+		next_to: &lt;DOE_NAME&gt;
+
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="components.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Components</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="routing.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Routing</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">YAML</a><ul>
+<li><a class="reference internal" href="#netlist">Netlist</a></li>
+<li><a class="reference internal" href="#mask">Mask</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    </body>
+</html>

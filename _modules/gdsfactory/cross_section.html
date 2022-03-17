@@ -1,0 +1,1222 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>gdsfactory.cross_section - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for gdsfactory.cross_section</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""You can define a path with a list of points</span>
+
+<span class="sd">To create a component you need to extrude the path with a cross-section.</span>
+
+<span class="sd">"""</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">pydantic</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="kn">from</span> <span class="nn">gdsfactory.tech</span> <span class="kn">import</span> <span class="n">TECH</span><span class="p">,</span> <span class="n">Section</span>
+
+<span class="n">LAYER</span> <span class="o">=</span> <span class="n">TECH</span><span class="o">.</span><span class="n">layer</span>
+<span class="n">Layer</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="n">Layers</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Layer</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="n">Floats</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="CrossSection"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.CrossSection">[docs]</a><span class="k">class</span> <span class="nc">CrossSection</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">"""Extend phidl.device_layout.CrossSection with port_types.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sections: list of sections</span>
+<span class="sd">        ports:</span>
+<span class="sd">        port_types:</span>
+<span class="sd">        aliases:</span>
+<span class="sd">        info:</span>
+<span class="sd">    """</span>
+
+    <span class="n">sections</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Section</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ports</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">port_types</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">aliases</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Section</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">decorator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="CrossSection.add"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.CrossSection.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">layer</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="n">ports</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">port_types</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"optical"</span><span class="p">,</span> <span class="s2">"optical"</span><span class="p">),</span>
+        <span class="n">hidden</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">"""Adds a cross-sectional element to the CrossSection. If ports are</span>
+<span class="sd">        specified, when creating a Component with the gf.path.extrude() command</span>
+<span class="sd">        it will add Ports at the ends.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            width: width of the segment (um)</span>
+<span class="sd">            offset: Offset of the segment (positive values = right hand side)</span>
+<span class="sd">            layer: The polygon layer to put the segment on</span>
+<span class="sd">            ports: Optional port names at the ends of the cross-section</span>
+<span class="sd">            name: Optional Name of the cross-sectional element for later access</span>
+<span class="sd">            port_types: electrical, optical ...</span>
+<span class="sd">            hidden: if True does not draw polygons for CrossSection</span>
+
+<span class="sd">        .. code::</span>
+
+<span class="sd">              0   offset</span>
+<span class="sd">              |&lt;--------------&gt;|</span>
+<span class="sd">              |              _____</span>
+<span class="sd">              |             |     |</span>
+<span class="sd">              |             |layer|</span>
+<span class="sd">              |             |_____|</span>
+<span class="sd">              |              &lt;----&gt;</span>
+<span class="sd">                             width</span>
+
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">width</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"CrossSection.add(): widths must be &gt;0"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ports</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"CrossSection.add(): must receive 2 port names"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ports</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"CrossSection.add(): a port named </span><span class="si">{</span><span class="n">p</span><span class="si">!r}</span><span class="s2"> already "</span>
+                    <span class="s2">"exists in this CrossSection, please rename port"</span>
+                <span class="p">)</span>
+
+        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ports</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">ports</span> <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">port_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">port_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">port_type</span> <span class="ow">in</span> <span class="n">port_types</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"CrossSection.add(): an element named </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> already "</span>
+                <span class="s2">"exists in this CrossSection, please change the name"</span>
+            <span class="p">)</span>
+
+        <span class="n">new_segment</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+            <span class="n">ports</span><span class="o">=</span><span class="n">ports</span><span class="p">,</span>
+            <span class="n">port_types</span><span class="o">=</span><span class="n">port_types</span><span class="p">,</span>
+            <span class="n">hidden</span><span class="o">=</span><span class="n">hidden</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_segment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_segment</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="CrossSection.copy"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.CrossSection.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Return a copy of the CrossSection"""</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">CrossSection</span><span class="p">()</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">sections</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">)</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">ports</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ports</span><span class="p">)))</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">aliases</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">)</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">port_types</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">port_types</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">X</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">__get_validators__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="bp">cls</span><span class="o">.</span><span class="n">validate</span>
+
+<div class="viewcode-block" id="CrossSection.validate"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.CrossSection.validate">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">"""pydantic checks CrossSection valid type"""</span>
+        <span class="c1"># assert isinstance(</span>
+        <span class="c1">#     v, CrossSection</span>
+        <span class="c1"># ), f"TypeError, Got {type(v)}, expecting CrossSection"</span>
+        <span class="k">return</span> <span class="n">v</span></div>
+
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">"sections"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">section</span><span class="p">)</span> <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">sections</span> <span class="k">if</span> <span class="n">section</span><span class="p">]</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">"ports"</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">ports</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">"port_types"</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">port_types</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">"aliases"</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">aliases</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">"info"</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">info</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"cross_sections"</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">"cross_sections"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cross_sections</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s2">"_"</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">"sections"</span><span class="p">]])</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"CrossSection"</span><span class="p">:</span>
+        <span class="sd">"""Allows access to Sections by name like X['etch2'].</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            key: Section name to access within the CrossSection.</span>
+<span class="sd">        """</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Section </span><span class="si">{</span><span class="n">key</span><span class="si">!r}</span><span class="s2"> does not exists in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Transition"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.Transition">[docs]</a><span class="k">class</span> <span class="nc">Transition</span><span class="p">(</span><span class="n">CrossSection</span><span class="p">):</span>
+    <span class="n">cross_section1</span><span class="p">:</span> <span class="n">CrossSection</span>
+    <span class="n">cross_section2</span><span class="p">:</span> <span class="n">CrossSection</span>
+    <span class="n">width_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"sine"</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="cross_section"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.cross_section">[docs]</a><span class="nd">@pydantic</span><span class="o">.</span><span class="n">validate_arguments</span>
+<span class="k">def</span> <span class="nf">cross_section</span><span class="p">(</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">layer_bbox</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">width_wide</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">auto_widen</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">auto_widen_minimum_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">200.0</span><span class="p">,</span>
+    <span class="n">taper_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">cladding_offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">layers_cladding</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Layer</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">sections</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Section</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">port_names</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o2"</span><span class="p">),</span>
+    <span class="n">port_types</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"optical"</span><span class="p">,</span> <span class="s2">"optical"</span><span class="p">),</span>
+    <span class="n">min_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10e-3</span><span class="p">,</span>
+    <span class="n">start_straight_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10e-3</span><span class="p">,</span>
+    <span class="n">end_straight_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10e-3</span><span class="p">,</span>
+    <span class="n">snap_to_grid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">decorator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrossSection</span><span class="p">:</span>
+    <span class="sd">"""Return CrossSection.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        width: main of the waveguide</span>
+<span class="sd">        layer: main layer</span>
+<span class="sd">        layer_bbox: optional bounding box layer for device recognition. (68, 0)</span>
+<span class="sd">        width_wide: taper to widen waveguides for lower loss</span>
+<span class="sd">        auto_widen: taper to widen waveguides for lower loss</span>
+<span class="sd">        auto_widen_minimum_length: minimum straight length for auto_widen</span>
+<span class="sd">        taper_length: taper_length for auto_widen</span>
+<span class="sd">        radius: bend radius</span>
+<span class="sd">        cladding_offset: offset for layers_cladding</span>
+<span class="sd">        layers_cladding:</span>
+<span class="sd">        sections: Sections(width, offset, layer, ports)</span>
+<span class="sd">        port_names: for input and output ('o1', 'o2')</span>
+<span class="sd">        port_types: for input and output (electrical, optical, vertical_te ...)</span>
+<span class="sd">        min_length: 10e-3 for routing</span>
+<span class="sd">        start_straight_length: for routing</span>
+<span class="sd">        end_straight_length: for routing</span>
+<span class="sd">        snap_to_grid: can snap points to grid when extruding the path</span>
+<span class="sd">        decorator: optional decorator function (adds pins to each port, etc.)</span>
+<span class="sd">    """</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">width_wide</span><span class="o">=</span><span class="n">width_wide</span><span class="p">,</span>
+        <span class="n">auto_widen</span><span class="o">=</span><span class="n">auto_widen</span><span class="p">,</span>
+        <span class="n">auto_widen_minimum_length</span><span class="o">=</span><span class="n">auto_widen_minimum_length</span><span class="p">,</span>
+        <span class="n">taper_length</span><span class="o">=</span><span class="n">taper_length</span><span class="p">,</span>
+        <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span>
+        <span class="n">cladding_offset</span><span class="o">=</span><span class="n">cladding_offset</span><span class="p">,</span>
+        <span class="n">layers_cladding</span><span class="o">=</span><span class="n">layers_cladding</span><span class="p">,</span>
+        <span class="n">sections</span><span class="o">=</span><span class="n">sections</span><span class="p">,</span>
+        <span class="n">min_length</span><span class="o">=</span><span class="n">min_length</span><span class="p">,</span>
+        <span class="n">start_straight_length</span><span class="o">=</span><span class="n">start_straight_length</span><span class="p">,</span>
+        <span class="n">end_straight_length</span><span class="o">=</span><span class="n">end_straight_length</span><span class="p">,</span>
+        <span class="n">snap_to_grid</span><span class="o">=</span><span class="n">snap_to_grid</span><span class="p">,</span>
+        <span class="n">port_types</span><span class="o">=</span><span class="n">port_types</span><span class="p">,</span>
+        <span class="n">port_names</span><span class="o">=</span><span class="n">port_names</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">CrossSection</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="n">info</span><span class="p">,</span> <span class="n">decorator</span><span class="o">=</span><span class="n">decorator</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">ports</span><span class="o">=</span><span class="n">port_names</span><span class="p">,</span>
+        <span class="n">port_types</span><span class="o">=</span><span class="n">port_types</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"_default"</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">layer_bbox</span><span class="p">:</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">layer_bbox</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"bbox"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">sections</span> <span class="o">=</span> <span class="n">sections</span> <span class="ow">or</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">section</span><span class="p">[</span><span class="s2">"width"</span><span class="p">],</span>
+                <span class="n">offset</span><span class="o">=</span><span class="n">section</span><span class="p">[</span><span class="s2">"offset"</span><span class="p">],</span>
+                <span class="n">layer</span><span class="o">=</span><span class="n">section</span><span class="p">[</span><span class="s2">"layer"</span><span class="p">],</span>
+                <span class="n">ports</span><span class="o">=</span><span class="n">section</span><span class="p">[</span><span class="s2">"ports"</span><span class="p">],</span>
+                <span class="n">port_types</span><span class="o">=</span><span class="n">section</span><span class="p">[</span><span class="s2">"port_types"</span><span class="p">],</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">section</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">section</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>
+                <span class="n">offset</span><span class="o">=</span><span class="n">section</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span>
+                <span class="n">layer</span><span class="o">=</span><span class="n">section</span><span class="o">.</span><span class="n">layer</span><span class="p">,</span>
+                <span class="n">ports</span><span class="o">=</span><span class="n">section</span><span class="o">.</span><span class="n">ports</span><span class="p">,</span>
+                <span class="n">port_types</span><span class="o">=</span><span class="n">section</span><span class="o">.</span><span class="n">port_types</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">section</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="pin"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.pin">[docs]</a><span class="nd">@pydantic</span><span class="o">.</span><span class="n">validate_arguments</span>
+<span class="k">def</span> <span class="nf">pin</span><span class="p">(</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">WG</span><span class="p">,</span>
+    <span class="n">layer_slab</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">SLAB90</span><span class="p">,</span>
+    <span class="n">layers_contact1</span><span class="p">:</span> <span class="n">Layers</span> <span class="o">=</span> <span class="p">(</span><span class="n">LAYER</span><span class="o">.</span><span class="n">PPP</span><span class="p">,),</span>
+    <span class="n">layers_contact2</span><span class="p">:</span> <span class="n">Layers</span> <span class="o">=</span> <span class="p">(</span><span class="n">LAYER</span><span class="o">.</span><span class="n">NPP</span><span class="p">,),</span>
+    <span class="n">cladding_offsets_contact1</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">),</span>
+    <span class="n">cladding_offsets_contact2</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">),</span>
+    <span class="n">contact_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">9.0</span><span class="p">,</span>
+    <span class="n">contact_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.55</span><span class="p">,</span>
+    <span class="n">slab_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">layer_via</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Layer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">via_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">via_offsets</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrossSection</span><span class="p">:</span>
+    <span class="sd">"""rib PIN doped cross_section.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        width: ridge width</span>
+<span class="sd">        layer: ridge layer</span>
+<span class="sd">        layer_slab: slab layer</span>
+<span class="sd">        layers_contact1: P++ layer</span>
+<span class="sd">        layers_contact2: N++ layer</span>
+<span class="sd">        cladding_offsets_contact1:</span>
+<span class="sd">        cladding_offsets_contact2:</span>
+<span class="sd">        contact_width:</span>
+<span class="sd">        contact_gap: offset from contact to ridge edge</span>
+<span class="sd">        slab_gap: extra slab gap (negative: contact goes beyond slab)</span>
+<span class="sd">        layer_via:</span>
+<span class="sd">        via_width:</span>
+<span class="sd">        via_offsets:</span>
+<span class="sd">        kwargs: other cross_section settings</span>
+
+<span class="sd">    https://doi.org/10.1364/OE.26.029983</span>
+
+<span class="sd">    .. code::</span>
+
+<span class="sd">                                      layer</span>
+<span class="sd">                                |&lt;----width---&gt;|</span>
+<span class="sd">                                 _______________ contact_gap           slab_gap</span>
+<span class="sd">                                |              |&lt;-----------&gt;|             &lt;--&gt;</span>
+<span class="sd">        ___ ____________________|              |__________________________|___</span>
+<span class="sd">       |   |         |                                       |            |   |</span>
+<span class="sd">       |   |    P++  |         undoped silicon               |     N++    |   |</span>
+<span class="sd">       |___|_________|_______________________________________|____________|___|</span>
+<span class="sd">                                                              &lt;-----------&gt;</span>
+<span class="sd">                                                              contact_width</span>
+<span class="sd">       &lt;----------------------------------------------------------------------&gt;</span>
+<span class="sd">                                   slab_width</span>
+<span class="sd">    """</span>
+    <span class="n">slab_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">contact_gap</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">contact_width</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">slab_gap</span>
+    <span class="n">contact_offset</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">contact_gap</span> <span class="o">+</span> <span class="n">contact_width</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">sections</span> <span class="o">=</span> <span class="p">[</span><span class="n">Section</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">slab_width</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_slab</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"slab"</span><span class="p">)]</span>
+    <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">Section</span><span class="p">(</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">contact_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cladding_offset</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=+</span><span class="n">contact_offset</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">layer</span><span class="p">,</span> <span class="n">cladding_offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">layers_contact1</span><span class="p">,</span> <span class="n">cladding_offsets_contact1</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">Section</span><span class="p">(</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">contact_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cladding_offset</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=-</span><span class="n">contact_offset</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">layer</span><span class="p">,</span> <span class="n">cladding_offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">layers_contact2</span><span class="p">,</span> <span class="n">cladding_offsets_contact2</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">layer_via</span> <span class="ow">and</span> <span class="n">via_width</span> <span class="ow">and</span> <span class="n">via_offsets</span><span class="p">:</span>
+        <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">Section</span><span class="p">(</span>
+                <span class="n">layer</span><span class="o">=</span><span class="n">layer_via</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">via_width</span><span class="p">,</span>
+                <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">via_offsets</span>
+        <span class="p">]</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">cross_section</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">sections</span><span class="o">=</span><span class="n">sections</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">layer_slab</span><span class="o">=</span><span class="n">layer_slab</span><span class="p">,</span>
+        <span class="n">layers_contact1</span><span class="o">=</span><span class="n">layers_contact1</span><span class="p">,</span>
+        <span class="n">layers_contact2</span><span class="o">=</span><span class="n">layers_contact2</span><span class="p">,</span>
+        <span class="n">cladding_offsets_contact1</span><span class="o">=</span><span class="n">cladding_offsets_contact1</span><span class="p">,</span>
+        <span class="n">cladding_offsets_contact2</span><span class="o">=</span><span class="n">cladding_offsets_contact2</span><span class="p">,</span>
+        <span class="n">contact_width</span><span class="o">=</span><span class="n">contact_width</span><span class="p">,</span>
+        <span class="n">contact_gap</span><span class="o">=</span><span class="n">contact_gap</span><span class="p">,</span>
+        <span class="n">slab_gap</span><span class="o">=</span><span class="n">slab_gap</span><span class="p">,</span>
+        <span class="n">layer_via</span><span class="o">=</span><span class="n">layer_via</span><span class="p">,</span>
+        <span class="n">via_width</span><span class="o">=</span><span class="n">via_width</span><span class="p">,</span>
+        <span class="n">via_offsets</span><span class="o">=</span><span class="n">via_offsets</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">info</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="pn"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.pn">[docs]</a><span class="nd">@pydantic</span><span class="o">.</span><span class="n">validate_arguments</span>
+<span class="k">def</span> <span class="nf">pn</span><span class="p">(</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">WG</span><span class="p">,</span>
+    <span class="n">layer_slab</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">SLAB90</span><span class="p">,</span>
+    <span class="n">gap_low_doping</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">gap_medium_doping</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">gap_high_doping</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">width_doping</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">8.0</span><span class="p">,</span>
+    <span class="n">width_slab</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">7.0</span><span class="p">,</span>
+    <span class="n">layer_p</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">P</span><span class="p">,</span>
+    <span class="n">layer_pp</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">PP</span><span class="p">,</span>
+    <span class="n">layer_ppp</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">PPP</span><span class="p">,</span>
+    <span class="n">layer_n</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">N</span><span class="p">,</span>
+    <span class="n">layer_np</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">NP</span><span class="p">,</span>
+    <span class="n">layer_npp</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">NPP</span><span class="p">,</span>
+    <span class="n">cladding_offsets</span><span class="p">:</span> <span class="n">Floats</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span>
+    <span class="n">layers_cladding</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Layer</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">port_names</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o2"</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrossSection</span><span class="p">:</span>
+    <span class="sd">"""rib PN doped cross_section.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        width: width of the ridge</span>
+<span class="sd">        layer: ridge llayer</span>
+<span class="sd">        layer_slab: slab layer</span>
+<span class="sd">        gap_low_doping: from waveguide center to low doping</span>
+<span class="sd">        gap_medium_doping: from waveguide center to medium doping.</span>
+<span class="sd">            None removes medium doping</span>
+<span class="sd">        gap_high_doping: from center to high doping. None removes it.</span>
+<span class="sd">        width_doping:</span>
+<span class="sd">        width_slab:</span>
+<span class="sd">        layer_p:</span>
+<span class="sd">        layer_pp:</span>
+<span class="sd">        layer_ppp:</span>
+<span class="sd">        layer_n:</span>
+<span class="sd">        layer_np:</span>
+<span class="sd">        layer_npp:</span>
+<span class="sd">        cladding_offsets:</span>
+<span class="sd">        layers_cladding: Iterable of layers</span>
+<span class="sd">        port_names:</span>
+
+
+<span class="sd">    .. code::</span>
+
+<span class="sd">                                   layer</span>
+<span class="sd">                           |&lt;------width------&gt;|</span>
+<span class="sd">                            ____________________</span>
+<span class="sd">                           |     |       |     |</span>
+<span class="sd">        ___________________|     |       |     |__________________________|</span>
+<span class="sd">                    P            |       |              N                 |</span>
+<span class="sd">                 width_p         |       |           width_n              |</span>
+<span class="sd">        &lt;-----------------------&gt;|       |&lt;------------------------------&gt;|</span>
+<span class="sd">                                     |&lt;-&gt;|</span>
+<span class="sd">                                     gap_low_doping</span>
+<span class="sd">                                     |         |        N+                |</span>
+<span class="sd">                                     |         |     width_np             |</span>
+<span class="sd">                                     |         |&lt;------------------------&gt;|</span>
+<span class="sd">                                     |&lt;-------&gt;|</span>
+<span class="sd">                                           gap_medium_doping</span>
+
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">CrossSection</span><span class="p">()</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="n">port_names</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width_slab</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_slab</span><span class="p">)</span>
+
+    <span class="n">offset_low_doping</span> <span class="o">=</span> <span class="n">width_doping</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">gap_low_doping</span>
+    <span class="n">width_low_doping</span> <span class="o">=</span> <span class="n">width_doping</span> <span class="o">-</span> <span class="n">gap_low_doping</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width_low_doping</span><span class="p">,</span> <span class="n">offset</span><span class="o">=+</span><span class="n">offset_low_doping</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_n</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width_low_doping</span><span class="p">,</span> <span class="n">offset</span><span class="o">=-</span><span class="n">offset_low_doping</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_p</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">gap_medium_doping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">width_medium_doping</span> <span class="o">=</span> <span class="n">width_doping</span> <span class="o">-</span> <span class="n">gap_medium_doping</span>
+        <span class="n">offset_medium_doping</span> <span class="o">=</span> <span class="n">width_medium_doping</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">gap_medium_doping</span>
+
+        <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width_medium_doping</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=+</span><span class="n">offset_medium_doping</span><span class="p">,</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">layer_np</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width_medium_doping</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=-</span><span class="n">offset_medium_doping</span><span class="p">,</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">layer_pp</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">gap_high_doping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">width_high_doping</span> <span class="o">=</span> <span class="n">width_doping</span> <span class="o">-</span> <span class="n">gap_high_doping</span>
+        <span class="n">offset_high_doping</span> <span class="o">=</span> <span class="n">width_high_doping</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">gap_high_doping</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width_high_doping</span><span class="p">,</span> <span class="n">offset</span><span class="o">=+</span><span class="n">offset_high_doping</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_npp</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width_high_doping</span><span class="p">,</span> <span class="n">offset</span><span class="o">=-</span><span class="n">offset_high_doping</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_ppp</span><span class="p">)</span>
+
+    <span class="n">layers_cladding</span> <span class="o">=</span> <span class="n">layers_cladding</span> <span class="ow">or</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">cladding_offset</span><span class="p">,</span> <span class="n">layer_cladding</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cladding_offsets</span><span class="p">,</span> <span class="n">layers_cladding</span><span class="p">):</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width_slab</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cladding_offset</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_cladding</span><span class="p">)</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">cladding_offsets</span><span class="o">=</span><span class="n">cladding_offsets</span><span class="p">,</span>
+        <span class="n">layers_cladding</span><span class="o">=</span><span class="n">layers_cladding</span><span class="p">,</span>
+        <span class="n">gap_low_doping</span><span class="o">=</span><span class="n">gap_low_doping</span><span class="p">,</span>
+        <span class="n">gap_medium_doping</span><span class="o">=</span><span class="n">gap_medium_doping</span><span class="p">,</span>
+        <span class="n">gap_high_doping</span><span class="o">=</span><span class="n">gap_high_doping</span><span class="p">,</span>
+        <span class="n">width_doping</span><span class="o">=</span><span class="n">width_doping</span><span class="p">,</span>
+        <span class="n">width_slab</span><span class="o">=</span><span class="n">width_slab</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">s</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="strip_heater_metal_undercut"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.strip_heater_metal_undercut">[docs]</a><span class="nd">@pydantic</span><span class="o">.</span><span class="n">validate_arguments</span>
+<span class="k">def</span> <span class="nf">strip_heater_metal_undercut</span><span class="p">(</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">WG</span><span class="p">,</span>
+    <span class="n">heater_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span>
+    <span class="n">trench_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">6.5</span><span class="p">,</span>
+    <span class="n">trench_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">layer_heater</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">HEATER</span><span class="p">,</span>
+    <span class="n">layer_trench</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">DEEPTRENCH</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrossSection</span><span class="p">:</span>
+    <span class="sd">"""Returns strip cross_section with top metal and undercut trenches on both sides.</span>
+<span class="sd">    dimensions from https://doi.org/10.1364/OE.18.020298</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        width: of waveguide</span>
+<span class="sd">        layer:</span>
+<span class="sd">        heater_width: of metal heater</span>
+<span class="sd">        trench_width:</span>
+<span class="sd">        trench_gap: from waveguide edge to trench edge</span>
+<span class="sd">        layer_heater:</span>
+<span class="sd">        layer_trench:</span>
+<span class="sd">        kwargs: cross_section settings</span>
+
+
+<span class="sd">    .. code::</span>
+
+<span class="sd">              |&lt;-------heater_width---------&gt;|</span>
+<span class="sd">               ______________________________</span>
+<span class="sd">              |                              |</span>
+<span class="sd">              |         layer_heater         |</span>
+<span class="sd">              |______________________________|</span>
+
+<span class="sd">                   |&lt;------width------&gt;|</span>
+<span class="sd">                    ____________________ trench_gap</span>
+<span class="sd">                   |                   |&lt;-----------&gt;|              |</span>
+<span class="sd">                   |                   |             |   undercut   |</span>
+<span class="sd">                   |       width       |             |              |</span>
+<span class="sd">                   |                   |             |&lt;------------&gt;|</span>
+<span class="sd">                   |___________________|             | trench_width |</span>
+<span class="sd">                                                     |              |</span>
+<span class="sd">                                                     |              |</span>
+
+<span class="sd">    """</span>
+    <span class="n">trench_offset</span> <span class="o">=</span> <span class="n">trench_gap</span> <span class="o">+</span> <span class="n">trench_width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">cross_section</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">sections</span><span class="o">=</span><span class="p">(</span>
+            <span class="n">Section</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="n">layer_heater</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span><span class="p">),</span>
+            <span class="n">Section</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="n">layer_trench</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">trench_width</span><span class="p">,</span> <span class="n">offset</span><span class="o">=+</span><span class="n">trench_offset</span><span class="p">),</span>
+            <span class="n">Section</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="n">layer_trench</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">trench_width</span><span class="p">,</span> <span class="n">offset</span><span class="o">=-</span><span class="n">trench_offset</span><span class="p">),</span>
+        <span class="p">),</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">"heater_width"</span><span class="p">]</span> <span class="o">=</span> <span class="n">heater_width</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">"layer_heater"</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer_heater</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">"trench_width"</span><span class="p">]</span> <span class="o">=</span> <span class="n">trench_width</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">"layer_heater"</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer_heater</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">"trench_gap"</span><span class="p">]</span> <span class="o">=</span> <span class="n">trench_gap</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="strip_heater_metal"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.strip_heater_metal">[docs]</a><span class="nd">@pydantic</span><span class="o">.</span><span class="n">validate_arguments</span>
+<span class="k">def</span> <span class="nf">strip_heater_metal</span><span class="p">(</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">WG</span><span class="p">,</span>
+    <span class="n">heater_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span>
+    <span class="n">layer_heater</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">HEATER</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrossSection</span><span class="p">:</span>
+    <span class="sd">"""Returns strip cross_section with top heater metal.</span>
+<span class="sd">    dimensions from https://doi.org/10.1364/OE.18.020298</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        width: of waveguide</span>
+<span class="sd">        layer:</span>
+<span class="sd">        heater_width: of metal heater</span>
+<span class="sd">        layer_heater: for the metal</span>
+
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">cross_section</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">sections</span><span class="o">=</span><span class="p">(</span><span class="n">Section</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="n">layer_heater</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span><span class="p">),),</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">"heater_width"</span><span class="p">]</span> <span class="o">=</span> <span class="n">heater_width</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">"layer_heater"</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer_heater</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="heater_metal"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.heater_metal">[docs]</a><span class="nd">@pydantic</span><span class="o">.</span><span class="n">validate_arguments</span>
+<span class="k">def</span> <span class="nf">heater_metal</span><span class="p">(</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">HEATER</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrossSection</span><span class="p">:</span>
+    <span class="sd">"""Returns metal heater cross_section.</span>
+<span class="sd">    dimensions from https://doi.org/10.1364/OE.18.020298</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        width: of the metal</span>
+<span class="sd">        layer: of the heater</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">cross_section</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="strip_heater_doped"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.strip_heater_doped">[docs]</a><span class="nd">@pydantic</span><span class="o">.</span><span class="n">validate_arguments</span>
+<span class="k">def</span> <span class="nf">strip_heater_doped</span><span class="p">(</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">WG</span><span class="p">,</span>
+    <span class="n">heater_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">heater_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">layers_heater</span><span class="p">:</span> <span class="n">Layers</span> <span class="o">=</span> <span class="p">(</span><span class="n">LAYER</span><span class="o">.</span><span class="n">WG</span><span class="p">,</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">NPP</span><span class="p">),</span>
+    <span class="n">cladding_offsets_heater</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrossSection</span><span class="p">:</span>
+    <span class="sd">"""Returns strip cross_section with N++ doped heaters on both sides.</span>
+
+<span class="sd">    .. code::</span>
+
+<span class="sd">                                  |&lt;------width------&gt;|</span>
+<span class="sd">          ____________             ___________________               ______________</span>
+<span class="sd">         |            |           |     undoped Si    |             |              |</span>
+<span class="sd">         |layer_heater|           |  intrinsic region |&lt;-----------&gt;| layer_heater |</span>
+<span class="sd">         |____________|           |___________________|             |______________|</span>
+<span class="sd">                                                                     &lt;------------&gt;</span>
+<span class="sd">                                                        heater_gap     heater_width</span>
+<span class="sd">    """</span>
+    <span class="n">heater_offset</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">heater_gap</span> <span class="o">+</span> <span class="n">heater_width</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">sections</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Section</span><span class="p">(</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cladding_offset</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=+</span><span class="n">heater_offset</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">layer</span><span class="p">,</span> <span class="n">cladding_offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">layers_heater</span><span class="p">,</span> <span class="n">cladding_offsets_heater</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">Section</span><span class="p">(</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cladding_offset</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=-</span><span class="n">heater_offset</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">layer</span><span class="p">,</span> <span class="n">cladding_offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">layers_heater</span><span class="p">,</span> <span class="n">cladding_offsets_heater</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">cross_section</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">sections</span><span class="o">=</span><span class="n">sections</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<span class="n">strip_heater_doped_contact</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+    <span class="n">strip_heater_doped</span><span class="p">,</span>
+    <span class="n">layers_heater</span><span class="o">=</span><span class="p">(</span><span class="n">LAYER</span><span class="o">.</span><span class="n">WG</span><span class="p">,</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">NPP</span><span class="p">,</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">VIAC</span><span class="p">),</span>
+    <span class="n">cladding_offsets_heater</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="rib_heater_doped"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.rib_heater_doped">[docs]</a><span class="nd">@pydantic</span><span class="o">.</span><span class="n">validate_arguments</span>
+<span class="k">def</span> <span class="nf">rib_heater_doped</span><span class="p">(</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">WG</span><span class="p">,</span>
+    <span class="n">heater_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">heater_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">layer_heater</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">NPP</span><span class="p">,</span>
+    <span class="n">layer_slab</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">SLAB90</span><span class="p">,</span>
+    <span class="n">slab_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">with_top_heater</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">with_bot_heater</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrossSection</span><span class="p">:</span>
+    <span class="sd">"""Returns rib cross_section with N++ doped heaters on both sides.</span>
+<span class="sd">    dimensions from https://doi.org/10.1364/OE.27.010456</span>
+
+<span class="sd">    .. code::</span>
+
+
+<span class="sd">                                    |&lt;------width------&gt;|</span>
+<span class="sd">                                     ____________________  heater_gap           slab_gap</span>
+<span class="sd">                                    |                   |&lt;-----------&gt;|             &lt;--&gt;</span>
+<span class="sd">         ___ _______________________|                   |__________________________|___</span>
+<span class="sd">        |   |            |                undoped Si                  |            |   |</span>
+<span class="sd">        |   |layer_heater|                intrinsic region            |layer_heater|   |</span>
+<span class="sd">        |___|____________|____________________________________________|____________|___|</span>
+<span class="sd">                                                                       &lt;----------&gt;</span>
+<span class="sd">                                                                        heater_width</span>
+<span class="sd">        &lt;------------------------------------------------------------------------------&gt;</span>
+<span class="sd">                                        slab_width</span>
+<span class="sd">    """</span>
+    <span class="n">heater_offset</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">heater_gap</span> <span class="o">+</span> <span class="n">heater_width</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="n">with_bot_heater</span> <span class="ow">and</span> <span class="n">with_top_heater</span><span class="p">:</span>
+        <span class="n">slab_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">heater_gap</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">heater_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">slab_gap</span>
+        <span class="n">slab_offset</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">with_top_heater</span><span class="p">:</span>
+        <span class="n">slab_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">+</span> <span class="n">heater_gap</span> <span class="o">+</span> <span class="n">heater_width</span> <span class="o">+</span> <span class="n">slab_gap</span>
+        <span class="n">slab_offset</span> <span class="o">=</span> <span class="o">-</span><span class="n">slab_width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="n">with_bot_heater</span><span class="p">:</span>
+        <span class="n">slab_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">+</span> <span class="n">heater_gap</span> <span class="o">+</span> <span class="n">heater_width</span> <span class="o">+</span> <span class="n">slab_gap</span>
+        <span class="n">slab_offset</span> <span class="o">=</span> <span class="o">+</span><span class="n">slab_width</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">sections</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">with_bot_heater</span><span class="p">:</span>
+        <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">Section</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="n">layer_heater</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span><span class="p">,</span> <span class="n">offset</span><span class="o">=+</span><span class="n">heater_offset</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="k">if</span> <span class="n">with_top_heater</span><span class="p">:</span>
+        <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">Section</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="n">layer_heater</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span><span class="p">,</span> <span class="n">offset</span><span class="o">=-</span><span class="n">heater_offset</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">Section</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">slab_width</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_slab</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">slab_offset</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"slab"</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">cross_section</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">sections</span><span class="o">=</span><span class="n">sections</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="rib_heater_doped_contact"><a class="viewcode-back" href="../../api.html#gdsfactory.cross_section.rib_heater_doped_contact">[docs]</a><span class="nd">@pydantic</span><span class="o">.</span><span class="n">validate_arguments</span>
+<span class="k">def</span> <span class="nf">rib_heater_doped_contact</span><span class="p">(</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">WG</span><span class="p">,</span>
+    <span class="n">heater_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">heater_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">layer_slab</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">SLAB90</span><span class="p">,</span>
+    <span class="n">layer_heater</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">NPP</span><span class="p">,</span>
+    <span class="n">contact_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">contact_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">layers_contact</span><span class="p">:</span> <span class="n">Layers</span> <span class="o">=</span> <span class="p">(</span><span class="n">LAYER</span><span class="o">.</span><span class="n">NPP</span><span class="p">,</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">VIAC</span><span class="p">),</span>
+    <span class="n">cladding_offsets_contact</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">),</span>
+    <span class="n">slab_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">slab_offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">with_top_heater</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">with_bot_heater</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrossSection</span><span class="p">:</span>
+    <span class="sd">"""Returns rib cross_section with N++ doped heaters on both sides.</span>
+<span class="sd">    dimensions from https://doi.org/10.1364/OE.27.010456</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        width:</span>
+<span class="sd">        layer:</span>
+<span class="sd">        heater_width:</span>
+<span class="sd">        heater_gap:</span>
+<span class="sd">        layer_slab:</span>
+<span class="sd">        layer_heater:</span>
+<span class="sd">        contact_width:</span>
+<span class="sd">        contact_gap:</span>
+<span class="sd">        layers_contact:</span>
+<span class="sd">        cladding_offsets_contact:</span>
+<span class="sd">        slab_gap: from heater edge</span>
+<span class="sd">        slab_offset: over the center of the slab</span>
+<span class="sd">        with_top_heater:</span>
+<span class="sd">        with_bot_heater:</span>
+
+<span class="sd">    .. code::</span>
+
+<span class="sd">                                   |&lt;----width------&gt;|</span>
+<span class="sd">       slab_gap                     __________________ contact_gap     contact width</span>
+<span class="sd">       &lt;--&gt;                        |                 |&lt;------------&gt;|&lt;---------------&gt;</span>
+<span class="sd">                                   |                 | heater_gap |</span>
+<span class="sd">                                   |                 |&lt;----------&gt;|</span>
+<span class="sd">        ___ _______________________|                 |___________________________ ____</span>
+<span class="sd">       |   |            |              undoped Si                 |              |    |</span>
+<span class="sd">       |   |layer_heater|              intrinsic region           |layer_heater  |    |</span>
+<span class="sd">       |___|____________|_________________________________________|______________|____|</span>
+<span class="sd">                                                                   &lt;------------&gt;</span>
+<span class="sd">                                                                    heater_width</span>
+<span class="sd">       &lt;------------------------------------------------------------------------------&gt;</span>
+<span class="sd">                                       slab_width</span>
+
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">with_bot_heater</span> <span class="ow">and</span> <span class="n">with_top_heater</span><span class="p">:</span>
+        <span class="n">slab_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">heater_gap</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">heater_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">slab_gap</span>
+        <span class="n">slab_offset</span> <span class="o">=</span> <span class="n">slab_offset</span>
+    <span class="k">elif</span> <span class="n">with_top_heater</span><span class="p">:</span>
+        <span class="n">slab_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">+</span> <span class="n">heater_gap</span> <span class="o">+</span> <span class="n">heater_width</span> <span class="o">+</span> <span class="n">slab_gap</span>
+        <span class="n">slab_offset</span> <span class="o">=</span> <span class="n">slab_offset</span> <span class="o">-</span> <span class="n">slab_width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="n">with_bot_heater</span><span class="p">:</span>
+        <span class="n">slab_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">+</span> <span class="n">heater_gap</span> <span class="o">+</span> <span class="n">heater_width</span> <span class="o">+</span> <span class="n">slab_gap</span>
+        <span class="n">slab_offset</span> <span class="o">=</span> <span class="n">slab_offset</span> <span class="o">+</span> <span class="n">slab_width</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">heater_offset</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">heater_gap</span> <span class="o">+</span> <span class="n">heater_width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">contact_offset</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">contact_gap</span> <span class="o">+</span> <span class="n">contact_width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">sections</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Section</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">slab_width</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_slab</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">slab_offset</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"slab"</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">with_bot_heater</span><span class="p">:</span>
+        <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">Section</span><span class="p">(</span>
+                <span class="n">layer</span><span class="o">=</span><span class="n">layer_heater</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span><span class="p">,</span>
+                <span class="n">offset</span><span class="o">=+</span><span class="n">heater_offset</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">with_top_heater</span><span class="p">:</span>
+        <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">Section</span><span class="p">(</span>
+                <span class="n">layer</span><span class="o">=</span><span class="n">layer_heater</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span><span class="p">,</span>
+                <span class="n">offset</span><span class="o">=-</span><span class="n">heater_offset</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">with_bot_heater</span><span class="p">:</span>
+        <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">Section</span><span class="p">(</span>
+                <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cladding_offset</span><span class="p">,</span>
+                <span class="n">offset</span><span class="o">=+</span><span class="n">contact_offset</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">layer</span><span class="p">,</span> <span class="n">cladding_offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">layers_contact</span><span class="p">,</span> <span class="n">cladding_offsets_contact</span><span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">with_top_heater</span><span class="p">:</span>
+        <span class="n">sections</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">Section</span><span class="p">(</span>
+                <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">heater_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cladding_offset</span><span class="p">,</span>
+                <span class="n">offset</span><span class="o">=-</span><span class="n">contact_offset</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">layer</span><span class="p">,</span> <span class="n">cladding_offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">layers_contact</span><span class="p">,</span> <span class="n">cladding_offsets_contact</span><span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">cross_section</span><span class="p">(</span>
+        <span class="n">sections</span><span class="o">=</span><span class="n">sections</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<span class="n">strip</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">cross_section</span><span class="p">)</span>
+<span class="n">strip_auto_widen</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">cross_section</span><span class="p">,</span> <span class="n">width_wide</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">auto_widen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">rib</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+    <span class="n">strip</span><span class="p">,</span>
+    <span class="n">sections</span><span class="o">=</span><span class="p">(</span><span class="n">Section</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">LAYER</span><span class="o">.</span><span class="n">SLAB90</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"slab"</span><span class="p">),),</span>
+    <span class="n">layers_cladding</span><span class="o">=</span><span class="p">(</span><span class="n">LAYER</span><span class="o">.</span><span class="n">SLAB90</span><span class="p">,),</span>
+    <span class="n">cladding_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">nitride</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">cross_section</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">LAYER</span><span class="o">.</span><span class="n">WGN</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">strip_rib_tip</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+    <span class="n">strip</span><span class="p">,</span> <span class="n">sections</span><span class="o">=</span><span class="p">(</span><span class="n">Section</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">LAYER</span><span class="o">.</span><span class="n">SLAB90</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"slab"</span><span class="p">),)</span>
+<span class="p">)</span>
+
+<span class="n">port_names_electrical</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"e1"</span><span class="p">,</span> <span class="s2">"e2"</span><span class="p">)</span>
+<span class="n">port_types_electrical</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"electrical"</span><span class="p">,</span> <span class="s2">"electrical"</span><span class="p">)</span>
+<span class="n">metal1</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+    <span class="n">cross_section</span><span class="p">,</span>
+    <span class="n">layer</span><span class="o">=</span><span class="n">LAYER</span><span class="o">.</span><span class="n">M1</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">port_names</span><span class="o">=</span><span class="n">port_names_electrical</span><span class="p">,</span>
+    <span class="n">port_types</span><span class="o">=</span><span class="n">port_types_electrical</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">metal2</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+    <span class="n">metal1</span><span class="p">,</span>
+    <span class="n">layer</span><span class="o">=</span><span class="n">LAYER</span><span class="o">.</span><span class="n">M2</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">metal3</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+    <span class="n">metal1</span><span class="p">,</span>
+    <span class="n">layer</span><span class="o">=</span><span class="n">LAYER</span><span class="o">.</span><span class="n">M3</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># xs_strip = strip()</span>
+<span class="c1"># xs_strip_auto_widen = strip_auto_widen()</span>
+<span class="c1"># xs_rib = rib()</span>
+<span class="c1"># xs_nitride = nitride()</span>
+<span class="c1"># xs_metal1 = metal1()</span>
+<span class="c1"># xs_metal2 = metal2()</span>
+<span class="c1"># xs_metal3 = metal3()</span>
+<span class="c1"># xs_pin = pin()</span>
+<span class="c1"># xs_strip_heater_metal_undercut = strip_heater_metal_undercut()</span>
+<span class="c1"># xs_strip_heater_metal = strip_heater_metal()</span>
+<span class="c1"># xs_strip_heater_doped = strip_heater_doped()</span>
+<span class="c1"># xs_rib_heater_doped = rib_heater_doped()</span>
+
+
+<span class="n">cross_section_factory</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
+    <span class="n">strip</span><span class="o">=</span><span class="n">strip</span><span class="p">,</span>
+    <span class="n">strip_auto_widen</span><span class="o">=</span><span class="n">strip_auto_widen</span><span class="p">,</span>
+    <span class="n">rib</span><span class="o">=</span><span class="n">rib</span><span class="p">,</span>
+    <span class="n">nitride</span><span class="o">=</span><span class="n">nitride</span><span class="p">,</span>
+    <span class="n">metal1</span><span class="o">=</span><span class="n">metal1</span><span class="p">,</span>
+    <span class="n">metal2</span><span class="o">=</span><span class="n">metal2</span><span class="p">,</span>
+    <span class="n">metal3</span><span class="o">=</span><span class="n">metal3</span><span class="p">,</span>
+    <span class="n">pin</span><span class="o">=</span><span class="n">pin</span><span class="p">,</span>
+    <span class="n">strip_heater_metal_undercut</span><span class="o">=</span><span class="n">strip_heater_metal_undercut</span><span class="p">,</span>
+    <span class="n">strip_heater_metal</span><span class="o">=</span><span class="n">strip_heater_metal</span><span class="p">,</span>
+    <span class="n">strip_heater_doped</span><span class="o">=</span><span class="n">strip_heater_doped</span><span class="p">,</span>
+    <span class="n">rib_heater_doped</span><span class="o">=</span><span class="n">rib_heater_doped</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+    <span class="kn">from</span> <span class="nn">gdsfactory.add_pins</span> <span class="kn">import</span> <span class="n">add_pins_siepic_optical</span>
+
+    <span class="n">P</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">straight</span><span class="p">()</span>
+    <span class="c1"># P = gf.path.euler(radius=10, use_eff=True)</span>
+    <span class="c1"># P = euler()</span>
+    <span class="c1"># P = gf.Path()</span>
+    <span class="c1"># P.append(gf.path.straight(length=5))</span>
+    <span class="c1"># P.append(gf.path.arc(radius=10, angle=90))</span>
+    <span class="c1"># P.append(gf.path.spiral())</span>
+
+    <span class="c1"># Create a blank CrossSection</span>
+    <span class="c1"># X.add(width=2.0, offset=4, layer=LAYER.HEATER, ports=["HW0", "HE0"])</span>
+
+    <span class="c1"># X = pin(width=0.5, width_i=0.5)</span>
+    <span class="c1"># x = strip(width=0.5)</span>
+
+    <span class="c1"># X = strip_heater_metal_undercut()</span>
+    <span class="c1"># X = metal1()</span>
+    <span class="c1"># X = pin(layer_via=LAYER.VIAC, via_offsets=(-2, 2))</span>
+    <span class="c1"># X = pin()</span>
+    <span class="c1"># X = strip_heater_doped()</span>
+
+    <span class="c1"># x1 = strip_rib_tip()</span>
+    <span class="c1"># x2 = rib_heater_doped_contact()</span>
+    <span class="c1"># X = gf.path.transition(x1, x2)</span>
+    <span class="c1"># P = gf.path.straight(npoints=100, length=10)</span>
+
+    <span class="c1"># X = CrossSection()</span>
+    <span class="c1"># X.add(width=2.0, offset=-4, layer=LAYER.HEATER, ports=["e1", "e2"])</span>
+    <span class="c1"># X.add(width=0.5, offset=0, layer=LAYER.SLAB90, ports=["o1", "o2"])</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">rib_heater_doped</span><span class="p">(</span><span class="n">with_bot_heater</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">decorator</span><span class="o">=</span><span class="n">add_pins_siepic_optical</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">npoints</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">extrude</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+
+    <span class="c1"># print(x1.to_dict())</span>
+    <span class="c1"># print(x1.name)</span>
+    <span class="c1"># c = gf.path.component(P, strip(width=2, layer=LAYER.WG, cladding_offset=3))</span>
+    <span class="c1"># c = gf.add_pins(c)</span>
+    <span class="c1"># c &lt;&lt; gf.components.bend_euler(radius=10)</span>
+    <span class="c1"># c &lt;&lt; gf.components.bend_circular(radius=10)</span>
+    <span class="c1"># c.pprint_ports()</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">show_ports</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    </body>
+</html>

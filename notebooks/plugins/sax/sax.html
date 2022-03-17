@@ -1,0 +1,2604 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Simphony circuit simulator" href="../simphony/01_components.html" /><link rel="prev" title="FDTD tidy3d" href="../tidy3d/00_tidy3d.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>SAX circuit simulator - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../plugins.html">Plugins</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="SAX-circuit-simulator">
+<h1>SAX circuit simulator<a class="headerlink" href="#SAX-circuit-simulator" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://flaport.github.io/sax/">SAX</a> is a circuit solver written in JAX, writing your component models in SAX enables you not only to get the function values but the gradients, this is useful for circuit optimization.</p>
+<p>This tutorial has been adapted from SAX tutorial.</p>
+<p>Note that SAX does not work on Windows, so if you use windows you’ll need to run from <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/">WSL</a> or using docker.</p>
+<p>You can install sax with pip</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>! pip install sax
+</pre></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.sax</span> <span class="k">as</span> <span class="nn">gs</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.modes</span> <span class="k">as</span> <span class="nn">gm</span>
+<span class="kn">import</span> <span class="nn">sax</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:58.897 | INFO     | gdsfactory.config:&lt;module&gt;:52 - Load '/home/runner/work/gdsfactory/gdsfactory/gdsfactory' 4.4.12
+2022-03-17 04:15:00.621 | INFO     | gdsfactory.simulation.gmeep:&lt;module&gt;:28 - Meep '1.22.0' installed at ['/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/meep']
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using MPI version 4.0, 1 processes
+</pre></div></div>
+</div>
+<section id="Scatter-dictionaries">
+<h2>Scatter <em>dictionaries</em><a class="headerlink" href="#Scatter-dictionaries" title="Permalink to this headline">#</a></h2>
+<p>The core datastructure for specifying scatter parameters in SAX is a dictionary… more specifically a dictionary which maps a port combination (2-tuple) to a scatter parameter (or an array of scatter parameters when considering multiple wavelengths for example). Such a specific dictionary mapping is called ann <code class="docutils literal notranslate"><span class="pre">SDict</span></code> in SAX (<code class="docutils literal notranslate"><span class="pre">SDict</span> <span class="pre">≈</span> <span class="pre">Dict[Tuple[str,str],</span> <span class="pre">float]</span></code>).</p>
+<p>Dictionaries are in fact much better suited for characterizing S-parameters than, say, (jax-)numpy arrays due to the inherent sparse nature of scatter parameters. Moreover, dictonaries allow for string indexing, which makes them much more pleasant to use in this context.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>o2            o3
+   \        /
+    ========
+   /        \
+o1            o4
+</pre></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupling</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="n">coupling</span> <span class="o">**</span> <span class="mf">0.5</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">coupling</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+<span class="n">coupler_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">):</span> <span class="n">tau</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">"o4"</span><span class="p">,</span> <span class="s2">"o1"</span><span class="p">):</span> <span class="n">tau</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">):</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">kappa</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">"o3"</span><span class="p">,</span> <span class="s2">"o1"</span><span class="p">):</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">kappa</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">):</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">kappa</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">"o4"</span><span class="p">,</span> <span class="s2">"o2"</span><span class="p">):</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">kappa</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">):</span> <span class="n">tau</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">"o3"</span><span class="p">,</span> <span class="s2">"o2"</span><span class="p">):</span> <span class="n">tau</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">coupler_dict</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{('o1', 'o4'): 0.7071067811865476,
+ ('o4', 'o1'): 0.7071067811865476,
+ ('o1', 'o3'): 0.7071067811865476j,
+ ('o3', 'o1'): 0.7071067811865476j,
+ ('o2', 'o4'): 0.7071067811865476j,
+ ('o4', 'o2'): 0.7071067811865476j,
+ ('o2', 'o3'): 0.7071067811865476,
+ ('o3', 'o2'): 0.7071067811865476}
+</pre></div></div>
+</div>
+<p>it can still be tedious to specify every port in the circuit manually. SAX therefore offers the <code class="docutils literal notranslate"><span class="pre">reciprocal</span></code> function, which auto-fills the reverse connection if the forward connection exist. For example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupler_dict</span> <span class="o">=</span> <span class="n">sax</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">):</span> <span class="n">tau</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">):</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">kappa</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">):</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">kappa</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">):</span> <span class="n">tau</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">coupler_dict</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{('o1', 'o4'): 0.7071067811865476,
+ ('o1', 'o3'): 0.7071067811865476j,
+ ('o2', 'o4'): 0.7071067811865476j,
+ ('o2', 'o3'): 0.7071067811865476,
+ ('o4', 'o1'): 0.7071067811865476,
+ ('o3', 'o1'): 0.7071067811865476j,
+ ('o4', 'o2'): 0.7071067811865476j,
+ ('o3', 'o2'): 0.7071067811865476}
+</pre></div></div>
+</div>
+</section>
+<section id="Parametrized-Models">
+<h2>Parametrized Models<a class="headerlink" href="#Parametrized-Models" title="Permalink to this headline">#</a></h2>
+<p>Constructing such an <code class="docutils literal notranslate"><span class="pre">SDict</span></code> is easy, however, usually we’re more interested in having parametrized models for our components. To parametrize the coupler <code class="docutils literal notranslate"><span class="pre">SDict</span></code>, just wrap it in a function to obtain a SAX <code class="docutils literal notranslate"><span class="pre">Model</span></code>, which is a keyword-only function mapping to an <code class="docutils literal notranslate"><span class="pre">SDict</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coupler</span><span class="p">(</span><span class="n">coupling</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sax</span><span class="o">.</span><span class="n">SDict</span><span class="p">:</span>
+    <span class="n">kappa</span> <span class="o">=</span> <span class="n">coupling</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">coupling</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="n">coupler_dict</span> <span class="o">=</span> <span class="n">sax</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">):</span> <span class="n">tau</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">):</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">kappa</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">):</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">kappa</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">):</span> <span class="n">tau</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">coupler_dict</span>
+
+
+<span class="n">coupler</span><span class="p">(</span><span class="n">coupling</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{('o1', 'o4'): 0.8366600265340756,
+ ('o1', 'o3'): 0.5477225575051661j,
+ ('o2', 'o4'): 0.5477225575051661j,
+ ('o2', 'o3'): 0.8366600265340756,
+ ('o4', 'o1'): 0.8366600265340756,
+ ('o3', 'o1'): 0.5477225575051661j,
+ ('o4', 'o2'): 0.5477225575051661j,
+ ('o3', 'o2'): 0.8366600265340756}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">waveguide</span><span class="p">(</span><span class="n">wl</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">wl0</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">neff</span><span class="o">=</span><span class="mf">2.34</span><span class="p">,</span> <span class="n">ng</span><span class="o">=</span><span class="mf">3.4</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sax</span><span class="o">.</span><span class="n">SDict</span><span class="p">:</span>
+    <span class="n">dwl</span> <span class="o">=</span> <span class="n">wl</span> <span class="o">-</span> <span class="n">wl0</span>
+    <span class="n">dneff_dwl</span> <span class="o">=</span> <span class="p">(</span><span class="n">ng</span> <span class="o">-</span> <span class="n">neff</span><span class="p">)</span> <span class="o">/</span> <span class="n">wl0</span>
+    <span class="n">neff</span> <span class="o">=</span> <span class="n">neff</span> <span class="o">-</span> <span class="n">dwl</span> <span class="o">*</span> <span class="n">dneff_dwl</span>
+    <span class="n">phase</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">neff</span> <span class="o">*</span> <span class="n">length</span> <span class="o">/</span> <span class="n">wl</span>
+    <span class="n">transmission</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">loss</span> <span class="o">*</span> <span class="n">length</span> <span class="o">/</span> <span class="mi">20</span><span class="p">)</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phase</span><span class="p">)</span>
+    <span class="n">sdict</span> <span class="o">=</span> <span class="n">sax</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o2"</span><span class="p">):</span> <span class="n">transmission</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">sdict</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Component-Models">
+<h2>Component Models<a class="headerlink" href="#Component-Models" title="Permalink to this headline">#</a></h2>
+<section id="Waveguide-model">
+<h3>Waveguide model<a class="headerlink" href="#Waveguide-model" title="Permalink to this headline">#</a></h3>
+<p>You can create a dispersive waveguide model in SAX.</p>
+<p>Lets compute the effective index <code class="docutils literal notranslate"><span class="pre">neff</span></code> and group index <code class="docutils literal notranslate"><span class="pre">ng</span></code> for a 1550nm 500nm straight waveguide</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">find_mode_dispersion</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="mf">1.55</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">neff</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">ng</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2.3638584286954814 4.251242165908622
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">straight_sc</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">straight</span><span class="p">,</span> <span class="n">neff</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">neff</span><span class="p">,</span> <span class="n">ng</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">ng</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">straight_sc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/jax/_src/numpy/lax_numpy.py:2635: UserWarning: Explicitly requested dtype &lt;class 'complex'&gt; requested in asarray is not available, and will be truncated to dtype complex64. To enable more dtypes, set the jax_enable_x64 configuration option or the JAX_ENABLE_X64 shell environment variable. See https://github.com/google/jax#current-gotchas for more.
+  lax_internal._check_user_dtype_supported(dtype, "asarray")
+WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_13_1.png" src="../../../_images/notebooks_plugins_sax_sax_13_1.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:title={'center':'o1'}, xlabel='wavelength (nm)', ylabel='|S (dB)|'&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">straight_sc</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/jax/_src/numpy/lax_numpy.py:2635: UserWarning: Explicitly requested dtype &lt;class 'complex'&gt; requested in asarray is not available, and will be truncated to dtype complex64. To enable more dtypes, set the jax_enable_x64 configuration option or the JAX_ENABLE_X64 shell environment variable. See https://github.com/google/jax#current-gotchas for more.
+  lax_internal._check_user_dtype_supported(dtype, "asarray")
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_14_1.png" src="../../../_images/notebooks_plugins_sax_sax_14_1.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:title={'center':'o1'}, xlabel='wavelength (nm)', ylabel='angle (rad)'&gt;
+</pre></div></div>
+</div>
+</section>
+<section id="Coupler-model">
+<h3>Coupler model<a class="headerlink" href="#Coupler-model" title="Permalink to this headline">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gm.find_coupling_vs_gap<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">find_coupling_vs_gap</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 12/12 [00:00&lt;00:00, 446.29it/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<div class="table-wrapper"><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>gap</th>
+<th>ne</th>
+<th>no</th>
+<th>lc</th>
+<th>dn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.200000</td>
+<td>2.457894</td>
+<td>2.437607</td>
+<td>38.201198</td>
+<td>0.020287</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.218182</td>
+<td>2.459028</td>
+<td>2.441121</td>
+<td>43.278893</td>
+<td>0.017907</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.236364</td>
+<td>2.452195</td>
+<td>2.437659</td>
+<td>53.318206</td>
+<td>0.014535</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.254545</td>
+<td>2.451946</td>
+<td>2.439549</td>
+<td>62.514018</td>
+<td>0.012397</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.272727</td>
+<td>2.451248</td>
+<td>2.441058</td>
+<td>76.053858</td>
+<td>0.010190</td>
+</tr>
+<tr>
+<th>5</th>
+<td>0.290909</td>
+<td>2.451491</td>
+<td>2.442325</td>
+<td>84.553535</td>
+<td>0.009166</td>
+</tr>
+<tr>
+<th>6</th>
+<td>0.309091</td>
+<td>2.449447</td>
+<td>2.441517</td>
+<td>97.723696</td>
+<td>0.007931</td>
+</tr>
+<tr>
+<th>7</th>
+<td>0.327273</td>
+<td>2.447256</td>
+<td>2.440698</td>
+<td>118.168160</td>
+<td>0.006558</td>
+</tr>
+<tr>
+<th>8</th>
+<td>0.345455</td>
+<td>2.451715</td>
+<td>2.446248</td>
+<td>141.751936</td>
+<td>0.005467</td>
+</tr>
+<tr>
+<th>9</th>
+<td>0.363636</td>
+<td>2.451128</td>
+<td>2.446210</td>
+<td>157.608710</td>
+<td>0.004917</td>
+</tr>
+<tr>
+<th>10</th>
+<td>0.381818</td>
+<td>2.445577</td>
+<td>2.441408</td>
+<td>185.893679</td>
+<td>0.004169</td>
+</tr>
+<tr>
+<th>11</th>
+<td>0.400000</td>
+<td>2.445128</td>
+<td>2.441678</td>
+<td>224.665375</td>
+<td>0.003450</td>
+</tr>
+</tbody>
+</table></div>
+</div></div>
+</div>
+<p>For a 200nm gap the effective index difference <code class="docutils literal notranslate"><span class="pre">dn</span></code> is <code class="docutils literal notranslate"><span class="pre">0.02</span></code>, which means that there is 100% power coupling over 38.2um</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupler_sc</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">,</span> <span class="n">dn</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">coupling0</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">gs</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">coupler_sc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_19_0.png" src="../../../_images/notebooks_plugins_sax_sax_19_0.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:title={'center':'o1'}, xlabel='wavelength (nm)', ylabel='|S (dB)|'&gt;
+</pre></div></div>
+</div>
+<p>If we ignore the coupling from the bend <code class="docutils literal notranslate"><span class="pre">coupling0</span> <span class="pre">=</span> <span class="pre">0</span></code> we know that for a 3dB coupling we need half of the <code class="docutils literal notranslate"><span class="pre">lc</span></code> length, which is the length needed to coupler <code class="docutils literal notranslate"><span class="pre">100%</span></code> of power.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupler_sc</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">,</span> <span class="n">dn</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mf">38.2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">coupling0</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">gs</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">coupler_sc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_21_0.png" src="../../../_images/notebooks_plugins_sax_sax_21_0.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:title={'center':'o1'}, xlabel='wavelength (nm)', ylabel='|S (dB)|'&gt;
+</pre></div></div>
+</div>
+</section>
+<section id="FDTD-Sparameters-model">
+<h3>FDTD Sparameters model<a class="headerlink" href="#FDTD-Sparameters-model" title="Permalink to this headline">#</a></h3>
+<p>You can also fit a model from Sparameter FDTD simulation data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gdsfactory.simulation.get_sparameters_path</span> <span class="kn">import</span> <span class="n">get_sparameters_path_lumerical</span>
+
+<span class="n">filepath</span> <span class="o">=</span> <span class="n">get_sparameters_path_lumerical</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">mmi1x2</span><span class="p">)</span>
+<span class="n">mmi1x2</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">sdict_from_csv</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="n">filepath</span><span class="p">)</span>
+<span class="n">gs</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">mmi1x2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_23_0.png" src="../../../_images/notebooks_plugins_sax_sax_23_0.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:title={'center':'o1'}, xlabel='wavelength (nm)', ylabel='|S (dB)|'&gt;
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Circuit-Models">
+<h2>Circuit Models<a class="headerlink" href="#Circuit-Models" title="Permalink to this headline">#</a></h2>
+<p>You can combine component models into a circuit using <code class="docutils literal notranslate"><span class="pre">sax.circuit</span></code>, which basically creates a new <code class="docutils literal notranslate"><span class="pre">Model</span></code> function:</p>
+<p>Lets define a <a class="reference external" href="https://en.wikipedia.org/wiki/Mach%E2%80%93Zehnder_interferometer">MZI interferometer</a></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>           _________
+          |  top    |
+          |         |
+    lft===|         |===rgt
+          |         |
+          |_________|
+             bot
+
+               o1    top   o2
+                 ----------
+o2            o3           o2            o3
+   \        /                 \        /
+    ========                   ========
+   /        \                 /        \
+o1     lft    04           o1    rgt     04
+                 ----------
+               o1   bot    o2
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">waveguide</span> <span class="o">=</span> <span class="n">straight_sc</span>
+<span class="n">coupler</span> <span class="o">=</span> <span class="n">coupler_sc</span>
+
+<span class="n">mzi</span> <span class="o">=</span> <span class="n">sax</span><span class="o">.</span><span class="n">circuit</span><span class="p">(</span>
+    <span class="n">instances</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"lft"</span><span class="p">:</span> <span class="n">coupler</span><span class="p">,</span>
+        <span class="s2">"top"</span><span class="p">:</span> <span class="n">waveguide</span><span class="p">,</span>
+        <span class="s2">"bot"</span><span class="p">:</span> <span class="n">waveguide</span><span class="p">,</span>
+        <span class="s2">"rgt"</span><span class="p">:</span> <span class="n">coupler</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">connections</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"lft,o4"</span><span class="p">:</span> <span class="s2">"bot,o1"</span><span class="p">,</span>
+        <span class="s2">"bot,o2"</span><span class="p">:</span> <span class="s2">"rgt,o1"</span><span class="p">,</span>
+        <span class="s2">"lft,o3"</span><span class="p">:</span> <span class="s2">"top,o1"</span><span class="p">,</span>
+        <span class="s2">"top,o2"</span><span class="p">:</span> <span class="s2">"rgt,o2"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">ports</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"o1"</span><span class="p">:</span> <span class="s2">"lft,o1"</span><span class="p">,</span>
+        <span class="s2">"o2"</span><span class="p">:</span> <span class="s2">"lft,o2"</span><span class="p">,</span>
+        <span class="s2">"o4"</span><span class="p">:</span> <span class="s2">"rgt,o4"</span><span class="p">,</span>
+        <span class="s2">"o3"</span><span class="p">:</span> <span class="s2">"rgt,o3"</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">circuit</span></code> function just creates a similar function as we created for the waveguide and the coupler, but in stead of taking parameters directly it takes parameter <em>dictionaries</em> for each of the instances in the circuit. The keys in these parameter dictionaries should correspond to the keyword arguments of each individual subcomponent.</p>
+<p>Let’s now do a simulation for the MZI we just constructed:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> mzi()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/jax/_src/numpy/lax_numpy.py:2635: UserWarning: Explicitly requested dtype &lt;class 'complex'&gt; requested in asarray is not available, and will be truncated to dtype complex64. To enable more dtypes, set the jax_enable_x64 configuration option or the JAX_ENABLE_X64 shell environment variable. See https://github.com/google/jax#current-gotchas for more.
+  lax_internal._check_user_dtype_supported(dtype, "asarray")
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 2.19 s, sys: 11.8 ms, total: 2.2 s
+Wall time: 2.2 s
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{('o1', 'o1'): 0j,
+ ('o1', 'o2'): 0j,
+ ('o2', 'o1'): 0j,
+ ('o2', 'o2'): 0j,
+ ('o3', 'o3'): 0j,
+ ('o3', 'o4'): 0j,
+ ('o3', 'o1'): 0.99974+0.0044j,
+ ('o3', 'o2'): -9.807199239730835e-05+0.02229j,
+ ('o4', 'o3'): 0j,
+ ('o4', 'o4'): 0j,
+ ('o4', 'o1'): -9.807199239730835e-05+0.02229j,
+ ('o4', 'o2'): 0.99974+0.0044j,
+ ('o1', 'o3'): 0.99974+0.0044j,
+ ('o1', 'o4'): -9.807199239730835e-05+0.02229j,
+ ('o2', 'o3'): -9.807199239730835e-05+0.02229j,
+ ('o2', 'o4'): 0.99974+0.0044j}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.example_libraries.optimizers</span> <span class="k">as</span> <span class="nn">opt</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>  <span class="c1"># plotting</span>
+
+<span class="n">mzi2</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">mzi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> mzi2()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 3.08 s, sys: 47.3 ms, total: 3.13 s
+Wall time: 3.1 s
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{('o1', 'o1'): 0j,
+ ('o1', 'o2'): 0j,
+ ('o1', 'o3'): 0.99974+0.0044j,
+ ('o1', 'o4'): -9.807199239730835e-05+0.02229j,
+ ('o2', 'o1'): 0j,
+ ('o2', 'o2'): 0j,
+ ('o2', 'o3'): -9.807199239730835e-05+0.02229j,
+ ('o2', 'o4'): 0.99974+0.0044j,
+ ('o3', 'o1'): 0.99974+0.0044j,
+ ('o3', 'o2'): -9.807199239730835e-05+0.02229j,
+ ('o3', 'o3'): 0j,
+ ('o3', 'o4'): 0j,
+ ('o4', 'o1'): -9.807199239730835e-05+0.02229j,
+ ('o4', 'o2'): 0.99974+0.0044j,
+ ('o4', 'o3'): 0j,
+ ('o4', 'o4'): 0j}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mzi</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="p">{</span><span class="s2">"length"</span><span class="p">:</span> <span class="mf">25.0</span><span class="p">},</span> <span class="n">btm</span><span class="o">=</span><span class="p">{</span><span class="s2">"length"</span><span class="p">:</span> <span class="mf">15.0</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{('o1', 'o1'): 0j,
+ ('o1', 'o2'): 0j,
+ ('o2', 'o1'): 0j,
+ ('o2', 'o2'): 0j,
+ ('o3', 'o3'): 0j,
+ ('o3', 'o4'): 0j,
+ ('o3', 'o1'): 0.85721-0.34735j,
+ ('o3', 'o2'): 0.35958-0.12346j,
+ ('o4', 'o3'): 0j,
+ ('o4', 'o4'): 0j,
+ ('o4', 'o1'): -0.34409+0.16169j,
+ ('o4', 'o2'): 0.85721-0.34735j,
+ ('o1', 'o3'): 0.85721-0.34735j,
+ ('o1', 'o4'): -0.34409+0.16169j,
+ ('o2', 'o3'): 0.35958-0.12346j,
+ ('o2', 'o4'): 0.85721-0.34735j}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wl</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.51</span><span class="p">,</span> <span class="mf">1.59</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="o">%</span><span class="k">time</span> S = mzi(wl=wl, top={"length": 25.0}, btm={"length": 15.0})
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/numpy/core/getlimits.py:499: UserWarning: The value of the smallest subnormal for &lt;class 'numpy.float32'&gt; type is zero.
+  setattr(self, word, getattr(machar, word).flat[0])
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/numpy/core/getlimits.py:89: UserWarning: The value of the smallest subnormal for &lt;class 'numpy.float32'&gt; type is zero.
+  return self._float_to_str(self.smallest_subnormal)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 2.52 s, sys: 11.9 ms, total: 2.53 s
+Wall time: 2.52 s
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span> <span class="o">*</span> <span class="mf">1e3</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"o3"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span> <span class="o">*</span> <span class="mf">1e3</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"o4"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"λ [nm]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"T"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_32_0.png" src="../../../_images/notebooks_plugins_sax_sax_32_0.png"/>
+</div>
+</div>
+</section>
+<section id="Optimization">
+<h2>Optimization<a class="headerlink" href="#Optimization" title="Permalink to this headline">#</a></h2>
+<p>You can optimize an MZI to get T=0 at 1550nm. To do this, you need to define a loss function for the circuit at 1550nm. This function should take the parameters that you want to optimize as positional arguments:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">delta_length</span><span class="p">):</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">mzi</span><span class="p">(</span><span class="n">wl</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="p">{</span><span class="s2">"length"</span><span class="p">:</span> <span class="mf">15.0</span> <span class="o">+</span> <span class="n">delta_length</span><span class="p">},</span> <span class="n">btm</span><span class="o">=</span><span class="p">{</span><span class="s2">"length"</span><span class="p">:</span> <span class="mf">15.0</span><span class="p">})</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> loss(10.0)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/jax/_src/numpy/lax_numpy.py:2635: UserWarning: Explicitly requested dtype &lt;class 'complex'&gt; requested in asarray is not available, and will be truncated to dtype complex64. To enable more dtypes, set the jax_enable_x64 configuration option or the JAX_ENABLE_X64 shell environment variable. See https://github.com/google/jax#current-gotchas for more.
+  lax_internal._check_user_dtype_supported(dtype, "asarray")
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 3.07 s, sys: 32 ms, total: 3.11 s
+Wall time: 3.08 s
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.14454
+</pre></div></div>
+</div>
+<p>You can use this loss function to define a grad function which works on the parameters of the loss function:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span>
+        <span class="n">loss</span><span class="p">,</span>
+        <span class="n">argnums</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># JAX gradient function for the first positional argument, jitted</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next, you need to define a JAX optimizer, which on its own is nothing more than three more functions:</p>
+<ol class="arabic simple">
+<li><p>an initialization function with which to initialize the optimizer state</p></li>
+<li><p>an update function which will update the optimizer state (and with it the model parameters).</p></li>
+<li><p>a function with the model parameters given the optimizer state.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">initial_delta_length</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">optim_init</span><span class="p">,</span> <span class="n">optim_update</span><span class="p">,</span> <span class="n">optim_params</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">adam</span><span class="p">(</span><span class="n">step_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">optim_state</span> <span class="o">=</span> <span class="n">optim_init</span><span class="p">(</span><span class="n">initial_delta_length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">optim_params</span><span class="p">(</span><span class="n">optim_state</span><span class="p">)</span>
+    <span class="n">lossvalue</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">gradvalue</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">optim_state</span> <span class="o">=</span> <span class="n">optim_update</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">gradvalue</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lossvalue</span><span class="p">,</span> <span class="n">optim_state</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tqdm</span>
+
+<span class="n">range_</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">trange</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">range_</span><span class="p">:</span>
+    <span class="n">lossvalue</span><span class="p">,</span> <span class="n">optim_state</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">)</span>
+    <span class="n">range_</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">lossvalue</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 300/300 [00:15&lt;00:00, 19.05it/s, loss=0.000497]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta_length</span> <span class="o">=</span> <span class="n">optim_params</span><span class="p">(</span><span class="n">optim_state</span><span class="p">)</span>
+<span class="n">delta_length</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+10.08127
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">mzi</span><span class="p">(</span><span class="n">wl</span><span class="o">=</span><span class="n">wl</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="p">{</span><span class="s2">"length"</span><span class="p">:</span> <span class="mf">15.0</span> <span class="o">+</span> <span class="n">delta_length</span><span class="p">},</span> <span class="n">btm</span><span class="o">=</span><span class="p">{</span><span class="s2">"length"</span><span class="p">:</span> <span class="mf">15.0</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span> <span class="o">*</span> <span class="mf">1e3</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"λ [nm]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"T"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1550</span><span class="p">,</span> <span class="mi">1550</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_43_0.png" src="../../../_images/notebooks_plugins_sax_sax_43_0.png"/>
+</div>
+</div>
+<p>The minimum of the MZI is perfectly located at 1550nm.</p>
+</section>
+<section id="Model-fit">
+<h2>Model fit<a class="headerlink" href="#Model-fit" title="Permalink to this headline">#</a></h2>
+<p>You can fit a sax model to Sparameter FDTD simulation data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">jax.example_libraries.optimizers</span> <span class="k">as</span> <span class="nn">opt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.modes</span> <span class="k">as</span> <span class="nn">gm</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.sax</span> <span class="k">as</span> <span class="nn">gs</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sparameters_path</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp')
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sd</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">sdict_from_csv</span><span class="p">(</span>
+    <span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sparameters_path</span> <span class="o">/</span> <span class="s2">"coupler"</span> <span class="o">/</span> <span class="s2">"coupler_G224n_L20_S220.csv"</span><span class="p">,</span>
+    <span class="n">xkey</span><span class="o">=</span><span class="s2">"wavelength_nm"</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">"S"</span><span class="p">,</span>
+    <span class="n">xunits</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupler_fdtd</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+    <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">sdict_from_csv</span><span class="p">,</span>
+    <span class="n">filepath</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sparameters_path</span> <span class="o">/</span> <span class="s2">"coupler"</span> <span class="o">/</span> <span class="s2">"coupler_G224n_L20_S220.csv"</span><span class="p">,</span>
+    <span class="n">xkey</span><span class="o">=</span><span class="s2">"wavelength_nm"</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">"S"</span><span class="p">,</span>
+    <span class="n">xunits</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">coupler_fdtd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_50_0.png" src="../../../_images/notebooks_plugins_sax_sax_50_0.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:title={'center':'o1'}, xlabel='wavelength (nm)', ylabel='|S (dB)|'&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">coupler_fdtd</span><span class="p">,</span> <span class="n">ports2</span><span class="o">=</span><span class="p">(</span><span class="s2">"o3"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_51_0.png" src="../../../_images/notebooks_plugins_sax_sax_51_0.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:title={'center':'o1'}, xlabel='wavelength (nm)', ylabel='|S (dB)|'&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modes</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">find_modes_coupler</span><span class="p">(</span><span class="n">gap</span><span class="o">=</span><span class="mf">0.224</span><span class="p">)</span>
+<span class="n">modes</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{1: Mode1, 2: Mode2, 3: Mode3, 4: Mode4}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dn</span> <span class="o">=</span> <span class="n">modes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">neff</span> <span class="o">-</span> <span class="n">modes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">neff</span>
+<span class="n">dn</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.01660599375543148
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupler</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">sax</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">,</span> <span class="n">dn</span><span class="o">=</span><span class="n">dn</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">coupling0</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">gs</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">coupler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_54_0.png" src="../../../_images/notebooks_plugins_sax_sax_54_0.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:title={'center':'o1'}, xlabel='wavelength (nm)', ylabel='|S (dB)|'&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupler_fdtd</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">sdict_from_csv</span><span class="p">(</span>
+    <span class="n">filepath</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sparameters_path</span> <span class="o">/</span> <span class="s2">"coupler"</span> <span class="o">/</span> <span class="s2">"coupler_G224n_L20_S220.csv"</span><span class="p">,</span>
+    <span class="n">xkey</span><span class="o">=</span><span class="s2">"wavelength_nm"</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">"S"</span><span class="p">,</span>
+    <span class="n">xunits</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">coupler_fdtd</span>
+<span class="n">T_fdtd</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">K_fdtd</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+<span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">coupling0</span><span class="p">,</span> <span class="n">dn</span><span class="p">,</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="p">):</span>
+    <span class="sd">"""Returns fit least squares error from a coupler model spectrum</span>
+<span class="sd">    to the FDTD Sparameter spectrum that we want to fit.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        coupling0: coupling from the bend raegion</span>
+<span class="sd">        dn: effective index difference between even and odd mode solver simulations.</span>
+<span class="sd">        dn1: first derivative of effective index difference vs wavelength.</span>
+<span class="sd">        dn2: second derivative of effective index difference vs wavelength.</span>
+<span class="sd">        dk1: first derivative of coupling0 vs wavelength.</span>
+<span class="sd">        dk2: second derivative of coupling vs wavelength.</span>
+
+<span class="sd">    .. code::</span>
+
+<span class="sd">          coupling0/2        coupling        coupling0/2</span>
+<span class="sd">        &lt;-------------&gt;&lt;--------------------&gt;&lt;----------&gt;</span>
+<span class="sd">         o2 ________                           _______o3</span>
+<span class="sd">                    \                         /</span>
+<span class="sd">                     \        length         /</span>
+<span class="sd">                      ======================= gap</span>
+<span class="sd">                     /                       \</span>
+<span class="sd">            ________/                         \________</span>
+<span class="sd">         o1                                           o4</span>
+
+<span class="sd">                      ------------------------&gt; K (coupled power)</span>
+<span class="sd">                     /</span>
+<span class="sd">                    / K</span>
+<span class="sd">           -----------------------------------&gt; T = 1 - K (transmitted power)</span>
+
+<span class="sd">    T: o1 -&gt; o4</span>
+<span class="sd">    K: o1 -&gt; o3</span>
+<span class="sd">    """</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">sax</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">(</span>
+        <span class="n">dn</span><span class="o">=</span><span class="n">dn</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">coupling0</span><span class="o">=</span><span class="n">coupling0</span><span class="p">,</span> <span class="n">dn1</span><span class="o">=</span><span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="o">=</span><span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="o">=</span><span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="o">=</span><span class="n">dk2</span>
+    <span class="p">)</span>
+    <span class="n">T_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">K_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">T_fdtd</span> <span class="o">-</span> <span class="n">T_model</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">K_fdtd</span> <span class="o">-</span> <span class="n">K_model</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+
+<span class="n">loss</span><span class="p">(</span><span class="n">coupling0</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">dn</span><span class="o">=</span><span class="mf">0.016</span><span class="p">,</span> <span class="n">dk1</span><span class="o">=</span><span class="mf">1.2435</span><span class="p">,</span> <span class="n">dk2</span><span class="o">=</span><span class="mf">5.3022</span><span class="p">,</span> <span class="n">dn1</span><span class="o">=</span><span class="mf">0.1169</span><span class="p">,</span> <span class="n">dn2</span><span class="o">=</span><span class="mf">0.4821</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.31112
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span>
+        <span class="n">loss</span><span class="p">,</span>
+        <span class="n">argnums</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># JAX gradient function for the first positional argument, jitted</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">,</span> <span class="n">dn</span><span class="p">,</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">optim_params</span><span class="p">(</span><span class="n">optim_state</span><span class="p">)</span>
+    <span class="n">lossvalue</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">dn</span><span class="p">,</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="p">)</span>
+    <span class="n">gradvalue</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">dn</span><span class="p">,</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="p">)</span>
+    <span class="n">optim_state</span> <span class="o">=</span> <span class="n">optim_update</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">gradvalue</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lossvalue</span><span class="p">,</span> <span class="n">optim_state</span>
+
+
+<span class="n">coupling0</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">optim_init</span><span class="p">,</span> <span class="n">optim_update</span><span class="p">,</span> <span class="n">optim_params</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">adam</span><span class="p">(</span><span class="n">step_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">optim_state</span> <span class="o">=</span> <span class="n">optim_init</span><span class="p">(</span><span class="n">coupling0</span><span class="p">)</span>
+
+<span class="n">dn</span> <span class="o">=</span> <span class="mf">0.0166</span>
+<span class="n">dn1</span> <span class="o">=</span> <span class="mf">0.11</span>
+<span class="n">dn2</span> <span class="o">=</span> <span class="mf">0.48</span>
+<span class="n">dk1</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">dk2</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">range_</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">trange</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">range_</span><span class="p">:</span>
+    <span class="n">lossvalue</span><span class="p">,</span> <span class="n">optim_state</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">,</span> <span class="n">dn</span><span class="p">,</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="p">)</span>
+    <span class="n">range_</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">lossvalue</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 300/300 [00:00&lt;00:00, 364.16it/s, loss=0.178476]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupling0_fit</span> <span class="o">=</span> <span class="n">optim_params</span><span class="p">(</span><span class="n">optim_state</span><span class="p">)</span>
+<span class="n">coupling0_fit</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.11667
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupler</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+    <span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">sax</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">,</span> <span class="n">dn</span><span class="o">=</span><span class="n">dn</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">coupling0</span><span class="o">=</span><span class="n">coupling0_fit</span>
+<span class="p">)</span>
+<span class="n">gs</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">coupler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_59_0.png" src="../../../_images/notebooks_plugins_sax_sax_59_0.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:title={'center':'o1'}, xlabel='wavelength (nm)', ylabel='|S (dB)|'&gt;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wl</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.50</span><span class="p">,</span> <span class="mf">1.60</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">sax</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">(</span>
+    <span class="n">dn</span><span class="o">=</span><span class="n">dn</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">coupling0</span><span class="o">=</span><span class="n">coupling0_fit</span><span class="p">,</span> <span class="n">dn1</span><span class="o">=</span><span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="o">=</span><span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="o">=</span><span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="o">=</span><span class="n">dk2</span><span class="p">,</span> <span class="n">wl</span><span class="o">=</span><span class="n">wl</span>
+<span class="p">)</span>
+<span class="n">T_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">K_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupler_fdtd</span> <span class="o">=</span> <span class="n">S</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">sdict_from_csv</span><span class="p">(</span>
+    <span class="n">filepath</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sparameters_path</span> <span class="o">/</span> <span class="s2">"coupler"</span> <span class="o">/</span> <span class="s2">"coupler_G224n_L20_S220.csv"</span><span class="p">,</span>
+    <span class="n">xkey</span><span class="o">=</span><span class="s2">"wavelength_nm"</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">"S"</span><span class="p">,</span>
+    <span class="n">xunits</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+    <span class="n">wl</span><span class="o">=</span><span class="n">wl</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">T_fdtd</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">K_fdtd</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T_fdtd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fdtd"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"b"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fit"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K_fdtd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fdtd"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"r"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fit"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"r"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x7fc11f9367f0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_62_1.png" src="../../../_images/notebooks_plugins_sax_sax_62_1.png"/>
+</div>
+</div>
+<section id="Multi-variable-optimization">
+<h3>Multi-variable optimization<a class="headerlink" href="#Multi-variable-optimization" title="Permalink to this headline">#</a></h3>
+<p>As you can see we need to fit more than 1 variable <code class="docutils literal notranslate"><span class="pre">coupling0</span></code> to get a good fit.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span>
+        <span class="n">loss</span><span class="p">,</span>
+        <span class="c1"># argnums=0,  # JAX gradient function for the first positional argument, jitted</span>
+        <span class="n">argnums</span><span class="o">=</span><span class="p">[</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">1</span><span class="p">,</span>
+            <span class="mi">2</span><span class="p">,</span>
+            <span class="mi">3</span><span class="p">,</span>
+            <span class="mi">4</span><span class="p">,</span>
+            <span class="mi">5</span><span class="p">,</span>
+        <span class="p">],</span>  <span class="c1"># JAX gradient function for all positional arguments, jitted</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">):</span>
+    <span class="n">coupling0</span><span class="p">,</span> <span class="n">dn</span><span class="p">,</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span> <span class="o">=</span> <span class="n">optim_params</span><span class="p">(</span><span class="n">optim_state</span><span class="p">)</span>
+    <span class="n">lossvalue</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">coupling0</span><span class="p">,</span> <span class="n">dn</span><span class="p">,</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="p">)</span>
+    <span class="n">gradvalue</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">coupling0</span><span class="p">,</span> <span class="n">dn</span><span class="p">,</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="p">)</span>
+    <span class="n">optim_state</span> <span class="o">=</span> <span class="n">optim_update</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">gradvalue</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lossvalue</span><span class="p">,</span> <span class="n">optim_state</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupling0</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">dn</span> <span class="o">=</span> <span class="mf">0.0166</span>
+<span class="n">dn1</span> <span class="o">=</span> <span class="mf">0.11</span>
+<span class="n">dn2</span> <span class="o">=</span> <span class="mf">0.48</span>
+<span class="n">dk1</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">dk2</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="n">optim_init</span><span class="p">,</span> <span class="n">optim_update</span><span class="p">,</span> <span class="n">optim_params</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">adam</span><span class="p">(</span><span class="n">step_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">optim_state</span> <span class="o">=</span> <span class="n">optim_init</span><span class="p">((</span><span class="n">coupling0</span><span class="p">,</span> <span class="n">dn</span><span class="p">,</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">range_</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">trange</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">range_</span><span class="p">:</span>
+    <span class="n">lossvalue</span><span class="p">,</span> <span class="n">optim_state</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">)</span>
+    <span class="n">range_</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">lossvalue</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 1000/1000 [00:16&lt;00:00, 61.54it/s, loss=0.177288]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coupling0_fit</span><span class="p">,</span> <span class="n">dn_fit</span><span class="p">,</span> <span class="n">dn1_fit</span><span class="p">,</span> <span class="n">dn2_fit</span><span class="p">,</span> <span class="n">dk1_fit</span><span class="p">,</span> <span class="n">dk2_fit</span> <span class="o">=</span> <span class="n">optim_params</span><span class="p">(</span><span class="n">optim_state</span><span class="p">)</span>
+<span class="n">coupling0_fit</span><span class="p">,</span> <span class="n">dn_fit</span><span class="p">,</span> <span class="n">dn1_fit</span><span class="p">,</span> <span class="n">dn2_fit</span><span class="p">,</span> <span class="n">dk1_fit</span><span class="p">,</span> <span class="n">dk2_fit</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(0.29556, 0.01216, 0.11, 0.48, 1.2, 5.0)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wl</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.60</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">coupler_fdtd</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">sdict_from_csv</span><span class="p">(</span>
+    <span class="n">filepath</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sparameters_path</span> <span class="o">/</span> <span class="s2">"coupler"</span> <span class="o">/</span> <span class="s2">"coupler_G224n_L20_S220.csv"</span><span class="p">,</span>
+    <span class="n">wl</span><span class="o">=</span><span class="n">wl</span><span class="p">,</span>
+    <span class="n">xkey</span><span class="o">=</span><span class="s2">"wavelength_nm"</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">"S"</span><span class="p">,</span>
+    <span class="n">xunits</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">coupler_fdtd</span>
+<span class="n">T_fdtd</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">sax</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">(</span>
+    <span class="n">dn</span><span class="o">=</span><span class="n">dn_fit</span><span class="p">,</span>
+    <span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">coupling0</span><span class="o">=</span><span class="n">coupling0_fit</span><span class="p">,</span>
+    <span class="n">dn1</span><span class="o">=</span><span class="n">dn1_fit</span><span class="p">,</span>
+    <span class="n">dn2</span><span class="o">=</span><span class="n">dn2_fit</span><span class="p">,</span>
+    <span class="n">dk1</span><span class="o">=</span><span class="n">dk1_fit</span><span class="p">,</span>
+    <span class="n">dk2</span><span class="o">=</span><span class="n">dk2_fit</span><span class="p">,</span>
+    <span class="n">wl</span><span class="o">=</span><span class="n">wl</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">T_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">K_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T_fdtd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fdtd"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"b"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fit"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K_fdtd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fdtd"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"r"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fit"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"r"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x7fc120b382b0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_69_1.png" src="../../../_images/notebooks_plugins_sax_sax_69_1.png"/>
+</div>
+</div>
+<p>As you can see trying to fit many parameters do not give you a better fit,</p>
+<p>you have to make sure you fit the right parameters, in this case <code class="docutils literal notranslate"><span class="pre">dn1</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wl</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.50</span><span class="p">,</span> <span class="mf">1.60</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">sax</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">(</span>
+    <span class="n">dn</span><span class="o">=</span><span class="n">dn_fit</span><span class="p">,</span>
+    <span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">coupling0</span><span class="o">=</span><span class="n">coupling0_fit</span><span class="p">,</span>
+    <span class="n">dn1</span><span class="o">=</span><span class="n">dn1_fit</span> <span class="o">-</span> <span class="mf">0.045</span><span class="p">,</span>
+    <span class="n">dn2</span><span class="o">=</span><span class="n">dn2_fit</span><span class="p">,</span>
+    <span class="n">dk1</span><span class="o">=</span><span class="n">dk1_fit</span><span class="p">,</span>
+    <span class="n">dk2</span><span class="o">=</span><span class="n">dk2_fit</span><span class="p">,</span>
+    <span class="n">wl</span><span class="o">=</span><span class="n">wl</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">T_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">K_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T_fdtd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fdtd"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"b"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fit"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K_fdtd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fdtd"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"r"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fit"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"r"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x7fc120930d60&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_71_1.png" src="../../../_images/notebooks_plugins_sax_sax_71_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dn</span> <span class="o">=</span> <span class="n">dn_fit</span>
+<span class="n">dn2</span> <span class="o">=</span> <span class="n">dn2_fit</span>
+<span class="n">dk1</span> <span class="o">=</span> <span class="n">dk1_fit</span>
+<span class="n">dk2</span> <span class="o">=</span> <span class="n">dk2_fit</span>
+
+
+<span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">dn1</span><span class="p">):</span>
+    <span class="sd">"""Returns fit least squares error from a coupler model spectrum</span>
+<span class="sd">    to the FDTD Sparameter spectrum that we want to fit.</span>
+
+<span class="sd">    """</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">sax</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">(</span>
+        <span class="n">dn</span><span class="o">=</span><span class="n">dn</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">coupling0</span><span class="o">=</span><span class="n">coupling0</span><span class="p">,</span> <span class="n">dn1</span><span class="o">=</span><span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="o">=</span><span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="o">=</span><span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="o">=</span><span class="n">dk2</span>
+    <span class="p">)</span>
+    <span class="n">T_model</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">K_model</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">T_fdtd</span> <span class="o">-</span> <span class="n">T_model</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">K_fdtd</span> <span class="o">-</span> <span class="n">K_model</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+
+<span class="n">grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span>
+        <span class="n">loss</span><span class="p">,</span>
+        <span class="n">argnums</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># JAX gradient function for the first positional argument, jitted</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">dn1</span> <span class="o">=</span> <span class="mf">0.11</span>
+<span class="n">optim_init</span><span class="p">,</span> <span class="n">optim_update</span><span class="p">,</span> <span class="n">optim_params</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">adam</span><span class="p">(</span><span class="n">step_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="n">optim_state</span> <span class="o">=</span> <span class="n">optim_init</span><span class="p">(</span><span class="n">dn1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">optim_params</span><span class="p">(</span><span class="n">optim_state</span><span class="p">)</span>
+    <span class="n">lossvalue</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">gradvalue</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">optim_state</span> <span class="o">=</span> <span class="n">optim_update</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">gradvalue</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lossvalue</span><span class="p">,</span> <span class="n">optim_state</span>
+
+
+<span class="n">range_</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">trange</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">range_</span><span class="p">:</span>
+    <span class="n">lossvalue</span><span class="p">,</span> <span class="n">optim_state</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">optim_state</span><span class="p">)</span>
+    <span class="n">range_</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">lossvalue</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 300/300 [00:00&lt;00:00, 351.07it/s, loss=0.177387]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dn1_fit</span> <span class="o">=</span> <span class="n">optim_params</span><span class="p">(</span><span class="n">optim_state</span><span class="p">)</span>
+<span class="n">dn1_fit</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.11
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wl</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.50</span><span class="p">,</span> <span class="mf">1.60</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">sax</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">coupler</span><span class="p">(</span>
+    <span class="n">dn</span><span class="o">=</span><span class="n">dn</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">coupling0</span><span class="o">=</span><span class="n">coupling0</span><span class="p">,</span> <span class="n">dn1</span><span class="o">=</span><span class="n">dn1_fit</span><span class="p">,</span> <span class="n">dn2</span><span class="o">=</span><span class="n">dn2</span><span class="p">,</span> <span class="n">dk1</span><span class="o">=</span><span class="n">dk1</span><span class="p">,</span> <span class="n">dk2</span><span class="o">=</span><span class="n">dk2</span><span class="p">,</span> <span class="n">wl</span><span class="o">=</span><span class="n">wl</span>
+<span class="p">)</span>
+<span class="n">T_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">K_model</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">coupler_fdtd</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">sdict_from_csv</span><span class="p">(</span>
+    <span class="n">filepath</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sparameters_path</span> <span class="o">/</span> <span class="s2">"coupler"</span> <span class="o">/</span> <span class="s2">"coupler_G224n_L20_S220.csv"</span><span class="p">,</span>
+    <span class="n">xkey</span><span class="o">=</span><span class="s2">"wavelength_nm"</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">"S"</span><span class="p">,</span>
+    <span class="n">xunits</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+    <span class="n">wl</span><span class="o">=</span><span class="n">wl</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">coupler_fdtd</span>
+<span class="n">T_fdtd</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">K_fdtd</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T_fdtd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fdtd"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"b"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fit"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K_fdtd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fdtd"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"r"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fit"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"r"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x7fc1208a85e0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_74_1.png" src="../../../_images/notebooks_plugins_sax_sax_74_1.png"/>
+</div>
+</div>
+</section>
+</section>
+<section id="Model-fit-(linear-regression)">
+<h2>Model fit (linear regression)<a class="headerlink" href="#Model-fit-(linear-regression)" title="Permalink to this headline">#</a></h2>
+<p>For a better fit of the coupler we can build a linear regression model of the coupler with <code class="docutils literal notranslate"><span class="pre">sklearn</span></code></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sax</span>
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.sax</span> <span class="k">as</span> <span class="nn">gs</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">c</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c</span> <span class="o">/</span> <span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">c</span> <span class="o">/</span> <span class="mf">2.0e-6</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-12</span>  <span class="c1"># THz</span>
+<span class="n">wl</span> <span class="o">=</span> <span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="mf">1e12</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>  <span class="c1"># um</span>
+
+<span class="n">filepath</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sparameters_path</span> <span class="o">/</span> <span class="s2">"coupler"</span> <span class="o">/</span> <span class="s2">"coupler_G224n_L20_S220.csv"</span>
+<span class="n">coupler_fdtd</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+    <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">sdict_from_csv</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">xkey</span><span class="o">=</span><span class="s2">"wavelength_nm"</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">"S"</span><span class="p">,</span> <span class="n">xunits</span><span class="o">=</span><span class="mf">1e-3</span>
+<span class="p">)</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="n">coupler_fdtd</span><span class="p">(</span><span class="n">wl</span><span class="o">=</span><span class="n">wl</span><span class="p">)</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="n">sd</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">sd</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">k</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="n">k</span>
+</pre></div>
+</div>
+</div>
+<p>Lets fit the symmetric (t+k) and antisymmetric (t-k) transmission</p>
+<section id="Symmetric">
+<h3>Symmetric<a class="headerlink" href="#Symmetric" title="Permalink to this headline">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency [THz]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Transmission"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"symmetric (transmission + coupling)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:matplotlib.legend:No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_79_1.png" src="../../../_images/notebooks_plugins_sax_sax_79_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency [THz]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Transmission"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"anti-symmetric (transmission - coupling)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:matplotlib.legend:No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_80_1.png" src="../../../_images/notebooks_plugins_sax_sax_80_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">fX</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_order</span><span class="o">=</span><span class="mi">8</span><span class="p">:</span> <span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">**</span> <span class="p">(</span>
+    <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">_order</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+<span class="p">)</span>  <span class="c1"># artificially create more 'features' (wl**2, wl**3, wl**4, ...)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">fX</span><span class="p">(</span><span class="n">wl</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="n">asm</span><span class="p">,</span> <span class="n">bsm</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">fsm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">fX</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">@</span> <span class="n">asm</span> <span class="o">+</span> <span class="n">bsm</span>  <span class="c1"># fit symmetric module fiir</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">fsm</span><span class="p">(</span><span class="n">wl</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency [THz]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Transmission"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:matplotlib.legend:No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_81_1.png" src="../../../_images/notebooks_plugins_sax_sax_81_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">r</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+<span class="n">asp</span><span class="p">,</span> <span class="n">bsp</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">fsp</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">fX</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">@</span> <span class="n">asp</span> <span class="o">+</span> <span class="n">bsp</span>  <span class="c1"># fit symmetric phase</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">fsp</span><span class="p">(</span><span class="n">wl</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency [THz]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Angle [deg]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:matplotlib.legend:No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_82_1.png" src="../../../_images/notebooks_plugins_sax_sax_82_1.png"/>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">fsm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">fsp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Lets fit the symmetric (t+k) and antisymmetric (t-k) transmission</p>
+</section>
+<section id="Anti-Symmetric">
+<h3>Anti-Symmetric<a class="headerlink" href="#Anti-Symmetric" title="Permalink to this headline">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">r</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">aam</span><span class="p">,</span> <span class="n">bam</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">fam</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">fX</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">@</span> <span class="n">aam</span> <span class="o">+</span> <span class="n">bam</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">fam</span><span class="p">(</span><span class="n">wl</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency [THz]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Transmission"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:matplotlib.legend:No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_85_1.png" src="../../../_images/notebooks_plugins_sax_sax_85_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">r</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+<span class="n">aap</span><span class="p">,</span> <span class="n">bap</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">fap</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">fX</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">@</span> <span class="n">aap</span> <span class="o">+</span> <span class="n">bap</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">fap</span><span class="p">(</span><span class="n">wl</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency [THz]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Angle [deg]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:matplotlib.legend:No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_86_1.png" src="../../../_images/notebooks_plugins_sax_sax_86_1.png"/>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fa</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">fam</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">fap</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Total">
+<h3>Total<a class="headerlink" href="#Total" title="Permalink to this headline">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">fs</span><span class="p">(</span><span class="n">wl</span><span class="p">)</span> <span class="o">+</span> <span class="n">fa</span><span class="p">(</span><span class="n">wl</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t_</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency [THz]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Transmission"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, 'Transmission')
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_89_1.png" src="../../../_images/notebooks_plugins_sax_sax_89_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">fs</span><span class="p">(</span><span class="n">wl</span><span class="p">)</span> <span class="o">-</span> <span class="n">fa</span><span class="p">(</span><span class="n">wl</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">k_</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency [THz]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Coupling"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, 'Coupling')
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_90_1.png" src="../../../_images/notebooks_plugins_sax_sax_90_1.png"/>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">coupler</span><span class="p">(</span><span class="n">wl</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
+    <span class="n">wl</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">wl</span><span class="p">)</span>
+    <span class="n">wl_shape</span> <span class="o">=</span> <span class="n">wl</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">wl</span> <span class="o">=</span> <span class="n">wl</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">fs</span><span class="p">(</span><span class="n">wl</span><span class="p">)</span> <span class="o">+</span> <span class="n">fa</span><span class="p">(</span><span class="n">wl</span><span class="p">)))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">*</span><span class="n">wl_shape</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">fs</span><span class="p">(</span><span class="n">wl</span><span class="p">)</span> <span class="o">-</span> <span class="n">fa</span><span class="p">(</span><span class="n">wl</span><span class="p">)))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">*</span><span class="n">wl_shape</span><span class="p">)</span>
+    <span class="n">sdict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">):</span> <span class="n">t</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">):</span> <span class="n">k</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">):</span> <span class="n">k</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">):</span> <span class="n">t</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">sax</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span><span class="n">sdict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c</span> <span class="o">/</span> <span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">c</span> <span class="o">/</span> <span class="mf">2.0e-6</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-12</span>  <span class="c1"># THz</span>
+<span class="n">wl</span> <span class="o">=</span> <span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="mf">1e12</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>  <span class="c1"># um</span>
+
+<span class="n">filepath</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sparameters_path</span> <span class="o">/</span> <span class="s2">"coupler"</span> <span class="o">/</span> <span class="s2">"coupler_G224n_L20_S220.csv"</span>
+<span class="n">coupler_fdtd</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+    <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">sdict_from_csv</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">xkey</span><span class="o">=</span><span class="s2">"wavelength_nm"</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">"S"</span><span class="p">,</span> <span class="n">xunits</span><span class="o">=</span><span class="mf">1e-3</span>
+<span class="p">)</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="n">coupler_fdtd</span><span class="p">(</span><span class="n">wl</span><span class="o">=</span><span class="n">wl</span><span class="p">)</span>
+<span class="n">sd_</span> <span class="o">=</span> <span class="n">coupler</span><span class="p">(</span><span class="n">wl</span><span class="o">=</span><span class="n">wl</span><span class="p">)</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sd</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sd</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">T_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sd_</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">K_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sd_</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">dP</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">sd</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">sd</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">]))</span>
+<span class="n">dP_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">sd_</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o3"</span><span class="p">])</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">sd_</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o4"</span><span class="p">]))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"T (fdtd)"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"C0"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="s2">"6"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">T_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"T (model)"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"C0"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"K (fdtd)"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"C1"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="s2">"6"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">K_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"K (model)"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"C1"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">dP</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"ΔΦ (fdtd)"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"C2"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="s2">"6"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">dP_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"ΔΦ (model)"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"C2"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency [THz]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Transmission"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figlegend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.08</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"fdtd_vs_model.png"</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_sax_sax_92_0.png" src="../../../_images/notebooks_plugins_sax_sax_92_0.png"/>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../simphony/01_components.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Simphony circuit simulator</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../tidy3d/00_tidy3d.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">FDTD tidy3d</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">SAX circuit simulator</a><ul>
+<li><a class="reference internal" href="#Scatter-dictionaries">Scatter <em>dictionaries</em></a></li>
+<li><a class="reference internal" href="#Parametrized-Models">Parametrized Models</a></li>
+<li><a class="reference internal" href="#Component-Models">Component Models</a><ul>
+<li><a class="reference internal" href="#Waveguide-model">Waveguide model</a></li>
+<li><a class="reference internal" href="#Coupler-model">Coupler model</a></li>
+<li><a class="reference internal" href="#FDTD-Sparameters-model">FDTD Sparameters model</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Circuit-Models">Circuit Models</a></li>
+<li><a class="reference internal" href="#Optimization">Optimization</a></li>
+<li><a class="reference internal" href="#Model-fit">Model fit</a><ul>
+<li><a class="reference internal" href="#Multi-variable-optimization">Multi-variable optimization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Model-fit-(linear-regression)">Model fit (linear regression)</a><ul>
+<li><a class="reference internal" href="#Symmetric">Symmetric</a></li>
+<li><a class="reference internal" href="#Anti-Symmetric">Anti-Symmetric</a></li>
+<li><a class="reference internal" href="#Total">Total</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

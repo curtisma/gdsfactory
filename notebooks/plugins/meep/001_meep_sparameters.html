@@ -1,0 +1,1767 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="FDTD Meep gratings" href="002_gratings.html" /><link rel="prev" title="FDTD Lumerical" href="../lumerical/1_fdtd_sparameters.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>FDTD Meep - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../plugins.html">Plugins</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="FDTD-Meep">
+<h1>FDTD Meep<a class="headerlink" href="#FDTD-Meep" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://meep.readthedocs.io/en/latest/">Meep</a> is a free, open source Finite Difference Time Domain (FDTD) simulator</p>
+<p>You to install meep and MPB with:</p>
+<p>conda</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge pymeep=*=mpi_mpich_* -y
+</pre></div>
+</div>
+<p>or mamba (faster conda)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mamba install pymeep=*=mpi_mpich_* -y
+</pre></div>
+</div>
+<p>Works only on Mac, Linux or windows <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/">WSL</a></p>
+<p>gdsfactory <code class="docutils literal notranslate"><span class="pre">gmeep</span></code> plugin computes the transmission spectrum for Photonic planar components.</p>
+<p>One of the advantages of using <code class="docutils literal notranslate"><span class="pre">gmeep</span></code> is that you only need to define your component once using gdsfactory, and automatically can simulate it in meep without having to define the geometry again.</p>
+<p>For extracting Sparameters, <code class="docutils literal notranslate"><span class="pre">gmeep</span></code> automatically swaps the source between ports to compute the full Sparameters matrix.</p>
+<ul class="simple">
+<li><p>add monitors on each component port</p></li>
+<li><p>extend ports to go over the PML</p></li>
+<li><p>run simulation and compute Sparameter coefficients with proper ratios for each Sparameter. Monitors record Fourier Transform fields. Sparameter is a relationship of those parameters at different frequencies.</p></li>
+</ul>
+<p>The resolution is in pixels/um, you should run with at least <code class="docutils literal notranslate"><span class="pre">resolution=30</span></code> for 1/30 um/pixel (33 nm/ pixel)</p>
+<p>Notice that most examples run with <code class="docutils literal notranslate"><span class="pre">resolution=20</span></code> so they run fast.</p>
+<p>Here are some examples on how to extract Sparameters in Meep in some planar devices.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> top view
+      ________________________________
+     <span class="p">|</span>                               <span class="p">|</span>
+     <span class="p">|</span> xmargin_left                  <span class="p">|</span> port_extension
+     <span class="p">|</span>&lt;---------&gt;       port_margin <span class="o">||</span>&lt;--&gt;
+  o2_<span class="p">|</span>___________          _________<span class="o">||</span>_o3
+     <span class="p">|</span>           <span class="se">\ </span>       /          <span class="p">|</span>
+     <span class="p">|</span>            <span class="se">\ </span>     /           <span class="p">|</span>
+     <span class="p">|</span>             <span class="o">======</span>            <span class="p">|</span>
+     <span class="p">|</span>            /      <span class="se">\ </span>          <span class="p">|</span>
+  o1_<span class="p">|</span>___________/        <span class="se">\_</span>_________<span class="p">|</span>_o4
+     <span class="p">|</span>   <span class="p">|</span>                 &lt;--------&gt;<span class="p">|</span>
+     <span class="p">|</span>   <span class="p">|</span>ymargin_bot   xmargin_right<span class="p">|</span>
+     <span class="p">|</span>   <span class="p">|</span>                           <span class="p">|</span>
+     <span class="p">|</span>___<span class="p">|</span>___________________________<span class="p">|</span>
+
+side view
+      ________________________________
+     <span class="p">|</span>                     <span class="p">|</span>         <span class="p">|</span>
+     <span class="p">|</span>                     <span class="p">|</span>         <span class="p">|</span>
+     <span class="p">|</span>                   zmargin_top <span class="p">|</span>
+     <span class="p">|</span>xmargin_left         <span class="p">|</span>         <span class="p">|</span>
+     <span class="p">|</span>&lt;---&gt; _____         _<span class="p">|</span>___      <span class="p">|</span>
+     <span class="p">|</span>     <span class="p">|</span>     <span class="p">|</span>       <span class="p">|</span>     <span class="p">|</span>     <span class="p">|</span>
+     <span class="p">|</span>     <span class="p">|</span>     <span class="p">|</span>       <span class="p">|</span>     <span class="p">|</span>     <span class="p">|</span>
+     <span class="p">|</span>     <span class="p">|</span>_____<span class="p">|</span>       <span class="p">|</span>_____<span class="p">|</span>     <span class="p">|</span>
+     <span class="p">|</span>       <span class="p">|</span>                       <span class="p">|</span>
+     <span class="p">|</span>       <span class="p">|</span>                       <span class="p">|</span>
+     <span class="p">|</span>       <span class="p">|</span>zmargin_bot            <span class="p">|</span>
+     <span class="p">|</span>       <span class="p">|</span>                       <span class="p">|</span>
+     <span class="p">|</span>_______<span class="p">|</span>_______________________<span class="p">|</span>
+</pre></div>
+</div>
+<section id="Single-core">
+<h2>Single core<a class="headerlink" href="#Single-core" title="Permalink to this headline">#</a></h2>
+<p>Running on a single CPU core can be slow as the a single core needs to update all the simulation grid points sequentially.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.gmeep</span> <span class="k">as</span> <span class="nn">gm</span>
+
+<span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set_plot_options</span><span class="p">(</span><span class="n">show_subports</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_ports</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:13.430 | INFO     | gdsfactory.config:&lt;module&gt;:52 - Load '/home/runner/work/gdsfactory/gdsfactory/gdsfactory' 4.4.12
+2022-03-17 04:14:14.673 | INFO     | gdsfactory.simulation.gmeep:&lt;module&gt;:28 - Meep '1.22.0' installed at ['/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/meep']
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using MPI version 4.0, 1 processes
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:14.690 | INFO     | gdsfactory.show:show:36 - Klayout show straight_fba69bc3: uid 1, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+straight_fba69bc3: uid 1, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_2_2.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_2_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+straight_fba69bc3: uid 1, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">run=False</span></code> only plots the simulations for you to review that is set up <strong>correctly</strong></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ymargin_top</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ymargin_bot</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:14.945 | INFO     | gdsfactory.show:show:36 - Klayout show straight_fba69bc3_add_p_847ac5c6: uid 4, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/meep/__init__.py:4351: ComplexWarning: Casting complex values to real discards the imaginary part
+  return _meep._get_epsilon_grid(gobj_list, mlist, _default_material, _ensure_periodicity, gv, cell_size, cell_center, nx, xtics, ny, ytics, nz, ztics, grid_vals, frequency)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_4_1.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_4_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on cython_function_or_method in module gdsfactory.simulation.gmeep.write_sparameters_meep:
+
+write_sparameters_meep(component: Union[Callable[..., gdsfactory.component.Component], gdsfactory.component.Component], port_symmetries: Optional[Dict[str, Dict[str, List[str]]]] = None, resolution: int = 30, wavelength_start: float = 1.5, wavelength_stop: float = 1.6, wavelength_points: int = 50, dirpath: Union[str, pathlib.Path] = PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp'), layer_stack: gdsfactory.tech.LayerStack = {'core': LayerLevel(layer=(1, 0), thickness=0.22, zmin=0.0, material='si', sidewall_angle=0), 'clad': LayerLevel(layer=(111, 0), thickness=None, zmin=0.0, material='sio2', sidewall_angle=0), 'slab150': LayerLevel(layer=(2, 0), thickness=0.15, zmin=0.0, material='si', sidewall_angle=0), 'slab90': LayerLevel(layer=(3, 0), thickness=0.09, zmin=0.0, material='si', sidewall_angle=0), 'nitride': LayerLevel(layer=(34, 0), thickness=0.35, zmin=0.32, material='sin', sidewall_angle=0), 'ge': LayerLevel(layer=(5, 0), thickness=0.5, zmin=0.22, material='ge', sidewall_angle=0), 'via_contact': LayerLevel(layer=(40, 0), thickness=1.1, zmin=0.09, material='Aluminum', sidewall_angle=0), 'metal1': LayerLevel(layer=(41, 0), thickness=0.75, zmin=1.32, material='Aluminum', sidewall_angle=0), 'heater': LayerLevel(layer=(47, 0), thickness=0.75, zmin=1.32, material='TiN', sidewall_angle=0), 'viac': LayerLevel(layer=(44, 0), thickness=1.5, zmin=2.0700000000000003, material='Aluminum', sidewall_angle=0), 'metal2': LayerLevel(layer=(45, 0), thickness=2.0, zmin=3.5700000000000003, material='Aluminum', sidewall_angle=0)}, port_margin: float = 2, port_monitor_offset: float = -0.1, port_source_offset: float = -0.1, filepath: Optional[pathlib.Path] = None, overwrite: bool = False, animate: bool = False, lazy_parallelism: bool = False, run: bool = True, dispersive: bool = False, xmargin: float = 0, ymargin: float = 3, xmargin_left: float = 0, xmargin_right: float = 0, ymargin_top: float = 0, ymargin_bot: float = 0, **settings) -&gt; pandas.core.frame.DataFrame
+    Compute Sparameters and writes them to a CSV filepath.
+    Simulates each time using a different input port (by default, all of them)
+    unless you specify port_symmetries:
+
+    port_symmetries = {"o1":
+            {
+                "s11": ["s22","s33","s44"],
+                "s21": ["s21","s34","s43"],
+                "s31": ["s13","s24","s42"],
+                "s41": ["s14","s23","s32"],
+            }
+        }
+    - Only simulations using the outer key port names will be run
+    - The associated value is another dict whose keys are the S-parameters computed
+        when this source is active
+    - The values of this inner Dict are lists of s-parameters whose values are copied
+
+    This allows you doing less simulations
+
+    TODO: automate this for common component types
+    (geometrical symmetries, reciprocal materials, etc.)
+
+    TODO: enable other port naming conventions, such as (in0, in1, out0, out1)
+
+
+    .. code::
+
+         top view
+              ________________________________
+             |                               |
+             | xmargin_left                  | port_extension
+             |&lt;---------&gt;       port_margin ||&lt;--&gt;
+          o2_|___________          _________||_o3
+             |           \        /          |
+             |            \      /           |
+             |             ======            |
+             |            /      \           |
+          o1_|___________/        \__________|_o4
+             |   |                 &lt;--------&gt;|
+             |   |ymargin_bot   xmargin_right|
+             |   |                           |
+             |___|___________________________|
+
+        side view
+              ________________________________
+             |                     |         |
+             |                     |         |
+             |                   zmargin_top |
+             |xmargin_left         |         |
+             |&lt;---&gt; _____         _|___      |
+             |     |     |       |     |     |
+             |     |     |       |     |     |
+             |     |_____|       |_____|     |
+             |       |                       |
+             |       |                       |
+             |       |zmargin_bot            |
+             |       |                       |
+             |_______|_______________________|
+
+
+
+    Args:
+        component: to simulate.
+        resolution: in pixels/um (30: for coarse, 100: for fine)
+        port_symmetries: Dict to specify port symmetries, to save number of simulations
+        dirpath: directory to store Sparameters
+        layer_stack: LayerStack class
+        port_margin: margin on each side of the port
+        port_monitor_offset: offset between monitor Component port and monitor MEEP port
+        port_source_offset: offset between source Component port and source MEEP port
+        filepath: to store pandas Dataframe with Sparameters in CSV format.
+            Defaults to dirpath/component_.csv
+        overwrite: overwrites stored Sparameter CSV results.
+        animate: saves a MP4 images of the simulation for inspection, and also
+            outputs during computation. The name of the file is the source index
+        lazy_parallelism: toggles the flag "meep.divide_parallel_processes" to
+            perform the simulations with different sources in parallel
+        run: runs simulation, if False, only plots simulation
+        dispersive: use dispersive models for materials (requires higher resolution)
+        xmargin: left and right distance from component to PML.
+        xmargin_left: west distance from component to PML.
+        xmargin_right: east distance from component to PML.
+        ymargin: top and bottom distance from component to PML.
+        ymargin_top: north distance from component to PML.
+        ymargin_bot: south distance from component to PML.
+
+    keyword Args:
+        extend_ports_length: to extend ports beyond the PML (um).
+        zmargin_top: thickness for cladding above core (um).
+        zmargin_bot: thickness for cladding below core (um)
+        tpml: PML thickness (um).
+        clad_material: material for cladding.
+        is_3d: if True runs in 3D
+        wavelength_start: wavelength min (um).
+        wavelength_stop: wavelength max (um).
+        wavelength_points: wavelength steps
+        dfcen: delta frequency
+        port_source_name: input port name
+        port_field_monitor_name:
+        port_margin: margin on each side of the port (um).
+        distance_source_to_monitors: in (um).
+        port_source_offset: offset between source Component port and source MEEP port
+        port_monitor_offset: offset between monitor Component port and monitor MEEP port
+        material_name_to_meep: dispersive materials have a wavelength
+            dependent index. Maps layer_stack names with meep material database names.
+
+    Returns:
+        sparameters in a pandas Dataframe (wavelengths, s11a, s12m, ...)
+            where `a` is the angle in radians and `m` the module
+
+</pre></div></div>
+</div>
+<p>As you’ve noticed we added <code class="docutils literal notranslate"><span class="pre">ymargin_top</span></code> and <code class="docutils literal notranslate"><span class="pre">ymargin_bot</span></code> to ensure we have enough distance to the PML</p>
+<p>You can also do this directly with another version of the function that adds <code class="docutils literal notranslate"><span class="pre">ymargin_top</span></code> and <code class="docutils literal notranslate"><span class="pre">ymargin_bot</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:15.070 | INFO     | gdsfactory.show:show:36 - Klayout show straight_fba69bc3_add_p_847ac5c6: uid 4, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_7_1.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_7_1.png"/>
+</div>
+</div>
+<p>Because components with <code class="docutils literal notranslate"><span class="pre">left-right</span></code> ports are very common <code class="docutils literal notranslate"><span class="pre">write_sparameters_meep</span></code> <code class="docutils literal notranslate"><span class="pre">y_margin</span> <span class="pre">=</span> <span class="pre">3um</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">taper</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">width1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">width2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">with_cladding_box</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:15.184 | INFO     | gdsfactory.show:show:36 - Klayout show taper_ea039af6: uid 9, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+taper_ea039af6: uid 9, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_9_2.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_9_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+taper_ea039af6: uid 9, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:15.312 | INFO     | gdsfactory.show:show:36 - Klayout show taper_ea039af6_add_padd_a1a4ba9f: uid 11, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_10_1.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_10_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:15.427 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep:write_sparameters_meep:342 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/taper_ea039af6_4a47720e.csv')
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_12_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_12_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">(</span><span class="s2">"s21m"</span><span class="p">,),</span> <span class="n">logscale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_13_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_13_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">(</span><span class="s2">"s21m"</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_14_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_14_0.png"/>
+</div>
+</div>
+<p>For a small taper S21 (Transmission) is around 0dB (100% transmission)</p>
+</section>
+<section id="Port-symmetries">
+<h2>Port symmetries<a class="headerlink" href="#Port-symmetries" title="Permalink to this headline">#</a></h2>
+<p>You can save some simulations in reciprocal devices. If the device looks the same going from in -&gt; out as out -&gt; in, we only need to run one simulation</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_euler</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:16.159 | INFO     | gdsfactory.show:show:36 - Klayout show bend_euler_f4d868f6: uid 15, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+bend_euler_f4d868f6: uid 15, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_17_2.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_17_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+bend_euler_f4d868f6: uid 15, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep_1x1_bend90</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:16.293 | INFO     | gdsfactory.show:show:36 - Klayout show bend_euler_f4d868f6_add_244459bf: uid 18, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+Warning: grid volume is not an integer number of pixels; cell size will be rounded to nearest pixel.
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/meep/__init__.py:4351: ComplexWarning: Casting complex values to real discards the imaginary part
+  return _meep._get_epsilon_grid(gobj_list, mlist, _default_material, _ensure_periodicity, gv, cell_size, cell_center, nx, xtics, ny, ytics, nz, ztics, grid_vals, frequency)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_18_1.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_18_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep_1x1_bend90</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:17.509 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep:write_sparameters_meep:342 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/bend_euler_f4d868f6_1972921f.csv')
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_20_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_20_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">(</span><span class="s2">"s21m"</span><span class="p">,),</span> <span class="n">logscale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_21_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_21_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">(</span><span class="s2">"s11m"</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_22_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_22_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">crossing</span><span class="p">()</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:18.043 | INFO     | gdsfactory.show:show:36 - Klayout show crossing: uid 22, ports ['o1', 'o3', 'o4', 'o2'], aliases [], 4 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+crossing: uid 22, ports ['o1', 'o3', 'o4', 'o2'], aliases [], 4 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_23_2.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_23_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+crossing: uid 22, ports ['o1', 'o3', 'o4', 'o2'], aliases [], 4 polygons, 0 references
+</pre></div></div>
+</div>
+<p>Here are the port symmetries for a crossing</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">port_symmetries</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"o1"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"s11"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"s22"</span><span class="p">,</span> <span class="s2">"s33"</span><span class="p">,</span> <span class="s2">"s44"</span><span class="p">],</span>
+        <span class="s2">"s21"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"s12"</span><span class="p">,</span> <span class="s2">"s34"</span><span class="p">,</span> <span class="s2">"s43"</span><span class="p">],</span>
+        <span class="s2">"s31"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"s13"</span><span class="p">,</span> <span class="s2">"s24"</span><span class="p">,</span> <span class="s2">"s42"</span><span class="p">],</span>
+        <span class="s2">"s41"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"s14"</span><span class="p">,</span> <span class="s2">"s23"</span><span class="p">,</span> <span class="s2">"s32"</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">(</span>
+    <span class="n">c</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">ymargin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">port_symmetries</span><span class="o">=</span><span class="n">gm</span><span class="o">.</span><span class="n">port_symmetries</span><span class="o">.</span><span class="n">port_symmetries_crossing</span><span class="p">,</span>
+    <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:18.171 | INFO     | gdsfactory.show:show:36 - Klayout show crossing_add_padding_co_92e5a1de: uid 26, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 4 polygons, 1 references
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/meep/__init__.py:4351: ComplexWarning: Casting complex values to real discards the imaginary part
+  return _meep._get_epsilon_grid(gobj_list, mlist, _default_material, _ensure_periodicity, gv, cell_size, cell_center, nx, xtics, ny, ytics, nz, ztics, grid_vals, frequency)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_25_1.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_25_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">(</span>
+    <span class="n">c</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">ymargin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">port_symmetries</span><span class="o">=</span><span class="n">gm</span><span class="o">.</span><span class="n">port_symmetries</span><span class="o">.</span><span class="n">port_symmetries_crossing</span><span class="p">,</span>
+    <span class="n">run</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:18.785 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep:write_sparameters_meep:342 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/crossing_31c32d8e.csv')
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gm</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_27_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_27_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gm</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">(</span><span class="s2">"s31m"</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_28_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_28_0.png"/>
+</div>
+</div>
+<p>As you can see this crossing looks beautiful but is quite <strong>lossy</strong> (9dB @ 15550nm)</p>
+</section>
+<section id="Multicore-(MPI)">
+<h2>Multicore (MPI)<a class="headerlink" href="#Multicore-(MPI)" title="Permalink to this headline">#</a></h2>
+<p>You can divide each simulation into multiple cores thanks to <a class="reference external" href="https://en.wikipedia.org/wiki/Message_Passing_Interface">MPI (message passing interface)</a></p>
+<p>Lets try to reproduce the coupler results from the <a class="reference external" href="https://meep.readthedocs.io/en/latest/Python_Tutorials/GDSII_Import/">Meep docs</a></p>
+<p>According to the simulations in the doc to get a 3dB (50%/50%) splitter you need 150nm over 8um</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation</span> <span class="k">as</span> <span class="nn">sim</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.gmeep</span> <span class="k">as</span> <span class="nn">gm</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">coupler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on function coupler in module gdsfactory.components.coupler:
+
+coupler(gap: float = 0.236, length: float = 20.0, coupler_symmetric: Callable[..., gdsfactory.component.Component] = &lt;function coupler_symmetric at 0x7f1a179db790&gt;, coupler_straight: Callable[..., gdsfactory.component.Component] = &lt;function coupler_straight at 0x7f1a179db550&gt;, dy: float = 5.0, dx: float = 10.0, cross_section: Callable[..., gdsfactory.cross_section.CrossSection] = functools.partial(&lt;cyfunction cross_section at 0x7f1a355e5380&gt;), **kwargs) -&gt; gdsfactory.component.Component
+    Symmetric coupler.
+
+    Args:
+        gap: between straights
+        length: of coupling region
+        coupler_symmetric
+        coupler_straight
+        dy: port to port vertical spacing
+        dx: length of bend in x direction
+        cross_section: factory
+        kwargs: cross_section settings
+
+    .. code::
+
+               dx                                 dx
+            |------|                           |------|
+         o2 ________                           ______o3
+                    \                         /           |
+                     \        length         /            |
+                      ======================= gap         | dy
+                     /                       \            |
+            ________/                         \_______    |
+         o1                                          o4
+
+                        coupler_straight  coupler_symmetric
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">coupler</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">gap</span><span class="o">=</span><span class="mf">0.13</span><span class="p">)</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:19.631 | INFO     | gdsfactory.show:show:36 - Klayout show coupler_2e5eb039: uid 28, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 6 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+coupler_2e5eb039: uid 28, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 6 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_33_2.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_33_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+coupler_2e5eb039: uid 28, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 6 polygons, 0 references
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:19.931 | INFO     | gdsfactory.show:show:36 - Klayout show coupler_2e5eb039_add_pa_bb794c1c: uid 36, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 4 polygons, 1 references
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/meep/__init__.py:4351: ComplexWarning: Casting complex values to real discards the imaginary part
+  return _meep._get_epsilon_grid(gobj_list, mlist, _default_material, _ensure_periodicity, gv, cell_size, cell_center, nx, xtics, ny, ytics, nz, ztics, grid_vals, frequency)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_34_1.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_34_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep_mpi</span><span class="p">(</span>
+    <span class="n">component</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+    <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:23.194 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_mpi:write_sparameters_meep_mpi:137 - Simulation PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/coupler_2e5eb039_a26130db.csv') already exists
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_37_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_37_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">"s13m"</span><span class="p">,</span> <span class="s2">"s14m"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_38_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_38_0.png"/>
+</div>
+</div>
+</section>
+<section id="Batch">
+<h2>Batch<a class="headerlink" href="#Batch" title="Permalink to this headline">#</a></h2>
+<p>You can also run a batch of multicore simulations</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation</span> <span class="k">as</span> <span class="nn">sim</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.gmeep</span> <span class="k">as</span> <span class="nn">gm</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mf">3.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ymargin</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:24.089 | INFO     | gdsfactory.show:show:36 - Klayout show straight_a2076d5c_add_p_c4432928: uid 41, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/meep/__init__.py:4351: ComplexWarning: Casting complex values to real discards the imaginary part
+  return _meep._get_epsilon_grid(gobj_list, mlist, _default_material, _ensure_periodicity, gv, cell_size, cell_center, nx, xtics, ny, ytics, nz, ztics, grid_vals, frequency)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_42_1.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_42_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"component"</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span> <span class="s2">"ymargin"</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">c1_dict</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">filepaths</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep_batch_1x1</span><span class="p">(</span>
+    <span class="n">jobs</span><span class="o">=</span><span class="n">jobs</span><span class="p">,</span>
+    <span class="n">cores_per_run</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">total_cores</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">lazy_parallelism</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:24.205 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:135 - Simulation PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/straight_a2076d5c_ecb62219.csv') not found. Adding it to the queue
+2022-03-17 04:14:24.207 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:143 - Running 1 simulations
+2022-03-17 04:14:24.209 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:144 - total_cores = 8 with cores_per_run = 4
+2022-03-17 04:14:24.209 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:145 - Running 1 batches with up to 2 jobs each.
+  0%|          | 0/1 [00:00&lt;?, ?it/s]2022-03-17 04:14:24.216 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:156 - Task 0 of batch 0 is job 0
+2022-03-17 04:14:24.220 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_mpi:write_sparameters_meep_mpi:137 - Simulation PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/straight_a2076d5c_68b4366e.csv') already exists
+100%|██████████| 1/1 [00:00&lt;00:00, 198.51it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'component': straight_a2076d5c: uid 38, ports ['o1', 'o2'], aliases [], 1 polygons, 0 references,
+ 'ymargin': 3}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filepaths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">gf</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_44_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_44_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">coupler_ring</span><span class="p">()</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:24.492 | INFO     | gdsfactory.show:show:36 - Klayout show coupler_ring: uid 43, ports ['o2', 'o1', 'o3', 'o4'], aliases [], 0 polygons, 3 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+coupler_ring: uid 43, ports ['o2', 'o1', 'o3', 'o4'], aliases [], 0 polygons, 3 references
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_45_2.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_45_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+coupler_ring: uid 43, ports ['o2', 'o1', 'o3', 'o4'], aliases [], 0 polygons, 3 references
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ymargin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymargin_bot</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">xmargin</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:24.635 | INFO     | gdsfactory.show:show:36 - Klayout show coupler_ring_add_paddin_ba010477: uid 53, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 4 polygons, 1 references
+Warning: grid volume is not an integer number of pixels; cell size will be rounded to nearest pixel.
+/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/meep/__init__.py:4351: ComplexWarning: Casting complex values to real discards the imaginary part
+  return _meep._get_epsilon_grid(gobj_list, mlist, _default_material, _ensure_periodicity, gv, cell_size, cell_center, nx, xtics, ny, ytics, nz, ztics, grid_vals, frequency)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_46_1.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_46_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">component</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+    <span class="n">ymargin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">ymargin_bot</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
+    <span class="n">xmargin</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1_dict</span><span class="p">]</span>
+
+<span class="n">filepaths</span> <span class="o">=</span> <span class="n">gm</span><span class="o">.</span><span class="n">write_sparameters_meep_batch</span><span class="p">(</span>
+    <span class="n">jobs</span><span class="o">=</span><span class="n">jobs</span><span class="p">,</span>
+    <span class="n">cores_per_run</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">total_cores</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">delete_temp_files</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy_parallelism</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:14:30.472 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:135 - Simulation PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/coupler_ring_900ed81e.csv') not found. Adding it to the queue
+2022-03-17 04:14:30.473 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:143 - Running 1 simulations
+2022-03-17 04:14:30.474 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:144 - total_cores = 8 with cores_per_run = 4
+2022-03-17 04:14:30.476 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:145 - Running 1 batches with up to 2 jobs each.
+  0%|          | 0/1 [00:00&lt;?, ?it/s]2022-03-17 04:14:30.478 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_batch:write_sparameters_meep_batch:156 - Task 0 of batch 0 is job 0
+2022-03-17 04:14:30.480 | INFO     | gdsfactory.simulation.gmeep.write_sparameters_meep_mpi:write_sparameters_meep_mpi:137 - Simulation PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/coupler_ring_6c254d62.csv') already exists
+100%|██████████| 1/1 [00:00&lt;00:00, 348.08it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'component': coupler_ring: uid 43, ports ['o2', 'o1', 'o3', 'o4'], aliases [], 0 polygons, 3 references,
+ 'xmargin': 2.5,
+ 'ymargin': 0,
+ 'ymargin_bot': 2.5}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filepaths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gm</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_49_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_49_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gm</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">"s31m"</span><span class="p">,</span> <span class="s2">"s41m"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_50_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_50_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gm</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">"s31m"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_51_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_51_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gm</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">"s41m"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_meep_001_meep_sparameters_52_0.png" src="../../../_images/notebooks_plugins_meep_001_meep_sparameters_52_0.png"/>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="002_gratings.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">FDTD Meep gratings</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../lumerical/1_fdtd_sparameters.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">FDTD Lumerical</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">FDTD Meep</a><ul>
+<li><a class="reference internal" href="#Single-core">Single core</a></li>
+<li><a class="reference internal" href="#Port-symmetries">Port symmetries</a></li>
+<li><a class="reference internal" href="#Multicore-(MPI)">Multicore (MPI)</a></li>
+<li><a class="reference internal" href="#Batch">Batch</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

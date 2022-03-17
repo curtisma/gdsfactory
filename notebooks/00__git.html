@@ -1,0 +1,1521 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Python intro" href="00__python_intro.html" /><link rel="prev" title="Git Python Tutorial" href="../git.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>Git: Version control - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../git.html">Git Python Tutorial</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="Git:-Version-control">
+<h1>Git: Version control<a class="headerlink" href="#Git:-Version-control" title="Permalink to this headline">#</a></h1>
+<p>“Revision control, also known as version control, source control or software configuration management (SCM), is the <strong>management of changes to documents, programs, and other information stored as computer files.</strong>” – Wikipedia</p>
+<p><strong>Reproducibility?</strong></p>
+<ul class="simple">
+<li><p>Tracking and recreating every step of your work</p></li>
+<li><p>In the software world: it’s called <em>Version Control</em>!</p></li>
+</ul>
+<p>What do (good) version control tools give you?</p>
+<ul class="simple">
+<li><p>Peace of mind (backups)</p></li>
+<li><p>Freedom (exploratory branching)</p></li>
+<li><p>Collaboration (synchronization)</p></li>
+</ul>
+<section id="Git-is-an-enabling-technology:-Use-version-control-for-everything">
+<h2>Git is an enabling technology: Use version control for everything<a class="headerlink" href="#Git-is-an-enabling-technology:-Use-version-control-for-everything" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Write documents (never get <code class="docutils literal notranslate"><span class="pre">paper_v5_john_jane_final_oct22_really_final.tex</span></code> by email again!)</p></li>
+<li><p>Write code</p></li>
+<li><p>Backup your computer configuration</p></li>
+</ul>
+<p>This tutorial is structured in the following way: we will begin with a brief overview of key concepts you need to understand in order for git to really make sense. We will then dive into hands-on work: after a brief interlude into necessary configuration we will discuss 5 “stages of git” with scenarios of increasing sophistication and complexity, introducing the necessary commands for each stage:</p>
+<ol class="arabic simple">
+<li><p>Local, single-user, linear workflow</p></li>
+<li><p>Single local user, branching</p></li>
+<li><p>Using remotes as a single user</p></li>
+<li><p>Remotes for collaborating in a small team</p></li>
+<li><p>distributed collaboration with large teams with GitHub/GitLab</p></li>
+</ol>
+<p>In reality, this tutorial only covers stages 1-4, since for #5 there are many software develoment-oriented tutorials and documents of very high quality online. But most scientists start working alone with a few files or with a small team, so I feel it’s important to build first the key concepts and practices based on problems scientists encounter in their everyday life and without the jargon of the software world. Once you’ve become familiar with 1-4, the excellent tutorials that exist about
+collaborating on github on open-source projects should make sense.</p>
+</section>
+<section id="Very-high-level-picture:-an-overview-of-key-concepts">
+<h2>Very high level picture: an overview of key concepts<a class="headerlink" href="#Very-high-level-picture:-an-overview-of-key-concepts" title="Permalink to this headline">#</a></h2>
+<p>The <strong>commit</strong>: <em>a snapshot of work at a point in time</em> Every ball in this diagram represents a commit of all the files in a code repository, that we can go later in time, compare it with. We can also add labels/tags to this commits in case we want to develop new features.</p>
+<p><img alt="image0" src="https://i.imgur.com/Sw95CUf.png"/></p>
+<p>Credit: Gitflow Atlassian</p>
+<p>And this is pretty much the essence of Git!</p>
+</section>
+<section id="First-things-first:-git-must-be-configured-before-first-use">
+<h2>First things first: git must be configured before first use<a class="headerlink" href="#First-things-first:-git-must-be-configured-before-first-use" title="Permalink to this headline">#</a></h2>
+<p>The minimal amount of configuration for git to work without pestering you is to tell it who you are:</p>
+<section id="Exercise">
+<h3>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">#</a></h3>
+<p>The preceding <code class="docutils literal notranslate"><span class="pre">!</span></code> marks that this code will execute in the <code class="docutils literal notranslate"><span class="pre">terminal</span></code> interpreter instead of in <code class="docutils literal notranslate"><span class="pre">python</span></code></p>
+<p>Lets tell Git who you are.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git config --global user.name <span class="s2">"joaquin"</span> # replace joaquin by your name
+<span class="o">!</span>git config --global user.email <span class="s2">"user@gmail.com"</span> # replace j by your email
+</pre></div>
+</div>
+</div>
+<p>And how you will edit text files (it will often ask you to edit messages and other information, and thus wants to know how you like to edit your files):</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put here your preferred editor. If this is not set, git will honor the $EDITOR environment variable</span>
+<span class="c1"># On Windows: Notepad works, Notepad++, sublime or atom</span>
+<span class="c1"># On mac/linux: vim, sublime or atom as a basic option</span>
+<span class="o">!</span>git config --global core.editor nvim  # my lightweight neovim editor
+
+<span class="c1"># And while we're at it, we also turn on the use of color, which is very useful</span>
+<span class="o">!</span>git config --global color.ui <span class="s2">"auto"</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="Stage-0:-Configure-GIT">
+<h2>Stage 0: Configure GIT<a class="headerlink" href="#Stage-0:-Configure-GIT" title="Permalink to this headline">#</a></h2>
+<p>Github is offers in its help pages instructions on how to configure the credentials helper for <a class="reference external" href="https://help.github.com/articles/set-up-git#platform-mac">Mac OSX</a> and <a class="reference external" href="https://help.github.com/articles/set-up-git#platform-windows">Windows</a>.</p>
+<p>First we are going to create an SSH key that you can upload to Gitlab to recognize you. The key has a private part <code class="docutils literal notranslate"><span class="pre">id_rsa</span></code> that you should keep secret, and a public part <code class="docutils literal notranslate"><span class="pre">id_rsa.pub</span></code> that can upload it to Gitlab so gitlab knows it’s you.</p>
+<p>Uncomment the following 2 lines, and make sure you run them only once, so you generate the key only one time.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#! ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#! less ~/.ssh/id_rsa.pub</span>
+</pre></div>
+</div>
+</div>
+<p>Then paste the key into your Gitlab or github account</p>
+</section>
+<section id="Stage-1:-Local,-single-user,-linear-workflow">
+<h2>Stage 1: Local, single-user, linear workflow<a class="headerlink" href="#Stage-1:-Local,-single-user,-linear-workflow" title="Permalink to this headline">#</a></h2>
+<p>Simply type <code class="docutils literal notranslate"><span class="pre">git</span></code> to see a full list of all the ‘core’ commands. We’ll now go through most of these via small practical exercises:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+usage: git [--version] [--help] [-C &lt;path&gt;] [-c &lt;name&gt;=&lt;value&gt;]
+           [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]
+           [--super-prefix=&lt;path&gt;] [--config-env=&lt;name&gt;=&lt;envvar&gt;]
+           &lt;command&gt; [&lt;args&gt;]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone     Clone a repository into a new directory
+   init      Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add       Add file contents to the index
+   mv        Move or rename a file, a directory, or a symlink
+   restore   Restore working tree files
+   rm        Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect    Use binary search to find the commit that introduced a bug
+   diff      Show changes between commits, commit and working tree, etc
+   grep      Print lines matching a pattern
+   log       Show commit logs
+   show      Show various types of objects
+   status    Show the working tree status
+
+grow, mark and tweak your common history
+   branch    List, create, or delete branches
+   commit    Record changes to the repository
+   merge     Join two or more development histories together
+   rebase    Reapply commits on top of another base tip
+   reset     Reset current HEAD to the specified state
+   switch    Switch branches
+   tag       Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch     Download objects and refs from another repository
+   pull      Fetch from and integrate with another repository or a local branch
+   push      Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help &lt;command&gt;' or 'git help &lt;concept&gt;'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+</pre></div></div>
+</div>
+<p>We are going to create a test repo for git to play</p>
+<section id="git-init:-create-an-empty-repository">
+<h3><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>: create an empty repository<a class="headerlink" href="#git-init:-create-an-empty-repository" title="Permalink to this headline">#</a></h3>
+<p>first we create a folder called <code class="docutils literal notranslate"><span class="pre">playground_repo</span></code></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span> mkdir playground_repo
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">playground_repo</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/home/runner/work/gdsfactory/gdsfactory/docs/notebooks/playground_repo
+</pre></div></div>
+</div>
+<p>Let’s look at what git did:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">la</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+total 8
+drwxr-xr-x 2 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">.</span>/
+drwxr-xr-x 5 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">..</span>/
+</pre></div></div>
+</div>
+<p>The folder is empty now.</p>
+<p>Lets create a new repo in the folder.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span> git init
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-yellow-fg">hint: Using 'master' as the name for the initial branch. This default branch name</span>
+<span class="ansi-yellow-fg">hint: is subject to change. To configure the initial branch name to use in all</span>
+<span class="ansi-yellow-fg">hint: of your new repositories, which will suppress this warning, call:</span>
+<span class="ansi-yellow-fg">hint: </span>
+<span class="ansi-yellow-fg">hint:      git config --global init.defaultBranch &lt;name&gt;</span>
+<span class="ansi-yellow-fg">hint: </span>
+<span class="ansi-yellow-fg">hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and</span>
+<span class="ansi-yellow-fg">hint: 'development'. The just-created branch can be renamed via this command:</span>
+<span class="ansi-yellow-fg">hint: </span>
+<span class="ansi-yellow-fg">hint:      git branch -m &lt;name&gt;</span>
+Initialized empty Git repository in /home/runner/work/gdsfactory/gdsfactory/docs/notebooks/playground_repo/.git/
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">la</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+total 12
+drwxr-xr-x 3 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">.</span>/
+drwxr-xr-x 5 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">..</span>/
+drwxr-xr-x 7 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">.git</span>/
+</pre></div></div>
+</div>
+<p>Now you can see that there is a hidden folder <code class="docutils literal notranslate"><span class="pre">.git</span></code> (notice the dot that marks it as a hidden folder), which is the GIT repo</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+total 32
+-rw-r--r-- 1 runner docker   23 Mar 17 04:10 HEAD
+drwxr-xr-x 2 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">branches</span>/
+-rw-r--r-- 1 runner docker   92 Mar 17 04:10 config
+-rwxr-xr-x 1 runner docker   73 Mar 17 04:10 <span class="ansi-green-intense-fg ansi-bold">description</span>*
+drwxr-xr-x 2 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">hooks</span>/
+drwxr-xr-x 2 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">info</span>/
+drwxr-xr-x 4 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">objects</span>/
+drwxr-xr-x 4 runner docker 4096 Mar 17 04:10 <span class="ansi-blue-intense-fg ansi-bold">refs</span>/
+</pre></div></div>
+</div>
+<p>Now let’s edit our first file in the test directory with a text editor… I’m doing it programatically here for automation purposes, but you’d normally be editing by hand</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="s2">"My first bit of text in the repo"</span> &gt; README.md
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ls</span></code> lists the contents of the current working directory</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+README.md
+</pre></div></div>
+</div>
+</section>
+<section id="git-add:-tell-git-about-this-new-file">
+<h3><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>: tell git about this new file<a class="headerlink" href="#git-add:-tell-git-about-this-new-file" title="Permalink to this headline">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git add README.md
+</pre></div>
+</div>
+</div>
+<p>We can now ask git about what happened with <code class="docutils literal notranslate"><span class="pre">status</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git status
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached &lt;file&gt;..." to unstage)
+        <span class="ansi-green-fg">new file:   README.md</span>
+
+</pre></div></div>
+</div>
+</section>
+<section id="git-commit:-permanently-record-our-changes-in-git's-database">
+<h3><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>: permanently record our changes in git’s database<a class="headerlink" href="#git-commit:-permanently-record-our-changes-in-git's-database" title="Permalink to this headline">#</a></h3>
+<p>For now, we are <em>always</em> going to call <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> either with the <code class="docutils literal notranslate"><span class="pre">-a</span></code> option <em>or</em> with specific filenames (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">file1</span> <span class="pre">file2...</span></code>). This delays the discussion of an aspect of git called the <em>index</em> (often referred to also as the ‘staging area’) that we will cover later. Most everyday work in regular scientific practice doesn’t require understanding the extra moving parts that the index involves, so on a first round we’ll bypass it. Later on we will discuss how to use it to achieve
+more fine-grained control of what and how git records our actions.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git commit -a -m <span class="s2">"First commit"</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[master (root-commit) c2a40bc] First commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+</pre></div></div>
+</div>
+<p>In the commit above, we used the <code class="docutils literal notranslate"><span class="pre">-m</span></code> flag to specify a message at the command line. If we don’t do that, git will open the editor we specified in our configuration above and require that we enter a message. By default, git refuses to record changes that don’t have a message to go along with them (though you can obviously ‘cheat’ by using an empty or meaningless string: git only tries to facilitate best practices, it’s not your nanny).</p>
+</section>
+<section id="git-log:-what-has-been-committed-so-far">
+<h3><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>: what has been committed so far<a class="headerlink" href="#git-log:-what-has-been-committed-so-far" title="Permalink to this headline">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git log
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-yellow-fg">commit c2a40bc8c94b8da26d7dc802e27ddc909bb82106</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-intense-fg ansi-bold">HEAD -&gt; </span><span class="ansi-green-intense-fg ansi-bold">master</span><span class="ansi-yellow-fg">)</span>
+Author: joaquin &lt;user@gmail.com&gt;
+Date:   Thu Mar 17 04:10:51 2022 +0000
+
+    First commit
+</pre></div></div>
+</div>
+</section>
+<section id="git-diff:-what-have-I-changed?">
+<h3><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>: what have I changed?<a class="headerlink" href="#git-diff:-what-have-I-changed?" title="Permalink to this headline">#</a></h3>
+<p>Let’s do a little bit more work… Again, in practice you’ll be editing the files by hand, here we do it via shell commands for the sake of automation (and therefore the reproducibility of this tutorial!)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="s2">"And now we add a second line..."</span> &gt;&gt; README.md
+</pre></div>
+</div>
+</div>
+<p>And now we can ask git what is different:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git diff
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-bold">diff --git a/README.md b/README.md</span>
+<span class="ansi-bold">index db447fe..466ed60 100644</span>
+<span class="ansi-bold">--- a/README.md</span>
+<span class="ansi-bold">+++ b/README.md</span>
+<span class="ansi-cyan-fg">@@ -1 +1,2 @@</span>
+ My first bit of text in the repo
+<span class="ansi-green-fg">+</span><span class="ansi-green-fg">And now we add a second line...</span>
+</pre></div></div>
+</div>
+</section>
+<section id="The-cycle-of-git-virtue:-work,-commit,-work,-commit,-...">
+<h3>The cycle of git virtue: work, commit, work, commit, …<a class="headerlink" href="#The-cycle-of-git-virtue:-work,-commit,-work,-commit,-..." title="Permalink to this headline">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git commit -a -m <span class="s2">"added second line."</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[master 87527c0] added second line.
+ 1 file changed, 1 insertion(+)
+</pre></div></div>
+</div>
+</section>
+<section id="git-log-revisited">
+<h3><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> revisited<a class="headerlink" href="#git-log-revisited" title="Permalink to this headline">#</a></h3>
+<p>First, let’s see what the log shows us now:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git log
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-yellow-fg">commit 87527c01bce6778589231f5221cc9dc04f30b4b1</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-intense-fg ansi-bold">HEAD -&gt; </span><span class="ansi-green-intense-fg ansi-bold">master</span><span class="ansi-yellow-fg">)</span>
+Author: joaquin &lt;user@gmail.com&gt;
+Date:   Thu Mar 17 04:10:52 2022 +0000
+
+    added second line.
+
+<span class="ansi-yellow-fg">commit c2a40bc8c94b8da26d7dc802e27ddc909bb82106</span>
+Author: joaquin &lt;user@gmail.com&gt;
+Date:   Thu Mar 17 04:10:51 2022 +0000
+
+    First commit
+</pre></div></div>
+</div>
+<p>Sometimes it’s handy to see a very summarized version of the log:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git log --oneline --topo-order --graph
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+* <span class="ansi-yellow-fg">87527c0</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-intense-fg ansi-bold">HEAD -&gt; </span><span class="ansi-green-intense-fg ansi-bold">master</span><span class="ansi-yellow-fg">)</span> added second line.
+* <span class="ansi-yellow-fg">c2a40bc</span> First commit
+</pre></div></div>
+</div>
+<p>Git supports <em>aliases:</em> new names given to command combinations. Let’s make this handy shortlog an alias, so we only have to type <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">slog</span></code> and see this compact log:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create our alias (this saves it in git's permanent configuration file):</span>
+<span class="o">!</span>git config --global alias.slog <span class="s2">"log --oneline --topo-order --graph"</span>
+
+<span class="c1"># And now we can use it</span>
+<span class="o">!</span>git slog
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+* <span class="ansi-yellow-fg">87527c0</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-intense-fg ansi-bold">HEAD -&gt; </span><span class="ansi-green-intense-fg ansi-bold">master</span><span class="ansi-yellow-fg">)</span> added second line.
+* <span class="ansi-yellow-fg">c2a40bc</span> First commit
+</pre></div></div>
+</div>
+</section>
+<section id="git-mv-and-rm:-moving-and-removing-files">
+<h3><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span></code> and <code class="docutils literal notranslate"><span class="pre">rm</span></code>: moving and removing files<a class="headerlink" href="#git-mv-and-rm:-moving-and-removing-files" title="Permalink to this headline">#</a></h3>
+<p>While <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> is used to add fils to the list git tracks, we must also tell it if we want their names to change or for it to stop tracking them. In familiar Unix fashion, the <code class="docutils literal notranslate"><span class="pre">mv</span></code> and <code class="docutils literal notranslate"><span class="pre">rm</span></code> git commands do precisely this:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git mv README.md README.markdown
+<span class="o">!</span>git status
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+On branch master
+Changes to be committed:
+  (use "git restore --staged &lt;file&gt;..." to unstage)
+        <span class="ansi-green-fg">renamed:    README.md -&gt; README.markdown</span>
+
+</pre></div></div>
+</div>
+<p>Note that these changes must be committed too, to become permanent! In git’s world, until something hasn’t been committed, it isn’t permanently recorded anywhere.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git commit -a -m <span class="s2">"I like this new name better"</span>
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">"Let's look at the log again:"</span>
+<span class="o">!</span>git slog
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[master 31f89f4] I like this new name better
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename README.md =&gt; README.markdown (100%)
+Let's look at the log again:
+* <span class="ansi-yellow-fg">31f89f4</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-intense-fg ansi-bold">HEAD -&gt; </span><span class="ansi-green-intense-fg ansi-bold">master</span><span class="ansi-yellow-fg">)</span> I like this new name better
+* <span class="ansi-yellow-fg">87527c0</span> added second line.
+* <span class="ansi-yellow-fg">c2a40bc</span> First commit
+</pre></div></div>
+</div>
+<p>And <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code> works in a similar fashion removing the file from your repo.</p>
+</section>
+</section>
+<section id="Local-user,-branching">
+<h2>Local user, branching<a class="headerlink" href="#Local-user,-branching" title="Permalink to this headline">#</a></h2>
+<p>What is a branch? A branch is a label for the state of a GIT repositories. It makes it easy to develop features and go back and forth between the original <code class="docutils literal notranslate"><span class="pre">master</span></code> and the copy <code class="docutils literal notranslate"><span class="pre">feature</span> <span class="pre">branch</span></code> version of the files inside the GIT repo</p>
+<p><img alt="image0" src="https://i.imgur.com/Sw95CUf.png"/></p>
+<p>Credit: Gitflow Atlassian</p>
+<p>There can be multiple branches alive at any point in time; the working directory is the state of a special pointer called HEAD. In this example there are two branches, <em>master</em> and <em>develop</em>:</p>
+<p>Once new commits are made on a branch, HEAD and the branch label move with the new commits:</p>
+<p>This allows the history of both branches to diverge:</p>
+<p>But based on this graph structure, git can compute the necessary information to merge the divergent branches back and continue with a unified line of development:</p>
+<p>Let’s now illustrate all of this with a concrete example.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git status
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+On branch master
+nothing to commit, working tree clean
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+README.markdown
+</pre></div></div>
+</div>
+<p>We are now going to try two different routes of development: on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch we will add one file and on the <code class="docutils literal notranslate"><span class="pre">emojis</span></code> branch, which we will create, we will add a different one. We will then merge the emojis branch into <code class="docutils literal notranslate"><span class="pre">master</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git branch emojis
+<span class="o">!</span>git checkout emojis
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Switched to branch 'emojis'
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="s2">"Some emojis :smile:, :horse:, :cat:"</span> &gt; emojis.md
+<span class="o">!</span>git add emojis.md
+<span class="o">!</span>git commit -a -m <span class="s2">"Adding some emojis"</span>
+<span class="o">!</span>git slog
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[emojis e97214f] Adding some emojis
+ 1 file changed, 1 insertion(+)
+ create mode 100644 emojis.md
+* <span class="ansi-yellow-fg">e97214f</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-intense-fg ansi-bold">HEAD -&gt; </span><span class="ansi-green-intense-fg ansi-bold">emojis</span><span class="ansi-yellow-fg">)</span> Adding some emojis
+* <span class="ansi-yellow-fg">31f89f4</span><span class="ansi-yellow-fg"> (</span><span class="ansi-green-intense-fg ansi-bold">master</span><span class="ansi-yellow-fg">)</span> I like this new name better
+* <span class="ansi-yellow-fg">87527c0</span> added second line.
+* <span class="ansi-yellow-fg">c2a40bc</span> First commit
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git checkout master
+<span class="o">!</span>git slog
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Switched to branch 'master'
+* <span class="ansi-yellow-fg">31f89f4</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-intense-fg ansi-bold">HEAD -&gt; </span><span class="ansi-green-intense-fg ansi-bold">master</span><span class="ansi-yellow-fg">)</span> I like this new name better
+* <span class="ansi-yellow-fg">87527c0</span> added second line.
+* <span class="ansi-yellow-fg">c2a40bc</span> First commit
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+README.markdown
+</pre></div></div>
+</div>
+<p>As you can see there are no emjois file in master yet</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="s2">"All the while, more work goes on in master..."</span> &gt;&gt; README.markdown
+<span class="o">!</span>git commit -a -m <span class="s2">"The mainline keeps moving"</span>
+<span class="o">!</span>git slog
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[master 6a47a38] The mainline keeps moving
+ 1 file changed, 1 insertion(+)
+* <span class="ansi-yellow-fg">6a47a38</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-intense-fg ansi-bold">HEAD -&gt; </span><span class="ansi-green-intense-fg ansi-bold">master</span><span class="ansi-yellow-fg">)</span> The mainline keeps moving
+* <span class="ansi-yellow-fg">31f89f4</span> I like this new name better
+* <span class="ansi-yellow-fg">87527c0</span> added second line.
+* <span class="ansi-yellow-fg">c2a40bc</span> First commit
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+README.markdown
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git merge emojis -m <span class="s1">'merge emojis'</span>
+<span class="o">!</span>git slog
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Merge made by the 'ort' strategy.
+ emojis.md | 1 <span class="ansi-green-fg">+</span>
+ 1 file changed, 1 insertion(+)
+ create mode 100644 emojis.md
+*   <span class="ansi-yellow-fg">a9c2e65</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-intense-fg ansi-bold">HEAD -&gt; </span><span class="ansi-green-intense-fg ansi-bold">master</span><span class="ansi-yellow-fg">)</span> merge emojis
+<span class="ansi-red-fg">|</span><span class="ansi-green-fg">\</span>
+<span class="ansi-red-fg">|</span> * <span class="ansi-yellow-fg">e97214f</span><span class="ansi-yellow-fg"> (</span><span class="ansi-green-intense-fg ansi-bold">emojis</span><span class="ansi-yellow-fg">)</span> Adding some emojis
+* <span class="ansi-green-fg">|</span> <span class="ansi-yellow-fg">6a47a38</span> The mainline keeps moving
+<span class="ansi-green-fg">|</span><span class="ansi-green-fg">/</span>
+* <span class="ansi-yellow-fg">31f89f4</span> I like this new name better
+* <span class="ansi-yellow-fg">87527c0</span> added second line.
+* <span class="ansi-yellow-fg">c2a40bc</span> First commit
+</pre></div></div>
+</div>
+</section>
+<section id="Using-remotes-as-a-single-user">
+<h2>Using remotes as a single user<a class="headerlink" href="#Using-remotes-as-a-single-user" title="Permalink to this headline">#</a></h2>
+<p>We are now going to introduce the concept of a <em>remote repository</em>: a pointer to another copy of the repository that lives on a different location. This can be simply a different path on the filesystem or a server on the internet.</p>
+<p>For this discussion, we’ll be using remotes hosted on the <a class="reference external" href="http://github.com">GitHub.com</a> service, but you can equally use other services like <a class="reference external" href="http://gitlab.com">Gitlab</a></p>
+<p>Let’s see if we have any remote repositories here:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git remote -v
+</pre></div>
+</div>
+</div>
+<p>Since the above cell didn’t produce any output after the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> call, it means we have no remote repositories configured. We will now proceed to do so. Once logged into Github or Gitlab, go to the new repository page and make a repository called <code class="docutils literal notranslate"><span class="pre">test</span></code>. Do <strong>not</strong> check the box that says <code class="docutils literal notranslate"><span class="pre">Initialize</span> <span class="pre">this</span> <span class="pre">repository</span> <span class="pre">with</span> <span class="pre">a</span> <span class="pre">README</span></code>, since we already have an existing repository here. That option is useful when you’re starting first at Github and don’t have a repo made already on a
+local computer.</p>
+<p>We can now follow the instructions from the next page:</p>
+<section id="An-important-aside:-conflict-management">
+<h3>An important aside: conflict management<a class="headerlink" href="#An-important-aside:-conflict-management" title="Permalink to this headline">#</a></h3>
+<p>While git is very good at merging, if two different branches modify the same file in the same location, it simply can’t decide which change should prevail. At that point, human intervention is necessary to make the decision. Git will help you by marking the location in the file that has a problem, but it’s up to you to resolve the conflict. Let’s see how that works by intentionally creating a conflict.</p>
+<p>We start by creating a branch and making a change to our experiment file:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git branch trouble
+<span class="o">!</span>git checkout trouble
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">"This is going to be a problem..."</span> &gt;&gt; README.markdown
+<span class="o">!</span>git commit -a -m <span class="s2">"Adding a file for trouble"</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Switched to branch 'trouble'
+[trouble 7184d85] Adding a file for trouble
+ 1 file changed, 1 insertion(+)
+</pre></div></div>
+</div>
+<p>And now we go back to the master branch, where we change the <em>same</em> file:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git checkout master
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">"At the same time master keeps working on same line will cause a MERGE CONFLICT ..."</span> &gt;&gt; README.markdown
+<span class="o">!</span>git commit -a -m <span class="s2">"Keep working on the experiment"</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Switched to branch 'master'
+[master b3e3e0b] Keep working on the experiment
+ 1 file changed, 1 insertion(+)
+</pre></div></div>
+</div>
+<p>So now let’s see what happens if we try to merge the <code class="docutils literal notranslate"><span class="pre">trouble</span></code> branch into <code class="docutils literal notranslate"><span class="pre">master</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git checkout master
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Already on 'master'
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git merge trouble
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Auto-merging README.markdown
+CONFLICT (content): Merge conflict in README.markdown
+Automatic merge failed; fix conflicts and then commit the result.
+</pre></div></div>
+</div>
+<p>Let’s see what git has put into our file:</p>
+<p>At this point, we go into the file with a text editor, decide which changes to keep, and make a new commit that records our decision. I’ve now made the edits, in this case I decided that both pieces of text were useful, but integrated them with some changes:</p>
+<p>Let’s then make our new commit:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!git commit -a -m "Completed merge of trouble, fixing conflicts along the way"</span>
+<span class="c1">#!git slog</span>
+</pre></div>
+</div>
+</div>
+<p><em>Note:</em> While it’s a good idea to understand the basics of fixing merge conflicts by hand, in some cases you may find the use of an automated tool useful. Git supports multiple <a class="reference external" href="https://www.kernel.org/pub/software/scm/git/docs/git-mergetool.html">merge tools</a>: a merge tool is a piece of software that conforms to a basic interface and knows how to merge two files into a new one. Since these are typically graphical tools, there are various to choose from for the different operating systems, and
+as long as they obey a basic command structure, git can work with any of them.</p>
+</section>
+</section>
+<section id="Git-resources">
+<h2>Git resources<a class="headerlink" href="#Git-resources" title="Permalink to this headline">#</a></h2>
+<p>this tutorial is based on <a class="reference external" href="https://github.com/fperez/reprosw">Francisco Perez GIT notebook</a> and has some ideas from the other links:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.atlassian.com/git/tutorials/what-is-version-control">atlassian tutorial</a></p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/get-started/quickstart/hello-world">Github tutorial</a></p></li>
+<li><p><a class="reference external" href="http://nbviewer.ipython.org/urls/raw.github.com/jrjohansson/scientific-python-lectures/master/Lecture-7-Revision-Control-Software.ipynb">tutorial on version control</a></p></li>
+<li><p><a class="reference external" href="https://github.com/johnmcdonnell/Git-Tutorial">“Git for Scientists: A Tutorial”</a> by John McDonnell</p></li>
+<li><p>Emanuele Olivetti’s lecture notes and exercises from the G-Node summer school on <a class="reference external" href="https://python.g-node.org/wiki/schedule">Advanced Scientific Programming in Python</a>.</p></li>
+<li><p><a class="reference external" href="http://git-scm.com/book">Pro Git book</a></p></li>
+<li><p><a class="reference external" href="https://education.github.com/git-cheat-sheet-education.pdf">Cheat sheet</a></p></li>
+<li><p><a class="reference external" href="http://www.gitready.com">Git ready</a>. A great website of posts on specific git-related topics, organized by difficulty.</p></li>
+<li><p><a class="reference external" href="http://www-cs-students.stanford.edu/~blynn/gitmagic/index.html">Git Magic</a>. Another book-size guide that has useful snippets.</p></li>
+<li><p><a class="reference external" href="http://cworth.org/hgbook-git/tour">port</a> of the Hg book</p></li>
+</ul>
+</section>
+<section id="Photonics-resources">
+<h2>Photonics resources<a class="headerlink" href="#Photonics-resources" title="Permalink to this headline">#</a></h2>
+<p>You can <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> some repositories for photonics and <code class="docutils literal notranslate"><span class="pre">install</span></code> the repo</p>
+<p>Also, you can also add your fork information, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> your changes and then send a PullRequest (request to merge your changes)</p>
+<p>For photonics layout you can take a look at <a class="reference external" href="https://gdsfactory.github.io/gdsfactory/">gdsfactory</a></p>
+<p>and copy paste these lines below changing <code class="docutils literal notranslate"><span class="pre">YourGithubUserName</span></code> wit you GitHub username</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!git clone https://github.com/gdsfactory/gdsfactory.git
+!cd gdsfactory
+!make install
+!git remote add fork git@github.com:YourGithubUserName/gdsfactory.git
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<p>For photonics layout you can take a look at <a class="reference external" href="https://gdsfactory.github.io/ubc/">UBCpdk</a></p>
+<p>and copy paste these lines below changing <code class="docutils literal notranslate"><span class="pre">YourGithubUserName</span></code> wit you GitHub username</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!git clone https://github.com/gdsfactory/ubc.git
+!cd ubc
+!make install
+!git remote add fork git@github.com:YourGithubUserName/ubc.git
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<p>For solving modes can take a look at <a class="reference external" href="https://modes.readthedocs.io/en/latest/notebooks.html">modes</a></p>
+<p>and copy paste these lines below changing <code class="docutils literal notranslate"><span class="pre">YourGithubUserName</span></code> wit you GitHub username</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!git clone https://github.com/joamatab/modesolverpy.git
+!cd modesolverpy
+!make install
+!git remote add fork git@github.com:YourGithubUserName/modesolverpy.git
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="00__python_intro.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Python intro</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../git.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Git Python Tutorial</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Git: Version control</a><ul>
+<li><a class="reference internal" href="#Git-is-an-enabling-technology:-Use-version-control-for-everything">Git is an enabling technology: Use version control for everything</a></li>
+<li><a class="reference internal" href="#Very-high-level-picture:-an-overview-of-key-concepts">Very high level picture: an overview of key concepts</a></li>
+<li><a class="reference internal" href="#First-things-first:-git-must-be-configured-before-first-use">First things first: git must be configured before first use</a><ul>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Stage-0:-Configure-GIT">Stage 0: Configure GIT</a></li>
+<li><a class="reference internal" href="#Stage-1:-Local,-single-user,-linear-workflow">Stage 1: Local, single-user, linear workflow</a><ul>
+<li><a class="reference internal" href="#git-init:-create-an-empty-repository"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>: create an empty repository</a></li>
+<li><a class="reference internal" href="#git-add:-tell-git-about-this-new-file"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>: tell git about this new file</a></li>
+<li><a class="reference internal" href="#git-commit:-permanently-record-our-changes-in-git's-database"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>: permanently record our changes in git’s database</a></li>
+<li><a class="reference internal" href="#git-log:-what-has-been-committed-so-far"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>: what has been committed so far</a></li>
+<li><a class="reference internal" href="#git-diff:-what-have-I-changed?"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>: what have I changed?</a></li>
+<li><a class="reference internal" href="#The-cycle-of-git-virtue:-work,-commit,-work,-commit,-...">The cycle of git virtue: work, commit, work, commit, …</a></li>
+<li><a class="reference internal" href="#git-log-revisited"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> revisited</a></li>
+<li><a class="reference internal" href="#git-mv-and-rm:-moving-and-removing-files"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span></code> and <code class="docutils literal notranslate"><span class="pre">rm</span></code>: moving and removing files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Local-user,-branching">Local user, branching</a></li>
+<li><a class="reference internal" href="#Using-remotes-as-a-single-user">Using remotes as a single user</a><ul>
+<li><a class="reference internal" href="#An-important-aside:-conflict-management">An important aside: conflict management</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Git-resources">Git resources</a></li>
+<li><a class="reference internal" href="#Photonics-resources">Photonics resources</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

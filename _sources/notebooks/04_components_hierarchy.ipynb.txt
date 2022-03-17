@@ -1,0 +1,480 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "151ffe48-fdf0-43ac-ae0d-76eae5e1b82e",
+   "metadata": {},
+   "source": [
+    "# Components with hierarchy\n",
+    "\n",
+    "\n",
+    "![](https://i.imgur.com/3pczkyM.png)\n",
+    "\n",
+    "\n",
+    "You can define some components (waveguides, bends, couplers) as a stand alone components, with basic input parameters (width, length, radius ...)\n",
+    "\n",
+    "Then you can re-use those components in a more complex hiearchical components.\n",
+    "\n",
+    "`gdsfactory` does this by passing the higher level component with the lower level functions to build the components.\n",
+    "\n",
+    "You can customize any of the functions thanks to `functools.partial`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ec03cbca-b432-45c9-af70-e4834c98eecf",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import gdsfactory as gf\n",
+    "\n",
+    "# gf.CONF.plotter = 'holoviews'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "953398ff-f5cc-42c9-b86f-263f331b7239",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "@gf.cell\n",
+    "def bend_with_straight(\n",
+    "    bend=gf.components.bend_euler,\n",
+    "    straight=gf.components.straight,\n",
+    ") -> gf.Component:\n",
+    "    c = gf.Component()\n",
+    "    b = bend()\n",
+    "    s = straight()\n",
+    "\n",
+    "    bref = c << b\n",
+    "    sref = c << s\n",
+    "\n",
+    "    sref.connect(\"o2\", bref.ports[\"o2\"])\n",
+    "    c.info[\"length\"] = b.info[\"length\"] + s.info[\"length\"]\n",
+    "    return c\n",
+    "\n",
+    "\n",
+    "c = bend_with_straight()\n",
+    "print(c.metadata.info.length)\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "855f2ed2-00cf-44ea-8435-5a304cac9a03",
+   "metadata": {},
+   "source": [
+    "Lets **customize** the functions that we pass.\n",
+    "For example, we want to increase the radius of the bend from the default 10um to 20um."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "558cddd6-1c57-4461-86d4-317eeb7b46d0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c = gf.components.bend_circular()\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "71668f94-3d00-4fa7-bd16-7fca97d3ed33",
+   "metadata": {},
+   "source": [
+    "## functools.partial\n",
+    "\n",
+    "Partial lets you define different default parameters for a function, so you can modify the settings for the child cells."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c8ad9ffc-d3b7-4a0a-87ca-5604f2f6347e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from functools import partial"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7ab522b6-6c84-42c6-b98a-955682e3ef95",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "bend20 = partial(gf.components.bend_circular, radius=20)\n",
+    "b = bend20()\n",
+    "b.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "4a58d796-1dc9-406e-9d08-c53df384fc14",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "type(bend20)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "bd93b419-661d-48db-95c5-40615c4d10d8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "bend20.func.__name__"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "55f8b903-9c09-4c03-982f-f4a9746249e0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "bend20.keywords"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a3fe7cee-69fc-4b02-832a-7f51c483e51c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "b = bend_with_straight(bend=bend20)\n",
+    "print(b.metadata.info.length)\n",
+    "b.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1c8641a7-9f80-47af-a373-64ef15454cca",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# You can still modify the bend to have any bend radius\n",
+    "b3 = bend20(radius=10)\n",
+    "b3.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c7a11dcb-0514-4d13-81b3-8f8300d15f26",
+   "metadata": {},
+   "source": [
+    "## PDK custom fab\n",
+    "\n",
+    "You can define a new PDK by creating function that customize partial parameters of the generic functions.\n",
+    "\n",
+    "Lets say that this PDK uses layer (41, 0) for the pads (instead of the layer used in the generic pad function).\n",
+    "\n",
+    "You can also access `functools.partial` from `gf.partial`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1c4a99b7-0743-401a-9e70-6c2e18c6b1b1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import gdsfactory as gf\n",
+    "\n",
+    "pad = gf.partial(gf.components.pad, layer=(41, 0))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7655c9c2-e6a9-4728-8c97-339146c1c191",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c = pad()\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f239cb04-0557-44e3-bc7a-4a3c20893982",
+   "metadata": {},
+   "source": [
+    "## Composing functions\n",
+    "\n",
+    "You can combine more complex functions out of smaller functions.\n",
+    "\n",
+    "Lets say that we want to add tapers and grating couplers to a wide waveguide."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "56774265-5404-4539-8eb2-9c4c986e3b89",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c1 = gf.components.straight()\n",
+    "c1.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "5bb0604a-474a-4e8a-bf20-2735ebe43ea8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "straight_wide = gf.partial(gf.components.straight, width=3)\n",
+    "c3 = straight_wide()\n",
+    "c3.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ea9be922-2cfe-45ea-bfbe-1396fd977a54",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c1 = gf.components.straight(width=3)\n",
+    "c1.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1f94a79b-db82-4d6b-807c-d69246e1c7c7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c2 = gf.add_tapers(c1)\n",
+    "c2.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "44631601-5f47-4742-9e2a-a9bf79a32e31",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c2.metadata_child.changed  # You can still access the child metadata"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "5a07b615-67ef-4b30-a7a9-513369f5d350",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c3 = gf.routing.add_fiber_array(c2, with_loopback=False)\n",
+    "c3.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1d17f729-f779-4e50-befb-38294e41a35a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c3.metadata_child.changed  # You can still access the child metadata"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4df163e7-bb2a-4418-9bd2-9ebfafb3c837",
+   "metadata": {},
+   "source": [
+    "Lets do it with a **single** step thanks to `toolz.pipe`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "40de540a-b961-42c6-b86e-79eaa301d561",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import toolz\n",
+    "\n",
+    "add_fiber_array = gf.partial(gf.routing.add_fiber_array, with_loopback=False)\n",
+    "add_tapers = gf.add_tapers\n",
+    "\n",
+    "# pipe is more readable than the equivalent add_fiber_array(add_tapers(c1))\n",
+    "c3 = toolz.pipe(c1, add_tapers, add_fiber_array)\n",
+    "c3.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "fc43299b-992b-406f-98f9-d941d9369e74",
+   "metadata": {},
+   "source": [
+    "we can even combine `add_tapers` and `add_fiber_array` thanks to `toolz.compose` or `toolz.compose`\n",
+    "\n",
+    "For example:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "eb6f4451-53e9-4218-9d00-0ab7fae83098",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "add_tapers_fiber_array = toolz.compose_left(add_tapers, add_fiber_array)\n",
+    "c4 = add_tapers_fiber_array(c1)\n",
+    "c4.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0a225379-8aec-4163-9a65-e3114bc9d75e",
+   "metadata": {},
+   "source": [
+    "is equivalent to"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e77ef988-570f-4267-ab5f-a84327849641",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c5 = add_fiber_array(add_tapers(c1))\n",
+    "c5.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7d8a184e-67fe-490a-adaf-62386eaa417f",
+   "metadata": {},
+   "source": [
+    "as well as equivalent to"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a44b48ce-dbd8-4a8f-acbd-79df35f3db9e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "add_tapers_fiber_array = toolz.compose(add_fiber_array, add_tapers)\n",
+    "c6 = add_tapers_fiber_array(c1)\n",
+    "c6.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "232830dd-b9ec-4c88-a991-0a034311982d",
+   "metadata": {},
+   "source": [
+    "or"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "75f3f14f-641c-4b94-be02-416b612e2d46",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c7 = toolz.pipe(c1, add_tapers, add_fiber_array)\n",
+    "c7.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "485fb6a0-3fe0-4139-8be5-477adc75590c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c7.metadata_child.changed  # You can still access the child metadata"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "fe3d11b6-56de-4bde-b801-ffa43fc075fd",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c7.metadata.child.child.name, c7.metadata.child.child.function_name"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e9436460-1773-4af3-917e-4849e1debcb4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c7.metadata.child.name, c7.metadata.child.function_name"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "48c309ab-647d-419c-8ad3-b64c378e66d0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c7.metadata.name, c7.metadata.function_name"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "15c4e4e5-c5e2-4772-9ad9-5b271681aba0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c7.metadata.changed.keys()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "28987b83-ae6e-442d-94b3-cdfe1272e7fd",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

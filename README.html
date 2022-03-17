@@ -1,0 +1,602 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="metadata description" lang="en" name="description" xml:lang="en" />
+<meta content="description des métadonnées" lang="fr" name="description" xml:lang="fr" />
+<meta content="Sphinx, MyST" name="keywords" />
+<meta content="en_US" property="og:locale" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Git Python Tutorial" href="git.html" /><link rel="prev" title="Gdsfactory" href="index.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>gdsfactory 4.4.12 - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="gdsfactory-4-4-12">
+<h1>gdsfactory 4.4.12<a class="headerlink" href="#gdsfactory-4-4-12" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://gdsfactory.github.io/gdsfactory/"><img alt="docs" src="https://github.com/gdsfactory/gdsfactory/actions/workflows/pages.yml/badge.svg"/></a>
+<a class="reference external" href="https://pypi.org/project/gdsfactory/"><img alt="pypi" src="https://img.shields.io/pypi/v/gdsfactory"/></a>
+<a class="reference external" href="https://github.com/gdsfactory/gdsfactory/issues"><img alt="issues" src="https://img.shields.io/github/issues/gdsfactory/gdsfactory"/></a>
+<a class="reference external" href="https://github.com/gdsfactory/gdsfactory/network/members"><img alt="forks" src="https://img.shields.io/github/forks/gdsfactory/gdsfactory.svg"/></a>
+<a class="reference external" href="https://github.com/gdsfactory/gdsfactory/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/gdsfactory/gdsfactory.svg"/></a>
+<a class="reference external" href="https://pepy.tech/project/gdsfactory"><img alt="Downloads" src="https://pepy.tech/badge/gdsfactory"/></a>
+<a class="reference external" href="https://pepy.tech/project/gdsfactory"><img alt="Downloads" src="https://pepy.tech/badge/gdsfactory/month"/></a>
+<a class="reference external" href="https://pepy.tech/project/gdsfactory"><img alt="Downloads" src="https://pepy.tech/badge/gdsfactory/week"/></a>
+<a class="reference external" href="https://choosealicense.com/licenses/mit/"><img alt="MIT" src="https://img.shields.io/github/license/gdsfactory/gdsfactory"/></a>
+<a class="reference external" href="https://codecov.io/gh/gdsfactory/gdsfactory/tree/master/gdsfactory"><img alt="codecov" src="https://img.shields.io/codecov/c/github/gdsfactory/gdsfactory"/></a>
+<a class="reference external" href="https://github.com/psf/black"><img alt="black" src="https://img.shields.io/badge/code%20style-black-000000.svg"/></a>
+<a class="reference external" href="https://mybinder.org/v2/gh/gdsfactory/gdsfactory/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg"/></a></p>
+<p><img alt="" src="https://i.imgur.com/v4wpHpg.png"/></p>
+<p><a class="reference external" href="https://gdsfactory.github.io/gdsfactory/">gdsfactory</a> is an EDA (electronics design automation) tool to Layout Integrated Circuits.
+It is build on top of <a class="reference external" href="https://github.com/amccaugh/phidl">phidl</a>, <a class="reference external" href="https://github.com/heitzmann/gdspy">gdspy</a> and klayout and provides you with functions to build your GDSII components, PDKs and masks for different foundries.</p>
+<p>You just need to adapt the functions to your foundry and build your own library of elements (see <a class="reference external" href="https://github.com/gdsfactory/ubc">UBC PDK</a> example).</p>
+<p>gdsfactory provides you with functions that you can use to:</p>
+<ul class="simple">
+<li><p>define components, circuits and masks in python or YAML</p></li>
+<li><p>add routes between components</p></li>
+<li><p>ensure you can build complex systems by testing settings, ports and GDS geometry</p></li>
+</ul>
+<p>As input, you describe your layouts in python or YAML code.</p>
+<p>As output it creates a <a class="reference external" href="https://en.wikipedia.org/wiki/GDSII">GDSII file</a> which is the most common filetype used by CMOS foundries.
+It also can output components settings (that you can use for measurement and data analysis) or netlists (for circuit simulations). You can also easily adapt this metadata output files to your needs.</p>
+<p><img alt="" src="https://i.imgur.com/XbhWJDz.png"/></p>
+<p>For Photonics IC layout I used <a class="reference external" href="https://github.com/jtambasco/ipkiss">IPKISS</a> for 7 years.</p>
+<p>IPKISS is quite slow when working with large layouts, so in 2019 I stopped using it.</p>
+<p>Then I tried all the commercial (Luceda, Cadence, Synopsys) and open source EDA tools (phidl, gdspy, picwriter, klayout-zero-pdk, nazca) looking for a fast and easy to use workflow.</p>
+<p>The metrics for the benchmark were:</p>
+<ol class="arabic simple">
+<li><p>Fast</p></li>
+<li><p>Easy to use</p></li>
+<li><p>Maintained / Documented / Popular</p></li>
+</ol>
+<p>PHIDL was the outstanding winner thanks to its speed, code beauty and easy of use, and is written on top of gdspy (which came second), so you can also leverage all the goodies from gdspy.</p>
+<p>Gdsfactory also leverages klayout and gdspy libraries for some functions.</p>
+<p><img alt="" src="https://i.imgur.com/4xQJ2yk.png"/></p>
+<p>What nice things come from phidl?</p>
+<ul class="simple">
+<li><p>functional programming that follow UNIX philosophy</p></li>
+<li><p>nice API to create and modify Components</p></li>
+<li><p>Easy definition of paths, cross-sections and extrude them into Components</p></li>
+<li><p>Easy definition of ports, to connect components. Ports in phidl have name, position, width and orientation (in degrees)</p>
+<ul>
+<li><p>gdsfactory expands phidl ports with layer, port_type (optical, electrical, vertical_te, vertical_tm …) and cross_section</p></li>
+<li><p>gdsfactory adds renaming ports functions (clockwise, counter_clockwise …)</p></li>
+</ul>
+</li>
+</ul>
+<p>What nice things come from klayout?</p>
+<ul class="simple">
+<li><p>GDS viewer. gdsfactory can send GDS files directly to klayout, you just need to have klayout open</p></li>
+<li><p>layer colormaps for showing in klayout, matplotlib, trimesh (using the same colors)</p></li>
+<li><p>fast boolean xor to avoid geometric regressions on Components geometry. Klayout booleans are faster than gdspy ones</p></li>
+<li><p>basic DRC checks</p></li>
+</ul>
+<p>What functionality does gdsfactory provide you on top phidl/gdspy/klayout?</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">@cell</span> <span class="pre">decorator</span></code> for decorating functions that create components</p>
+<ul>
+<li><p>autonames Components with a unique name that depends on the input parameters</p></li>
+<li><p>avoids duplicated names and faster runtime implementing a cache. If you try to call the same component function with the same parameters, you get the component directly from the cache.</p></li>
+<li><p>automatically adds cell parameters into a <code class="docutils literal notranslate"><span class="pre">component.info</span></code> (<code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">default</span></code>, <code class="docutils literal notranslate"><span class="pre">changed</span></code>) as well as any other <code class="docutils literal notranslate"><span class="pre">info</span></code> metadata (<code class="docutils literal notranslate"><span class="pre">polarization</span></code>, <code class="docutils literal notranslate"><span class="pre">wavelength</span></code>, <code class="docutils literal notranslate"><span class="pre">test_protocol</span></code>, <code class="docutils literal notranslate"><span class="pre">simulation_settings</span></code> …)</p></li>
+<li><p>writes component metadata in YAML including port information (name, position, width, orientation, type, layer)</p></li>
+</ul>
+</li>
+<li><p>routing functions where the routes are composed of configurable bends and straight sections (for circuit simulations you want to maintain the route bends and straight settings)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_route</span></code>: for single routes between component ports</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_route_from_steps</span></code>: for single routes between ports where we define the steps or bends</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_bundle</span></code>: for bundles of routes (river routing)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_bundle_path_length_match</span></code>: for routes that need to keep the same path length</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_route(auto_widen=True)</span></code>: for routes that expand to wider waveguides to reduce loss and phase errors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_route(impossible</span> <span class="pre">route)</span></code>: for impossible routes it raises a warning and returns a FlexPath on an error layer</p></li>
+</ul>
+</li>
+<li><p>testing framework to avoid unwanted regressions</p>
+<ul>
+<li><p>checks geometric GDS changes by making a boolean difference between GDS cells</p></li>
+<li><p>checks metadata changes, including port location and component settings</p></li>
+</ul>
+</li>
+<li><p>large library of photonics and electrical components that you can easily customize to your technology</p></li>
+<li><p>read components from GDS, numpy, YAML</p></li>
+<li><p>export components to GDS, YAML or 3D (trimesh, STL …)</p></li>
+<li><p>export netlist in YAML format</p></li>
+<li><p>plugins to compute Sparameters using for example Lumerical, meep or tidy3d</p></li>
+</ul>
+<p>How can you learn more?</p>
+<p>gdsfactory is written in python and requires some basic knowledge of python. If you are new to python you can find many free online resources to learn:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/index.html">books</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/c/anthonywritescode">youTube videos</a></p></li>
+<li><p>courses</p>
+<ul>
+<li><p><a class="reference external" href="https://nbviewer.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-0-Scientific-Computing-with-Python.ipynb">scientific computing</a></p></li>
+<li><p><a class="reference external" href="http://jrjohansson.github.io/numericalpython.html">numerical python</a></p></li>
+<li><p><a class="reference external" href="https://dabeaz-course.github.io/practical-python/Notes/01_Introduction/01_Python.html">python</a></p></li>
+</ul>
+</li>
+</ul>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h2>
+<p>First, you need to install <a class="reference external" href="https://www.klayout.de/">klayout</a> to visualize the GDS files that you create.</p>
+<p>gdsfactory works for python versions 3.7, 3.8 and 3.9 in Windows, MacOs and Linux.
+<a class="reference external" href="https://github.com/gdsfactory/gdsfactory/actions">Github</a> runs all the tests at least once a day for different versions of python (3.7, 3.8, 3.9)</p>
+<p>If you are on Windows, I recommend you install gdspy with Anaconda3, Miniconda3 or <a class="reference external" href="https://github.com/conda-forge/miniforge#mambaforge">mamba</a> (faster conda alternative) and <code class="docutils literal notranslate"><span class="pre">pip</span></code> for gdsfactory.
+I also recommend you install the gdsfactory link to klayout <code class="docutils literal notranslate"><span class="pre">gf</span> <span class="pre">tool</span> <span class="pre">install</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">install</span> <span class="n">gdspy</span> <span class="o">-</span><span class="n">y</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">gdsfactory</span><span class="p">[</span><span class="n">full</span><span class="p">]</span>
+<span class="n">gf</span> <span class="n">tool</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Mamba is a faster alternative to conda, if you don’t want to install mamba, you can also replace <code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">install</span> <span class="pre">gdspy</span></code> with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">gdspy</span> <span class="pre">-y</span></code></p>
+<p>For Linux and MacOs you can also install gdsfactory without Anaconda3:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">gdsfactory</span><span class="p">[</span><span class="n">full</span><span class="p">]</span>
+<span class="n">gf</span> <span class="n">tool</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Or you can install the development version if you plan to <a class="reference external" href="https://gdsfactory.readthedocs.io/en/latest/contribution.html">contribute</a> to gdsfactory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gdsfactory</span><span class="o">/</span><span class="n">gdsfactory</span><span class="o">.</span><span class="n">git</span> <span class="o">--</span><span class="n">shallow</span><span class="o">-</span><span class="n">exclude</span><span class="o">=</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span>
+<span class="n">cd</span> <span class="n">gdsfactory</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>To summarize: There are 2 methods to install gdsfactory</p>
+<ol class="arabic simple">
+<li><p>For users, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gdsfactory</span></code> will download it from <a class="reference external" href="https://pypi.org/project/gdsfactory/">PyPi (python package index)</a></p></li>
+<li><p>For developers, git clone it from <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/">GitHub</a> to your computer and link the library to your python with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code></p></li>
+</ol>
+<p>For updating:</p>
+<ol class="arabic simple">
+<li><p>Users need to <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gdsfactory</span> <span class="pre">--upgrade</span></code> to install the latest release available.</p></li>
+<li><p>Developers need to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> from GitHub to get the latest changes.</p></li>
+</ol>
+<p>After installing it you should be able to <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">gdsfactory</span> <span class="pre">as</span> <span class="pre">gf</span></code> from a python script.</p>
+<ul class="simple">
+<li><p>gdsfactory</p>
+<ul>
+<li><p>components: define a basic library of generic components that you can customize</p></li>
+<li><p>gdsdiff: hash geometry and show differences by displaying boolean operations in klayout</p></li>
+<li><p>klayout: klayout generic tech layers and klive macro</p></li>
+<li><p>klive: stream GDS directly to klayout</p></li>
+<li><p>ports: to connect components</p></li>
+<li><p>routing: add waveguides to connect components</p></li>
+<li><p>samples: python tutorial</p></li>
+<li><p>tests:</p></li>
+</ul>
+</li>
+<li><p>docs/notebooks: jupyter-notebooks based tutorial</p></li>
+</ul>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Run notebooks on <a class="reference external" href="https://mybinder.org/v2/gh/gdsfactory/gdsfactory/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg"/></a></p></li>
+<li><p><a class="reference external" href="https://gdsfactory.github.io/gdsfactory/">read online docs</a></p></li>
+<li><p><a class="reference external" href="https://github.com/gdsfactory/gdsfactory">download the code</a></p></li>
+<li><p>run gdsfactory/samples on your IDE (Spyder, PyCharm, VSCode) and docs/notebooks in jupyter-lab</p></li>
+<li><p>play with <a class="reference external" href="https://gdsfactory.github.io/ubc/">UBCpdk docs</a> and <a class="reference external" href="https://github.com/gdsfactory/ubc">code</a></p></li>
+</ul>
+</section>
+<section id="plugins">
+<h2>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">#</a></h2>
+<p>We try to keep gdsfactory core with minimum dependencies.
+So when you run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gdsfactory</span></code> you do not install any plugins by default.
+If you want to install gdsfactory together with all the plugins you can run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">gdsfactory</span><span class="p">[</span><span class="n">full</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here are some of the plugins that you can use in gdsfactory:</p>
+<section id="trimesh">
+<h3>Trimesh<a class="headerlink" href="#trimesh" title="Permalink to this headline">#</a></h3>
+<p>For (3D rendering and STL export)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">trimesh</span>
+</pre></div>
+</div>
+</section>
+<section id="lumerical-fdtd">
+<h3>Lumerical FDTD<a class="headerlink" href="#lumerical-fdtd" title="Permalink to this headline">#</a></h3>
+<p>For simulating Sparameters using FDTD.</p>
+</section>
+<section id="meep-mpb">
+<h3>meep / mpb<a class="headerlink" href="#meep-mpb" title="Permalink to this headline">#</a></h3>
+<p>Open source FDTD / mode simulations. You to install meep and MPB with conda:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">pymeep</span><span class="o">=*=</span><span class="n">mpi_mpich_</span><span class="o">*</span> <span class="o">-</span><span class="n">y</span>
+</pre></div>
+</div>
+<p>or mamba (faster conda)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">install</span> <span class="n">pymeep</span><span class="o">=*=</span><span class="n">mpi_mpich_</span><span class="o">*</span> <span class="o">-</span><span class="n">y</span>
+</pre></div>
+</div>
+<p>Works only on Mac, Linux or windows <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/">WSL</a></p>
+</section>
+<section id="sax">
+<h3>SAX<a class="headerlink" href="#sax" title="Permalink to this headline">#</a></h3>
+<p>Circuit simulations with optimization capabilities. You can install sax with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sax</span></code></p>
+<p>Works only on Mac, Linux or windows <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/">WSL</a></p>
+</section>
+<section id="tidy3d">
+<h3>tidy3d<a class="headerlink" href="#tidy3d" title="Permalink to this headline">#</a></h3>
+<p>For fast FDTD GPU based simulations on the cloud. Requires you to create an account <a class="reference external" href="https://simulation.cloud/">on their website</a></p>
+</section>
+</section>
+<section id="changelog">
+<h2>CHANGELOG<a class="headerlink" href="#changelog" title="Permalink to this headline">#</a></h2>
+<p>gdsfactory keeps a general <a class="reference external" href="https://gdsfactory.readthedocs.io/en/latest/CHANGELOG.html">changelog</a> as well as for each individual component</p>
+<p>By default each component has an empty changelog and starts with version ‘0.0.1’</p>
+<ul class="simple">
+<li><p>major:</p>
+<ul>
+<li><p>position of ports changes. Affects position of ports. High level circuits may not work.</p></li>
+</ul>
+</li>
+<li><p>minor</p>
+<ul>
+<li><p>affects a physical layer. Footprint is the same. it fits, but may not work the same.</p></li>
+</ul>
+</li>
+<li><p>patch: (decoration or formalities)</p>
+<ul>
+<li><p>smaller changes</p></li>
+<li><p>name change</p></li>
+</ul>
+</li>
+</ul>
+<p>You will need to manually bump the version and document any changes</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@gf</span><span class="o">.</span><span class="n">cell</span>
+<span class="k">def</span> <span class="nf">my_component</span><span class="p">():</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+
+    <span class="n">c</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s2">"0.0.2"</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">changelog</span> <span class="o">+=</span> <span class="s2">" # 0.0.2 increase default length to 11um "</span>
+</pre></div>
+</div>
+</section>
+<section id="acks">
+<h2>Acks<a class="headerlink" href="#acks" title="Permalink to this headline">#</a></h2>
+<p>gdsfactory top contributors:</p>
+<ul class="simple">
+<li><p>Joaquin Matres (Google): maintainer</p></li>
+<li><p>Damien Bonneau (PsiQ): cell decorator, Component routing functions, Klayout placer</p></li>
+<li><p>Pete Shadbolt (PsiQ): Klayout auto-placer, Klayout GDS interface (klive)</p></li>
+<li><p>Troy Tamas (Rockley): get_route_from_steps, netlist driven flow (from_yaml)</p></li>
+<li><p>Floris Laporte (Rockley): netlist extraction and circuit simulation interface with <a class="reference external" href="https://flaport.github.io/sax">SAX</a></p></li>
+<li><p>Alec Hammond (Georgia Tech): Meep and MPB interface</p></li>
+<li><p>Simon Bilodeau (Princeton): Meep FDTD write Sparameters</p></li>
+<li><p>Thomas Dorch (Freedom Photonics): for Meep’s material database access, MPB sidewall angles, and add_pin_path</p></li>
+</ul>
+<p>Open source heroes:</p>
+<ul class="simple">
+<li><p>Matthias Köfferlein (Germany): for Klayout</p></li>
+<li><p>Lucas Heitzmann (University of Campinas, Brazil): for gdspy</p></li>
+<li><p>Adam McCaughan (NIST): for phidl</p></li>
+<li><p>Alex Tait (Queens University): for lytest</p></li>
+<li><p>Thomas Ferreira de Lima (NEC): for <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">klayout</span></code></p></li>
+</ul>
+</section>
+<section id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/gdsfactory/gdsfactory">gdsfactory github repo</a> and <a class="reference external" href="https://gdsfactory.github.io/gdsfactory/">docs</a></p></li>
+<li><p><a class="reference external" href="https://github.com/gdsfactory/ubc">ubc PDK</a>: sample open source PDK from edx course.</p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/miniforge#mambaforge">miniforge install instructions</a></p></li>
+<li><p><a class="reference external" href="https://flaport.github.io/sax">SAX</a>: separate package for circuit simulations</p></li>
+<li><p><a class="reference external" href="https://github.com/joamatab/awesome_photonics">awesome photonics list</a></p></li>
+<li><p><a class="reference external" href="https://github.com/amccaugh/phidl">phidl (gdsfactory is based on phidl)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/heitzmann/gdspy">gdspy (phidl is based on gdspy)</a></p></li>
+<li><p><a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/optional.html">docs follow MyST syntax</a></p></li>
+<li><p><a class="reference external" href="https://semver.org/">versions follow semantic versioning</a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="git.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Git Python Tutorial</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">gdsfactory 4.4.12</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#plugins">Plugins</a><ul>
+<li><a class="reference internal" href="#trimesh">Trimesh</a></li>
+<li><a class="reference internal" href="#lumerical-fdtd">Lumerical FDTD</a></li>
+<li><a class="reference internal" href="#meep-mpb">meep / mpb</a></li>
+<li><a class="reference internal" href="#sax">SAX</a></li>
+<li><a class="reference internal" href="#tidy3d">tidy3d</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#changelog">CHANGELOG</a></li>
+<li><a class="reference internal" href="#acks">Acks</a></li>
+<li><a class="reference internal" href="#links">Links</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    </body>
+</html>

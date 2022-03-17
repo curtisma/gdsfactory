@@ -1,0 +1,403 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "bbdf9c81-0609-4e87-bc68-561e022fd61c",
+   "metadata": {},
+   "source": [
+    "# GDS\n",
+    "\n",
+    "## GDS output\n",
+    "\n",
+    "GDS files are great for describing geometry thanks to the concept of References, where you store any geometry only once in memory.\n",
+    "\n",
+    "For storing device metadata (settings, port locations, port widths, port angles ...) there is no clear standard.\n",
+    "\n",
+    "`gdsfactory` stores the that metadata in `YAML` files, and also has functions to add pins\n",
+    "\n",
+    "- `Component.write_gds()` saves GDS\n",
+    "- `Component.write_gds_metadata()` save GDS + YAML metadata"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "41cdfefd-cd4c-4354-b2eb-b453c6974102",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import gdsfactory as gf\n",
+    "\n",
+    "c = gf.components.mzi()\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "23c537c6-45d1-4bf1-b26b-4a09e2550f90",
+   "metadata": {},
+   "source": [
+    "You can write **GDS** files only"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f5ecd514-2f27-41cf-887c-42a46b6c8ab6",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gdspath = c.write_gds(\"extra/mzi.gds\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "bc2f3682-14e0-4d40-85ce-4cca5885fbc4",
+   "metadata": {},
+   "source": [
+    "Or **GDS** with **YAML** metadata information (ports, settings, cells ...)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "edf7bc41-5089-4799-911c-6460ae3bc0b1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gdspath = c.write_gds_with_metadata(\"extra/mzi.gds\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9a3c7014-1623-441d-86b0-9730510f2c9a",
+   "metadata": {},
+   "source": [
+    "This created a `mzi.yml` file that contains:\n",
+    "- ports\n",
+    "- cells (flat list of cells)\n",
+    "- info (function name, module, changed settings, full settings, default settings)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "2b58db0d-c661-4b5b-9e89-32518747b510",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c.metadata.keys()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e1fa8437-3162-45de-8154-bd0b4cea21c1",
+   "metadata": {},
+   "source": [
+    "## GDS input\n",
+    "\n",
+    "You can read GDS files into gdsfactory thanks to the `import_gds` function\n",
+    "\n",
+    "### GDS input + YAML metadata\n",
+    "\n",
+    "`import_gds` reads the same GDS file from disk without losing any information"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "12dd6787-d042-45c4-8146-8e6d9aca450d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gf.clear_cache()\n",
+    "\n",
+    "c = gf.import_gds(gdspath)\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ede99d15-fa43-4a76-afd5-9cd3a9121904",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import gdsfactory as gf\n",
+    "\n",
+    "c2 = gf.import_gds(gdspath, name=\"mzi_sample\")\n",
+    "c2.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "6d5f8a53-7ed1-4408-85e7-e86011cf451e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c2.name"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "64134499-6d8f-46a7-9161-7a0070af81cf",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c3 = gf.routing.add_fiber_single(c2)\n",
+    "c3.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "8e86401c-754f-4552-ad8f-7ad0fbeb0f26",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gdspath = c3.write_gds_with_metadata(\"extra/pdk.gds\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "028114a5-47aa-4533-bcf8-2e37dcad720e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gf.mask.write_labels(gdspath, layer_label=gf.LAYER.LABEL)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7809ac64-5ad6-453b-9d15-6f2981139610",
+   "metadata": {},
+   "source": [
+    "### GDS input + port pins\n",
+    "\n",
+    "Sometimes the GDS does not have YAML metadata, therefore you need to figure out the port locations, widths and orientations.\n",
+    "\n",
+    "gdsfactory provides you with functions that will add ports to the component by looking for pins shapes on a specific layers.\n",
+    "\n",
+    "There are different pin standards supported to automatically add ports to components:\n",
+    "\n",
+    "- PINs towards the inside of the port (port at the outer part of the PIN)\n",
+    "- PINs with half of the pin inside and half outside (port at the center of the PIN)\n",
+    "- PIN with only labels (no shapes). You have to manually specify the width of the port.\n",
+    "\n",
+    "\n",
+    "Lets add pins, save a GDS and then import it back."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3fdedf7c-653c-4d1b-a153-3a046bb5c3a4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import gdsfactory as gf\n",
+    "\n",
+    "c = gf.components.straight(decorator=gf.add_pins)  # add pins inside the component\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "19a0495e-167d-462b-b9be-00b9c3742496",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gdspath = c.write_gds(\"extra/wg.gds\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3b750944-d67d-4d2a-89cc-adf1a6b53649",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gf.clear_cache()\n",
+    "c2 = gf.import_gds(gdspath)\n",
+    "c2.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a4c82900-c039-48b9-a80f-a830d7cc5682",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c2.ports  # import_gds does not automatically add the pins"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ae92153b-2980-4a1f-add9-3c1e096562a5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c3 = gf.import_gds(gdspath, decorator=gf.add_ports.add_ports_from_markers_inside)\n",
+    "c3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1c753748-291f-4387-afb7-9b734f13ba2c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c3.ports"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d39c98f8-1f60-47dd-9acc-4a0820d7e1cc",
+   "metadata": {},
+   "source": [
+    "## Import PDK\n",
+    "\n",
+    "Foundries provide PDKs in different formats and commercial tools.\n",
+    "\n",
+    "The easiest way to import a PDK into gdsfactory is to\n",
+    "\n",
+    "1. have each GDS cell into a separate GDS file\n",
+    "2. have one GDS file with all the cells inside\n",
+    "3. Have a klayout layermap. Makes easier to create the layermap.\n",
+    "\n",
+    "With that you can easily create the PDK as as python package.\n",
+    "\n",
+    "Thanks to having a gdsfactory PDK as a python package you can\n",
+    "\n",
+    "- version control your PDK using GIT to keep track of changes and work on a team\n",
+    "    - write tests of your pdk components to avoid unwanted changes from one component to another.\n",
+    "    - ensure you maintain the quality of the PDK with continous integration checks\n",
+    "    - pin the version of gdsfactory, so new updates of gdsfactory won't affect your code\n",
+    "- name your PDK version using [semantic versioning](https://semver.org/). For example patches increase the last number (0.0.1 -> 0.0.2)\n",
+    "- install your PDK easily `pip install pdk_fab_a` and easily interface with other tools\n",
+    "\n",
+    "\n",
+    "\n",
+    "To create a **Python** package you can start from a customizable template (thanks to cookiecutter)\n",
+    "\n",
+    "I usually create a python package by running this 2 commands inside a terminal\n",
+    "\n",
+    "```\n",
+    "pip install cookiecutter\n",
+    "cookiecutter https://github.com/joamatab/cookiecutter-pypackage-minimal\n",
+    "```\n",
+    "\n",
+    "It will ask you some questions to fill in the template (name of the package being the most important)\n",
+    "\n",
+    "\n",
+    "Then you can add the information about the GDS files and the Layers inside that package"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "60d5ef98-8451-411a-864b-04d349ca3809",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import gdsfactory as gf\n",
+    "from gdsfactory.layers import lyp_to_dataclass\n",
+    "from gdsfactory.config import PATH"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "33b9c8db-fa7a-48d7-859a-f0e3038fd4f2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(lyp_to_dataclass(PATH.klayout_lyp))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7db84f41-e038-43db-9bc7-b7ed0b0d32f2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# lets create a sample PDK (for demo purposes only) using GDSfactory\n",
+    "# if the PDK is in a commercial tool you can also do this. Make sure you save a single pdk.gds\n",
+    "sample_pdk_cells = gf.grid(\n",
+    "    [\n",
+    "        gf.components.straight,\n",
+    "        gf.components.bend_euler,\n",
+    "        gf.components.grating_coupler_elliptical,\n",
+    "    ]\n",
+    ")\n",
+    "sample_pdk_cells.write_gds(\"extra/pdk.gds\")\n",
+    "sample_pdk_cells.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "213f9c07-3acb-4593-92e5-eef3a9975349",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sample_pdk_cells.get_dependencies()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d87bcb81-39ec-4773-a8ae-3e461b9bc73c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# we write the sample PDK into a single GDS file\n",
+    "gf.clear_cache()\n",
+    "gf.write_cells.write_cells(gdspath=\"extra/pdk.gds\", dirpath=\"extra/gds\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "72be214d-c0e9-420f-bb27-cb8612f3a23e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Lets generate the script that we need to have to each GDS cell into gdsfactory\n",
+    "\n",
+    "import gdsfactory as gf\n",
+    "\n",
+    "print(gf.write_cells.get_import_gds_script(\"extra/gds\"))"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

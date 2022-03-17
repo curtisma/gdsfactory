@@ -1,0 +1,451 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>gdsfactory.components.grating_coupler_elliptical_lumerical - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notebooks/plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for gdsfactory.components.grating_coupler_elliptical_lumerical</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">gdsfactory.cell</span> <span class="kn">import</span> <span class="n">cell</span>
+<span class="kn">from</span> <span class="nn">gdsfactory.component</span> <span class="kn">import</span> <span class="n">Component</span>
+<span class="kn">from</span> <span class="nn">gdsfactory.components.grating_coupler_elliptical_arbitrary</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">grating_coupler_elliptical_arbitrary</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">gdsfactory.config</span> <span class="kn">import</span> <span class="n">CONFIG</span>
+<span class="kn">from</span> <span class="nn">gdsfactory.tech</span> <span class="kn">import</span> <span class="n">LAYER</span>
+<span class="kn">from</span> <span class="nn">gdsfactory.types</span> <span class="kn">import</span> <span class="n">Floats</span><span class="p">,</span> <span class="n">Layer</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">-</span><span class="mf">2.4298362615732447</span><span class="p">,</span>
+    <span class="mf">0.1</span><span class="p">,</span>
+    <span class="mf">0.48007023217536954</span><span class="p">,</span>
+    <span class="mf">0.1</span><span class="p">,</span>
+    <span class="mf">0.607397685752365</span><span class="p">,</span>
+    <span class="mf">0.1</span><span class="p">,</span>
+    <span class="mf">0.4498844003086115</span><span class="p">,</span>
+    <span class="mf">0.1</span><span class="p">,</span>
+    <span class="mf">0.4274116312627637</span><span class="p">,</span>
+    <span class="mf">0.1</span><span class="p">,</span>
+    <span class="mf">0.4757904248387285</span><span class="p">,</span>
+    <span class="mf">0.1</span><span class="p">,</span>
+    <span class="mf">0.5026649898504233</span><span class="p">,</span>
+    <span class="mf">0.10002922416240886</span><span class="p">,</span>
+    <span class="mf">0.5100366774007897</span><span class="p">,</span>
+    <span class="mf">0.1</span><span class="p">,</span>
+    <span class="mf">0.494399635363353</span><span class="p">,</span>
+    <span class="mf">0.1079599958465788</span><span class="p">,</span>
+    <span class="mf">0.47400592737426483</span><span class="p">,</span>
+    <span class="mf">0.14972685326277918</span><span class="p">,</span>
+    <span class="mf">0.43272750134545823</span><span class="p">,</span>
+    <span class="mf">0.1839530796530385</span><span class="p">,</span>
+    <span class="mf">0.3872023336708212</span><span class="p">,</span>
+    <span class="mf">0.2360175325711591</span><span class="p">,</span>
+    <span class="mf">0.36032212454768675</span><span class="p">,</span>
+    <span class="mf">0.24261846353500535</span><span class="p">,</span>
+    <span class="mf">0.35770350120764394</span><span class="p">,</span>
+    <span class="mf">0.2606637836858316</span><span class="p">,</span>
+    <span class="mf">0.3526104381544335</span><span class="p">,</span>
+    <span class="mf">0.24668202254540886</span><span class="p">,</span>
+    <span class="mf">0.3717488388788273</span><span class="p">,</span>
+    <span class="mf">0.22920754299702897</span><span class="p">,</span>
+    <span class="mf">0.37769616507688464</span><span class="p">,</span>
+    <span class="mf">0.2246528336925301</span><span class="p">,</span>
+    <span class="mf">0.3765437598650894</span><span class="p">,</span>
+    <span class="mf">0.22041773376471022</span><span class="p">,</span>
+    <span class="mf">0.38047596041838994</span><span class="p">,</span>
+    <span class="mf">0.21923601658169187</span><span class="p">,</span>
+    <span class="mf">0.3798873698864591</span><span class="p">,</span>
+    <span class="mf">0.21700438236445285</span><span class="p">,</span>
+    <span class="mf">0.38291698672245644</span><span class="p">,</span>
+    <span class="mf">0.21827768053295463</span><span class="p">,</span>
+    <span class="mf">0.3641322152037017</span><span class="p">,</span>
+    <span class="mf">0.23729077006065105</span><span class="p">,</span>
+    <span class="mf">0.3676834419346081</span><span class="p">,</span>
+    <span class="mf">0.24865079519725933</span><span class="p">,</span>
+    <span class="mf">0.34415050295044936</span><span class="p">,</span>
+    <span class="mf">0.2733570818755685</span><span class="p">,</span>
+    <span class="mf">0.3306230780901629</span><span class="p">,</span>
+    <span class="mf">0.27350446437732157</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="grating_coupler_elliptical_lumerical"><a class="viewcode-back" href="../../../components.html#gdsfactory.components.grating_coupler_elliptical_lumerical">[docs]</a><span class="nd">@cell</span>
+<span class="k">def</span> <span class="nf">grating_coupler_elliptical_lumerical</span><span class="p">(</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="n">Floats</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">,</span>
+    <span class="n">layer</span><span class="p">:</span> <span class="n">Layer</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">layer_slab</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Layer</span><span class="p">]</span> <span class="o">=</span> <span class="n">LAYER</span><span class="o">.</span><span class="n">SLAB150</span><span class="p">,</span>
+    <span class="n">taper_angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">55</span><span class="p">,</span>
+    <span class="n">taper_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">12.24</span> <span class="o">+</span> <span class="mf">0.36</span><span class="p">,</span>
+    <span class="n">fiber_angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">bias_gap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+    <span class="sd">"""Returns a grating coupler from lumerical inverse design 3D optimization</span>
+
+<span class="sd">    this is a wrapper of components.grating_coupler_elliptical_arbitrary</span>
+<span class="sd">    https://support.lumerical.com/hc/en-us/articles/1500000306621</span>
+<span class="sd">    https://support.lumerical.com/hc/en-us/articles/360042800573</span>
+
+<span class="sd">    Here are the simulation settings used in lumerical</span>
+
+<span class="sd">        n_bg=1.44401 #Refractive index of the background material (cladding)</span>
+<span class="sd">        wg=3.47668   # Refractive index of the waveguide material (core)</span>
+<span class="sd">        lambda0=1550e-9</span>
+<span class="sd">        bandwidth = 0e-9</span>
+<span class="sd">        polarization = 'TE'</span>
+<span class="sd">        wg_width=500e-9 # Waveguide width</span>
+<span class="sd">        wg_height=220e-9 # Waveguide height</span>
+<span class="sd">        etch_depth=80e-9 # etch depth</span>
+<span class="sd">        theta_fib_mat = 5 # Angle of the fiber mode in material</span>
+<span class="sd">        theta_taper=30</span>
+<span class="sd">        efficiency=0.55 # 5.2 dB</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        parameters: xinput, gap1, width1, gap2, width2 ...</span>
+<span class="sd">        layer:</span>
+<span class="sd">        layer_slab:</span>
+<span class="sd">        taper_angle:</span>
+<span class="sd">        taper_length:</span>
+<span class="sd">        fiber_angle: used to compute ellipticity</span>
+<span class="sd">        info: optional simulation settings</span>
+<span class="sd">        bias_gap: gap/trenches bias (um) to compensate for etching bias</span>
+
+<span class="sd">    keyword Args:</span>
+<span class="sd">        wg_width: waveguide width</span>
+<span class="sd">        taper_length: taper length from input</span>
+<span class="sd">        taper_angle: grating flare angle</span>
+<span class="sd">        layer: LAYER.WG</span>
+<span class="sd">        wavelength: grating transmission central wavelength (um)</span>
+<span class="sd">        fiber_angle: fibre angle in degrees determines ellipticity</span>
+<span class="sd">        neff: tooth effective index</span>
+<span class="sd">        nclad: cladding effective index</span>
+<span class="sd">        layer_slab: Optional slab</span>
+<span class="sd">        polarization: te or tm</span>
+<span class="sd">        fiber_marker_width</span>
+<span class="sd">        fiber_marker_layer</span>
+<span class="sd">        spiked: grating teeth have sharp spikes to avoid non-manhattan drc errors</span>
+
+<span class="sd">    """</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">parameters</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">parameters</span>
+    <span class="p">)</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">)</span>
+    <span class="n">xinput</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">teeth_list</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">gaps</span> <span class="o">=</span> <span class="n">teeth_list</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">widths</span> <span class="o">=</span> <span class="n">teeth_list</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">info</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">gaps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gap</span> <span class="o">+</span> <span class="n">bias_gap</span> <span class="k">for</span> <span class="n">gap</span> <span class="ow">in</span> <span class="n">gaps</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">grating_coupler_elliptical_arbitrary</span><span class="p">(</span>
+        <span class="n">gaps</span><span class="o">=</span><span class="n">gaps</span><span class="p">,</span>
+        <span class="n">widths</span><span class="o">=</span><span class="n">widths</span><span class="p">,</span>
+        <span class="n">taper_angle</span><span class="o">=</span><span class="n">taper_angle</span><span class="p">,</span>
+        <span class="n">taper_length</span><span class="o">=</span><span class="n">taper_length</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+        <span class="n">layer_slab</span><span class="o">=</span><span class="n">layer_slab</span><span class="p">,</span>
+        <span class="n">fiber_angle</span><span class="o">=</span><span class="n">fiber_angle</span><span class="p">,</span>
+        <span class="n">info</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">xinput</span><span class="o">=</span><span class="n">xinput</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">),</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<span class="n">grating_coupler_elliptical_lumerical_etch70</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+    <span class="n">grating_coupler_elliptical_lumerical</span><span class="p">,</span>
+    <span class="n">info</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">etch_depth</span><span class="o">=</span><span class="mf">80e-3</span><span class="p">,</span>
+        <span class="n">link</span><span class="o">=</span><span class="s2">"https://support.lumerical.com/hc/en-us/articles/1500000306621"</span><span class="p">,</span>
+        <span class="n">fiber_angle</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">width_min</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">gap_min</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">efficiency</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_compare</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Component</span><span class="p">()</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">grating_coupler_elliptical_lumerical_etch70</span><span class="p">(</span>
+        <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">layer_slab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fiber_angle</span><span class="o">=</span><span class="mi">5</span>
+    <span class="p">)</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">import_gds</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">"gdsdir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"gc.gds"</span><span class="p">)</span>
+    <span class="n">c2</span><span class="o">.</span><span class="n">xmin</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">c1</span><span class="o">.</span><span class="n">xmin</span> <span class="o">=</span> <span class="mf">0.7</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="c1"># c = _compare()</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">grating_coupler_elliptical_lumerical_etch70</span><span class="p">()</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    </body>
+</html>

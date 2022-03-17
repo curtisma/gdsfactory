@@ -1,0 +1,1527 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Movement" href="02_movement.html" /><link rel="prev" title="Component" href="00_geometry.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>References - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../notebooks.html">Layout Tutorial</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00_geometry.html">Component</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="References">
+<h1>References<a class="headerlink" href="#References" title="Permalink to this headline">#</a></h1>
+<p>GDS allows defining the component once in memory and reference to that structure in other components.</p>
+<p>As you build complex components you can include references to other simpler components. Adding a reference is like having a pointer to a component.</p>
+<p>The GDSII specification allows the use of references, and similarly gdsfactory uses them (with the <code class="docutils literal notranslate"><span class="pre">add_ref()</span></code> function). So what is a reference? Simply put: <strong>A reference does not contain any geometry. It only *points* to an existing geometry</strong>.</p>
+<p>Say Alice has a ridiculously large polygon with 100 billion vertices in it that we’ll call BigPolygon. It’s huge, and she needs to use it in her design 250 times. Well, a single copy of BigPolygon takes up 100GB of memory just by itself, so she doesn’t want to make 250 copies of it. Since Alice is clever, she instead <em>references</em> the polygon 250 times. Each reference only uses a few bytes of memory – it only needs to know the memory address of BigPolygon and a few other things. In this way, she
+can keep one copy of BigPolygon and use it again and again wherever she needs to.</p>
+<p>Let’s start by making a blank geometry (<code class="docutils literal notranslate"><span class="pre">Component</span></code>) then adding a single polygon to it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">gf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set_plot_options</span><span class="p">(</span><span class="n">show_subports</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># gf.CONF.plotter = 'holoviews'</span>
+
+<span class="c1"># Create a blank Component</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="s2">"component_with_polygon"</span><span class="p">)</span>
+
+<span class="c1"># Add a polygon</span>
+<span class="n">xpts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="n">ypts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_polygon</span><span class="p">([</span><span class="n">xpts</span><span class="p">,</span> <span class="n">ypts</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># plot the Component with the polygon in it</span>
+<span class="n">p</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:11:29.639 | INFO     | gdsfactory.config:&lt;module&gt;:52 - Load '/home/runner/work/gdsfactory/gdsfactory/gdsfactory' 4.4.12
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_2_1.png" src="../_images/notebooks_01_references_2_1.png"/>
+</div>
+</div>
+<p>Now, pretend we’re in the same position as Alice: We want to reuse this polygon repeatedly but do not want to make multiple copies of it. To do so, we need to make a second blank <code class="docutils literal notranslate"><span class="pre">Component</span></code>, this time called <code class="docutils literal notranslate"><span class="pre">c</span></code>. In this new Component we’ll <em>reference</em> our Component <code class="docutils literal notranslate"><span class="pre">p</span></code> which contains our polygon.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="s2">"Component_with_references"</span><span class="p">)</span>  <span class="c1"># Create a new blank Component</span>
+<span class="n">poly_ref</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>  <span class="c1"># Reference the Component "p" that has the polygon in it</span>
+<span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># show it in klayout</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>  <span class="c1"># plot the reference-containing Component "c"</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:11:30.981 | INFO     | gdsfactory.show:show:36 - Klayout show Component_with_references: uid 3, ports [], aliases [], 0 polygons, 1 references
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_4_1.png" src="../_images/notebooks_01_references_4_1.png"/>
+</div>
+</div>
+<p>OK, well that seemed to work, but it also seems thoroughly useless! It looks like you just made a copy of your polygon – but remember, you didn’t actually make a second polygon, you just made a reference (aka pointer) to the original polygon. Let’s add two more references to <code class="docutils literal notranslate"><span class="pre">c</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poly_ref2</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>  <span class="c1"># Reference the Component "p" that has the polygon in it</span>
+<span class="n">poly_ref3</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>  <span class="c1"># Reference the Component "p" that has the polygon in it</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>  <span class="c1"># plot the reference-containing Component "c"</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:11:31.090 | INFO     | gdsfactory.show:show:36 - Klayout show Component_with_references: uid 4, ports [], aliases [], 0 polygons, 3 references
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_6_1.png" src="../_images/notebooks_01_references_6_1.png"/>
+</div>
+</div>
+<p>Now you have 3x polygons all on top of each other. Again, this would appear useless, except that you can manipulate each reference indepedently. Notice that when you called <code class="docutils literal notranslate"><span class="pre">c.add_ref(p)</span></code> above, we saved the result to a new variable each time (<code class="docutils literal notranslate"><span class="pre">poly_ref</span></code>, <code class="docutils literal notranslate"><span class="pre">poly_ref2</span></code>, and <code class="docutils literal notranslate"><span class="pre">poly_ref3</span></code>)? You can use those variables to reposition the references.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poly_ref2</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># Rotate the 2nd reference we made 15 degrees</span>
+<span class="n">poly_ref3</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># Rotate the 3rd reference we made 30 degrees</span>
+<span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:11:31.200 | INFO     | gdsfactory.show:show:36 - Klayout show Component_with_references: uid 5, ports [], aliases [], 0 polygons, 3 references
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_8_1.png" src="../_images/notebooks_01_references_8_1.png"/>
+</div>
+</div>
+<p>Now you’re getting somewhere! You’ve only had to make the polygon once, but you’re able to reuse it as many times as you want.</p>
+<section id="Modifying-the-referenced-geometry">
+<h2>Modifying the referenced geometry<a class="headerlink" href="#Modifying-the-referenced-geometry" title="Permalink to this headline">#</a></h2>
+<p>What happens when you change the original geometry that the reference points to? In your case, your references in <code class="docutils literal notranslate"><span class="pre">c</span></code> all point to the Component <code class="docutils literal notranslate"><span class="pre">p</span></code> that with the original polygon. Let’s try adding a second polygon to <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<p>First you add the second polygon and make sure <code class="docutils literal notranslate"><span class="pre">P</span></code> looks like you expect:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a 2nd polygon to "p"</span>
+<span class="n">xpts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="n">ypts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_polygon</span><span class="p">([</span><span class="n">xpts</span><span class="p">,</span> <span class="n">ypts</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">p</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_10_0.png" src="../_images/notebooks_01_references_10_0.png"/>
+</div>
+</div>
+<p>That looks good. Now let’s find out what happened to <code class="docutils literal notranslate"><span class="pre">c</span></code> that contains the three references. Keep in mind that you have not modified <code class="docutils literal notranslate"><span class="pre">c</span></code> or executed any functions/operations on <code class="docutils literal notranslate"><span class="pre">c</span></code> – all you have done is modify <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_12_0.png" src="../_images/notebooks_01_references_12_0.png"/>
+</div>
+</div>
+<p><strong>When you modify the original geometry, all of the references automatically reflect the modifications.</strong> This is very powerful, because you can use this to make very complicated designs from relatively simple elements in a computation- and memory-efficienct way.</p>
+<p>Let’s try making references a level deeper by referencing <code class="docutils literal notranslate"><span class="pre">c</span></code>. Note here we use the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> operator to add the references – this is just shorthand, and is exactly equivalent to using <code class="docutils literal notranslate"><span class="pre">add_ref()</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c2</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>  <span class="c1"># Create a new blank Component</span>
+<span class="n">d_ref1</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>  <span class="c1"># Reference the Component "c" that 3 references in it</span>
+<span class="n">d_ref2</span> <span class="o">=</span> <span class="n">c2</span> <span class="o">&lt;&lt;</span> <span class="n">c</span>  <span class="c1"># Use the "&lt;&lt;" operator to create a 2nd reference to c</span>
+<span class="n">d_ref3</span> <span class="o">=</span> <span class="n">c2</span> <span class="o">&lt;&lt;</span> <span class="n">c</span>  <span class="c1"># Use the "&lt;&lt;" operator to create a 3rd reference to c</span>
+
+<span class="n">d_ref1</span><span class="o">.</span><span class="n">move</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">d_ref2</span><span class="o">.</span><span class="n">move</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">c2</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_14_0.png" src="../_images/notebooks_01_references_14_0.png"/>
+</div>
+</div>
+<p>As you’ve seen you have two ways to add a reference to our component:</p>
+<ol class="arabic simple">
+<li><p>create the reference and add it to the component</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="s2">"reference_sample"</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">wr</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">ref</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">wr</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_16_0.png" src="../_images/notebooks_01_references_16_0.png"/>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>or do it in a single line</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="s2">"reference_sample_shorter_syntax"</span><span class="p">)</span>
+<span class="n">wr</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_18_0.png" src="../_images/notebooks_01_references_18_0.png"/>
+</div>
+</div>
+<p>in both cases you can move the reference <code class="docutils literal notranslate"><span class="pre">wr</span></code> after created</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="s2">"two_references"</span><span class="p">)</span>
+<span class="n">wr1</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">wr2</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">wr2</span><span class="o">.</span><span class="n">movey</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">add_ports</span><span class="p">(</span><span class="n">wr1</span><span class="o">.</span><span class="n">get_ports_list</span><span class="p">(),</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">"top_"</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">add_ports</span><span class="p">(</span><span class="n">wr2</span><span class="o">.</span><span class="n">get_ports_list</span><span class="p">(),</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">"bot_"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">ports</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'top_o1': Port (name top_o1, midpoint [0. 0.], width 0.6, orientation 180.0, layer (1, 0), port_type optical),
+ 'top_o2': Port (name top_o2, midpoint [10.  0.], width 0.6, orientation 0.0, layer (1, 0), port_type optical),
+ 'bot_o1': Port (name bot_o1, midpoint [ 0. 10.], width 0.6, orientation 180.0, layer (1, 0), port_type optical),
+ 'bot_o2': Port (name bot_o2, midpoint [10. 10.], width 0.6, orientation 0.0, layer (1, 0), port_type optical)}
+</pre></div></div>
+</div>
+<p>You can also auto_rename ports using gdsfactory default convention, where ports are numbered clockwise starting from the bottom left</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">auto_rename_ports</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">ports</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'o1': Port (name o1, midpoint [0. 0.], width 0.6, orientation 180.0, layer (1, 0), port_type optical),
+ 'o4': Port (name o4, midpoint [10.  0.], width 0.6, orientation 0.0, layer (1, 0), port_type optical),
+ 'o2': Port (name o2, midpoint [ 0. 10.], width 0.6, orientation 180.0, layer (1, 0), port_type optical),
+ 'o3': Port (name o3, midpoint [10. 10.], width 0.6, orientation 0.0, layer (1, 0), port_type optical)}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_25_0.png" src="../_images/notebooks_01_references_25_0.png"/>
+</div>
+</div>
+</section>
+<section id="Arrays-of-references">
+<h2>Arrays of references<a class="headerlink" href="#Arrays-of-references" title="Permalink to this headline">#</a></h2>
+<p>In GDS, there’s a type of structure called a “CellArray” which takes a cell and repeats it NxM times on a fixed grid spacing. For convenience, <code class="docutils literal notranslate"><span class="pre">Component</span></code> includes this functionality with the add_array() function. Note that CellArrays are not compatible with ports (since there is no way to access/modify individual elements in a GDS cellarray)</p>
+<p>gdsfactory also provides with more flexible arrangement options if desired, see for example <code class="docutils literal notranslate"><span class="pre">grid()</span></code> and <code class="docutils literal notranslate"><span class="pre">packer()</span></code>.</p>
+<p>As well as <code class="docutils literal notranslate"><span class="pre">gf.components.array</span></code></p>
+<p>Let’s make a new Component and put a big array of our Component <code class="docutils literal notranslate"><span class="pre">c</span></code> in it:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c3</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>  <span class="c1"># Create a new blank Component</span>
+<span class="n">aref</span> <span class="o">=</span> <span class="n">c3</span><span class="o">.</span><span class="n">add_array</span><span class="p">(</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="p">)</span>  <span class="c1"># Reference the Component "c" 3 references in it with a 3 rows, 6 columns array</span>
+<span class="n">c3</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_27_0.png" src="../_images/notebooks_01_references_27_0.png"/>
+</div>
+</div>
+<p>CellArrays don’t have ports and there is no way to access/modify individual elements in a GDS cellarray.</p>
+<p>gdsfactory provides you with similar functions in <code class="docutils literal notranslate"><span class="pre">gf.components.array</span></code> and <code class="docutils literal notranslate"><span class="pre">gf.components.array_2d</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c4</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>  <span class="c1"># Create a new blank Component</span>
+<span class="n">aref</span> <span class="o">=</span> <span class="n">c4</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">c4</span><span class="o">.</span><span class="n">add_ports</span><span class="p">(</span><span class="n">aref</span><span class="o">.</span><span class="n">get_ports_list</span><span class="p">())</span>
+<span class="n">c4</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_29_0.png" src="../_images/notebooks_01_references_29_0.png"/>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gf.components.array<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<p>You can also create an array of references for periodic structures. Lets create a <a class="reference external" href="https://picwriter.readthedocs.io/en/latest/components/dbr.html">Distributed Bragg Reflector</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+
+<span class="nd">@gf</span><span class="o">.</span><span class="n">cell</span>
+<span class="k">def</span> <span class="nf">dbr_period</span><span class="p">(</span><span class="n">w1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">w2</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">l1</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">straight</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">):</span>
+    <span class="sd">"""Return one DBR period."""</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">straight</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="n">l1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w1</span><span class="p">)</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">straight</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="n">l2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w2</span><span class="p">)</span>
+    <span class="n">r2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s2">"o1"</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">r1</span><span class="o">.</span><span class="n">ports</span><span class="p">[</span><span class="s2">"o2"</span><span class="p">])</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add_port</span><span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">r1</span><span class="o">.</span><span class="n">ports</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">])</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add_port</span><span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">r2</span><span class="o">.</span><span class="n">ports</span><span class="p">[</span><span class="s2">"o2"</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="n">l1</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">period</span> <span class="o">=</span> <span class="n">dbr_period</span><span class="p">(</span><span class="n">l1</span><span class="o">=</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="n">l2</span><span class="p">)</span>
+<span class="n">period</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_32_0.png" src="../_images/notebooks_01_references_32_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbr</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="s2">"DBR"</span><span class="p">)</span>
+<span class="n">dbr</span><span class="o">.</span><span class="n">add_array</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="p">(</span><span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">dbr</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_33_0.png" src="../_images/notebooks_01_references_33_0.png"/>
+</div>
+</div>
+<p>Finally we need to add ports to the new component</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p0</span> <span class="o">=</span> <span class="n">dbr</span><span class="o">.</span><span class="n">add_port</span><span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">period</span><span class="o">.</span><span class="n">ports</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">])</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">dbr</span><span class="o">.</span><span class="n">add_port</span><span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">period</span><span class="o">.</span><span class="n">ports</span><span class="p">[</span><span class="s2">"o2"</span><span class="p">])</span>
+
+<span class="n">p1</span><span class="o">.</span><span class="n">midpoint</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">dbr</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_35_0.png" src="../_images/notebooks_01_references_35_0.png"/>
+</div>
+</div>
+</section>
+<section id="Connect-references">
+<h2>Connect references<a class="headerlink" href="#Connect-references" title="Permalink to this headline">#</a></h2>
+<p>We have seen that once you create a reference you can manipulate the reference to move it to a location. Here we are going to connect that reference to a port. Remeber that we follow that a certain reference <code class="docutils literal notranslate"><span class="pre">source</span></code> connects to a <code class="docutils literal notranslate"><span class="pre">destination</span></code> port</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bend</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_circular</span><span class="p">()</span>
+<span class="n">bend</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_37_0.png" src="../_images/notebooks_01_references_37_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="s2">"sample_reference_connect"</span><span class="p">)</span>
+
+<span class="n">mmi</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">mmi1x2</span><span class="p">()</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_circular</span><span class="p">()</span>
+<span class="n">b</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">mmi</span><span class="o">.</span><span class="n">ports</span><span class="p">[</span><span class="s2">"o2"</span><span class="p">])</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">add_port</span><span class="p">(</span><span class="s2">"o1"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">mmi</span><span class="o">.</span><span class="n">ports</span><span class="p">[</span><span class="s2">"o1"</span><span class="p">])</span>
+<span class="n">c</span><span class="o">.</span><span class="n">add_port</span><span class="p">(</span><span class="s2">"o2"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">ports</span><span class="p">[</span><span class="s2">"o2"</span><span class="p">])</span>
+<span class="n">c</span><span class="o">.</span><span class="n">add_port</span><span class="p">(</span><span class="s2">"o3"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">mmi</span><span class="o">.</span><span class="n">ports</span><span class="p">[</span><span class="s2">"o3"</span><span class="p">])</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_38_0.png" src="../_images/notebooks_01_references_38_0.png"/>
+</div>
+</div>
+</section>
+<section id="Port-naming">
+<h2>Port naming<a class="headerlink" href="#Port-naming" title="Permalink to this headline">#</a></h2>
+<p>You have the freedom to name the ports as you want, and you can use <code class="docutils literal notranslate"><span class="pre">gf.port.auto_rename_ports(prefix='o')</span></code> to rename them later on.</p>
+<p>Here is the default naming convention.</p>
+<p>Ports are numbered clock-wise starting from the bottom left corner</p>
+<p>Optical ports have <code class="docutils literal notranslate"><span class="pre">o</span></code> prefix and Electrical ports <code class="docutils literal notranslate"><span class="pre">e</span></code> prefix</p>
+<p>The port naming comes in most cases from the <code class="docutils literal notranslate"><span class="pre">gdsfactory.cross_section</span></code>. For example</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gdsfactory.cross_section.strip</span></code> has ports <code class="docutils literal notranslate"><span class="pre">o1</span></code> for input and <code class="docutils literal notranslate"><span class="pre">o2</span></code> for output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gdsfactory.cross_section.metal1</span></code> has ports <code class="docutils literal notranslate"><span class="pre">e1</span></code> for input and <code class="docutils literal notranslate"><span class="pre">e2</span></code> for output</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">nxn</span><span class="p">(</span><span class="n">west</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">south</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">north</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">xsize</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">ysize</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_40_0.png" src="../_images/notebooks_01_references_40_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight_heater_metal</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_41_0.png" src="../_images/notebooks_01_references_41_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">ports</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'o1': Port (name o1, midpoint [0. 0.], width 0.5, orientation 180.0, layer (1, 0), port_type optical),
+ 'o2': Port (name o2, midpoint [30.  0.], width 0.5, orientation 0.0, layer (1, 0), port_type optical),
+ 'e1': Port (name e1, midpoint [-16.   0.], width 11.0, orientation 180, layer (49, 0), port_type electrical),
+ 'e2': Port (name e2, midpoint [46.  0.], width 11.0, orientation 0, layer (49, 0), port_type electrical)}
+</pre></div></div>
+</div>
+<p>You can get the optical ports by <code class="docutils literal notranslate"><span class="pre">layer</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">get_ports_dict</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'o1': Port (name o1, midpoint [0. 0.], width 0.5, orientation 180.0, layer (1, 0), port_type optical),
+ 'o2': Port (name o2, midpoint [30.  0.], width 0.5, orientation 0.0, layer (1, 0), port_type optical)}
+</pre></div></div>
+</div>
+<p>or by <code class="docutils literal notranslate"><span class="pre">width</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">get_ports_dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'o1': Port (name o1, midpoint [0. 0.], width 0.5, orientation 180.0, layer (1, 0), port_type optical),
+ 'o2': Port (name o2, midpoint [30.  0.], width 0.5, orientation 0.0, layer (1, 0), port_type optical)}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c0</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight_heater_metal</span><span class="p">()</span>
+<span class="n">c0</span><span class="o">.</span><span class="n">ports</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'o1': Port (name o1, midpoint [0. 0.], width 0.5, orientation 180.0, layer (1, 0), port_type optical),
+ 'o2': Port (name o2, midpoint [320.   0.], width 0.5, orientation 0.0, layer (1, 0), port_type optical),
+ 'e1': Port (name e1, midpoint [-16.   0.], width 11.0, orientation 180, layer (49, 0), port_type electrical),
+ 'e2': Port (name e2, midpoint [336.   0.], width 11.0, orientation 0, layer (49, 0), port_type electrical)}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">c0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">auto_rename_ports_layer_orientation</span><span class="p">()</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">ports</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'1_0_W0': Port (name 49_0_W1, midpoint [0. 0.], width 0.5, orientation 180.0, layer (1, 0), port_type optical),
+ '1_0_E0': Port (name 49_0_E0, midpoint [320.   0.], width 0.5, orientation 0.0, layer (1, 0), port_type optical),
+ '49_0_W0': Port (name 49_0_W0, midpoint [-16.   0.], width 11.0, orientation 180, layer (49, 0), port_type electrical),
+ '49_0_E1': Port (name 49_0_E1, midpoint [336.   0.], width 11.0, orientation 0, layer (49, 0), port_type electrical)}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c2</span> <span class="o">=</span> <span class="n">c0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">auto_rename_ports</span><span class="p">()</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">ports</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'o1': Port (name o1, midpoint [0. 0.], width 0.5, orientation 180.0, layer (1, 0), port_type optical),
+ 'o2': Port (name o2, midpoint [320.   0.], width 0.5, orientation 0.0, layer (1, 0), port_type optical),
+ 'e1': Port (name e1, midpoint [-16.   0.], width 11.0, orientation 180, layer (49, 0), port_type electrical),
+ 'e2': Port (name e2, midpoint [336.   0.], width 11.0, orientation 0, layer (49, 0), port_type electrical)}
+</pre></div></div>
+</div>
+<p>You can also rename them with a different port naming convention</p>
+<ul class="simple">
+<li><p>prefix: add <code class="docutils literal notranslate"><span class="pre">e</span></code> for electrical <code class="docutils literal notranslate"><span class="pre">o</span></code> for optical</p></li>
+<li><p>clockwise</p></li>
+<li><p>counter-clockwise</p></li>
+<li><p>orientation <code class="docutils literal notranslate"><span class="pre">E</span></code> East, <code class="docutils literal notranslate"><span class="pre">W</span></code> West, <code class="docutils literal notranslate"><span class="pre">N</span></code> North, <code class="docutils literal notranslate"><span class="pre">S</span></code> South</p></li>
+</ul>
+<p>Here is the default one we use (clockwise starting from bottom left west facing port)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    3   4
+    |___|_
+2 -|      |- 5
+   |      |
+1 -|______|- 6
+    |   |
+    8   7
+</pre></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">Component</span><span class="p">()</span>
+<span class="n">nxn</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">nxn</span><span class="p">(</span><span class="n">west</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">north</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">south</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">xsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ysize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_ref</span><span class="p">(</span><span class="n">nxn</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">add_ports</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">ports</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_51_0.png" src="../_images/notebooks_01_references_51_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ref</span><span class="o">.</span><span class="n">get_ports_list</span><span class="p">()</span>  <span class="c1"># by default returns ports clockwise starting from bottom left west facing port</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[Port (name o1, midpoint [0.   1.25], width 0.5, orientation 180, layer (1, 0), port_type optical),
+ Port (name o2, midpoint [0.   2.75], width 0.5, orientation 180, layer (1, 0), port_type optical),
+ Port (name o3, midpoint [1.25 4.  ], width 0.5, orientation 90, layer (1, 0), port_type optical),
+ Port (name o4, midpoint [2.75 4.  ], width 0.5, orientation 90, layer (1, 0), port_type optical),
+ Port (name o5, midpoint [4.   2.75], width 0.5, orientation 0, layer (1, 0), port_type optical),
+ Port (name o6, midpoint [4.   1.25], width 0.5, orientation 0, layer (1, 0), port_type optical),
+ Port (name o7, midpoint [2.75 0.  ], width 0.5, orientation 270, layer (1, 0), port_type optical),
+ Port (name o8, midpoint [1.25 0.  ], width 0.5, orientation 270, layer (1, 0), port_type optical)]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">auto_rename_ports</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_53_0.png" src="../_images/notebooks_01_references_53_0.png"/>
+</div>
+</div>
+<p>You can also get the ports counter-clockwise</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    4   3
+    |___|_
+5 -|      |- 2
+   |      |
+6 -|______|- 1
+    |   |
+    7   8
+</pre></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">auto_rename_ports_counter_clockwise</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_55_0.png" src="../_images/notebooks_01_references_55_0.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">get_ports_list</span><span class="p">(</span><span class="n">clockwise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[Port (name o1, midpoint [4.   1.25], width 0.5, orientation 0, layer (1, 0), port_type optical),
+ Port (name o2, midpoint [4.   2.75], width 0.5, orientation 0, layer (1, 0), port_type optical),
+ Port (name o3, midpoint [2.75 4.  ], width 0.5, orientation 90, layer (1, 0), port_type optical),
+ Port (name o4, midpoint [1.25 4.  ], width 0.5, orientation 90, layer (1, 0), port_type optical),
+ Port (name o5, midpoint [0.   2.75], width 0.5, orientation 180, layer (1, 0), port_type optical),
+ Port (name o6, midpoint [0.   1.25], width 0.5, orientation 180, layer (1, 0), port_type optical),
+ Port (name o7, midpoint [1.25 0.  ], width 0.5, orientation 270, layer (1, 0), port_type optical),
+ Port (name o8, midpoint [2.75 0.  ], width 0.5, orientation 270, layer (1, 0), port_type optical)]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">ports_layer</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'1_0_W0': 'o6',
+ '1_0_W1': 'o5',
+ '1_0_E0': 'o1',
+ '1_0_E1': 'o2',
+ '1_0_N0': 'o4',
+ '1_0_N1': 'o3',
+ '1_0_S0': 'o7',
+ '1_0_S1': 'o8'}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">port_by_orientation_cw</span><span class="p">(</span><span class="s2">"W0"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Port (name o6, midpoint [0.   1.25], width 0.5, orientation 180, layer (1, 0), port_type optical)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">port_by_orientation_ccw</span><span class="p">(</span><span class="s2">"W1"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Port (name o6, midpoint [0.   1.25], width 0.5, orientation 180, layer (1, 0), port_type optical)
+</pre></div></div>
+</div>
+<p>Lets extend the East facing ports (orientation = 0 deg)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+
+<span class="n">nxn</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">nxn</span><span class="p">(</span>
+    <span class="n">west</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">north</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">east</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">south</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">cross_section</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">cross_section</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span>
+    <span class="n">xsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">ysize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">extension</span><span class="o">.</span><span class="n">extend_ports</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="n">nxn</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:11:34.328 | INFO     | gdsfactory.show:show:36 - Klayout show nxn_e9081bdd_extend_por_ae3f688a: uid 57, ports ['o1', 'o2', 'o3', 'o4', 'o5', 'o6', 'o7', 'o8'], aliases [], 10 polygons, 1 references
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_61_1.png" src="../_images/notebooks_01_references_61_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">ports</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'o1': Port (name o1, midpoint [0.   1.25], width 0.5, orientation 180, layer (1, 0), port_type optical),
+ 'o2': Port (name o2, midpoint [0.   2.75], width 0.5, orientation 180, layer (1, 0), port_type optical),
+ 'o3': Port (name o3, midpoint [1.25 4.  ], width 0.5, orientation 90, layer (1, 0), port_type optical),
+ 'o4': Port (name o4, midpoint [2.75 4.  ], width 0.5, orientation 90, layer (1, 0), port_type optical),
+ 'o5': Port (name o5, midpoint [9.   2.75], width 0.5, orientation 0.0, layer (1, 0), port_type optical),
+ 'o6': Port (name o6, midpoint [9.   1.25], width 0.5, orientation 0.0, layer (1, 0), port_type optical),
+ 'o7': Port (name o7, midpoint [2.75 0.  ], width 0.5, orientation 270, layer (1, 0), port_type optical),
+ 'o8': Port (name o8, midpoint [1.25 0.  ], width 0.5, orientation 270, layer (1, 0), port_type optical)}
+</pre></div></div>
+</div>
+</section>
+<section id="component_sequence">
+<h2>component_sequence<a class="headerlink" href="#component_sequence" title="Permalink to this headline">#</a></h2>
+<p>When you have repetitive connections you can describe the connectivity as an ASCII map</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bend180</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_circular180</span><span class="p">()</span>
+<span class="n">wg_pin</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight_pin</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">wg</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">()</span>
+
+<span class="c1"># Define a map between symbols and (component, input port, output port)</span>
+<span class="n">symbol_to_component</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"D"</span><span class="p">:</span> <span class="p">(</span><span class="n">bend180</span><span class="p">,</span> <span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o2"</span><span class="p">),</span>
+    <span class="s2">"C"</span><span class="p">:</span> <span class="p">(</span><span class="n">bend180</span><span class="p">,</span> <span class="s2">"o2"</span><span class="p">,</span> <span class="s2">"o1"</span><span class="p">),</span>
+    <span class="s2">"P"</span><span class="p">:</span> <span class="p">(</span><span class="n">wg_pin</span><span class="p">,</span> <span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o2"</span><span class="p">),</span>
+    <span class="s2">"-"</span><span class="p">:</span> <span class="p">(</span><span class="n">wg</span><span class="p">,</span> <span class="s2">"o1"</span><span class="p">,</span> <span class="s2">"o2"</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="c1"># Generate a sequence</span>
+<span class="c1"># This is simply a chain of characters. Each of them represents a component</span>
+<span class="c1"># with a given input and and a given output</span>
+
+<span class="n">sequence</span> <span class="o">=</span> <span class="s2">"DC-P-P-P-P-CD"</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">component_sequence</span><span class="p">(</span>
+    <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span><span class="p">,</span> <span class="n">symbol_to_component</span><span class="o">=</span><span class="n">symbol_to_component</span>
+<span class="p">)</span>
+<span class="n">component</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"component_sequence"</span>
+<span class="n">component</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">component</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:11:34.527 | INFO     | gdsfactory.show:show:36 - Klayout show component_sequence: uid 75, ports ['o1', 'o2'], aliases ['D1', 'C1', '-1', 'P1', '-2', 'P2', '-3', 'P3', '-4', 'P4', '-5', 'C2', 'D2'], 2 polygons, 13 references
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_references_65_1.png" src="../_images/notebooks_01_references_65_1.png"/>
+</div>
+</div>
+<p>As the sequence is defined as a string you can use the string operations to easily build complex sequences</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="02_movement.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Movement</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="00_geometry.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Component</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">References</a><ul>
+<li><a class="reference internal" href="#Modifying-the-referenced-geometry">Modifying the referenced geometry</a></li>
+<li><a class="reference internal" href="#Arrays-of-references">Arrays of references</a></li>
+<li><a class="reference internal" href="#Connect-references">Connect references</a></li>
+<li><a class="reference internal" href="#Port-naming">Port naming</a></li>
+<li><a class="reference internal" href="#component_sequence">component_sequence</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

@@ -1,0 +1,1351 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/><title>Index - gdsfactory 4.4.12 documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#Symbols"><strong>Symbols</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#Q"><strong>Q</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#Y"><strong>Y</strong></a></div>
+</section>
+<section id="Symbols" class="genindex-section">
+  <h2>Symbols</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    --force
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-layermap_to_dataclass-f">gf-gds-layermap_to_dataclass command line option</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-mask-clean-f">gf-mask-clean command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --version
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-version">gf command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --xor
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-diff-x">gf-gds-diff command line option</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    -f
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-layermap_to_dataclass-f">gf-gds-layermap_to_dataclass command line option</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-mask-clean-f">gf-mask-clean command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -x
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-diff-x">gf-gds-diff command line option</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.absorb">absorb() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.add">add() (gdsfactory.component.Component method)</a>
+
+        <ul>
+          <li><a href="api.html#gdsfactory.cross_section.CrossSection.add">(gdsfactory.cross_section.CrossSection method)</a>
+</li>
+        </ul></li>
+        <li><a href="routing.html#gdsfactory.routing.add_fiber_array.add_fiber_array">add_fiber_array() (in module gdsfactory.routing.add_fiber_array)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.add_fiber_single.add_fiber_single">add_fiber_single() (in module gdsfactory.routing.add_fiber_single)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.add_fidutials">add_fidutials() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.add_frame">add_frame() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.add_padding">add_padding() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.add_port">add_port() (gdsfactory.component.Component method)</a>
+
+        <ul>
+          <li><a href="api.html#gdsfactory.functions.add_port">(in module gdsfactory.functions)</a>
+</li>
+        </ul></li>
+        <li><a href="api.html#gdsfactory.component.Component.add_ports">add_ports() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.add_ref">add_ref() (gdsfactory.component.Component method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.functions.add_settings_label">add_settings_label() (in module gdsfactory.functions)</a>
+</li>
+        <li><a href="api.html#gdsfactory.functions.add_text">add_text() (in module gdsfactory.functions)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.align_wafer">align_wafer() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.array">array() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.array_with_fanout">array_with_fanout() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.array_with_fanout_2d">array_with_fanout_2d() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.array_with_via">array_with_via() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.array_with_via_2d">array_with_via_2d() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.assert_ports_on_grid">assert_ports_on_grid() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.auto_rename_ports">auto_rename_ports() (gdsfactory.component.Component method)</a>
+
+        <ul>
+          <li><a href="api.html#gdsfactory.functions.auto_rename_ports">(in module gdsfactory.functions)</a>
+</li>
+        </ul></li>
+        <li><a href="api.html#gdsfactory.component.Component.auto_rename_ports_orientation">auto_rename_ports_orientation() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.awg">awg() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.bbox">bbox (gdsfactory.component.Component property)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.bbox">bbox() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.bend_circular">bend_circular() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.bend_circular180">bend_circular180() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.bend_circular_heater">bend_circular_heater() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.bend_euler">bend_euler() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.bend_euler180">bend_euler180() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.bend_euler_s">bend_euler_s() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.bend_port">bend_port() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.bend_s">bend_s() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.bend_straight_bend">bend_straight_bend() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.C">C() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cavity">cavity() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cdc">cdc() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cdsem_all">cdsem_all() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cell.cell">cell() (in module gdsfactory.cell)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cell.cell_without_validator">cell_without_validator() (in module gdsfactory.cell)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.circle">circle() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.compass">compass() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.compensation_path">compensation_path() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component">Component (class in gdsfactory.component)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.component_lattice">component_lattice() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.component_sequence">component_sequence() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.contact">contact() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.contact_heater_m3">contact_heater_m3() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.contact_slab_m3">contact_slab_m3() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.contact_slot">contact_slot() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.contact_slot_m1_m2">contact_slot_m1_m2() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.contact_with_offset">contact_with_offset() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.copy">copy() (gdsfactory.component.Component method)</a>
+
+        <ul>
+          <li><a href="api.html#gdsfactory.cross_section.CrossSection.copy">(gdsfactory.cross_section.CrossSection method)</a>
+</li>
+        </ul></li>
+        <li><a href="api.html#gdsfactory.component.Component.copy_child_info">copy_child_info() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.copy_layers">copy_layers() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.coupler">coupler() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.coupler90">coupler90() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.coupler90bend">coupler90bend() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.coupler90circular">coupler90circular() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.coupler_adiabatic">coupler_adiabatic() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.coupler_asymmetric">coupler_asymmetric() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.coupler_full">coupler_full() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.coupler_ring">coupler_ring() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.coupler_straight">coupler_straight() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.coupler_symmetric">coupler_symmetric() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cross">cross() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.cross_section">cross_section() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.crossing">crossing() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.crossing45">crossing45() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.crossing_arm">crossing_arm() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.crossing_etched">crossing_etched() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.crossing_from_taper">crossing_from_taper() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.CrossSection">CrossSection (class in gdsfactory.cross_section)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cutback_bend">cutback_bend() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cutback_bend180">cutback_bend180() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cutback_bend180circular">cutback_bend180circular() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cutback_bend90">cutback_bend90() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cutback_bend90circular">cutback_bend90circular() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cutback_component">cutback_component() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.cutback_component_mirror">cutback_component_mirror() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.dbr">dbr() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.dbr_tapered">dbr_tapered() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.delay_snake">delay_snake() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.delay_snake2">delay_snake2() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.delay_snake3">delay_snake3() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.delay_snake_sbend">delay_snake_sbend() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.dicing_lane">dicing_lane() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.die">die() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.die_bbox">die_bbox() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.die_bbox_frame">die_bbox_frame() (in module gdsfactory.components)</a>
+</li>
+        <li>
+    DIRPATH
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-merge_gds-arg-DIRPATH">gf-gds-merge_gds command line option</a>
+</li>
+        </ul></li>
+        <li><a href="components.html#gdsfactory.components.disk">disk() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.ellipse">ellipse() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.extend_port">extend_port() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.extend_ports">extend_ports() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.extract">extract() (gdsfactory.component.Component method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.fiber">fiber() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.fiber_array">fiber_array() (in module gdsfactory.components)</a>
+</li>
+        <li>
+    FILENAME
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-show-arg-FILENAME">gf-gds-show command line option</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    FILEPATH
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-layermap_to_dataclass-arg-FILEPATH">gf-gds-layermap_to_dataclass command line option</a>
+</li>
+        </ul></li>
+        <li><a href="api.html#gdsfactory.component.Component.flatten">flatten() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="yaml.html#gdsfactory.read.from_yaml">from_yaml() (in module gdsfactory.read)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    gdsfactory.cross_section
+
+        <ul>
+          <li><a href="api.html#module-gdsfactory.cross_section">module</a>
+</li>
+        </ul></li>
+        <li>
+    gdsfactory.functions
+
+        <ul>
+          <li><a href="api.html#module-gdsfactory.functions">module</a>
+</li>
+        </ul></li>
+        <li>
+    gdsfactory.routing.get_route
+
+        <ul>
+          <li><a href="routing.html#module-gdsfactory.routing.get_route">module</a>
+</li>
+        </ul></li>
+        <li>
+    gdsfactory.routing.get_route_from_steps
+
+        <ul>
+          <li><a href="routing.html#module-gdsfactory.routing.get_route_from_steps">module</a>
+</li>
+        </ul></li>
+        <li>
+    gdsfactory.types
+
+        <ul>
+          <li><a href="component_intro.html#module-gdsfactory.types">module</a>
+</li>
+        </ul></li>
+        <li>
+    GDSPATH
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-merge_gds-arg-GDSPATH">gf-gds-merge_gds command line option</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-gds-write_cells-arg-GDSPATH">gf-gds-write_cells command line option</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-mask-write_labels-arg-GDSPATH">gf-mask-write_labels command line option</a>
+</li>
+        </ul></li>
+        <li>
+    GDSPATH1
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-diff-arg-GDSPATH1">gf-gds-diff command line option</a>
+</li>
+        </ul></li>
+        <li>
+    GDSPATH2
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-diff-arg-GDSPATH2">gf-gds-diff command line option</a>
+</li>
+        </ul></li>
+        <li><a href="routing.html#gdsfactory.routing.get_bundle.get_bundle">get_bundle() (in module gdsfactory.routing.get_bundle)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_bundle_corner.get_bundle_corner">get_bundle_corner() (in module gdsfactory.routing.get_bundle_corner)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_bundle_from_steps.get_bundle_from_steps">get_bundle_from_steps() (in module gdsfactory.routing.get_bundle_from_steps)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_bundle_from_waypoints.get_bundle_from_waypoints">get_bundle_from_waypoints() (in module gdsfactory.routing.get_bundle_from_waypoints)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_bundle_path_length_match.get_bundle_path_length_match">get_bundle_path_length_match() (in module gdsfactory.routing.get_bundle_path_length_match)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_bundle.get_bundle_same_axis">get_bundle_same_axis() (in module gdsfactory.routing.get_bundle)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_bundle_u.get_bundle_udirect">get_bundle_udirect() (in module gdsfactory.routing.get_bundle_u)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_bundle_u.get_bundle_uindirect">get_bundle_uindirect() (in module gdsfactory.routing.get_bundle_u)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.get_layers">get_layers() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.get_netlist">get_netlist() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.get_netlist_yaml">get_netlist_yaml() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.get_ports_dict">get_ports_dict() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.get_ports_list">get_ports_list() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.get_ports_xsize">get_ports_xsize() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.get_ports_ysize">get_ports_ysize() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_route.get_route">get_route() (in module gdsfactory.routing.get_route)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_route.get_route_electrical">get_route_electrical() (in module gdsfactory.routing.get_route)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_route_from_steps.get_route_from_steps">get_route_from_steps() (in module gdsfactory.routing.get_route_from_steps)</a>
+</li>
+        <li><a href="routing.html#gdsfactory.routing.get_route.get_route_from_waypoints">get_route_from_waypoints() (in module gdsfactory.routing.get_route)</a>
+</li>
+        <li>
+    gf command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-version">--version</a>
+</li>
+        </ul></li>
+        <li>
+    gf-gds-diff command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-diff-x">--xor</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-gds-diff-x">-x</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-gds-diff-arg-GDSPATH1">GDSPATH1</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-gds-diff-arg-GDSPATH2">GDSPATH2</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    gf-gds-layermap_to_dataclass command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-layermap_to_dataclass-f">--force</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-gds-layermap_to_dataclass-f">-f</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-gds-layermap_to_dataclass-arg-FILEPATH">FILEPATH</a>
+</li>
+        </ul></li>
+        <li>
+    gf-gds-merge_gds command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-merge_gds-arg-DIRPATH">DIRPATH</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-gds-merge_gds-arg-GDSPATH">GDSPATH</a>
+</li>
+        </ul></li>
+        <li>
+    gf-gds-show command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-show-arg-FILENAME">FILENAME</a>
+</li>
+        </ul></li>
+        <li>
+    gf-gds-write_cells command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-gds-write_cells-arg-GDSPATH">GDSPATH</a>
+</li>
+        </ul></li>
+        <li>
+    gf-mask-build_devices command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-mask-build_devices-arg-REGEX">REGEX</a>
+</li>
+        </ul></li>
+        <li>
+    gf-mask-build_does command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-mask-build_does-arg-YAMLPATH">YAMLPATH</a>
+</li>
+        </ul></li>
+        <li>
+    gf-mask-clean command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-mask-clean-f">--force</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-mask-clean-f">-f</a>
+</li>
+        </ul></li>
+        <li>
+    gf-mask-write_labels command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-mask-write_labels-arg-GDSPATH">GDSPATH</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-mask-write_labels-arg-LAYER_LABEL">LAYER_LABEL</a>
+</li>
+        </ul></li>
+        <li>
+    gf-mask-write_metadata command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-mask-write_metadata-arg-LAYER_LABEL">LAYER_LABEL</a>
+</li>
+        </ul></li>
+        <li>
+    gf-tool-config command line option
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-tool-config-arg-KEY">KEY</a>
+</li>
+        </ul></li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_array">grating_coupler_array() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_circular">grating_coupler_circular() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_elliptical">grating_coupler_elliptical() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_elliptical_arbitrary">grating_coupler_elliptical_arbitrary() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_elliptical_lumerical">grating_coupler_elliptical_lumerical() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_elliptical_te">grating_coupler_elliptical_te() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_elliptical_tm">grating_coupler_elliptical_tm() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_elliptical_trenches">grating_coupler_elliptical_trenches() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_loss_fiber_array">grating_coupler_loss_fiber_array() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_loss_fiber_array4">grating_coupler_loss_fiber_array4() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_loss_fiber_single">grating_coupler_loss_fiber_single() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_rectangular">grating_coupler_rectangular() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_rectangular_arbitrary">grating_coupler_rectangular_arbitrary() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_rectangular_arbitrary_slab">grating_coupler_rectangular_arbitrary_slab() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_te">grating_coupler_te() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_tm">grating_coupler_tm() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.grating_coupler_tree">grating_coupler_tree() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.cross_section.heater_metal">heater_metal() (in module gdsfactory.cross_section)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.hline">hline() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.is_unlocked">is_unlocked() (gdsfactory.component.Component method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="K" class="genindex-section">
+  <h2>K</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    KEY
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-tool-config-arg-KEY">gf-tool-config command line option</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.L">L() (in module gdsfactory.components)</a>
+</li>
+        <li>
+    LAYER_LABEL
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-mask-write_labels-arg-LAYER_LABEL">gf-mask-write_labels command line option</a>
+</li>
+          <li><a href="cli.html#cmdoption-gf-mask-write_metadata-arg-LAYER_LABEL">gf-mask-write_metadata command line option</a>
+</li>
+        </ul></li>
+        <li><a href="components.html#gdsfactory.components.litho_calipers">litho_calipers() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.litho_steps">litho_steps() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.lock">lock() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.logo">logo() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.loop_mirror">loop_mirror() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.loss_deembedding_ch12_34">loss_deembedding_ch12_34() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.loss_deembedding_ch13_24">loss_deembedding_ch13_24() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.loss_deembedding_ch14_23">loss_deembedding_ch14_23() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.metadata_child">metadata_child (gdsfactory.component.Component property)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.metal1">metal1() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.metal2">metal2() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.metal3">metal3() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.mirror">mirror() (gdsfactory.component.Component method)</a>
+
+        <ul>
+          <li><a href="api.html#gdsfactory.functions.mirror">(in module gdsfactory.functions)</a>
+</li>
+        </ul></li>
+        <li><a href="components.html#gdsfactory.components.mmi1x2">mmi1x2() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mmi2x2">mmi2x2() (in module gdsfactory.components)</a>
+</li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="api.html#module-gdsfactory.cross_section">gdsfactory.cross_section</a>
+</li>
+          <li><a href="api.html#module-gdsfactory.functions">gdsfactory.functions</a>
+</li>
+          <li><a href="routing.html#module-gdsfactory.routing.get_route">gdsfactory.routing.get_route</a>
+</li>
+          <li><a href="routing.html#module-gdsfactory.routing.get_route_from_steps">gdsfactory.routing.get_route_from_steps</a>
+</li>
+          <li><a href="component_intro.html#module-gdsfactory.types">gdsfactory.types</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.move">move() (gdsfactory.component.Component method)</a>
+
+        <ul>
+          <li><a href="api.html#gdsfactory.functions.move">(in module gdsfactory.functions)</a>
+</li>
+        </ul></li>
+        <li><a href="api.html#gdsfactory.functions.move_port_to_zero">move_port_to_zero() (in module gdsfactory.functions)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi">mzi() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi1x2_2x2">mzi1x2_2x2() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi2x2_2x2">mzi2x2_2x2() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi_arm">mzi_arm() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi_arms">mzi_arms() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi_coupler">mzi_coupler() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi_lattice">mzi_lattice() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi_pads_center">mzi_pads_center() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi_phase_shifter">mzi_phase_shifter() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzi_phase_shifter_top_heater_metal">mzi_phase_shifter_top_heater_metal() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzit">mzit() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.mzit_lattice">mzit_lattice() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.cross_section.nitride">nitride() (in module gdsfactory.cross_section)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.nxn">nxn() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.pad">pad() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.pad_array">pad_array() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.pad_gsg_open">pad_gsg_open() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.pad_gsg_short">pad_gsg_short() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.pads_shorted">pads_shorted() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.pin">pin() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.pixel">pixel() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.plot">plot() (gdsfactory.component.Component method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.plot_netlist">plot_netlist() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.ploth">ploth() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.pn">pn() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.port_by_orientation_ccw">port_by_orientation_ccw() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.port_by_orientation_cw">port_by_orientation_cw() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.ports_layer">ports_layer (gdsfactory.component.Component property)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.pprint">pprint() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.pprint_ports">pprint_ports() (gdsfactory.component.Component method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Q" class="genindex-section">
+  <h2>Q</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.qrcode">qrcode() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.ramp">ramp() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.rectangle">rectangle() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.rectangle_with_slits">rectangle_with_slits() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.ref">ref() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.ref_center">ref_center() (gdsfactory.component.Component method)</a>
+</li>
+        <li>
+    REGEX
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-mask-build_devices-arg-REGEX">gf-mask-build_devices command line option</a>
+</li>
+        </ul></li>
+        <li><a href="api.html#gdsfactory.component.Component.remove_layers">remove_layers() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.resistance_meander">resistance_meander() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.resistance_sheet">resistance_sheet() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.rib">rib() (in module gdsfactory.cross_section)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.cross_section.rib_heater_doped">rib_heater_doped() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.rib_heater_doped_contact">rib_heater_doped_contact() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.ring">ring() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.ring_double">ring_double() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.ring_double_heater">ring_double_heater() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.ring_single">ring_single() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.ring_single_array">ring_single_array() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.ring_single_dut">ring_single_dut() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.ring_single_heater">ring_single_heater() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.rotate">rotate() (gdsfactory.component.Component method)</a>
+
+        <ul>
+          <li><a href="api.html#gdsfactory.functions.rotate">(in module gdsfactory.functions)</a>
+</li>
+        </ul></li>
+        <li><a href="routing.html#gdsfactory.routing.route_ports_to_side.route_ports_to_side">route_ports_to_side() (in module gdsfactory.routing.route_ports_to_side)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.seal_ring">seal_ring() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.show">show() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.size_info">size_info (gdsfactory.component.Component property)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.spiral">spiral() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.spiral_circular">spiral_circular() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.spiral_external_io">spiral_external_io() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.spiral_inner_io">spiral_inner_io() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.spiral_inner_io_fiber_single">spiral_inner_io_fiber_single() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.splitter_chain">splitter_chain() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.splitter_tree">splitter_tree() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.staircase">staircase() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight">straight() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_array">straight_array() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_heater_doped_rib">straight_heater_doped_rib() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_heater_doped_strip">straight_heater_doped_strip() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_heater_meander">straight_heater_meander() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.straight_heater_metal">straight_heater_metal() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_heater_metal_90_90">straight_heater_metal_90_90() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_heater_metal_undercut">straight_heater_metal_undercut() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_heater_metal_undercut_90_90">straight_heater_metal_undercut_90_90() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_pin">straight_pin() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_pin_slot">straight_pin_slot() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_pn">straight_pn() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_rib">straight_rib() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.straight_rib_tapered">straight_rib_tapered() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.strip">strip() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.strip_auto_widen">strip_auto_widen() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.strip_heater_doped">strip_heater_doped() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.strip_heater_doped_contact">strip_heater_doped_contact() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.strip_heater_metal">strip_heater_metal() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.strip_heater_metal_undercut">strip_heater_metal_undercut() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.strip_rib_tip">strip_rib_tip() (in module gdsfactory.cross_section)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.switch_tree">switch_tree() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.taper">taper() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper2">taper2() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_0p5_to_3_l36">taper_0p5_to_3_l36() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_cross_section_linear">taper_cross_section_linear() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_cross_section_sine">taper_cross_section_sine() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_from_csv">taper_from_csv() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_parabolic">taper_parabolic() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_strip_to_ridge">taper_strip_to_ridge() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_strip_to_ridge_trenches">taper_strip_to_ridge_trenches() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_w10_l100">taper_w10_l100() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_w10_l150">taper_w10_l150() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.taper_w10_l200">taper_w10_l200() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_w11_l200">taper_w11_l200() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.taper_w12_l200">taper_w12_l200() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.text">text() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.text_rectangular">text_rectangular() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.text_rectangular_multi_layer">text_rectangular_multi_layer() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.to_dict">to_dict() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.to_dict_polygons">to_dict_polygons() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.to_yaml">to_yaml() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.cross_section.Transition">Transition (class in gdsfactory.cross_section)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.triangle">triangle() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.unlock">unlock() (gdsfactory.component.Component method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.functions.update_info">update_info() (in module gdsfactory.functions)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.validate">validate() (gdsfactory.component.Component class method)</a>
+
+        <ul>
+          <li><a href="api.html#gdsfactory.cross_section.CrossSection.validate">(gdsfactory.cross_section.CrossSection class method)</a>
+</li>
+        </ul></li>
+        <li><a href="components.html#gdsfactory.components.verniers">verniers() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.version_stamp">version_stamp() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.via">via() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.via1">via1() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.via2">via2() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.via_cutback">via_cutback() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.viac">viac() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="components.html#gdsfactory.components.wire_corner">wire_corner() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.wire_sbend">wire_sbend() (in module gdsfactory.components)</a>
+</li>
+        <li><a href="components.html#gdsfactory.components.wire_straight">wire_straight() (in module gdsfactory.components)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api.html#gdsfactory.component.Component.write_gds">write_gds() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.write_gds_with_metadata">write_gds_with_metadata() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.write_netlist">write_netlist() (gdsfactory.component.Component method)</a>
+</li>
+        <li><a href="api.html#gdsfactory.component.Component.write_netlist_dot">write_netlist_dot() (gdsfactory.component.Component method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Y" class="genindex-section">
+  <h2>Y</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    YAMLPATH
+
+        <ul>
+          <li><a href="cli.html#cmdoption-gf-mask-build_does-arg-YAMLPATH">gf-mask-build_does command line option</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    </body>
+</html>

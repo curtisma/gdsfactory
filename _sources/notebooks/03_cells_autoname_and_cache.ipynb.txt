@@ -1,0 +1,478 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Cell\n",
+    "\n",
+    "Problem:\n",
+    "\n",
+    "In GDS format\n",
+    "\n",
+    "- each cell must have a unique name. Ideally the name is also consitent from different run times, in case you want to merge GDS files that were created at different times or computers.\n",
+    "- two cells stored in the GDS file cannot have the same name. Ideally they will be references to the same Cell. See `References tutorial`. That way we only have to store that cell in memory once and all the references are just pointers to that cell.\n",
+    "\n",
+    "Solution: The decorator `@gf.cell` addresses all these issues:\n",
+    "\n",
+    "1. Gives the cell a unique name depending on the parameters that you pass to it.\n",
+    "2. Creates a cache of cells where we use the cell name as the key. The first time the function runs, the cache stores the component, so the second time, you get the component directly from the cache, so you don't create the same cell twice.\n",
+    "\n",
+    "\n",
+    "Also, thanks to the @cell decorator, GDS cells in gdsfactory include an `metadata` dictionary where you can access any metadata from the cell:\n",
+    "\n",
+    "- `changed` settings used to create the cell\n",
+    "- `default` settings in function signature\n",
+    "- `full` full settings\n",
+    "- name\n",
+    "- function_name\n",
+    "- module\n",
+    "\n",
+    "\n",
+    "For creating Components you can define them in a function, and to make sure that the component gets a good name you just need to add the `@cell` decorator to that function\n",
+    "\n",
+    "Lets see how it works."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import gdsfactory as gf\n",
+    "\n",
+    "# gf.CONF.plotter = 'holoviews'\n",
+    "\n",
+    "\n",
+    "@gf.cell\n",
+    "def wg(length=10, width=1):\n",
+    "    print(\"BUILDING waveguide\")\n",
+    "    c = gf.Component()\n",
+    "    c.add_polygon([(0, 0), (length, 0), (length, width), (0, width)], layer=(1, 0))\n",
+    "    c.add_port(name=\"o1\", midpoint=[0, width / 2], width=width, orientation=180)\n",
+    "    c.add_port(name=\"o2\", midpoint=[length, width / 2], width=width, orientation=0)\n",
+    "    return c"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "See how the cells get the name from the parameters that you pass them"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c = wg()\n",
+    "print(c)\n",
+    "\n",
+    "# The second time you will get this cell from the cache\n",
+    "c = wg()\n",
+    "print(c)\n",
+    "\n",
+    "# If you call the cell with different parameters, the cell will get a different name\n",
+    "c = wg(width=0.5)\n",
+    "print(c)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c.metadata.changed"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c.metadata.default"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c.metadata.full"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c.pprint()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "thanks to `gf.cell` you can also add any metadata `info` relevant to the cell"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c = wg(length=3, info=dict(polarization=\"te\", wavelength=1.55))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c.pprint()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(c.metadata.info.wavelength)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Metadata\n",
+    "\n",
+    "Together with the GDS files that you send to the foundry you can also store some metadata in YAML for each cell containing all the settings that we used to build the GDS.\n",
+    "\n",
+    "the metadata will consists of all the parameters that were passed to the component function as well as derived properties\n",
+    "\n",
+    "- settings: includes all component metadata\n",
+    "    - derived properties\n",
+    "    - external metadata (test_protocol, docs, ...)\n",
+    "    - simulation_settings\n",
+    "    - function_name\n",
+    "    - name: for the component\n",
+    "    - name_long: for the component\n",
+    "    - full: full list of settings\n",
+    "    - changed: changed settings\n",
+    "    - default: includes the default signature of the component\n",
+    "- ports: port name, width, orientation\n",
+    "- cells:\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "How can you have add two different references to a cell with the same parameters?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import gdsfactory as gf\n",
+    "\n",
+    "c = gf.Component(\"problem\")\n",
+    "R1 = gf.components.rectangle(\n",
+    "    size=(4, 2), layer=(2, 0)\n",
+    ")  # Creates a rectangle (same Unique ID uid)\n",
+    "R2 = gf.components.rectangle(size=(4, 2), layer=(3, 0))\n",
+    "# Try Create a new rectangle that we want to change (but has the same name so we will get R1 from the cache)\n",
+    "\n",
+    "r1r = c << R1  # Add the first rectangle to c\n",
+    "r2r = c << R2  # Add the second rectangle to c\n",
+    "r2r.move((4, 2))\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(R1 == R2)\n",
+    "print(R1)\n",
+    "print(R2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# lets do it cleaner with references\n",
+    "import gdsfactory as gf\n",
+    "\n",
+    "c = gf.Component(\"solution\")\n",
+    "R = gf.components.rectangle(size=(4, 2), layer=(2, 0))\n",
+    "\n",
+    "r1 = c << R  # Add the first rectangle reference to c\n",
+    "r2 = c << R  # Add the second rectangle reference to c\n",
+    "\n",
+    "r2.rotate(45)\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import gdsfactory as gf\n",
+    "\n",
+    "c = gf.components.straight()\n",
+    "c.show()\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can even show ports of all references with `component.show(show_subports=True)`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c = gf.components.mzi_phase_shifter(length_x=50)\n",
+    "c.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Cache\n",
+    "\n",
+    "To avoid that 2 exact cells are not references of the same cell the `cell` decorator has a\n",
+    "cache where if a component has already been built it will return the component\n",
+    "from the cache\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "@gf.cell\n",
+    "def wg(length=10, width=1):\n",
+    "    c = gf.Component()\n",
+    "    c.add_polygon([(0, 0), (length, 0), (length, width), (0, width)], layer=(1, 0))\n",
+    "    print(\"BUILDING waveguide\")\n",
+    "    return c"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gf.clear_cache()\n",
+    "\n",
+    "wg1 = wg()  # cell builds a straight\n",
+    "print(wg1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "wg2 = wg()\n",
+    "# cell returns the same straight as before without having to run the function\n",
+    "print(wg2)  # notice that they have the same uuid (unique identifier)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "wg2.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from gdsfactory.cell import print_cache"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Lets say that you change the code of the straight function in a jupyter notebook like this one.  (I mostly use Vim/VsCode/Pycharm for creating new cells in python)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print_cache()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "wg3 = wg()\n",
+    "wg4 = wg(length=11)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print_cache()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gf.clear_cache()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To enable nice notebook tutorials, every time we show a cell in Matplotlib or Klayout, you can clear the cache,\n",
+    "\n",
+    "in case you want to develop cells in jupyter notebooks or an IPython kernel"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print_cache()  # cache is now empty"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Validate argument types\n",
+    "\n",
+    "By default, also `@cell` validates arguments based on their type annotations.\n",
+    "To make sure you pass the correct arguments to the cell it runs a validator that checks the type annotations for the function.\n",
+    "\n",
+    "\n",
+    "For example this will be correct\n",
+    "\n",
+    "```python\n",
+    "import gdsfactory as gf\n",
+    "\n",
+    "@gf.cell\n",
+    "def straigth_waveguide(length:float):\n",
+    "    return gf.components.straight(length=length)\n",
+    "\n",
+    "\n",
+    "component = straigth_waveguide(length=3)\n",
+    "```\n",
+    "\n",
+    "While this will raise an error, because you are passing a length that is a string, so it cannot convert it to a float\n",
+    "\n",
+    "\n",
+    "```python\n",
+    "component = straigth_waveguide(length='long')\n",
+    "```\n",
+    "\n",
+    "```bash\n",
+    "ValidationError: 1 validation error for StraigthWaveguide\n",
+    "length\n",
+    "  value is not a valid float (type=type_error.float)\n",
+    "\n",
+    "```\n",
+    "\n",
+    "by default `@cell` validates all arguments using [pydantic](https://pydantic-docs.helpmanual.io/usage/validation_decorator/#argument-types)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "@gf.cell\n",
+    "def straigth_waveguide(length: float):\n",
+    "    print(type(length))\n",
+    "    return gf.components.straight(length=length)\n",
+    "\n",
+    "\n",
+    "# It will also convert an `int` to a `float`\n",
+    "c = straigth_waveguide(length=3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

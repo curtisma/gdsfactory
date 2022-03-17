@@ -1,0 +1,986 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="gdsfactory 4.4.12" href="README.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="gdsfactory">
+<h1>Gdsfactory<a class="headerlink" href="#gdsfactory" title="Permalink to this headline">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">gdsfactory 4.4.12</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#documentation">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#plugins">Plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="README.html#trimesh">Trimesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README.html#lumerical-fdtd">Lumerical FDTD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README.html#meep-mpb">meep / mpb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README.html#sax">SAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README.html#tidy3d">tidy3d</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#changelog">CHANGELOG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#acks">Acks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#links">Links</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Git Python Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__git.html">Git: Version control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__git.html#Git-is-an-enabling-technology:-Use-version-control-for-everything">Git is an enabling technology: Use version control for everything</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__git.html#Very-high-level-picture:-an-overview-of-key-concepts">Very high level picture: an overview of key concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__git.html#First-things-first:-git-must-be-configured-before-first-use">First things first: git must be configured before first use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__git.html#Stage-0:-Configure-GIT">Stage 0: Configure GIT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__git.html#Stage-1:-Local,-single-user,-linear-workflow">Stage 1: Local, single-user, linear workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__git.html#Local-user,-branching">Local user, branching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__git.html#Using-remotes-as-a-single-user">Using remotes as a single user</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__git.html#Git-resources">Git resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__git.html#Photonics-resources">Photonics resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__python_intro.html">Python intro</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__python_intro.html#Classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__python_intro.html#Functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__python_intro.html#Factories">Factories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__python_intro.html#Decorators">Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__python_intro.html#List-comprehensions">List comprehensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__python_intro.html#Functional-programming">Functional programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00__python_intro.html#Ipython">Ipython</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Layout Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00_geometry.html">Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00_geometry.html#Connect-ports">Connect <strong>ports</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00_geometry.html#Move-and-rotate-references">Move and rotate references</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00_geometry.html#Ports">Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00_geometry.html#References">References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00_geometry.html#Labels">Labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00_geometry.html#Boolean-shapes">Boolean shapes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00_geometry.html#Move-Reference-by-port">Move Reference by port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00_geometry.html#Mirror-reference">Mirror reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/00_geometry.html#Write-GDS">Write GDS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/01_references.html">References</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/01_references.html#Modifying-the-referenced-geometry">Modifying the referenced geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/01_references.html#Arrays-of-references">Arrays of references</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/01_references.html#Connect-references">Connect references</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/01_references.html#Port-naming">Port naming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/01_references.html#component_sequence">component_sequence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_cells_autoname_and_cache.html">Cell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_cells_autoname_and_cache.html#Metadata">Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_cells_autoname_and_cache.html#Cache">Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_cells_autoname_and_cache.html#Validate-argument-types">Validate argument types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_layers.html">Technology</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_layers.html#Layers">Layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_layers.html#Custom-cross_section">Custom cross_section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_layers.html#3D-rendering">3D rendering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html">Paths and straights</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Path-creation">Path creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Defining-the-cross-section">Defining the cross-section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Building-Paths-quickly">Building Paths quickly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Waypoint-smooth-paths">Waypoint smooth paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Waypoint-sharp-paths">Waypoint sharp paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Custom-curves">Custom curves</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Simplifying-/-reducing-point-usage">Simplifying / reducing point usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Curvature-calculation">Curvature calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Transitioning-between-cross-sections">Transitioning between cross-sections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Variable-width-/-offset">Variable width / offset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Offsetting-a-Path">Offsetting a Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#Modifying-a-CrossSection">Modifying a CrossSection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html#cross-section">cross-section</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_.html">Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Basic-shapes">Basic shapes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Text">Text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Grid-/-packer-/-align-/-distribute">Grid / packer / align / distribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Boolean-/-outline-/-offset-/-invert">Boolean / outline / offset / invert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Lithography-structures">Lithography structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Paths-/-straights">Paths / straights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Importing-GDS-files">Importing GDS files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#LayerSet">LayerSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Useful-contact-pads-/-connectors">Useful contact pads / connectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Chip-/-die-template">Chip / die template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Optimal-superconducting-curves">Optimal superconducting curves</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_.html#Copying-and-extracting-geometry">Copying and extracting geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_hierarchy.html">Components with hierarchy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_hierarchy.html#functools.partial">functools.partial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_hierarchy.html#PDK-custom-fab">PDK custom fab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_components_hierarchy.html#Composing-functions">Composing functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_routing.html">Routing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_routing.html#get_route">get_route</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_routing.html#auto-widen">auto-widen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_routing.html#get_route_from_waypoints">get_route_from_waypoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_routing.html#get_route_from_steps">get_route_from_steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_routing.html#get_bundle">get_bundle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_routing.html#get_bundle_from_waypoints">get_bundle_from_waypoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_routing.html#get_bundle_from_steps">get_bundle_from_steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_routing.html#get_bundle_path_length_match">get_bundle_path_length_match</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_routing.html#Route-to-IO-(Pads,-grating-couplers-...)">Route to IO (Pads, grating couplers …)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/041_routing_electical.html">Routing (electrical)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/041_routing_electical.html#Single-route-functions">Single route functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/041_routing_electical.html#get_route_from_steps">get_route_from_steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/041_routing_electical.html#Bundle-of-routes-(get_bundle_electrical)">Bundle of routes (get_bundle_electrical)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/041_routing_electical.html#get-bundle-from-steps">get bundle from steps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/05_GDS.html">GDS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/05_GDS.html#GDS-output">GDS output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/05_GDS.html#GDS-input">GDS input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/05_GDS.html#Import-PDK">Import PDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/06_component_circuit_mask.html#Component">Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/06_component_circuit_mask.html#Circuits">Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/06_component_circuit_mask.html#Mask">Mask</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_mask.html">Masks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/06_mask.html#Pack">Pack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/06_mask.html#Grid">Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/06_mask.html#Mask">Mask</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/07_yaml_component.html">Netlist driven flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/07_yaml_component.html#instances">instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/07_yaml_component.html#placements">placements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/07_yaml_component.html#ports">ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/07_yaml_component.html#connections">connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/07_yaml_component.html#routes">routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/07_yaml_component.html#instances,-placements,-connections,-ports,-routes">instances, placements, connections, ports, routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/07_yaml_component.html#variables">variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/07_yaml_component.html#get_netlist-(Component--&gt;-YAML)">get_netlist (Component -&gt; YAML)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/07_yaml_component.html#Plot-netlist">Plot netlist</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/common_mistakes.html">Common mistakes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/common_mistakes.html#1.-Creating-cells-without-cell-decorator">1. Creating cells without <code class="docutils literal notranslate"><span class="pre">cell</span></code> decorator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html#component-simulation">Component simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html#circuit-simulation">Circuit simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html#store-cache-simulations">Store / cache simulations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="component_intro.html">Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="component_intro.html#layers">Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="component_intro.html#types">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="component_intro.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#component">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-gdsfactory.cross_section">CrossSection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-gdsfactory.functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#module-gdsfactory.routing.get_route">get_route</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#module-gdsfactory.routing.get_route_from_steps">get_route_from_steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#get-bundle">get_bundle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#get-bundle-from-steps">get_bundle_from_steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#route-ports-to-side">route_ports_to_side</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#get-bundle-from-waypoints">get_bundle_from_waypoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#get-bundle-path-length-match">get_bundle_path_length_match</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#add-fiber-array-add-fiber-single">add_fiber_array / add_fiber_single</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="yaml.html">YAML</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html#netlist">Netlist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html#mask">Mask</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="components.html#c">C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#l">L</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#add-fidutials">add_fidutials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#add-frame">add_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#align-wafer">align_wafer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#array">array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#array-with-fanout">array_with_fanout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#array-with-fanout-2d">array_with_fanout_2d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#array-with-via">array_with_via</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#array-with-via-2d">array_with_via_2d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#awg">awg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bbox">bbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bend-circular">bend_circular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bend-circular180">bend_circular180</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bend-circular-heater">bend_circular_heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bend-euler">bend_euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bend-euler180">bend_euler180</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bend-euler-s">bend_euler_s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bend-port">bend_port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bend-s">bend_s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#bend-straight-bend">bend_straight_bend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cavity">cavity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cdc">cdc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cdsem-all">cdsem_all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#circle">circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#compass">compass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#compensation-path">compensation_path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#component-lattice">component_lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#component-sequence">component_sequence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#contact">contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#contact-heater-m3">contact_heater_m3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#contact-slab-m3">contact_slab_m3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#contact-slot">contact_slot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#contact-slot-m1-m2">contact_slot_m1_m2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#contact-with-offset">contact_with_offset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#copy-layers">copy_layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler">coupler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler90">coupler90</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler90bend">coupler90bend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler90circular">coupler90circular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler-adiabatic">coupler_adiabatic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler-asymmetric">coupler_asymmetric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler-full">coupler_full</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler-ring">coupler_ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler-straight">coupler_straight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#coupler-symmetric">coupler_symmetric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cross">cross</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#crossing">crossing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#crossing45">crossing45</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#crossing-arm">crossing_arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#crossing-etched">crossing_etched</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#crossing-from-taper">crossing_from_taper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cutback-bend">cutback_bend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cutback-bend180">cutback_bend180</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cutback-bend180circular">cutback_bend180circular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cutback-bend90">cutback_bend90</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cutback-bend90circular">cutback_bend90circular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cutback-component">cutback_component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cutback-component-mirror">cutback_component_mirror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#dbr">dbr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#dbr-tapered">dbr_tapered</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#delay-snake">delay_snake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#delay-snake2">delay_snake2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#delay-snake3">delay_snake3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#delay-snake-sbend">delay_snake_sbend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#dicing-lane">dicing_lane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#die">die</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#die-bbox">die_bbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#die-bbox-frame">die_bbox_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#disk">disk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#ellipse">ellipse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#extend-port">extend_port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#extend-ports">extend_ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#fiber">fiber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#fiber-array">fiber_array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-array">grating_coupler_array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-circular">grating_coupler_circular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-elliptical">grating_coupler_elliptical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-elliptical-arbitrary">grating_coupler_elliptical_arbitrary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-elliptical-lumerical">grating_coupler_elliptical_lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-elliptical-te">grating_coupler_elliptical_te</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-elliptical-tm">grating_coupler_elliptical_tm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-elliptical-trenches">grating_coupler_elliptical_trenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-loss-fiber-array">grating_coupler_loss_fiber_array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-loss-fiber-array4">grating_coupler_loss_fiber_array4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-loss-fiber-single">grating_coupler_loss_fiber_single</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-rectangular">grating_coupler_rectangular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-rectangular-arbitrary">grating_coupler_rectangular_arbitrary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-rectangular-arbitrary-slab">grating_coupler_rectangular_arbitrary_slab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-te">grating_coupler_te</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-tm">grating_coupler_tm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#grating-coupler-tree">grating_coupler_tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#hline">hline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#litho-calipers">litho_calipers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#litho-steps">litho_steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#logo">logo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#loop-mirror">loop_mirror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#loss-deembedding-ch12-34">loss_deembedding_ch12_34</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#loss-deembedding-ch13-24">loss_deembedding_ch13_24</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#loss-deembedding-ch14-23">loss_deembedding_ch14_23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mmi1x2">mmi1x2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mmi2x2">mmi2x2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi">mzi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi1x2-2x2">mzi1x2_2x2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi2x2-2x2">mzi2x2_2x2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi-arm">mzi_arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi-arms">mzi_arms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi-coupler">mzi_coupler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi-lattice">mzi_lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi-pads-center">mzi_pads_center</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi-phase-shifter">mzi_phase_shifter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzi-phase-shifter-top-heater-metal">mzi_phase_shifter_top_heater_metal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzit">mzit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#mzit-lattice">mzit_lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#nxn">nxn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#pad">pad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#pad-array">pad_array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#pad-gsg-open">pad_gsg_open</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#pad-gsg-short">pad_gsg_short</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#pads-shorted">pads_shorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#pixel">pixel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#qrcode">qrcode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#ramp">ramp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#rectangle">rectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#rectangle-with-slits">rectangle_with_slits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#resistance-meander">resistance_meander</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#resistance-sheet">resistance_sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#ring">ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#ring-double">ring_double</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#ring-double-heater">ring_double_heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#ring-single">ring_single</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#ring-single-array">ring_single_array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#ring-single-dut">ring_single_dut</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#ring-single-heater">ring_single_heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#seal-ring">seal_ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#spiral">spiral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#spiral-circular">spiral_circular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#spiral-external-io">spiral_external_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#spiral-inner-io">spiral_inner_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#spiral-inner-io-fiber-single">spiral_inner_io_fiber_single</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#splitter-chain">splitter_chain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#splitter-tree">splitter_tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#staircase">staircase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight">straight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-array">straight_array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-heater-doped-rib">straight_heater_doped_rib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-heater-doped-strip">straight_heater_doped_strip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-heater-meander">straight_heater_meander</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-heater-metal">straight_heater_metal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-heater-metal-90-90">straight_heater_metal_90_90</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-heater-metal-undercut">straight_heater_metal_undercut</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-heater-metal-undercut-90-90">straight_heater_metal_undercut_90_90</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-pin">straight_pin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-pin-slot">straight_pin_slot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-pn">straight_pn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-rib">straight_rib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#straight-rib-tapered">straight_rib_tapered</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#switch-tree">switch_tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper">taper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper2">taper2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-0p5-to-3-l36">taper_0p5_to_3_l36</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-cross-section-linear">taper_cross_section_linear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-cross-section-sine">taper_cross_section_sine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-from-csv">taper_from_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-parabolic">taper_parabolic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-strip-to-ridge">taper_strip_to_ridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-strip-to-ridge-trenches">taper_strip_to_ridge_trenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-w10-l100">taper_w10_l100</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-w10-l150">taper_w10_l150</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-w10-l200">taper_w10_l200</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-w11-l200">taper_w11_l200</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#taper-w12-l200">taper_w12_l200</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#text">text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#text-rectangular">text_rectangular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#text-rectangular-multi-layer">text_rectangular_multi_layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#triangle">triangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#verniers">verniers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#version-stamp">version_stamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#via">via</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#via1">via1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#via2">via2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#via-cutback">via_cutback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#viac">viac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#wire-corner">wire_corner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#wire-sbend">wire_sbend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#wire-straight">wire_straight</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">gf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#gf-gds">gds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-gds-diff">diff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-gds-layermap-to-dataclass">layermap_to_dataclass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-gds-merge-gds">merge_gds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-gds-show">show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-gds-write-cells">write_cells</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#gf-mask">mask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-mask-build-devices">build_devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-mask-build-does">build_does</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-mask-clean">clean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-mask-write-labels">write_labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-mask-write-metadata">write_metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#gf-tool">tool</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-tool-config">config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-tool-install">install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html#gf-tool-test">test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#testing-your-own-component-factories">Testing your own component factories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#gdsdiff">gdsdiff</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">CHANGELOG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id1">4.4.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id2">4.4.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id3">4.4.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id4">4.4.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id5">4.4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id6">4.4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id7">4.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id8">4.3.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id9">4.3.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id10">4.3.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id11">4.3.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id12">4.3.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id13">4.3.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id14">4.3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id15">4.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id16">4.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id17">4.2.17</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id18">4.2.16</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id19">4.2.15</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id20">4.2.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id21">4.2.13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id22">4.2.13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id23">4.2.12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id24">4.2.11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id25">4.2.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id26">4.2.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id27">4.2.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id28">4.2.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id29">4.2.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id30">4.2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id31">4.2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id32">4.2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id33">4.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id34">4.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id35">4.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id36">4.1.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id37">4.1.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id38">4.1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id39">4.1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id40">4.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id41">4.0.18</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id42">4.0.17</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id43">4.0.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id44">4.0.13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id45">4.0.12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id46">4.0.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id47">4.0.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id48">4.0.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id49">4.0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id50">4.0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id51">4.0.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id52">4.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id53">3.12.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id54">3.12.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id55">3.12.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id56">3.12.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id57">3.12.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id58">3.12.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id59">3.12.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id60">3.11.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id61">3.11.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id62">3.11.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id63">3.11.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id64">3.11.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id65">3.10.12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id66">3.10.11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id67">3.10.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id68">3.10.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id69">3.10.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id70">3.10.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id71">3.10.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id72">3.10.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id73">3.10.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id74">3.10.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id75">3.10.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id76">3.10.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id77">3.10.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id78">3.9.28</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id79">3.9.27</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id80">3.9.26</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id81">3.9.25</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id82">3.9.23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id83">3.9.22</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id84">3.9.21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id85">3.9.20</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id86">3.9.19</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id87">3.9.18</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id88">3.9.17</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id89">3.9.16</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id90">3.9.15</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id91">3.9.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id92">3.9.13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id93">3.9.12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id94">3.9.11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id95">3.9.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id96">3.9.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id97">3.9.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id98">3.9.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id99">3.9.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id100">3.9.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id101">3.9.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id102">3.9.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id103">3.9.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id104">3.9.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id105">3.9.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id106">3.8.15</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id107">3.8.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id108">3.8.13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id109">3.8.12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id110">3.8.11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id111">3.8.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id112">3.8.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id113">3.8.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id114">3.8.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id115">3.8.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id116">3.8.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id117">3.8.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id118">3.8.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id119">3.8.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id120">3.8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id121">3.8.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id122">3.7.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id123">3.7.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id124">3.7.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id125">3.7.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id126">3.7.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id127">3.7.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id128">3.7.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id129">3.7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id130">3.7.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id131">3.6.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id132">3.6.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id133">3.6.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id134">3.6.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id135">3.6.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id136">3.6.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id137">3.6.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id138">3.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id139">3.5.12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id140">3.5.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id141">3.5.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id142">3.5.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id143">3.5.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id144">3.5.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id145">3.5.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id146">3.5.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id147">3.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id148">3.5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id149">3.4.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id150">3.4.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id151">3.4.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id152">3.4.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id153">3.4.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id154">3.4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id155">3.4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id156">3.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id157">3.3.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id158">3.3.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id159">3.3.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id160">3.3.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id161">3.3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id162">3.3.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id163">3.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id164">3.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id165">3.2.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id166">3.2.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id167">3.2.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id168">3.2.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id169">3.2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id170">3.2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id171">3.2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id172">3.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id173">3.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id174">3.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id175">3.1.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id176">3.1.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id177">3.1.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id178">3.1.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id179">3.1.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id180">3.1.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id181">3.1.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id182">3.1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id183">3.1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id184">3.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id185">3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id186">3.0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id187">3.0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id188">3.0.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id189">3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id190">2.7.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id191">2.7.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id192">2.7.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id193">2.7.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id194">2.7.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id195">2.7.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id196">2.7.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id197">2.7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id198">2.7.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id199">2.6.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id200">2.6.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id201">2.6.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id202">2.6.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id203">2.6.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id204">2.6.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id205">2.6.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id206">2.6.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id207">2.6.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id208">2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id209">2.5.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id210">2.5.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id211">2.5.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id212">2.5.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id213">2.5.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id214">2.5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id215">2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id216">2.5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id217">2.4.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id218">2.4.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id219">2.4.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id220">2.4.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id221">2.4.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id222">2.4.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id223">2.4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id224">2.4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id225">2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id226">2.3.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id227">2.3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id228">2.3.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id229">2.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id230">2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id231">2.2.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id232">2.2.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id233">2.2.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id234">2.2.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id235">2.2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id236">2.2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id237">2.2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id238">2.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id239">2.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id240">2.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id241">2.1.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id242">2.1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id243">2.1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id244">2.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id245">2.0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id246">2.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id247">1.4.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id248">1.4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id249">1.4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id250">1.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id251">1.3.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id252">1.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id253">1.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id254">1.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id255">1.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id256">1.1.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id257">1.1.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id258">1.1.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id259">1.1.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id260">1.1.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id261">1.1.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id262">1.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id263">1.0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id264">1.0.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id265">1.0.0</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="README.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">gdsfactory 4.4.12</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    </body>
+</html>

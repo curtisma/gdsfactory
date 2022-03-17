@@ -1,0 +1,2991 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="metadata description" lang="en" name="description" xml:lang="en" />
+<meta content="description des métadonnées" lang="fr" name="description" xml:lang="fr" />
+<meta content="Sphinx, MyST" name="keywords" />
+<meta content="en_US" property="og:locale" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Contributing" href="contribution.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>CHANGELOG - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="plugins.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/tidy3d/00_tidy3d.html">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/plugins/simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Contributing</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="changelog">
+<h1>CHANGELOG<a class="headerlink" href="#changelog" title="Permalink to this headline">#</a></h1>
+<section id="id1">
+<h2>4.4.7<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add dx_start and dy_start to route ports to side <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/242/files">PR</a> when using route_ports_to_side to route up and to the left/right, the minimum distance of the bottom route could not be less than the separation between routes. This adds options to override this behavior and use the larger of dx_start/dy_start and the radius instead.</p></li>
+<li><p>add suffix option to select ports <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/243">PR</a></p></li>
+<li><p>Interconnect improvements <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/241">PR</a></p></li>
+<li><p>fix gdsfactory meep interface, it works now with different layer stacks <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/244">PR</a></p></li>
+</ul>
+</section>
+<section id="id2">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/239">4.4.6</a><a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix klive macro to maintain position and do not reload layers. Make sure you run <code class="docutils literal notranslate"><span class="pre">gf</span> <span class="pre">tool</span> <span class="pre">install</span></code> to update your macro after you update to the latest gdsfactory version.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/238">4.4.5</a><a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>remove absorb from coupler ring and coupler90</p></li>
+<li><p><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/237">update interconnect plugin</a></p></li>
+<li><p><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/234">add siepic labels to components</a></p></li>
+</ul>
+</section>
+<section id="id4">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/236">4.4.4</a><a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>snap_to_grid straight waveguide length to reduce 1nm DRC snapping errors</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/235">4.4.3</a><a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>document mask metadata merging</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/231">4.4.2</a><a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Component.absorb keeps paths from absorbed reference</p></li>
+<li><p>add port_name to ring_single_dut</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/227">4.4.0</a><a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>change siepic pin_length from 100nm to 10nm</p></li>
+<li><p>absorb maintains labels</p></li>
+<li><p>rename add_pins to decorator in cross_section function and class</p></li>
+<li><p>add add_pins_siepic_optical and add_pins_siepic_electrical</p></li>
+<li><p>add PORTE: Layer = (1, 11)</p></li>
+<li><p>remove add_pins_to_references and add_pins_container</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/225">4.3.10</a><a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add package data in setup.py</p></li>
+<li><p>remove bend_radius from mzit</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>4.3.8<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>move load_lyp_generic to try Except</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/222">4.3.7</a><a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add_pin_path now works with siepic</p></li>
+<li><p>add add_pins_siepic in gf.add_pins</p></li>
+<li><p>gf.path.extrude can also add pins</p></li>
+<li><p>unpin <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/issues/221">issue</a></p></li>
+</ul>
+</section>
+<section id="id11">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/217">4.3.6</a><a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add_pin_path fixes</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/216">4.3.5</a><a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename add_pin_square to add_pin_rectangle</p></li>
+<li><p>add_pin_path to gf.add_pins</p></li>
+</ul>
+</section>
+<section id="id13">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/215">4.3.4</a><a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>tidy3d improvements:</p>
+<ul>
+<li><p>get_simulation and write_sparameters accepts componentOrFactory</p></li>
+<li><p>grating_coupler simulations can also be dispersive</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id14">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/214">4.3.3</a><a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>tidy3d improvements:</p>
+<ul>
+<li><p>add dispersive flag in tidy3d get_simulation</p></li>
+<li><p>write_sparameters_batch can accept list of kwargs</p></li>
+<li><p>write_sparameters accepts with_all_monitors: if True, includes field monitors which increase results file size.</p></li>
+<li><p>add test_write_sparameters</p></li>
+<li><p>run tidy3d tests on every push as part of test_plugins CI/CD</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id15">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/213">4.3.1</a><a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>gf.components.grating_coupler_circular improvements:</p>
+<ul>
+<li><p>rename teeth_list by a simpler widths and gaps separate arguments</p></li>
+<li><p>delete grating_coupler_circular_arbitrary as it’s now unnecessary</p></li>
+<li><p>add bias_gap</p></li>
+</ul>
+</li>
+<li><p>gf.components.grating_coupler_elliptical improvements:</p>
+<ul>
+<li><p>add bias_gap</p></li>
+</ul>
+</li>
+<li><p>fix <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/212">serialization of ports</a></p></li>
+<li><p>extend_ports works with cross_sections that do not have layer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gdsfactory</span></code> also installs most of the plugins</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gdsfactory[full]</span></code> only adds SIPANN (which depends on ternsorflow, which is a heavy dependency)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id16">
+<h2>4.3.0<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>tidy3d improvements:</p>
+<ul>
+<li><p>update to version 1.1.1</p></li>
+</ul>
+</li>
+<li><p>change port angle type annotation from int to float</p></li>
+</ul>
+</section>
+<section id="id17">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/210">4.2.17</a><a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>tidy3d improvements:</p>
+<ul>
+<li><p>change tidy3d grating_coupler angle positive to be positive for the most normal case (grating coupler waveguide facing west)</p></li>
+<li><p>tidy3d plot simulations in 2D only shows one plot</p></li>
+</ul>
+</li>
+<li><p>add cross_section to grating_coupler waveguide ports</p></li>
+</ul>
+</section>
+<section id="id18">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/209">4.2.16</a><a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>grating_coupler_circular does not auto_rename_ports</p></li>
+<li><p>simulation.tidy3d.write_sparameters_batch accepts kwargs for general simulations settings</p></li>
+<li><p>add simulation.tidy3d.utils print_tasks</p></li>
+<li><p>increase grating_coupler simulation wavelengths from 1.2 to 1.8um</p></li>
+</ul>
+</section>
+<section id="id19">
+<h2>4.2.15<a class="headerlink" href="#id19" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add sklearn notebook on fitting dispersive coupler model</p></li>
+<li><p>add sklearn to requirements_full</p></li>
+</ul>
+</section>
+<section id="id20">
+<h2>4.2.14<a class="headerlink" href="#id20" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add with_all_monitors=False by default to avoid storing all fields when running gtidy3d.write_sparameters_grating_coupler</p></li>
+</ul>
+</section>
+<section id="id21">
+<h2>4.2.13<a class="headerlink" href="#id21" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix <code class="docutils literal notranslate"><span class="pre">is_3d=False</span></code> case 2D sims for tidy3d write_sparameters_grating</p></li>
+</ul>
+</section>
+<section id="id22">
+<h2>4.2.13<a class="headerlink" href="#id22" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>gmeep simulation improvements:</p>
+<ul>
+<li><p>ymargin=3 by default</p></li>
+<li><p>add write_sparameters_meep_1x1 for reciprocal devices (port_symmetries1x1)</p></li>
+<li><p>add write_sparameters_meep_1x1_bend90 for 90degree bend simulations</p></li>
+</ul>
+</li>
+<li><p>fix <code class="docutils literal notranslate"><span class="pre">is_3d=False</span></code> case to run simulations in 2D with <a class="reference external" href="https://github.com/flexcompute/tidy3d/issues/229">tidy3d</a></p></li>
+</ul>
+</section>
+<section id="id23">
+<h2>4.2.12<a class="headerlink" href="#id23" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>update tidy3d client to latest version 1.0.2</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">is_3d</span></code> to run simulations in 2D</p></li>
+</ul>
+</section>
+<section id="id24">
+<h2>4.2.11<a class="headerlink" href="#id24" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>tidy3d simulation plugin improvements</p>
+<ul>
+<li><p>add tidy3d.get_simulation_grating_coupler</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id25">
+<h2>4.2.10<a class="headerlink" href="#id25" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>tidy3d simulation plugin improvements</p>
+<ul>
+<li><p>add run_time_ps to tidy3d plugin, increase by 10x previous default run_time_ps</p></li>
+<li><p>if a task was deleted it raises WebError exception, catch that in get results</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id26">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/199">4.2.9</a><a class="headerlink" href="#id26" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>thread each tidy3d.write_sparameters simulation, so they run in paralell</p></li>
+<li><p>add tidy3d.write_sparameters_batch to run multiple sparameters simulations in paralell</p></li>
+</ul>
+</section>
+<section id="id27">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/198">4.2.8</a><a class="headerlink" href="#id27" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix tidy3d materials. Si3N4 uses Luke2015 by default</p></li>
+</ul>
+</section>
+<section id="id28">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/197">4.2.7</a><a class="headerlink" href="#id28" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix meep grating_coupler (draw teeth instead of etch)</p></li>
+<li><p>add triangle2 and triangle4 to components</p></li>
+<li><p>tidy3d.plot_simulation_xy accepts wavelength to plot permitivity</p></li>
+<li><p>tidy3d.get_simulation accepts wavelength_min, wavelength_max, wavelength_steps</p></li>
+<li><p>tidy3d.get_simulation accepts wavelength_min, wavelength_max, wavelength_steps</p></li>
+<li><p>tidy3d.get_sparameters returns Sparameters dataframe wavelength_min, wavelength_max, wavelength_steps</p></li>
+<li><p>rename meep.write_sparameters wl_min to wavelength_start, wl_max to wavelength_stop and wl_steps to wavelength_points</p></li>
+<li><p>add port_source_offset to tidy3d.get_simulation as a workaround for <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/issues/191">tidy3d issue</a></p></li>
+</ul>
+</section>
+<section id="id29">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/196">4.2.6</a><a class="headerlink" href="#id29" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename gen_loopback() function to add_loopback in gdsfactory.add_loopback</p></li>
+</ul>
+</section>
+<section id="id30">
+<h2>4.2.5<a class="headerlink" href="#id30" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add gf.simulation.gmeep.write_sparameters_grating</p></li>
+</ul>
+</section>
+<section id="id31">
+<h2>4.2.4<a class="headerlink" href="#id31" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>tidy3d plugin improvements</p></li>
+</ul>
+</section>
+<section id="id32">
+<h2><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/190">4.2.3</a><a class="headerlink" href="#id32" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>better notebook doc</p></li>
+<li><p>update tidy3d plugin to latest version 1.0.1</p></li>
+</ul>
+</section>
+<section id="id33">
+<h2>4.2.2<a class="headerlink" href="#id33" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add gf.components.delay_snake_sbend</p></li>
+<li><p>rename gf.simulation.sax.from_csv to read</p></li>
+<li><p>rename gf.simulation.sax.models.coupler to coupler_single_wavelength</p></li>
+<li><p>add more models to sax: grating_coupler, coupler (dispersive)</p></li>
+</ul>
+</section>
+<section id="id34">
+<h2>4.2.1<a class="headerlink" href="#id34" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>center gdsfactory.simulation.modes at z=0</p></li>
+<li><p>rename dirpath to cache for gdsfactory.simulation.modes</p></li>
+<li><p>change sidewall_angle from radians to degrees</p></li>
+</ul>
+</section>
+<section id="id35">
+<h2>4.2.0<a class="headerlink" href="#id35" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add gdsfactory.simulation.simphony circuit simulation plugin</p></li>
+<li><p>fix gdsfactory.modes.overlap test</p></li>
+</ul>
+</section>
+<section id="id36">
+<h2>4.1.5<a class="headerlink" href="#id36" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add gdsfactory.simulation.sax circuit simulation plugin</p></li>
+</ul>
+</section>
+<section id="id37">
+<h2>4.1.4<a class="headerlink" href="#id37" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>improve gdsfactory/samples tutorial</p></li>
+<li><p>make klive python2 compatible</p></li>
+</ul>
+</section>
+<section id="id38">
+<h2>4.1.3<a class="headerlink" href="#id38" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix netlist tests</p></li>
+</ul>
+</section>
+<section id="id39">
+<h2>4.1.2<a class="headerlink" href="#id39" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix netlist export</p></li>
+</ul>
+</section>
+<section id="id40">
+<h2>4.1.0<a class="headerlink" href="#id40" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>difftest copy run_file to ref_file if prompt = Y (before it was just deleting it)</p></li>
+<li><p>Component.info is just now a regular dict (no more DictConfig)</p></li>
+<li><p>move Component.info.{changed, full, default} to Component.settings</p></li>
+<li><p>Component.metadata is a DictConfig property</p></li>
+<li><p>serialize with numpy arrays with orjson</p></li>
+<li><p>add Component.metadata and Component.metadata_child</p></li>
+<li><p>reduce total test time from 50 to 25 seconds thanks to faster serialization</p></li>
+</ul>
+</section>
+<section id="id41">
+<h2>4.0.18<a class="headerlink" href="#id41" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>improve gdsfactory.simulation.modes</p>
+<ul>
+<li><p>replace dataclass with pydantic.BaseModel</p></li>
+<li><p>add pickle based file cache to speed up mode calculation</p></li>
+<li><p>find_modes_waveguide and find_modes_coupler do not need to pass mode_solver</p></li>
+<li><p>add single_waveguide kwarg to find_modes_waveguide and find_modes_coupler</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id42">
+<h2>4.0.17<a class="headerlink" href="#id42" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pass layer_stack to read_sparameters_lumerical, so that it reads the same file as write_sparameters_lumerical</p></li>
+</ul>
+</section>
+<section id="id43">
+<h2>4.0.14<a class="headerlink" href="#id43" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add delete_fsp_files kwarg to write_sparameters_lumerical</p></li>
+</ul>
+</section>
+<section id="id44">
+<h2>4.0.13<a class="headerlink" href="#id44" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename write_sparameters_meep_mpi_pool to write_sparameters_meep_batch</p></li>
+<li><p>redirect write_sparameters_meep_mpi stderr and stdout to logger</p></li>
+<li><p>if stderr write_sparameters_meep_mpi does not wait for the results</p></li>
+<li><p>add gf.simulation.modes.find_modes_coupler</p></li>
+</ul>
+</section>
+<section id="id45">
+<h2>4.0.12<a class="headerlink" href="#id45" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>improve tidy3d plugin</p>
+<ul>
+<li><p>add xmargin_left, xmargin_right, ymargin_bot, ymargin_top</p></li>
+<li><p>plot_simulation_xy and plot_simulation_yz</p></li>
+<li><p>fix materials</p></li>
+<li><p>add tests</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id46">
+<h2>4.0.8<a class="headerlink" href="#id46" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Explicit port serialization <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/178">PR</a></p></li>
+<li><p>difftest should fail when there is no regression reference <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/177">PR</a></p></li>
+<li><p>add Sparameters calculation in tidy3d plugin</p></li>
+</ul>
+</section>
+<section id="id47">
+<h2>4.0.7<a class="headerlink" href="#id47" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add progress bar to write_sparameters_lumerical_components</p></li>
+</ul>
+</section>
+<section id="id48">
+<h2>4.0.4<a class="headerlink" href="#id48" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>modify the write_gds() function to fix the checking of duplicate cell names (recursively), and it also gives an option to choose how to handle duplicate cell names on write. It changes the default behavior to warn and overwrite duplicates, rather than throw an error. <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/174">PR</a></p></li>
+<li><p>remove clear_cache in <code class="docutils literal notranslate"><span class="pre">show()</span></code>. Intermediate clearing of cache can cause errors in final gds export, by leaving two versions of the same cell lingering within subcells created before/after cache clearing.</p></li>
+<li><p>remove clear_cache in some of the tests</p></li>
+</ul>
+</section>
+<section id="id49">
+<h2>4.0.3<a class="headerlink" href="#id49" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">safe_cell_names</span></code> flag to gf.read.import_gds, append hash to imported cell names to avoid duplicated cell names.</p></li>
+</ul>
+</section>
+<section id="id50">
+<h2>4.0.2<a class="headerlink" href="#id50" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>move triangle into requirements_dev.txt. Now that there is wheels for python3.9 and 3.10 you can manage the dependency with pip.</p></li>
+</ul>
+</section>
+<section id="id51">
+<h2>4.0.1<a class="headerlink" href="#id51" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/170">Mode field profile interpolation + overlap integrals</a></p></li>
+<li><p><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/171">Properly serialize transitions</a></p></li>
+</ul>
+</section>
+<section id="id52">
+<h2>4.0.0<a class="headerlink" href="#id52" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Consider only changed component args and kwargs when calculating hash for component name</p></li>
+<li><p>meep plugin write_sparameters_meep_mpi deletes old file when overwrite=True</p></li>
+<li><p>ensure write_sparameters_meep <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> have valid simulation settings</p></li>
+<li><p>fix component lattice mutability</p></li>
+<li><p>Component.auto_rename_ports() raises MutabilityError if component is locked</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">Component.is_unlocked()</span></code> that raises MutabilityError</p></li>
+<li><p>rename component_lattice <code class="docutils literal notranslate"><span class="pre">components</span></code> to <code class="docutils literal notranslate"><span class="pre">symbol_to_component</span></code></p></li>
+<li><p>raise error when trying to add two ports with the same name in <code class="docutils literal notranslate"><span class="pre">gf.add_ports.add_ports_from_markers_center</span></code>. Before it was just ignoring ports if it already had a port with the same name, so it was hard to debug.</p></li>
+<li><p>difftest adds failed test to logger.error, to clearly see test_errors and to log test error traces</p></li>
+<li><p>clean_value calls clean_value_json, so we only need to maintain one function to serialize both settings and name</p></li>
+</ul>
+</section>
+<section id="id53">
+<h2>3.12.9<a class="headerlink" href="#id53" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix tests</p></li>
+</ul>
+</section>
+<section id="id54">
+<h2>3.12.8<a class="headerlink" href="#id54" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">padding_north</span></code>, <code class="docutils literal notranslate"><span class="pre">padding_west</span></code>, <code class="docutils literal notranslate"><span class="pre">padding_east</span></code>, <code class="docutils literal notranslate"><span class="pre">padding_south</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">ymargin_top</span></code>, <code class="docutils literal notranslate"><span class="pre">xmargin_left</span></code>, <code class="docutils literal notranslate"><span class="pre">xmargin_right</span></code>, <code class="docutils literal notranslate"><span class="pre">ymargin_bot</span></code> for consistency of the meep plugin with the Lumerical plugin.</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">write_sparameters_meep_lr</span></code> with left and right ports and <code class="docutils literal notranslate"><span class="pre">write_sparameters_meep_mpi_lt</span></code> with left and top ports</p></li>
+<li><p>add xmargin and ymargin to write_sparameters_meep</p></li>
+</ul>
+</section>
+<section id="id55">
+<h2>3.12.7<a class="headerlink" href="#id55" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add Optional nslab to gm.modes.get_mode_solver_rib</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">padding_north</span></code>, <code class="docutils literal notranslate"><span class="pre">padding_west</span></code>, <code class="docutils literal notranslate"><span class="pre">padding_east</span></code>, <code class="docutils literal notranslate"><span class="pre">padding_south</span></code></p></li>
+<li><p>add tqdm progress bar to meep sims</p></li>
+</ul>
+</section>
+<section id="id56">
+<h2>3.12.6<a class="headerlink" href="#id56" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>make trimesh an optional dependency by moving imports inside function</p></li>
+</ul>
+</section>
+<section id="id57">
+<h2>3.12.3<a class="headerlink" href="#id57" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix docker container gdsfactory:latest</p></li>
+<li><p>leverage meep plot flag to avoid initializing the structure</p></li>
+<li><p>recommend to install triangle with mamba, and the rest of the dependencies with pip</p></li>
+</ul>
+</section>
+<section id="id58">
+<h2>3.12.1<a class="headerlink" href="#id58" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename gdsfactory.components.array to gdsfactory.components.array_component</p></li>
+<li><p>create <code class="docutils literal notranslate"><span class="pre">.gitpod.yml</span></code></p></li>
+</ul>
+</section>
+<section id="id59">
+<h2>3.12.0<a class="headerlink" href="#id59" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Consider only passed component args and kwargs when calculating hash for component name</p></li>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">_clean_value</span></code> by <code class="docutils literal notranslate"><span class="pre">clean_value_json</span></code></p></li>
+<li><p>delete <code class="docutils literal notranslate"><span class="pre">tech.Library</span></code> as it’s not being used. You can just use a dict of functions instead</p></li>
+</ul>
+</section>
+<section id="id60">
+<h2>3.11.5<a class="headerlink" href="#id60" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>move rectpack import inside pack function</p></li>
+<li><p>create <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install[dev]</span></code> just for developers, and reduce the dependencies for <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install[full]</span></code></p></li>
+<li><p>recommend installing gdspy and meep with mamba (faster than conda)</p></li>
+<li><p>rename w1 as width1 and w2 as width2 in find_neff_vs_width</p></li>
+</ul>
+</section>
+<section id="id61">
+<h2>3.11.4<a class="headerlink" href="#id61" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Remove numpy.typing from snap.py to be compatible with minimum version of numpy</p></li>
+</ul>
+</section>
+<section id="id62">
+<h2>3.11.3<a class="headerlink" href="#id62" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">res</span></code> to <code class="docutils literal notranslate"><span class="pre">resolution</span></code> in simulation.modes to be consistent with simulation.gmeep</p></li>
+</ul>
+</section>
+<section id="id63">
+<h2>3.11.2<a class="headerlink" href="#id63" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add plugins to notebooks and coverage</p></li>
+</ul>
+</section>
+<section id="id64">
+<h2>3.11.0<a class="headerlink" href="#id64" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>get_sparameters_path filepath based on component_name + simulation_settings hash</p></li>
+<li><p>move gdsfactory.simulation.write_sparameters_lumerical to gdsfactory.simulation.lumerical.write_sparameters_lumerical</p></li>
+<li><p>Sparameters are all lowercase (both for meep and lumerical plugins)</p></li>
+</ul>
+</section>
+<section id="id65">
+<h2>3.10.12<a class="headerlink" href="#id65" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>write_sparameters_lumerical allows passing material refractive index or any material in Lumerical’s material database</p></li>
+</ul>
+</section>
+<section id="id66">
+<h2>3.10.11<a class="headerlink" href="#id66" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>improve docs</p></li>
+</ul>
+</section>
+<section id="id67">
+<h2>3.10.10<a class="headerlink" href="#id67" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>cell name with no parameters passed only includes prefix <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/158">PR</a></p></li>
+<li><p>write_sparameters_meep can exploit symmetries <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/157">PR</a></p></li>
+</ul>
+</section>
+<section id="id68">
+<h2>3.10.9<a class="headerlink" href="#id68" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add tests for <code class="docutils literal notranslate"><span class="pre">write_sparameters_meep_mpi</span></code> and <code class="docutils literal notranslate"><span class="pre">write_sparameters_meep_mpi_pool</span></code> in <code class="docutils literal notranslate"><span class="pre">gdsfactory.simulation.gmeep</span></code> module</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_sparameters_meep_mpi</span></code> has <code class="docutils literal notranslate"><span class="pre">wait_to_finish</span></code> flag</p></li>
+</ul>
+</section>
+<section id="id69">
+<h2>3.10.8<a class="headerlink" href="#id69" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>improve meep simulation interface documentation and functions</p></li>
+<li><p>expose new <code class="docutils literal notranslate"><span class="pre">write_sparameters_meep_mpi</span></code> and <code class="docutils literal notranslate"><span class="pre">write_sparameters_meep_mpi_pool</span></code> in <code class="docutils literal notranslate"><span class="pre">gdsfactory.simulation.gmeep</span></code> module</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_sparameters_path</span></code> can also accept a layer_stack</p></li>
+</ul>
+</section>
+<section id="id70">
+<h2>3.10.7<a class="headerlink" href="#id70" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix crossing hard coded layers. Add cross_section setting to ports so that they can be extended.</p></li>
+<li><p>extend_ports creates cross_section with port_width and layer, if port has no cross_section and extend_ports does not have a specific cross_section</p></li>
+</ul>
+</section>
+<section id="id71">
+<h2>3.10.6<a class="headerlink" href="#id71" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add mzi_pads_center to components</p></li>
+</ul>
+</section>
+<section id="id72">
+<h2>3.10.5<a class="headerlink" href="#id72" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix add_ports_from_markers_center port location for square ports, depending on inside parameter</p></li>
+</ul>
+</section>
+<section id="id73">
+<h2>3.10.4<a class="headerlink" href="#id73" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>use matplotlib for default plotter instead of holoviews</p></li>
+<li><p>add_ports default prefix is ‘o’ for optical and ‘e’ for electrical ports</p></li>
+</ul>
+</section>
+<section id="id74">
+<h2>3.10.3<a class="headerlink" href="#id74" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/146">plot Sparameters uses lowercase s11, s21 …</a></p></li>
+</ul>
+</section>
+<section id="id75">
+<h2>3.10.2<a class="headerlink" href="#id75" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>write_cells in gf.write_cells uses gdspy interface directly</p></li>
+<li><p>gf.import_gds has an optional gdsdir argument</p></li>
+<li><p>remove unused max_name_length parameter in gf.import_gds</p></li>
+<li><p>bring back matplotlib as the default plotter backend. Holoviews does not work well with some <code class="docutils literal notranslate"><span class="pre">sphinx.autodoc</span></code> docs</p></li>
+<li><p>add_fiber_array prints warning if grating coupler port is not facing west</p></li>
+</ul>
+</section>
+<section id="id76">
+<h2>3.10.1<a class="headerlink" href="#id76" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>You can set up the default plotter from the gdsfactory config <code class="docutils literal notranslate"><span class="pre">gf.CONF.plotter</span> <span class="pre">=</span> <span class="pre">'matplotlib'</span></code></p></li>
+<li><p><a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/142">PR 142</a></p>
+<ul>
+<li><p>dispersive flag to meep simulations</p></li>
+<li><p>fixed bug where adding a layer would throw an error if “visible” or “transparent” were undefined in the .lyp file</p></li>
+</ul>
+</li>
+<li><p>remove p_start (starting period) from grating_coupler_elliptical</p></li>
+</ul>
+</section>
+<section id="id77">
+<h2>3.10.0<a class="headerlink" href="#id77" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add Component.ploth() to plot with holoviews (inspired by dphox)</p></li>
+<li><p>Component.plot(plotter=’holoviews’) accepts plotter argument for plotting backend (matplotlib, qt or holoviews)</p></li>
+<li><p>use holoviews as the default plotting backend</p></li>
+<li><p>remove clear_cache from Component.plot() and Component.show(), it’s easier to just do <code class="docutils literal notranslate"><span class="pre">gf.clear_cache()</span></code></p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">Component.plotqt</span></code> as the qt plotter is now available with <code class="docutils literal notranslate"><span class="pre">Component.plot(plotter='qt')</span></code></p></li>
+<li><p>gf.geometry.boolean works with tuples of components or references as well as single component or Reference. Overcome phidl bug, where tuples are not trated as lists.</p></li>
+<li><p>Before plotting make sure we recompute the bounding box</p></li>
+<li><p>YAML mask definition allows using <code class="docutils literal notranslate"><span class="pre">vars</span></code> for global variables</p></li>
+<li><p>grating_coupler_rectangular first teeth starts next to the taper</p></li>
+</ul>
+</section>
+<section id="id78">
+<h2>3.9.28<a class="headerlink" href="#id78" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>seal_ring accepts bbox instead of component</p></li>
+<li><p>die_bbox_frame accepts bbox</p></li>
+<li><p>die_bbox: rename text_position to text_anchor</p></li>
+<li><p>die_bbox: text_anchor accepts Literal instead of string</p></li>
+</ul>
+</section>
+<section id="id79">
+<h2>3.9.27<a class="headerlink" href="#id79" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Add <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/136">sidewall angles in MPB</a></p></li>
+</ul>
+</section>
+<section id="id80">
+<h2>3.9.26<a class="headerlink" href="#id80" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add some extra kwargs (with_taper1, with_taper2) to straight_heater_doped_rib</p></li>
+<li><p>add slab offset kwargs to cross_section.rib_heater_doped_contact</p></li>
+</ul>
+</section>
+<section id="id81">
+<h2>3.9.25<a class="headerlink" href="#id81" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gf.components.contact_slot</span></code> accepts optional layer_offsetsx and layer_offsetsy</p></li>
+<li><p>extend_ports cross_section is optional, and overrides port cross_section</p></li>
+</ul>
+</section>
+<section id="id82">
+<h2>3.9.23<a class="headerlink" href="#id82" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>validate cross_section</p></li>
+<li><p>update requirements</p></li>
+<li><p>add acks in README</p></li>
+</ul>
+</section>
+<section id="id83">
+<h2>3.9.22<a class="headerlink" href="#id83" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.read.from_dphox</span></code></p></li>
+<li><p>update requirements.txt</p></li>
+</ul>
+</section>
+<section id="id84">
+<h2>3.9.21<a class="headerlink" href="#id84" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>thanks to @thomasdorch <a class="reference external" href="https://github.com/gdsfactory/gdsfactory/pull/128">PR</a> you can now use Meep’s material database in your mode and FDTD simulations</p></li>
+</ul>
+</section>
+<section id="id85">
+<h2>3.9.20<a class="headerlink" href="#id85" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">loopback_xspacing</span></code> to <code class="docutils literal notranslate"><span class="pre">gf.routing.add_fiber_single</span></code></p></li>
+</ul>
+</section>
+<section id="id86">
+<h2>3.9.19<a class="headerlink" href="#id86" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">Component.get_setting()</span></code> which looks inside info, settings.full and child_info</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.function.add_settings_label</span></code> decorator</p></li>
+</ul>
+</section>
+<section id="id87">
+<h2>3.9.18<a class="headerlink" href="#id87" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename get_sparametersNxN to write_sparameters_meep, to be consistent with write_sparameters_lumerical function name</p></li>
+</ul>
+</section>
+<section id="id88">
+<h2>3.9.17<a class="headerlink" href="#id88" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>meep interface stores simulation metadata</p></li>
+</ul>
+</section>
+<section id="id89">
+<h2>3.9.16<a class="headerlink" href="#id89" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>meep interface improvements</p>
+<ul>
+<li><p>add run=True flag, if run=False, plots simulation</p></li>
+</ul>
+</li>
+<li><p>docker includes mpi version of meep</p></li>
+</ul>
+</section>
+<section id="id90">
+<h2>3.9.15<a class="headerlink" href="#id90" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>meep interface improvements</p>
+<ul>
+<li><p>add test Sparameters file dataframe</p></li>
+</ul>
+</li>
+<li><p>lumerical interface improvements (consitent with meep)</p>
+<ul>
+<li><p>wavelengths in um</p></li>
+<li><p>Sparameters starts with lowercase</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id91">
+<h2>3.9.14<a class="headerlink" href="#id91" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix seal_ring snap_to_grid to 2nm</p></li>
+<li><p>add Component.version and Component.changelog</p></li>
+<li><p>Component.to_dict() exports version</p></li>
+<li><p>add ring_single_heater and ring_double_heater to components</p></li>
+<li><p>add port_inclusion to pad and compass</p></li>
+</ul>
+</section>
+<section id="id92">
+<h2>3.9.13<a class="headerlink" href="#id92" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix seal_ring snap_to_grid to 2nm</p></li>
+</ul>
+</section>
+<section id="id93">
+<h2>3.9.12<a class="headerlink" href="#id93" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix text_rectangular_multi_layer layers</p></li>
+</ul>
+</section>
+<section id="id94">
+<h2>3.9.11<a class="headerlink" href="#id94" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add label_prefix to test and measurement labels</p></li>
+</ul>
+</section>
+<section id="id95">
+<h2>3.9.10<a class="headerlink" href="#id95" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.mask.merge_yaml</span></code> to merge yaml metadata</p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">pcm_optical</span></code> to <code class="docutils literal notranslate"><span class="pre">cdsem_all</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">cdsem_coupler</span></code></p></li>
+<li><p>Component.copy hash cache=True flag that adds new copies to CACHE (similarly to import_gds) to avoid duplicated cells</p></li>
+</ul>
+</section>
+<section id="id96">
+<h2>3.9.9<a class="headerlink" href="#id96" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pack_row in klayout_yaml_placer also accepts rotation</p></li>
+<li><p>placer uses Literal (‘N’, ‘S’, ‘E’, ‘W’) from gf.types</p></li>
+<li><p>rename label_layer as layer_label for consistency</p></li>
+</ul>
+</section>
+<section id="id97">
+<h2>3.9.8<a class="headerlink" href="#id97" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>better DRC messages</p></li>
+<li><p>write_drc allows you to define the shortcut</p></li>
+<li><p>fix resistance_sheet offset</p></li>
+<li><p>add comments to build does flow</p></li>
+</ul>
+</section>
+<section id="id98">
+<h2>3.9.7<a class="headerlink" href="#id98" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>build docker container</p></li>
+<li><p>recommend building triangle with conda forge instead of pip for conda based distributions</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gdsfactory[pip]</span></code> as a pip-based alternative of <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gdsfactory[full]</span></code></p></li>
+</ul>
+</section>
+<section id="id99">
+<h2>3.9.6<a class="headerlink" href="#id99" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Component.show() writes component in a different tempfile everytime. This avoids the <code class="docutils literal notranslate"><span class="pre">reload</span></code> question prompt from klayout.</p></li>
+<li><p>update klive to 0.0.7 to keep the same layers active between sessions</p></li>
+</ul>
+</section>
+<section id="id100">
+<h2>3.9.5<a class="headerlink" href="#id100" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>imported cell names get incremented (starting on index = 1) with a <code class="docutils literal notranslate"><span class="pre">$</span></code> (based on Klayout naming convention)</p></li>
+<li><p>add test for flatten = True</p></li>
+<li><p>raise ValueError if the passed name is already on any CAHE (CACHE_IMPORTED or CACHE)</p></li>
+<li><p>avoid duplicate cells decorating import_gds with functools.lru_cache</p></li>
+<li><p>show accepts <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> for write_gds</p></li>
+<li><p>simplify decorator in @cell (does not change name)</p></li>
+</ul>
+</section>
+<section id="id101">
+<h2>3.9.4<a class="headerlink" href="#id101" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>imported cell names get incremented (starting on index = 0) as we find them also in the CACHE. This avoids duplicated cell names.</p></li>
+</ul>
+</section>
+<section id="id102">
+<h2>3.9.3<a class="headerlink" href="#id102" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>better error messages using f”{component!r}” to get <code class="docutils literal notranslate"><span class="pre">'component_name'</span></code></p></li>
+<li><p>import*gds avoids duplicated cells by checking CACHE_IMPORTED and adding and underscore <code class="docutils literal notranslate"><span class="pre">*</span></code> suffix in case there are some name conflicts.</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">Component.lock()</span></code> and <code class="docutils literal notranslate"><span class="pre">Component.unlock()</span></code> allows you to modify component after adding it into CACHE</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.geometry.check_duplicated_cells</span></code> to check duplicated cells. Thanks to Klayout</p></li>
+<li><p>fix <code class="docutils literal notranslate"><span class="pre">mzi_with_arms</span></code>, before it had <code class="docutils literal notranslate"><span class="pre">delta_length</span></code> in both arms</p></li>
+</ul>
+</section>
+<section id="id103">
+<h2>3.9.2<a class="headerlink" href="#id103" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>increase <code class="docutils literal notranslate"><span class="pre">gf.routing.get_route_electrical</span></code> default min_straight_length from 10nm to 2um</p></li>
+<li><p>rename text_rectangular to text_rectangular_multi_layer</p></li>
+<li><p>rename manhattan_text to text_rectangular</p></li>
+</ul>
+</section>
+<section id="id104">
+<h2>3.9.1<a class="headerlink" href="#id104" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>gf.import_gds updates info based on <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>. In case you want to specify (wavelength, test_protocol…)</p></li>
+<li><p>store gf.import_gds name</p></li>
+</ul>
+</section>
+<section id="id105">
+<h2>3.9.0<a class="headerlink" href="#id105" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>move add_ports_from_markers functions from <code class="docutils literal notranslate"><span class="pre">gf.import_gds</span></code> to <code class="docutils literal notranslate"><span class="pre">gf.add_ports</span></code></p></li>
+<li><p>move write_cells functions from <code class="docutils literal notranslate"><span class="pre">gf.import_gds</span></code> to <code class="docutils literal notranslate"><span class="pre">gf.write_cells</span></code></p></li>
+<li><p>move <code class="docutils literal notranslate"><span class="pre">gf.import_gds</span></code> to <code class="docutils literal notranslate"><span class="pre">gf.read.import_gds</span></code>. keep <code class="docutils literal notranslate"><span class="pre">gf.import_gds</span></code> as a link to <code class="docutils literal notranslate"><span class="pre">gf.read.import_gds</span></code></p></li>
+<li><p>combine gf.read.from_gds with gf.import_gds</p></li>
+<li><p>add logger.info for write_gds, write_gds_with_metadata, gf.read.import_gds, klive.show()</p></li>
+</ul>
+</section>
+<section id="id106">
+<h2>3.8.15<a class="headerlink" href="#id106" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>gf.read.from_gds passes kwargs to gf.import_gds</p></li>
+<li><p>rename grating_coupler_loss to grating_coupler_loss_fiber_array4 gf.components</p></li>
+<li><p>add grating_coupler_loss_fiber_single to components</p></li>
+</ul>
+</section>
+<section id="id107">
+<h2>3.8.14<a class="headerlink" href="#id107" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>klayout is an optional dependency</p></li>
+</ul>
+</section>
+<section id="id108">
+<h2>3.8.13<a class="headerlink" href="#id108" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>copy adds <code class="docutils literal notranslate"><span class="pre">_copy</span></code> suffix to minimize chances of having duplicated cell names</p></li>
+</ul>
+</section>
+<section id="id109">
+<h2>3.8.12<a class="headerlink" href="#id109" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add gf.functions.add_texts to add labels to a list of components or componentFactories</p></li>
+</ul>
+</section>
+<section id="id110">
+<h2>3.8.11<a class="headerlink" href="#id110" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>gf.assert.version supports <a class="reference external" href="https://python-semanticversion.readthedocs.io/en/latest/">semantic versioning</a></p></li>
+</ul>
+</section>
+<section id="id111">
+<h2>3.8.10<a class="headerlink" href="#id111" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>get_netlist works even with cells that have have no settings.full or info.changed (not properly decorated with cell decorator)</p></li>
+</ul>
+</section>
+<section id="id112">
+<h2>3.8.9<a class="headerlink" href="#id112" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pack and grid accepts tuples of text labels (text_offsets, text_anchors), in case we want multiple text labels per component</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.functions.add_text</span></code> to create a new component with a text label</p></li>
+<li><p>add rotate90, rotate90n and rotate180 to functions</p></li>
+</ul>
+</section>
+<section id="id113">
+<h2>3.8.8<a class="headerlink" href="#id113" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename pack parameters (offset-&gt;text_offset, anchor-&gt;text_anchor, prefix-&gt;text_prefix)</p></li>
+<li><p>pack and grid can mirror references</p></li>
+</ul>
+</section>
+<section id="id114">
+<h2>3.8.7<a class="headerlink" href="#id114" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rotate accepts component or factory</p></li>
+<li><p>add plot_imbalance1x2 and plot_loss1x2 for component.simulation.plot</p></li>
+<li><p>rename bend_circular c.info.radius_min = float(radius) to c.info.radius = float(radius)</p></li>
+</ul>
+</section>
+<section id="id115">
+<h2>3.8.6<a class="headerlink" href="#id115" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add gf.grid_with_text</p></li>
+</ul>
+</section>
+<section id="id116">
+<h2>3.8.5<a class="headerlink" href="#id116" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix rectangle_with_slits</p></li>
+<li><p>rename mzi2x2 as mzi2x2_2x2, so it’s clearly different from mzi1x2_2x2</p></li>
+</ul>
+</section>
+<section id="id117">
+<h2>3.8.4<a class="headerlink" href="#id117" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>straight_heater_doped has with_top_contact and with_bot_contact settings to remove some contacts</p></li>
+<li><p>rib_heater_doped and rib_heater_doped_contact has with_bot_heater and with_top_heater settings</p></li>
+</ul>
+</section>
+<section id="id118">
+<h2>3.8.3<a class="headerlink" href="#id118" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>replace in contact_yspacing by heater_gap in straight_heater_doped</p></li>
+</ul>
+</section>
+<section id="id119">
+<h2>3.8.2<a class="headerlink" href="#id119" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add kwarg <code class="docutils literal notranslate"><span class="pre">auto_rename_ports=True</span></code> to <code class="docutils literal notranslate"><span class="pre">add_ports_from_markers_center</span></code></p></li>
+<li><p>mzi length_x is optional and defaults to straight_x_bot/top defaults</p></li>
+<li><p>change mzi_phase_shifter straight_x = None, to match phase shifter footprint</p></li>
+<li><p>replace gf.components.mzi_phase_shifter_90_90 with gf.components.mzi_phase_shifter_top_heater_metal</p></li>
+</ul>
+</section>
+<section id="id120">
+<h2>3.8.1<a class="headerlink" href="#id120" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.components.mzi</span></code> as a more robust implementation for the MZI</p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">gf.components.mzi</span></code> to <code class="docutils literal notranslate"><span class="pre">gf.components.mzi_arms</span></code></p></li>
+<li><p>expose <code class="docutils literal notranslate"><span class="pre">toolz.compose</span></code> as <code class="docutils literal notranslate"><span class="pre">gf.compose</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.components.mzi1x2</span></code>, <code class="docutils literal notranslate"><span class="pre">mzi1x2_2x2</span></code>, <code class="docutils literal notranslate"><span class="pre">mzi_coupler</span></code></p></li>
+</ul>
+</section>
+<section id="id121">
+<h2>3.8.0<a class="headerlink" href="#id121" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.components.copy_layers</span></code> to duplicate a component in multiple layers.</p></li>
+<li><p>better error message for <code class="docutils literal notranslate"><span class="pre">gf.pack</span></code> when it fails to pack some Component.</p></li>
+<li><p>rename gf.simulation.gmpb as gf.simulation.modes</p></li>
+<li><p>rename gf.simulation.gtidy3d as gf.simulation.tidy3d</p></li>
+<li><p>gf.simulation.modes.find_neff_vs_width can store neffs in CSV file when passing <code class="docutils literal notranslate"><span class="pre">filepath</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gf.components.rectangle_with_slits</span></code> has now <code class="docutils literal notranslate"><span class="pre">layer_slit</span></code> parameter</p></li>
+</ul>
+</section>
+<section id="id122">
+<h2>3.7.8<a class="headerlink" href="#id122" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>cell accepts <code class="docutils literal notranslate"><span class="pre">autoname</span></code> (True by default)</p></li>
+<li><p>import_gds defaults calls cell with <code class="docutils literal notranslate"><span class="pre">autoname=False</span></code></p></li>
+</ul>
+</section>
+<section id="id123">
+<h2>3.7.7<a class="headerlink" href="#id123" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">write_gds</span></code> prints warning when writing GDS files with Unnamed cells. Unnamed cells don’t get deterministic names. warning includes the number of unnamed cells</p></li>
+<li><p>cells with <code class="docutils literal notranslate"><span class="pre">decorator=function</span></code> that return a new cell do not leave Unnamed cells now</p></li>
+<li><p>pack includes a name_prefix to avoid unnamed cells</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">taper_cross_section</span></code> into a container so we can use a decorator over it without triggering InmutabilityError</p></li>
+</ul>
+</section>
+<section id="id124">
+<h2>3.7.6<a class="headerlink" href="#id124" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>to dict accepts component and function prefixes of the structures that we want to ignore when saving the settings dict</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_gds</span></code> prints warning when writing GDS files with Unnamed cells. Unnamed cells don’t get deterministic names.</p></li>
+</ul>
+</section>
+<section id="id125">
+<h2>3.7.5<a class="headerlink" href="#id125" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">add_tapers_cross_section</span></code> to taper component cross_sections</p></li>
+<li><p>letter <code class="docutils literal notranslate"><span class="pre">v</span></code> in text_rectangular_multi_layer is now DRC free</p></li>
+</ul>
+</section>
+<section id="id126">
+<h2>3.7.4<a class="headerlink" href="#id126" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add pad_gsg_short and pad_gsg_open to components</p></li>
+<li><p>export function parameters in settings exports as dict {‘function’: straight, ‘width’: 3}</p>
+<ul>
+<li><p>works also for partial and composed functions</p></li>
+</ul>
+</li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">get_child_name</span></code> for Component, so that when you run <code class="docutils literal notranslate"><span class="pre">copy_child_info</span></code> the name prefix also propagates</p></li>
+<li><p>only add layers_cladding for waveguide lengths &gt; 0. Otherwise it creates non-orientable boundaries</p></li>
+</ul>
+</section>
+<section id="id127">
+<h2>3.7.3<a class="headerlink" href="#id127" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> to <code class="docutils literal notranslate"><span class="pre">cutback_bend</span></code></p></li>
+<li><p>pack type annotation is more general with <code class="docutils literal notranslate"><span class="pre">List[ComponentOrFactory]</span></code> instead of <code class="docutils literal notranslate"><span class="pre">List[Component]</span></code>, it also builds any Components if you pass the factory instead of the component.</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">straight_length</span></code> parameter and more sensitive default values (2*radius) to <code class="docutils literal notranslate"><span class="pre">cutback_component</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.components.taper_parabolic</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mzi_lattice</span></code> adds all electrical ports from any of the mzi stages</p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">mzi_factory</span></code> to <code class="docutils literal notranslate"><span class="pre">mzi</span></code> in mzi_lattice to be consistent with other component kwargs</p></li>
+<li><p>replace taper_factory with taper to be consistent with other component kwargs</p></li>
+<li><p>coupler snaps length to grid, instead of asserting length is on_grid</p></li>
+<li><p>add layers_cladding to rib so bezier_slabs render correctly for rib couplers</p></li>
+</ul>
+</section>
+<section id="id128">
+<h2>3.7.2<a class="headerlink" href="#id128" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add_fiber_array and add_fiber_single can also get a component that has no child_info</p></li>
+</ul>
+</section>
+<section id="id129">
+<h2>3.7.1<a class="headerlink" href="#id129" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>keep python3.7 compatibility for <code class="docutils literal notranslate"><span class="pre">gf.functions.cache</span></code> decorator by using <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">=</span> <span class="pre">lru_cache(maxsize=None)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">cache</span> <span class="pre">=</span> <span class="pre">lru_cache</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_fiber_array</span></code> accepts ComponentOrFactory, convenient for testing the function without building a component</p></li>
+</ul>
+</section>
+<section id="id130">
+<h2>3.7.0<a class="headerlink" href="#id130" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix clean_name</p>
+<ul>
+<li><p>generators and iterables are properly hashed now</p></li>
+<li><p>toolz.compose functions hash both the functions and first function</p></li>
+<li><p>casting foats to ints when possible, so straight(length=5) and straight(length=5.0) return the same component</p></li>
+</ul>
+</li>
+<li><p>set Component._cached = True when adding Component into cache, and raises MutabilityError when adding any element to it.</p></li>
+<li><p>Component.flatten() returns a copy of the component, that includes the flattened component. New name adds <code class="docutils literal notranslate"><span class="pre">_flat</span></code> suffix to original name</p></li>
+<li><p>add bias to grating_coupler_lumerical</p></li>
+<li><p>try to cast float to int when exporting info</p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">ComponentSweep</span></code> as it was trivial to define as a list comprehension</p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">add_text</span></code> as it is prone to creating mutability errors</p></li>
+<li><p>pack can now add text labels if passed a text ComponentFactory</p></li>
+</ul>
+</section>
+<section id="id131">
+<h2>3.6.8<a class="headerlink" href="#id131" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">add_fiber_single</span></code> allows to have multiple gratings</p></li>
+<li><p>converted add_fiber_single, component_sequence and add_fiber_array from <code class="docutils literal notranslate"><span class="pre">cell_without_validator</span></code> to <code class="docutils literal notranslate"><span class="pre">cell</span></code></p></li>
+<li><p>Component pydantic validator accepts cell names below 100 characters (before it was forcing 32)</p></li>
+</ul>
+</section>
+<section id="id132">
+<h2>3.6.7<a class="headerlink" href="#id132" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename doe, write_does and load_does to <code class="docutils literal notranslate"><span class="pre">sweep</span></code> module <code class="docutils literal notranslate"><span class="pre">read_sweep</span></code>, <code class="docutils literal notranslate"><span class="pre">write_sweep</span></code> …</p></li>
+<li><p>Route and Routes are pydantic.BaseModel instead of dataclasses</p></li>
+<li><p>composed functions get a unique name. You can compose functions with <code class="docutils literal notranslate"><span class="pre">toolz.compose</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.add_text</span></code> for adding text labels to a list of Components</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.types.ComponentSweep</span></code></p></li>
+<li><p>increase MAX_NAME_LENGTH to 100 characters when validating a component</p></li>
+<li><p>add typing_extensions to requirements to keep 3.7 compatibility. Changed <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">typing</span> <span class="pre">import</span> <span class="pre">Literal</span></code> (requires python&gt;=3.8) to <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">typing_extensions</span> <span class="pre">import</span> <span class="pre">Literal</span></code></p></li>
+<li><p>add type checking error messages for Component and ComponentReference</p></li>
+<li><p>add type checking pydantic validator for Label</p></li>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">phidl.device_layout.Label</span></code> with <code class="docutils literal notranslate"><span class="pre">gf.Label</span></code></p></li>
+<li><p>Route has an Optional list of Label, in case route fails, or in case you want to add connectivity labels</p></li>
+</ul>
+</section>
+<section id="id133">
+<h2>3.6.6<a class="headerlink" href="#id133" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add slab arguments (slab_layer, slab_xmin) to grating couplers</p></li>
+<li><p>remove align to bottom left in gdsdiff</p></li>
+<li><p>gdsdiff after asking question, re-rises GeometryDifferencesError</p></li>
+</ul>
+</section>
+<section id="id134">
+<h2>3.6.5<a class="headerlink" href="#id134" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix gdsfactory/samples</p></li>
+<li><p>better docstrings documents <code class="docutils literal notranslate"><span class="pre">keyword</span> <span class="pre">Args</span></code> as well as <code class="docutils literal notranslate"><span class="pre">Args</span></code></p></li>
+<li><p>refactor:</p>
+<ul>
+<li><p>pads_shorted accepts pad as parameter</p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">n_devices</span></code> to columns in splitter_chain</p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">dbr2</span></code> to <code class="docutils literal notranslate"><span class="pre">dbr_tapered</span></code></p></li>
+<li><p>simpler pn cross_section definition</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id135">
+<h2>3.6.3<a class="headerlink" href="#id135" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>args in partial functions was being ignore when creating the name. Only kwargs and func.<strong>name</strong> were being considered</p></li>
+</ul>
+</section>
+<section id="id136">
+<h2>3.6.2<a class="headerlink" href="#id136" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>update rectpack dependency from 0.2.1 to 0.2.2</p></li>
+</ul>
+</section>
+<section id="id137">
+<h2>3.6.1<a class="headerlink" href="#id137" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>spiral_external_io_fiber_single has a cross_section_ports setting</p></li>
+<li><p>seal_ring snaps to grid</p></li>
+<li><p>Component.bbox and ComponentReference.bbox properties snap to 1nm grid</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.components.bend_straight_bend</span></code></p></li>
+</ul>
+</section>
+<section id="id138">
+<h2>3.6.0<a class="headerlink" href="#id138" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>snap_to_grid_nm waypoints in round_corners to avoid 1nm gaps in some routes</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.components.text_rectangular_multi_layer</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.components.rectangle_with_slits</span></code></p></li>
+</ul>
+</section>
+<section id="id139">
+<h2>3.5.12<a class="headerlink" href="#id139" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add tolerance to netlist extraction. Snap to any nm grid for detecting connectivity (defaults to 1nm).</p></li>
+</ul>
+</section>
+<section id="id140">
+<h2>3.5.10<a class="headerlink" href="#id140" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>enable having more than 2 ports per cross_section. Include test for that.</p></li>
+</ul>
+</section>
+<section id="id141">
+<h2>3.5.9<a class="headerlink" href="#id141" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>better docstrings</p></li>
+<li><p>component_sequence also accepts component factories</p></li>
+</ul>
+</section>
+<section id="id142">
+<h2>3.5.9<a class="headerlink" href="#id142" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>gf.simulation.get_sparameters_path takes kwargs with simulation_settings</p></li>
+<li><p>cross have port_type argument</p></li>
+<li><p>splitter_tree exposes bend_s info</p></li>
+<li><p>change simulation_settings default values</p>
+<ul>
+<li><p>port_margin = 0.5 -&gt; 1.5</p></li>
+<li><p>port_extension = 2.0 -&gt; 5.0</p></li>
+<li><p>xmargin = 0.5 -&gt; 3.0</p></li>
+<li><p>ymargin = 2.0 -&gt; 3.0</p></li>
+<li><p>remove pml_width as it was redundant with xmargin and ymargin</p></li>
+</ul>
+</li>
+<li><p>route with auto_taper was missing a mirror</p></li>
+</ul>
+</section>
+<section id="id143">
+<h2>3.5.8<a class="headerlink" href="#id143" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>gf.components.extend_ports uses port.cross_section to extend the port</p></li>
+</ul>
+</section>
+<section id="id144">
+<h2>3.5.6<a class="headerlink" href="#id144" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">cell</span></code> decorator to gf.components.text</p></li>
+</ul>
+</section>
+<section id="id145">
+<h2>3.5.5<a class="headerlink" href="#id145" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>expose spacing parameter in <code class="docutils literal notranslate"><span class="pre">gf.routing.get_bundle_from_steps</span></code></p></li>
+</ul>
+</section>
+<section id="id146">
+<h2>3.5.3<a class="headerlink" href="#id146" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>make trimesh, and tidy3d optional dependencies that you can install with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gdsfactory[full]</span></code></p></li>
+</ul>
+</section>
+<section id="id147">
+<h2>3.5.1<a class="headerlink" href="#id147" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.routing.get_bundle_from_steps</span></code></p></li>
+</ul>
+</section>
+<section id="id148">
+<h2>3.5.0<a class="headerlink" href="#id148" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">end_straight</span></code> to <code class="docutils literal notranslate"><span class="pre">end_straight_length</span></code></p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">start_straight</span></code> to <code class="docutils literal notranslate"><span class="pre">start_straight_length</span></code></p></li>
+</ul>
+</section>
+<section id="id149">
+<h2>3.4.9<a class="headerlink" href="#id149" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add pad_pitch to <code class="docutils literal notranslate"><span class="pre">resistance_sheet</span></code></p></li>
+<li><p>enable multimode waveguide in straight_heater_meander</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">grating_coupler_elliptical_arbitrary</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">grating_coupler_elliptical_lumerical</span></code> using lumerical parametrization</p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">grating_coupler_elliptical2</span></code> to <code class="docutils literal notranslate"><span class="pre">grating_coupler_circular</span></code>. rename <code class="docutils literal notranslate"><span class="pre">layer_core</span></code> to <code class="docutils literal notranslate"><span class="pre">layer</span></code>, <code class="docutils literal notranslate"><span class="pre">layer_ridge</span></code> to <code class="docutils literal notranslate"><span class="pre">layer_slab</span></code> for a more consistent parametrization of other grating couplers.</p></li>
+<li><p>add Component.add_padding</p></li>
+</ul>
+</section>
+<section id="id150">
+<h2>3.4.8<a class="headerlink" href="#id150" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pad has vertical_dc port</p></li>
+</ul>
+</section>
+<section id="id151">
+<h2>3.4.6<a class="headerlink" href="#id151" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.functions.move_port_to_zero</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gf.routing.add_fiber_single</span></code> has new parameter <code class="docutils literal notranslate"><span class="pre">zero_port</span></code> that can move a port to (0, 0)</p></li>
+<li><p>add fixme/routing</p></li>
+<li><p>enable <code class="docutils literal notranslate"><span class="pre">gf.read.from_yaml</span></code> to read ports that are defined without referencing any reference</p></li>
+</ul>
+</section>
+<section id="id152">
+<h2>3.4.5<a class="headerlink" href="#id152" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>decorate <code class="docutils literal notranslate"><span class="pre">gf.path.extrude</span></code> with cell, to avoid duplicated cell names</p></li>
+<li><p>enforce contact_startLayer_endLayer naming convention</p></li>
+<li><p>gf.grid accepts rotation for reference</p></li>
+<li><p>add pydantic validator class methods to Path and CrossSection</p></li>
+<li><p>CrossSection has a <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></p></li>
+<li><p>rename Component <code class="docutils literal notranslate"><span class="pre">to_dict</span></code> to <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code>: is now a method instead of a property</p></li>
+<li><p>rename Component <code class="docutils literal notranslate"><span class="pre">pprint</span></code> to <code class="docutils literal notranslate"><span class="pre">pprint()</span></code>: is now a method instead of a property</p></li>
+<li><p>rename Component <code class="docutils literal notranslate"><span class="pre">pprint_ports</span></code> to <code class="docutils literal notranslate"><span class="pre">pprint_ports()</span></code>: is now a method instead of a property</p></li>
+<li><p>Component.mirror() returns a container</p></li>
+</ul>
+</section>
+<section id="id153">
+<h2>3.4.4<a class="headerlink" href="#id153" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>decorators that return new component also work in cell</p></li>
+</ul>
+</section>
+<section id="id154">
+<h2>3.4.3<a class="headerlink" href="#id154" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>enable <code class="docutils literal notranslate"><span class="pre">Component.move()</span></code> which returns a new Component that contains a moved reference of the original component</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">Port._copy()</span></code> that is the same as <code class="docutils literal notranslate"><span class="pre">Port.copy</span></code> to keep backwards compatibility with phidl components</p></li>
+<li><p>adapt some phidl.geometry boolean operations into <code class="docutils literal notranslate"><span class="pre">gdsfactory.geometry</span></code></p></li>
+<li><p>move some functions (boolean, compute_area, offset, check_width … ) into <code class="docutils literal notranslate"><span class="pre">gdsfactory.geometry</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gdsfactory.geometry.boolean</span></code> for klayout based boolean operations</p></li>
+<li><p>add pydantic validator for <code class="docutils literal notranslate"><span class="pre">ComponentReference</span></code></p></li>
+<li><p>max_name_length is a cell decorator argument used when importing gds cells</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">geometry.boolean_klayout</span></code></p></li>
+</ul>
+</section>
+<section id="id155">
+<h2>3.4.2<a class="headerlink" href="#id155" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">import_gds</span></code> also shares the cell cache</p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">name_long</span></code> from <code class="docutils literal notranslate"><span class="pre">cell</span></code> decorator</p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">autoname</span></code> from <code class="docutils literal notranslate"><span class="pre">cell</span></code> decorator args</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Component.show()</span></code> shows a component copy instead of a container</p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">Component.get_parent_name()</span></code> and replace it with <code class="docutils literal notranslate"><span class="pre">Component.child_info.name</span></code></p></li>
+<li><p>gf.path.extrude adds cross_section.info and path.info to component info</p></li>
+</ul>
+</section>
+<section id="id156">
+<h2>3.4.0<a class="headerlink" href="#id156" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>gf.component_from_yaml accepts info settings</p></li>
+<li><p>make sure that zero length paths can be extruded without producing degenerated boundaries. They just have ports instead of trying to extrude zero length paths.</p></li>
+<li><p>snap.assert_on_2nm_grid for gap in mmi1x2, mmi2x2, coupler, coupler_ring</p></li>
+<li><p>gf.Component.rotate() calls gf.rotate so that it uses the Component CACHE</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">tests/test_rotate.py</span></code> to ensure cache is working</p></li>
+<li><p>add cache to component_from_yaml</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">tests/test_component_from_yaml_uid.py</span></code></p></li>
+<li><p>ensure consitent name in YAML by hashing the dict in case no name is provided</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">component.settings</span></code> contains input settings (full, changed, default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">component.info</span></code> contains derived settings (including module_name, parent settings, …)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">component.to_dict</span></code> returns a dict with all information (info, settings, ports)</p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">via_stack</span></code> to <code class="docutils literal notranslate"><span class="pre">contact</span></code></p></li>
+</ul>
+</section>
+<section id="id157">
+<h2>3.3.9<a class="headerlink" href="#id157" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>move <code class="docutils literal notranslate"><span class="pre">gf.component_from_yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">gf.read.from_yaml</span></code></p></li>
+<li><p>unpin triangle version in requirements.txt</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cell</span></code> components accept info settings dict, for the components</p></li>
+</ul>
+</section>
+<section id="id158">
+<h2>3.3.8<a class="headerlink" href="#id158" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">auto_widen</span></code> example in tutorials/routing</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">plugins</span></code> examples in tutorials/plugins</p></li>
+<li><p>Component.rotate() returns a new Component with a rotated reference of itself</p></li>
+<li><p>increase simulation_time in lumerical <code class="docutils literal notranslate"><span class="pre">simulation_settings</span></code> from 1ps to 10ps, so max simulation region increased 10x</p></li>
+<li><p>write_sparameters_lumerical returns session if run=False. Nice to debug sims.</p></li>
+<li><p>make consitent names in gf.read: <code class="docutils literal notranslate"><span class="pre">gf.read.from_phidl</span></code> <code class="docutils literal notranslate"><span class="pre">gf.read.from_picwriter</span></code> <code class="docutils literal notranslate"><span class="pre">gf.read.from_gds</span></code></p></li>
+</ul>
+</section>
+<section id="id159">
+<h2>3.3.5<a class="headerlink" href="#id159" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">route_manhattan</span></code> ensures correct route connectivity</p></li>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">bend_factory</span></code> by <code class="docutils literal notranslate"><span class="pre">bend</span></code> to be more consistent with components</p></li>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">bend90_factory</span></code> by <code class="docutils literal notranslate"><span class="pre">bend90</span></code> to be more consistent with components</p></li>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">straight_factory</span></code> by <code class="docutils literal notranslate"><span class="pre">straight</span></code> to be more consistent with components</p></li>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">get_route_electrical_shortest_path</span></code> by <code class="docutils literal notranslate"><span class="pre">route_quad</span></code></p></li>
+<li><p>gf.components.array raises error if columns &gt; 1 and xspacing = 0</p></li>
+<li><p>gf.components.array raises error if rows &gt; 1 and yspacing = 0</p></li>
+<li><p>simplify <code class="docutils literal notranslate"><span class="pre">gf.components.rectangle</span></code> defintion, by default it gets 4 ports</p></li>
+<li><p>containers use Component.copy_settings_from(old_Component), and they keep their parent settings in <code class="docutils literal notranslate"><span class="pre">parent</span></code>, as well as <code class="docutils literal notranslate"><span class="pre">parent_name</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Component.get_parent_name()</span></code> returns the original parent name for hierarchical components and for non-hierarchical it just returns the component name</p></li>
+</ul>
+</section>
+<section id="id160">
+<h2>3.3.4<a class="headerlink" href="#id160" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>containers use <code class="docutils literal notranslate"><span class="pre">gf.functions.copy_settings</span></code> instead of trying to detect <code class="docutils literal notranslate"><span class="pre">component=</span></code> from kwargs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Port._copy()</span></code> is now <code class="docutils literal notranslate"><span class="pre">Port.copy()</span></code></p></li>
+<li><p>bend_euler <code class="docutils literal notranslate"><span class="pre">p=0.5</span></code> as default based on this <a class="reference external" href="https://www.osapublishing.org/oe/fulltext.cfm?uri=oe-25-8-9150&amp;id=362937">paper</a></p></li>
+<li><p>rectangle has 4 ports by default (similar to compass), it just includes the <code class="docutils literal notranslate"><span class="pre">centered</span></code> parameter</p></li>
+<li><p>gf.grid accept component factories as well as components and is a cell</p></li>
+</ul>
+</section>
+<section id="id161">
+<h2>3.3.3<a class="headerlink" href="#id161" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix cutback_component bend</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.routing.route_quad</span></code></p></li>
+</ul>
+</section>
+<section id="id162">
+<h2>3.3.2<a class="headerlink" href="#id162" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gdsfactory.to_3d.to_stl</span></code></p></li>
+</ul>
+</section>
+<section id="id163">
+<h2>3.3.1<a class="headerlink" href="#id163" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>adjust z position for lumerical simulation region as well as port locations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Component.show()</span></code> and <code class="docutils literal notranslate"><span class="pre">Component.plot()</span></code> do not clear_cache by default (<code class="docutils literal notranslate"><span class="pre">clear_cache=False</span></code>)</p></li>
+</ul>
+</section>
+<section id="id164">
+<h2>3.3.0<a class="headerlink" href="#id164" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>write_sparameters in lumerical writes simulation_settings in YAML</p></li>
+<li><p>replace port_width with port_margin in simulation_settings</p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">Component.get_porst_east_west_spacing</span></code> as <code class="docutils literal notranslate"><span class="pre">Component.get_ports_ysize()</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">Component.get_ports_ysize()</span></code></p></li>
+<li><p>fix <code class="docutils literal notranslate"><span class="pre">mzi</span></code> <code class="docutils literal notranslate"><span class="pre">with_splitter</span></code></p></li>
+<li><p>enable <code class="docutils literal notranslate"><span class="pre">vars</span></code> variables in component_from_yaml</p></li>
+<li><p>gdsdiff accepts test_name, and uses the path of the test_file for storing GDS files</p></li>
+<li><p>add functools cache decorator for gdsfactory.import_gds and gdsfactory.read.gds</p></li>
+<li><p>rename cache with lru_cache(maxsize=None) to keep compatibility with python3.7 and 3.8</p></li>
+<li><p>update to phidl==1.6.0 and gdspy==1.6.9 in requirements.txt</p></li>
+<li><p>new gf.path.extrude adapted from phidl</p></li>
+</ul>
+</section>
+<section id="id165">
+<h2>3.2.9<a class="headerlink" href="#id165" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">component_from</span></code> to <code class="docutils literal notranslate"><span class="pre">read</span></code></p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">gf.bias</span></code></p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">gf.filecache</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">get_layer_to_sidewall_angle</span></code> in layer_stack</p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">gf.lys</span></code> to <code class="docutils literal notranslate"><span class="pre">gf.layers.LAYER_SET</span></code> to be consistent</p></li>
+</ul>
+</section>
+<section id="id166">
+<h2>3.2.8<a class="headerlink" href="#id166" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>array with via has consistent names</p></li>
+</ul>
+</section>
+<section id="id167">
+<h2>3.2.7<a class="headerlink" href="#id167" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>write_sparameters exports the layer_stack together with the simulation_settings</p></li>
+<li><p>write simulation_settings with omegaconf instead of YAML. Layer tuples were not exporting correctly.</p></li>
+<li><p>layer_stack inherits from dict</p></li>
+<li><p>simulation files use get_name_short to keep the name of the suffix within 32 characters + 32 characters for the name. This keeps filepath with less than 64 characters</p></li>
+</ul>
+</section>
+<section id="id168">
+<h2>3.2.6<a class="headerlink" href="#id168" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add_ports_from_labels accepts layer parameter for the port</p></li>
+</ul>
+</section>
+<section id="id169">
+<h2>3.2.5<a class="headerlink" href="#id169" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add add_ports_from_labels function</p></li>
+</ul>
+</section>
+<section id="id170">
+<h2>3.2.4<a class="headerlink" href="#id170" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>transition raises ValueError if has no common layers between both cross_sections</p></li>
+<li><p>grating coupler wavelength in um to be consistent with all units in gdsfactory</p></li>
+<li><p>rename thickness_nm to thickness and zmin_nm to zmin in layer_stack to be consistent with gdsfactory units in um</p></li>
+<li><p>rename Ppp to PPP, Npp to NPP to be consistent with nomenclature</p></li>
+<li><p>simulation_settings in um to be consistent with all units in gdsfactory being in um</p></li>
+</ul>
+</section>
+<section id="id171">
+<h2>3.2.3<a class="headerlink" href="#id171" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix gf.to_trimesh</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">Floats</span></code>, <code class="docutils literal notranslate"><span class="pre">Float2</span></code> and <code class="docutils literal notranslate"><span class="pre">Float3</span></code> to types</p></li>
+<li><p>add kwargs for component example documentation from signature</p></li>
+</ul>
+</section>
+<section id="id172">
+<h2>3.2.2<a class="headerlink" href="#id172" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.to_trimesh</span></code> to render components in 3D</p></li>
+<li><p>replace dx, dy by size in bend_s, and spacing by dx, dy in splitter_tree</p></li>
+</ul>
+</section>
+<section id="id173">
+<h2>3.2.1<a class="headerlink" href="#id173" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>simplify contact_with_offset_m1_m2</p></li>
+<li><p>contact_with_offset_m1_m2 use array of references</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">gf.components.taper_cross_section</span></code> to taper two cross_sections</p></li>
+</ul>
+</section>
+<section id="id174">
+<h2>3.2.0<a class="headerlink" href="#id174" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Ensures that an impossible route raises RouteWarning and draws error route with markers and labels on each waypoint</p></li>
+</ul>
+</section>
+<section id="id175">
+<h2>3.1.10<a class="headerlink" href="#id175" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix add fiber single for some cases</p></li>
+<li><p>create <code class="docutils literal notranslate"><span class="pre">strip_auto_widen</span></code> cross_section with automatic widening of the waveguide</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">add_grating_couplers_with_loopback_fiber_single</span></code></p></li>
+</ul>
+</section>
+<section id="id176">
+<h2>3.1.9<a class="headerlink" href="#id176" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pad_array and array use array of references, accept columns and rows as args</p></li>
+</ul>
+</section>
+<section id="id177">
+<h2>3.1.8<a class="headerlink" href="#id177" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>contact uses array of references</p></li>
+</ul>
+</section>
+<section id="id178">
+<h2>3.1.7<a class="headerlink" href="#id178" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>transition ports have different cross_sections</p></li>
+<li><p>get_bundle separation is now defined from center to center waveguide</p></li>
+<li><p>contact has 4 ports, consistent with pads</p></li>
+<li><p>pad takes size argument instead of (width, height), which is consistent with other rectangular structures</p></li>
+<li><p>add filecache to store in files</p></li>
+</ul>
+</section>
+<section id="id179">
+<h2>3.1.6<a class="headerlink" href="#id179" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">Component.write_netlist_dot</span></code> to write netlist graph in dot format</p></li>
+<li><p>add handling of separation keyword argument to get_bundle_from_waypoints (thanks to Troy @tvt173)</p></li>
+</ul>
+</section>
+<section id="id180">
+<h2>3.1.5<a class="headerlink" href="#id180" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>raise ValueError when moving or rotating component. This avoids modifying the state (position, rotation) of any Component after created and stored in the cell cache.</p></li>
+<li><p>add cross_section property to ports</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gdsfactory/routing/fanout.py</span></code> passes cross_section settings from port into bend_s</p></li>
+<li><p>fix manhattan text, avoid creating duplicated cells</p></li>
+<li><p>fix cdsem_all</p></li>
+</ul>
+</section>
+<section id="id181">
+<h2>3.1.4<a class="headerlink" href="#id181" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>remove limitation from get_bundle_from_waypoints is that it requires to have all the ports lined up.</p></li>
+</ul>
+</section>
+<section id="id182">
+<h2>3.1.3<a class="headerlink" href="#id182" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>because in 3.1.1 cells can accept <code class="docutils literal notranslate"><span class="pre">*args</span></code> containers now are detected when they have <code class="docutils literal notranslate"><span class="pre">Component.component</span></code></p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">component.settings['component']</span></code> to <code class="docutils literal notranslate"><span class="pre">component.settings['contains']</span></code></p></li>
+<li><p>grating couplers have port with <code class="docutils literal notranslate"><span class="pre">vertical_te</span></code> or <code class="docutils literal notranslate"><span class="pre">vertical_tm</span></code> prefix</p></li>
+<li><p>container keep the same syntax</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_fiber_array</span></code> allows passing <code class="docutils literal notranslate"><span class="pre">gc_port_labels</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_fiber_array</span></code> and <code class="docutils literal notranslate"><span class="pre">add_fiber_single</span></code> propagate any non-optical ports to the container</p></li>
+<li><p>fix ports transitions and raise error when saving gdsfile with duplicated cell names</p></li>
+</ul>
+</section>
+<section id="id183">
+<h2>3.1.2<a class="headerlink" href="#id183" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">doc</span></code> to update components documentation</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">routing.get_route_electrical</span></code> with sensitive defaults for routing electrical routes <code class="docutils literal notranslate"><span class="pre">bend=wire_corner</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">components.pad_array_2d</span></code> names <code class="docutils literal notranslate"><span class="pre">e{row}_{col}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">components.pad_array</span></code> names <code class="docutils literal notranslate"><span class="pre">e{col}</span></code></p></li>
+</ul>
+</section>
+<section id="id184">
+<h2>3.1.1<a class="headerlink" href="#id184" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>cells accept <code class="docutils literal notranslate"><span class="pre">*args</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">@cell</span></code> autonaming includes the complete keyword arguments keys (not only the first letter of each argument)</p></li>
+<li><p>fix straight_pin and straight_heater_doped length when they have tapers</p></li>
+<li><p>waveguide template defaults to euler=True for picwriter components (spiral)</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">Component.get_ports_xsize()</span></code></p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">toolz</span></code> library to requirements</p></li>
+</ul>
+</section>
+<section id="id185">
+<h2>3.1.0<a class="headerlink" href="#id185" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>move components python files to the same folder</p></li>
+<li><p>add components.write_factory function to generate dict</p></li>
+<li><p>added filecmp for testing components widht difftest, only does XOR if files are different. This speeds the check for larger files.</p></li>
+</ul>
+</section>
+<section id="id186">
+<h2>3.0.3<a class="headerlink" href="#id186" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>change port naming convention from WNES to o1, o2, o3 for optical, and e1, e2, e3, e4 for electrical</p></li>
+<li><p>add Component.auto_rename_ports()</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">ports_layer</span></code> property to Component and ComponentReference to get a map</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Component.show()</span></code> <code class="docutils literal notranslate"><span class="pre">show_ports</span></code> and <code class="docutils literal notranslate"><span class="pre">show_subports</span></code> show a container (do not modify original component)</p></li>
+<li><p>add port_types to cross_section</p></li>
+<li><p>rename straight_horizontal_top to straight_x_top</p></li>
+</ul>
+</section>
+<section id="id187">
+<h2>3.0.2<a class="headerlink" href="#id187" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add straight_rib, straight_heater_metal and straight_heater_doped</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xs2</span> <span class="pre">=</span> <span class="pre">gf.partial(cross_section)</span></code> does not require defining <code class="docutils literal notranslate"><span class="pre">xs2.__name__</span></code></p></li>
+<li><p>replace gf.extend[.] with gf.components.extension.</p></li>
+<li><p>Component.show() uses <code class="docutils literal notranslate"><span class="pre">add_pins_triangle</span></code> as default to show port orientation</p></li>
+<li><p>add gf.comtainers.bend_port</p></li>
+<li><p>get_netlist considers x,y,width to extract port connectivity</p></li>
+</ul>
+</section>
+<section id="id188">
+<h2>3.0.1<a class="headerlink" href="#id188" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pass cross_section functions to component factories instead of registering waveguides in TECH.waveguide</p></li>
+<li><p>snap_to_grid is now a cross_section property</p></li>
+<li><p>replace Waveguide with gdsfactory.cross_section functions</p></li>
+<li><p>add pydantic.validate_arguments to cross_section</p></li>
+<li><p>functools.partial have unique names</p></li>
+<li><p>partial functions include settings for JSON and name</p></li>
+<li><p>include xor flag when doing a gdsdiff</p></li>
+<li><p>delete StrOrDict, you can use functools.partial instead to customize functions</p></li>
+<li><p>include –xor flag to <code class="docutils literal notranslate"><span class="pre">gf</span> <span class="pre">gds</span> <span class="pre">diff</span> <span class="pre">--xor</span></code> CLI to run a detailed XOR between 2 GDS files</p></li>
+</ul>
+</section>
+<section id="id189">
+<h2>3.0.0<a class="headerlink" href="#id189" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">pp</span></code> to <code class="docutils literal notranslate"><span class="pre">gdsfactory</span></code></p></li>
+<li><p>recommend <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">gdsfactory</span> <span class="pre">as</span> <span class="pre">gf</span></code></p></li>
+<li><p>rename <code class="docutils literal notranslate"><span class="pre">pf</span></code> CLI to <code class="docutils literal notranslate"><span class="pre">gf</span></code></p></li>
+</ul>
+</section>
+<section id="id190">
+<h2>2.7.8<a class="headerlink" href="#id190" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename post_init to decorator</p></li>
+<li><p>add pp.layer.load_lyp_generic</p></li>
+<li><p>load_lyp, alpha=1 if visible = ‘false’</p></li>
+<li><p>LayerStack is now List[LayerLevel] and has no color information</p></li>
+</ul>
+</section>
+<section id="id191">
+<h2>2.7.7<a class="headerlink" href="#id191" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>remove taper_factory from pp.routing.add_fiber_array and pp.routing.add_fiber_single</p></li>
+<li><p>pp.Component.add_ports(port_list, prefix) to avoid adding duplicated port names</p></li>
+<li><p>add pp.components.litho_ruler</p></li>
+<li><p>@cell has <code class="docutils literal notranslate"><span class="pre">post_init</span></code> function. Perfect for adding pins</p></li>
+<li><p>update <code class="docutils literal notranslate"><span class="pre">samples/pdk/fabc.py</span></code> with partial</p></li>
+<li><p>Library can register partial functions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contact_with_offset_m1_m2</span></code> is now define with via functions instead of StrOrDict, skip it from tests</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">pp.components.die_box</span></code></p></li>
+</ul>
+</section>
+<section id="id192">
+<h2>2.7.6<a class="headerlink" href="#id192" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add Component.to_dict()</p></li>
+<li><p>add pp.config.set_plot_options for configuring matplotlib</p></li>
+<li><p>add pp.Component.add_ports(port_list)</p></li>
+<li><p>enable in pp.name the option of passing a partial function</p></li>
+<li><p>create partial notebook (for functional programming) demonstrating hierarchical components with customized subcomponent functions</p></li>
+<li><p>revert mzi and mzi_lattice to 2.5.3 (functional programming version)</p></li>
+<li><p>delete mzi_arm, mzi2x2 and mzi1x2</p></li>
+<li><p>add mzi_phase_shifter</p></li>
+<li><p>add wire_sbend</p></li>
+<li><p>pp.add_tapers back to functional programming</p></li>
+</ul>
+</section>
+<section id="id193">
+<h2>2.7.5<a class="headerlink" href="#id193" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix preview_layerset</p></li>
+<li><p>extension_factory default extension layer depends on the port</p></li>
+<li><p>add extend_ports_list to pp.extend</p></li>
+<li><p>add simulation_settings to pp.write</p></li>
+</ul>
+</section>
+<section id="id194">
+<h2>2.7.4<a class="headerlink" href="#id194" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>get_bundle_corner passing waveguide (consistent with other routes)</p></li>
+<li><p>fix pp.components.wire_corner</p></li>
+<li><p>delete pp.components.electrical.wire.py</p></li>
+</ul>
+</section>
+<section id="id195">
+<h2>2.7.3<a class="headerlink" href="#id195" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pp.grid allows accessing references from Component.aliases</p></li>
+<li><p>pp.routing.add_fiber_single and pp.routing.add_fiber_array accept get_input_label_text_loopback, get_input_label_text params</p></li>
+</ul>
+</section>
+<section id="id196">
+<h2>2.7.2<a class="headerlink" href="#id196" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fix print_config asdict(TECH)</p></li>
+<li><p>cell decorator validates arguments by default using pydantic, cell_without_validator does not</p></li>
+<li><p>add pydantic.vaidate method to Port</p></li>
+</ul>
+</section>
+<section id="id197">
+<h2>2.7.1<a class="headerlink" href="#id197" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add pp.components.die</p></li>
+<li><p>fix spiral_external_io</p></li>
+<li><p>add_fiber_array also labels loopbacks</p></li>
+<li><p>rename with_align_ports as loopback</p></li>
+</ul>
+</section>
+<section id="id198">
+<h2>2.7.0<a class="headerlink" href="#id198" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>round_corners raises RouteWarning if not enough space to fit a bend</p></li>
+</ul>
+</section>
+<section id="id199">
+<h2>2.6.10<a class="headerlink" href="#id199" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>contact has port with port_type=dc</p></li>
+</ul>
+</section>
+<section id="id200">
+<h2>2.6.9<a class="headerlink" href="#id200" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename tlm to contact and tlm_with_offset to contact_with_offset_m1_m2</p></li>
+</ul>
+</section>
+<section id="id201">
+<h2>2.6.8<a class="headerlink" href="#id201" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add pp.c.tlm_with_offset</p></li>
+<li><p>mzi adds any non-optical ports from straight_x_bot and straight_x_top</p></li>
+<li><p>ignore layer_to_inclusion: Optional[Dict[Layer, float]] from get_settings</p></li>
+</ul>
+</section>
+<section id="id202">
+<h2>2.6.7<a class="headerlink" href="#id202" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pp.sp.write has a logger</p></li>
+<li><p>via has optional pitch_x and pitch_y</p></li>
+</ul>
+</section>
+<section id="id203">
+<h2>2.6.6<a class="headerlink" href="#id203" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add pp.extend to pp</p></li>
+<li><p>fix pp.extend.extend_port, propagates all settings</p></li>
+<li><p>pp.gds.read_ports_from_markers accepts a center (xc and yc) for guessing port orientation</p></li>
+<li><p>import_gds only accessible from pp.gds.import_gds</p></li>
+<li><p>merge assert_grating_coupler_properties and version in pp.asserts.</p></li>
+<li><p>created pp.component_from module</p></li>
+<li><p>rename pp.import_phidl_component and pp.picwriter_to_component pp.component_from.phidl and pp.component_from.picwriter</p></li>
+<li><p>rename pp.load_component to pp.component_from.gds</p></li>
+<li><p>rename pp.netlist_to_component to pp.component_from.netlist. added a DeprecationWarning</p></li>
+<li><p>move set_plot_options to pp.klive.set_plot_options, stop overriding phidl’s set_plot_options in <code class="docutils literal notranslate"><span class="pre">pp.__init__</span></code></p></li>
+<li><p>move pp.merge_cells into pp.component_from.gdspaths and pp.component_from.gdsdir</p></li>
+<li><p>waveguide accepts dict(component=’fabc_nitride_cband’)</p></li>
+<li><p>add pp.remove and pp.read</p></li>
+<li><p>remove pp.gds</p></li>
+</ul>
+</section>
+<section id="id204">
+<h2>2.6.5<a class="headerlink" href="#id204" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add pp.routing.get_route_from_steps as a more convenient version of pp.routing.get_route_from_waypoints</p></li>
+</ul>
+</section>
+<section id="id205">
+<h2>2.6.4<a class="headerlink" href="#id205" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pp.components.mzi accepts straight_x_bot and straight_x_bot parameters</p></li>
+<li><p>pad array has axis=’x’ argument</p></li>
+<li><p>expose utils, sort_ports and fanout in pp.routing</p></li>
+</ul>
+</section>
+<section id="id206">
+<h2>2.6.3<a class="headerlink" href="#id206" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add min_length Waveguide setting, for manhattan routes and get_bundle</p></li>
+<li><p>remove grating_coupler.xmin = 0 inside the route_fiber function</p></li>
+</ul>
+</section>
+<section id="id207">
+<h2>2.6.2<a class="headerlink" href="#id207" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add pp.c.delay_snake2 and pp.c.delay_snake3</p></li>
+<li><p>rename FACTORY as LIBRARY. Now we have LIBRARY.factory as the Dict[str, Callable] with all the library functions.</p></li>
+<li><p>LIBRARY.get_component adds component._initialized=True attribute only once</p></li>
+</ul>
+</section>
+<section id="id208">
+<h2>2.6.0<a class="headerlink" href="#id208" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>cell decorator propagates settings for Component, only if isinstance(kwargs[‘component’], Component)</p></li>
+<li><p>get_route_from_waypoints adds port1 and port2 waypoints automatically</p></li>
+<li><p>get_route_from_waypoints accepts waveguide and waveguide_settings</p></li>
+<li><p>add_port warns you when trying to add ports with off-grid port points</p></li>
+<li><p>fix add_fiber: not passing factory to get_bundle</p></li>
+<li><p>Factory(name=) has required argument name</p></li>
+<li><p>Factory has <code class="docutils literal notranslate"><span class="pre">__str__</span></code> and <code class="docutils literal notranslate"><span class="pre">__repr__</span></code></p></li>
+<li><p>add_port(width=) width automatically snaps width to 1nm grid</p></li>
+<li><p>add DeprecationWarning to get_routes</p></li>
+<li><p>update pipfile</p></li>
+<li><p>remove conda environment.yml as it was out of date</p></li>
+<li><p>add automatic release of any tag that starts with v</p></li>
+</ul>
+</section>
+<section id="id209">
+<h2>2.5.7<a class="headerlink" href="#id209" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Component.show(show_ports=True) adds port names and pins by default (before show_ports=False)</p></li>
+<li><p>splitter_tree, also propagates extra coupler ports</p></li>
+<li><p>add_ports_from_markers has an optional <code class="docutils literal notranslate"><span class="pre">port_layer</span></code> for the new created port.</p></li>
+<li><p>component_settings = OmegaConf.to_container(component_settings, resolve=True)</p></li>
+<li><p>pp.c.pad_array consistent parameters with pp.c.array (pitch_x)</p></li>
+</ul>
+</section>
+<section id="id210">
+<h2>2.5.6<a class="headerlink" href="#id210" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>better error messages for off-grid ports, add suggestions for fixes</p></li>
+<li><p>Component.validator <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">len(name)</span> <span class="pre">&lt;=</span> <span class="pre">MAX_NAME_LENGTH</span></code>, before <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">len(name)</span> <span class="pre">&lt;</span> <span class="pre">MAX_NAME_LENGTH</span></code></p></li>
+</ul>
+</section>
+<section id="id211">
+<h2>2.5.5<a class="headerlink" href="#id211" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>update to omegaconf=2.1.0</p></li>
+<li><p>add loguru logger</p></li>
+<li><p>added pydantic validator to Component</p></li>
+<li><p>pp.add_tapers.add_tapers can accept taper port names</p></li>
+<li><p>add_tapers, add_fiber_array, add_fiber_single accepts taper with StrOrDict</p></li>
+<li><p>components accept waveguide StrOrDict</p></li>
+<li><p>some names were having 33 characters, fixed max characters name</p></li>
+</ul>
+</section>
+<section id="id212">
+<h2>2.5.4<a class="headerlink" href="#id212" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">pf</span> <span class="pre">gds</span></code> CLI commands for <code class="docutils literal notranslate"><span class="pre">merge_gds_from_directory</span></code>, <code class="docutils literal notranslate"><span class="pre">layermap_to_dataclass</span></code>, <code class="docutils literal notranslate"><span class="pre">write_cells</span></code></p></li>
+<li><p>component_from_yaml has a get_bundle_from_waypoints factory</p></li>
+<li><p>add heater with single metal</p></li>
+<li><p>fix routing with cross-sections with defined Sections</p></li>
+<li><p>add TECH.rename_ports</p></li>
+<li><p>add pp.containers.</p></li>
+<li><p>mzi accepts a factory and can accept StrOrDict for for leaf components</p></li>
+<li><p>Factory(post_init=function). Useful for adding pins when using Factory.get_component()</p></li>
+</ul>
+</section>
+<section id="id213">
+<h2>2.5.3<a class="headerlink" href="#id213" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>enable fixed timestamp in saved cells, which allows having the same hash for files that do not change</p></li>
+</ul>
+</section>
+<section id="id214">
+<h2>2.5.2<a class="headerlink" href="#id214" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fixed pp.import_phidl_component and added test</p></li>
+</ul>
+</section>
+<section id="id215">
+<h2>2.5.1<a class="headerlink" href="#id215" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>compatible with latest version of phidl (1.5.2)</p></li>
+<li><p>renamed routing functions</p></li>
+<li><p>reduced routing functions functions in pp.routing</p></li>
+<li><p>better error messages for waveguide settings (print available keyword args)</p></li>
+<li><p>fixed cell decorator to raise Error if any non keyword args defined</p></li>
+<li><p>pin more requirements in requirements.txt</p></li>
+<li><p>added pur (pip update requirements) in a separate workflow to test gdsfactory with bleeding edge dependencies</p></li>
+</ul>
+</section>
+<section id="id216">
+<h2>2.5.0<a class="headerlink" href="#id216" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add pp.routing.sort_ports</p></li>
+<li><p>add pp.routing.get_route_sbend for a single route</p></li>
+<li><p>add pp.routing.get_route_sbend_bundle for a bundle of Sbend routes</p></li>
+<li><p>rename start_ports, end_ports with ports1 and ports2</p></li>
+<li><p>straight_with_heater fixed connector</p></li>
+<li><p>straight_with_heater accepts port_orientation_input and port_orientation_output</p></li>
+<li><p>TECH defined in config.yml</p></li>
+<li><p>refactor pp.path.component to pp.path.extrude</p></li>
+<li><p>write to GDS again even if component already has a component.path</p></li>
+<li><p>define all TECH in tech.py dataclasses and delete Tech, and Pdk</p></li>
+<li><p>add pp.routing.fanout</p></li>
+<li><p>add Factory dataclass</p></li>
+<li><p>fix pp.routing.routing _gradual_bend</p></li>
+<li><p>add TestClass for Component</p></li>
+<li><p>fix get_bundle for indirect routing</p></li>
+<li><p>get_netlist returns cleaned names for components (-3.2 -&gt; m3p2)</p></li>
+<li><p>add pp.assert_version</p></li>
+<li><p>fix naming for components with long funcnames (already over 24 chars + 8 chars for name hash) to keep name shorter than 32 chars</p></li>
+<li><p>add pydantic validate_arguments decorator. @pp.cell_with_validator</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">validate_arguments</span>
+<span class="nd">@validate_arguments</span>
+</pre></div>
+</div>
+</section>
+<section id="id217">
+<h2>2.4.9<a class="headerlink" href="#id217" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename pp.plot file to pp.set_plot_options to avoid issues with pp.plot function</p></li>
+</ul>
+</section>
+<section id="id218">
+<h2>2.4.8<a class="headerlink" href="#id218" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">pins</span></code> kwargs from ring and mzi</p></li>
+<li><p>simpler coupler straight</p></li>
+<li><p>renamed <code class="docutils literal notranslate"><span class="pre">_get</span></code> to <code class="docutils literal notranslate"><span class="pre">get</span></code> in LayerStack</p></li>
+<li><p>import_gds raise FileNotFoundError</p></li>
+<li><p>import_gds sends gdspy str(gdspath)</p></li>
+<li><p>remove pp.plotgds, as you can just do component.plot()</p></li>
+<li><p>add pp.set_plot_options() to be consistent with latest 1.5.0 phidl release</p></li>
+</ul>
+</section>
+<section id="id219">
+<h2>2.4.7<a class="headerlink" href="#id219" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>better README</p></li>
+<li><p>get_settings exports int if possible (3.0 -&gt; 3)</p></li>
+<li><p>add cross_section pin for doped waveguides</p></li>
+<li><p>Raise error for making transition with unnamed sections</p></li>
+<li><p>store component settings in YAML as part of tech.component_settings</p></li>
+<li><p>add add_padding_to_size function</p></li>
+<li><p>simplify add_pins function. Replace port_type_to_layer with simple layer and port_type kwargs</p></li>
+<li><p>add Pdk.add_pins()</p></li>
+<li><p>replace pp.write_gds(component, gdspath) with component.write_gds(gdspath)</p></li>
+<li><p>replace pp.write_component(component, gdspath) with component.write_gds_with_metadata(gdspath)</p></li>
+<li><p>rename pp.components.waveguide to pp.components.straight</p></li>
+<li><p>rename auto_taper_to_wide_waveguides auto_widen</p></li>
+<li><p>rename wg_heater_connected to straight_with_heater</p></li>
+</ul>
+</section>
+<section id="id220">
+<h2>2.4.6<a class="headerlink" href="#id220" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>more consistent names on component factories</p></li>
+<li><p>add simulation_settings to Tech</p>
+<ul>
+<li><p>sparameters_path: pathlib.Path = CONFIG[“sp”]</p></li>
+<li><p>simulation_settings: SimulationSettings = simulation_settings</p></li>
+<li><p>layer_stack: LayerStack = LAYER_STACK</p></li>
+</ul>
+</li>
+<li><p>add Pdk.write_sparameters()</p></li>
+</ul>
+</section>
+<section id="id221">
+<h2>2.4.5<a class="headerlink" href="#id221" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>better docstrings</p></li>
+<li><p>simplify code for pp.path.smooth</p></li>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">pp.c.waveguide()</span></code> by <code class="docutils literal notranslate"><span class="pre">pp.components.waveguide()</span></code>. <code class="docutils literal notranslate"><span class="pre">pp.c.waveguide()</span></code> still works.</p></li>
+<li><p>replace <code class="docutils literal notranslate"><span class="pre">pp.qp()</span></code> by <code class="docutils literal notranslate"><span class="pre">pp.plot()</span></code> to be consistent with <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">Component()</span></code> and <code class="docutils literal notranslate"><span class="pre">c.plot()</span></code></p></li>
+<li><p>added <code class="docutils literal notranslate"><span class="pre">get_component_from_yaml</span></code> Pdk class</p></li>
+</ul>
+</section>
+<section id="id222">
+<h2>2.4.4<a class="headerlink" href="#id222" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>add vertical_te and vertical_tm ports to grating couplers</p></li>
+<li><p>remove klive warning when not klayout is not open (if klayout is not installed or running it will just fail silently)</p></li>
+<li><p>replace cladding for bend_circular and bend_euler with square cladding</p></li>
+<li><p>added <code class="docutils literal notranslate"><span class="pre">component.show(show_ports=True)</span></code></p></li>
+<li><p>added <code class="docutils literal notranslate"><span class="pre">component.show(show_subports=True)</span></code></p></li>
+<li><p>added <code class="docutils literal notranslate"><span class="pre">pf</span> <span class="pre">merge-cells</span></code></p></li>
+<li><p>added <code class="docutils literal notranslate"><span class="pre">auto_taper_to_wide_waveguides</span></code> option to add_fiber_array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_padding</span></code> returns the same component, <code class="docutils literal notranslate"><span class="pre">add_padding</span></code> returns a container with component inside</p></li>
+<li><p>remove container decorator, containers are just regular cells now with @cell decorator</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">add_pin_square_double</span></code> and make it the default</p></li>
+</ul>
+</section>
+<section id="id223">
+<h2>2.4.3<a class="headerlink" href="#id223" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>consistent port naming path.component extrusion</p></li>
+</ul>
+</section>
+<section id="id224">
+<h2>2.4.2<a class="headerlink" href="#id224" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>better docs</p></li>
+</ul>
+</section>
+<section id="id225">
+<h2>2.4.0<a class="headerlink" href="#id225" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>euler bends as default (with_arc_floorplan=True)</p></li>
+<li><p>define bends and straighs by path and cross_section</p></li>
+<li><p>tech file dataclass in pp.config</p></li>
+<li><p>added pp.pdk with tests</p></li>
+<li><p>include notebooks in docs with nbsphinx</p></li>
+<li><p>regression test for labels</p></li>
+<li><p>fixed CACHE key value by using the actual cellname</p></li>
+</ul>
+</section>
+<section id="id226">
+<h2>2.3.4<a class="headerlink" href="#id226" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>gdsdiff does not do booleans by default</p></li>
+<li><p>pin pre-commit versions</p></li>
+</ul>
+</section>
+<section id="id227">
+<h2>2.3.3<a class="headerlink" href="#id227" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>added pp.components.path to easily extrude CrossSections</p></li>
+<li><p>added more pp.types (ComponentFactory, RouteFactory) as Callable[…, Component]</p></li>
+<li><p>Load a LayerSet object from a Klayout lyp file</p></li>
+<li><p>clean lyp from generic tech</p></li>
+<li><p>bend_euler accepts similar parameters as bend_circular (layers_cladding, cladding_offset)</p></li>
+<li><p>renamed bend_euler90 as bend_euler</p></li>
+<li><p>components adapted from picwriter take more similar values (layer_cladding, layer)</p></li>
+<li><p>pp.difftest can step over each GDS file with a geometric difference and decide what to do interactively</p></li>
+<li><p>adapted pp.path and pp.cross_section from phidl</p></li>
+</ul>
+</section>
+<section id="id228">
+<h2>2.3.2<a class="headerlink" href="#id228" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fixed some mypy errors</p></li>
+<li><p>added dx to coupler</p></li>
+<li><p>bezier has now number of points as a parameter</p></li>
+<li><p>improved docs</p></li>
+<li><p>allow to set min and max area of port markers to read</p></li>
+</ul>
+</section>
+<section id="id229">
+<h2>2.3.1<a class="headerlink" href="#id229" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>refactor</p>
+<ul>
+<li><p>connect_strip to get_route</p></li>
+<li><p>connect_bundle to get_bundle</p></li>
+<li><p>connect_strip_way_points to get_route_from_waypoints</p></li>
+</ul>
+</li>
+<li><p>make diff shows all difference from the difftest run</p></li>
+<li><p>snap length to 1nm in route waveguide references</p></li>
+<li><p>remove any waveguide reference on the routes which have a 1nm-snapped length equal to zero</p></li>
+</ul>
+</section>
+<section id="id230">
+<h2>2.3.0<a class="headerlink" href="#id230" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>move tests to tests/ folder</p></li>
+<li><p>rename from <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">pp.testing</span> <span class="pre">import</span> <span class="pre">difftest</span></code> to <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">pp.difftest</span> <span class="pre">import</span> <span class="pre">difftest</span></code></p></li>
+<li><p>remove pp.container containerize</p></li>
+<li><p>better type annontations</p></li>
+<li><p>replace some <code class="docutils literal notranslate"><span class="pre">c.show()</span></code> by a simpler <code class="docutils literal notranslate"><span class="pre">c.show()</span></code></p></li>
+</ul>
+</section>
+<section id="id231">
+<h2>2.2.9<a class="headerlink" href="#id231" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>better settings export</p></li>
+<li><p>fixed docs</p></li>
+</ul>
+</section>
+<section id="id232">
+<h2>2.2.8<a class="headerlink" href="#id232" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>flat routes with no more zz_conn cells</p></li>
+<li><p>added from pp.import_gds import add_ports_from_markers_square</p></li>
+</ul>
+</section>
+<section id="id233">
+<h2>2.2.7<a class="headerlink" href="#id233" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>using mirror (port) in pp.component_from_yaml</p></li>
+<li><p>remove old, untested code to deal with libraries. Libraries should use factory</p></li>
+<li><p>add pp.get_name_to_function_dict to build factories as dict(func_name=func)</p></li>
+<li><p>component_from_yaml can also use (north, east, west, ne, nw …) for placement</p></li>
+<li><p>added regression tests for component_from_yaml</p></li>
+</ul>
+</section>
+<section id="id234">
+<h2>2.2.6<a class="headerlink" href="#id234" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>added badges from github in README (codecoverage, docs … )</p></li>
+<li><p>pp.import_gds can import and move cells with labels (thanks to Adam McCaughan)</p></li>
+<li><p>add margin and min_pin_area_um2 to read_ports_from_markers</p></li>
+<li><p>replace grating_coupler decorator with a simpler pp.assert_grating_coupler_properties() function</p></li>
+<li><p>rename _containers to container_names and _components to component_names</p></li>
+<li><p>simplify tests for components, containers and circuits</p></li>
+</ul>
+</section>
+<section id="id235">
+<h2>2.2.5<a class="headerlink" href="#id235" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>added common types in pp.types</p></li>
+<li><p>added simulation settings in name of sparameters</p></li>
+<li><p>store Sparameters in .csv as well as in Lumerical interconnect format .dat</p></li>
+<li><p>reduce some type errors when running mypy</p></li>
+<li><p>fix error in u_bundle_direct_routes for a single route (thanks to tvt173)</p></li>
+<li><p>When a component has both a placement and a connection are defined and transform over a component, we raise an error.</p></li>
+<li><p>add Component().plot() in matplotlib and Component.show() in Klayout</p></li>
+<li><p>clear_cache when running plot() or show(). Useful for Jupyter notebooks</p></li>
+<li><p>add logo</p></li>
+</ul>
+</section>
+<section id="id236">
+<h2>2.2.4<a class="headerlink" href="#id236" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>get_netlist() returns a dict. Removed recursive option as it is not consistent with the new netlist extractor in pp/get_netlist.py. Added name to netlist.</p>
+<ul>
+<li><p>fixed get_netlist() placements (using origin of the reference instead of x, y which refer to the center). Now we can go back and forth from component -&gt; netlist -&gt; component</p></li>
+<li><p>If there is a label at the same XY as the reference it gets the name from that label, the issue was that we need to add the labels after defining connections in component_from_yaml</p></li>
+</ul>
+</li>
+<li><p>ListConfig iterates as a list in \clean_value_json</p></li>
+<li><p>test component.get_netlist() -&gt; YAML-&gt; pp.component_from_yaml(YAML) = component (both for settings_changed and full_settings)</p></li>
+<li><p>add pp.testing with difftest(component) function for boolean GDS testing.</p></li>
+<li><p>improved placer documentation and comments in pp/samples/mask/does.yml</p></li>
+</ul>
+</section>
+<section id="id237">
+<h2>2.2.3<a class="headerlink" href="#id237" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>store config.yml in mask build directory (reproduce environment when building masks)</p></li>
+<li><p>add tests for add_fiber_single and add_fiber_array labels</p></li>
+<li><p>snap name to 1nm grid, try to name it without decimals when possible (L1p00 -&gt; L1)</p></li>
+<li><p>more sensitive defaults parameter names for MZI (coupler -&gt; splitter)</p></li>
+<li><p>sim settings outputs in YAML file</p></li>
+<li><p>fix sparameters sorting of ports when in pp.sp.read_sparameters</p></li>
+<li><p>pp.get_netlist() returns top level ports for a component</p></li>
+<li><p>output parameters that change in component (c.polarization=’te’) in settings[‘info’]</p></li>
+<li><p>fixed bug in get_settings to clean tuple settings export</p></li>
+</ul>
+</section>
+<section id="id238">
+<h2>2.2.2<a class="headerlink" href="#id238" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>rename coupler ports inside mzi function</p></li>
+</ul>
+</section>
+<section id="id239">
+<h2>2.2.1<a class="headerlink" href="#id239" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>pp.plot hides DEVREC layer</p></li>
+<li><p>test netlist of <code class="docutils literal notranslate"><span class="pre">_circuits</span></code></p></li>
+<li><p>sort the keys when loading YAML file for test_netlists</p></li>
+<li><p>better docstrings</p></li>
+<li><p>add function_name to container</p></li>
+<li><p>remove duplicated keys for container</p></li>
+<li><p>pp.clear_cache() in pytest fixture in <code class="docutils literal notranslate"><span class="pre">pp/conftest.py</span></code></p></li>
+<li><p>fixed pp.clear_cache() by using a global variable.</p></li>
+<li><p>added lytest tests, which test GDS boolean diffs using klayout</p></li>
+<li><p>fixed <code class="docutils literal notranslate"><span class="pre">pf</span> <span class="pre">diff</span></code> to show (diffs, common, only_old, only_new, old, new) using same layers in different cells. Thanks to Troy Tamas.</p></li>
+<li><p>removed <code class="docutils literal notranslate"><span class="pre">pins</span></code> argument from cell decorator as it changes the geometry of a cell with the same name (it was problematic).</p></li>
+<li><p>new recurse_instances function. No need to track connections in a global netlist dict. We can extract netlist connections from devices sharing ports.</p></li>
+<li><p>component_from_yaml adds label with. instance name. Thanks to Troy Tamas.</p></li>
+<li><p>write a pp.add_pins_to_references that adds pins and labels to references.</p></li>
+<li><p>make sure @cell decorator checks that it returns a Component</p></li>
+<li><p>remove other types of units conversions from</p></li>
+<li><p>better type hints</p></li>
+<li><p>export hierarchical and flat netlists</p></li>
+<li><p>rename 0.5 as 500n (it makes more sense as default units are in um) and submicron features are named in nm</p></li>
+<li><p>remove other renames</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mf">1e12</span> <span class="o">&gt;</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mf">1e9</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">/</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s2">G"</span>
+<span class="k">elif</span> <span class="mf">1e9</span> <span class="o">&gt;</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mf">1e6</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">/</span><span class="mf">1e6</span><span class="p">)</span><span class="si">}</span><span class="s2">M"</span>
+<span class="k">elif</span> <span class="mf">1e6</span> <span class="o">&gt;</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mf">1e3</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">/</span><span class="mf">1e3</span><span class="p">)</span><span class="si">}</span><span class="s2">K"</span>
+<span class="k">if</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mf">1e-3</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">*</span><span class="mf">1e3</span><span class="p">)</span><span class="si">}</span><span class="s2">n"</span>
+<span class="k">elif</span> <span class="mf">1e-6</span> <span class="o">&lt;</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mf">1e-3</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">*</span><span class="mf">1e6</span><span class="p">)</span><span class="si">}</span><span class="s2">p"</span>
+<span class="k">elif</span> <span class="mf">1e-9</span> <span class="o">&lt;</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">*</span><span class="mf">1e9</span><span class="p">)</span><span class="si">}</span><span class="s2">f"</span>
+<span class="k">elif</span> <span class="mf">1e-12</span> <span class="o">&lt;</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mf">1e-9</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">*</span><span class="mf">1e12</span><span class="p">)</span><span class="si">}</span><span class="s2">a"</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span>
+</pre></div>
+</div>
+</section>
+<section id="id240">
+<h2>2.2.0<a class="headerlink" href="#id240" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>component_from_yaml updates:</p>
+<ul>
+<li><p>placements:</p>
+<ul>
+<li><p>port: you can define an anchor port</p></li>
+<li><p>dx: delta x</p></li>
+<li><p>dy: delta x</p></li>
+<li><p>mirror: boolean or float (x axis for the mirror)</p></li>
+<li><p>x: number or can also be a port from another instance</p></li>
+</ul>
+</li>
+<li><p>routes:</p>
+<ul>
+<li><p>you can define a route range (left,E:0:3 : rigth,W:0:3)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>connect bundle is now the default way to connect groups of ports in component_from_yaml</p></li>
+<li><p>coupler: can change the vertical distance (dy) between outputs</p></li>
+<li><p>replace @pp.autoname with @pp.cell as a decorator with cells options (autoname, pins …)</p></li>
+</ul>
+</section>
+<section id="id241">
+<h2>2.1.4<a class="headerlink" href="#id241" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fixed installer for windows using copy instead of symlink</p></li>
+</ul>
+</section>
+<section id="id242">
+<h2>2.1.3<a class="headerlink" href="#id242" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pf</span> <span class="pre">install</span></code> installs klive, generate_tech and gitdiff</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pf</span> <span class="pre">diff</span></code> makes boolean difference between 2 GDS files</p></li>
+</ul>
+</section>
+<section id="id243">
+<h2>2.1.2<a class="headerlink" href="#id243" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>write conda environment.yml so you can <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">conda</span></code> to install the conda environment</p></li>
+<li><p>setup.py installs klive, generate_tech and gitdiff</p></li>
+</ul>
+</section>
+<section id="id244">
+<h2>2.1.0<a class="headerlink" href="#id244" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>test lengths for routes</p></li>
+<li><p>pytest are passing now for windows</p>
+<ul>
+<li><p>Fixed the spiral circular error by snapping length to 1nm (windows only)</p></li>
+<li><p>Testing now for windows and linux in the CICD</p></li>
+<li><p>Made the multiprocessing calls pickeable by removing the logger function (that wasn’t doing much anyway)</p></li>
+</ul>
+</li>
+<li><p>extend_ports: maintains un-extended ports</p></li>
+</ul>
+</section>
+<section id="id245">
+<h2>2.0.2<a class="headerlink" href="#id245" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>fixing sorting of ports in bundle routing: Thanks to Troy Tamas</p></li>
+<li><p>added <code class="docutils literal notranslate"><span class="pre">factory:</span> <span class="pre">optical</span></code> and <code class="docutils literal notranslate"><span class="pre">settings:</span></code> in component_from_yaml routes</p></li>
+<li><p>write more container metadata for component inside the container (function_name, module ….)</p></li>
+<li><p>more checks for the grating coupler decorator (W0 port with 180 degrees orientation)</p></li>
+<li><p>CI/CD tests run also on pull requests</p></li>
+<li><p>added pp.clear_cache() and call it when we run <code class="docutils literal notranslate"><span class="pre">c.show()</span></code></p></li>
+<li><p>use pp.clear_cache() when testing component port positions</p></li>
+</ul>
+</section>
+<section id="id246">
+<h2>2.0.0<a class="headerlink" href="#id246" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>addded grating coupler decorator to assert polarization and wavelength</p></li>
+<li><p>component_from_yaml function allows route filter input</p></li>
+<li><p>routes_factory: in pp.routing (optical, electrical)</p></li>
+<li><p>routes: in component_from_yaml allows route_factory</p></li>
+<li><p>no more routes and route_bundles: now it’s all called routes, and you need to specify the routing factory function name [optical, electrical …]</p></li>
+<li><p>renamed component_type2factory to component_factory</p></li>
+<li><p>explained factory operation in notebooks/02_components.ipynb</p></li>
+<li><p>mzi.py DL is now the actual delta_length</p></li>
+</ul>
+</section>
+<section id="id247">
+<h2>1.4.4<a class="headerlink" href="#id247" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>improved notebooks (thanks to phidl tutorial)</p></li>
+<li><p>added C and L components from phidl</p></li>
+<li><p>print(component) returns more info (similar to phidl)</p></li>
+<li><p>support new way of defining waveguides with pp.Path, pp.CrossSection and pp.path (thanks to phidl)</p></li>
+</ul>
+</section>
+<section id="id248">
+<h2>1.4.3<a class="headerlink" href="#id248" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>clean metadata dict recursively</p></li>
+</ul>
+</section>
+<section id="id249">
+<h2>1.4.2<a class="headerlink" href="#id249" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>renamed add_io_optical to add_fiber_array</p></li>
+<li><p>added taper factory and length to add_fiber_single</p></li>
+<li><p>fixed JSON metadata for Components with function kwargs</p></li>
+<li><p>fixed reference positions in component_from_yaml</p></li>
+<li><p>added bundle_routes option in component_from_yaml</p></li>
+</ul>
+</section>
+<section id="id250">
+<h2>1.4.0<a class="headerlink" href="#id250" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Works now for python&gt;=3.6, before only worked for python3.7 due to <a class="reference external" href="https://www.python.org/dev/peps/pep-0563/">type annotations</a></p></li>
+<li><p>nicer netlist representations (adding location to each node in the graph)</p></li>
+<li><p>YAML loader accepts strings (no more io.StringIO)</p></li>
+<li><p>better docs</p></li>
+<li><p>add_tapers only tapers optical ports in the new containered component</p></li>
+<li><p>add_ports from polygon markers</p></li>
+<li><p>add_io_optical maintains other ports</p></li>
+<li><p>added single fiber routing capabilities (pp.routing.add_fiber_single)</p></li>
+<li><p>added Component.copy()</p></li>
+<li><p>added basic electrical routing capabilities</p>
+<ul>
+<li><p>pp.routing.add_electrical_pads</p></li>
+<li><p>pp.routing.add_electrical_pads_top</p></li>
+<li><p>pp.routing.add_electrical_pads_shortest</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id251">
+<h2>1.3.2<a class="headerlink" href="#id251" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>improve sparameters tutorial</p></li>
+<li><p>fixed some issues when using <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">or</span> <span class="pre">x_default</span></code> not valid for <code class="docutils literal notranslate"><span class="pre">x=0</span></code></p></li>
+<li><p>added tests for splitter_tree and splitter_chain</p></li>
+</ul>
+</section>
+<section id="id252">
+<h2>1.3.1<a class="headerlink" href="#id252" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>get_netlist by default return a simpler netlist that captures only settings different from default. Full netlist component properties available with <code class="docutils literal notranslate"><span class="pre">full_settings=True</span></code>.</p></li>
+<li><p>limited pytest scope to netlist build tests to avoid weird side effects that move ports locations from test_component_ports</p></li>
+<li><p>sphinx==1.3.2 in requirements.txt</p></li>
+</ul>
+</section>
+<section id="id253">
+<h2>1.3.0<a class="headerlink" href="#id253" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Component.get_netlist()</span></code> returns its netlist</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Component.plot_netlist()</span></code> renders netlist graph</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">component_from_yaml</span></code> accepts netlist</p></li>
+<li><p>routing jupyter notebooks</p></li>
+<li><p>manhattan text can have cladding</p></li>
+</ul>
+</section>
+<section id="id254">
+<h2>1.2.1<a class="headerlink" href="#id254" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>replaced hiyapyco with omegaconf (better YAML parser that can handle number with exponents 1e9)</p></li>
+<li><p>separated conf (important to be saved) from CONFIG that contains useful paths</p></li>
+</ul>
+</section>
+<section id="id255">
+<h2>1.2.0<a class="headerlink" href="#id255" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>added link for <a class="reference external" href="https://github.com/gdsfactory/ubc">ubc PDK</a> to README</p></li>
+<li><p>added a jupyter notebook tutorial for references and array of references</p></li>
+<li><p>added dbr and cavity components</p></li>
+<li><p>rotate is now a container</p></li>
+<li><p>addapted pp.pack from phidl as an easier way to pack masks</p></li>
+<li><p>Autoname also has now a build in cache to avoid having two different cells with the same name</p></li>
+<li><p>added type annotations</p></li>
+</ul>
+</section>
+<section id="id256">
+<h2>1.1.9<a class="headerlink" href="#id256" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>write and read Sparameters</p></li>
+<li><p>pp.extend_ports is now a container</p></li>
+<li><p>any component decorated with @pp.cell can accept <code class="docutils literal notranslate"><span class="pre">pins=True</span></code> flag, and a function <code class="docutils literal notranslate"><span class="pre">pins_function</span></code>.</p></li>
+<li><p>Pins arguments will be ignored from the Component <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">settings</span></code></p></li>
+<li><p>better json serializer for settings</p></li>
+<li><p>added units to names (m,K,G …)</p></li>
+</ul>
+</section>
+<section id="id257">
+<h2>1.1.8<a class="headerlink" href="#id257" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>leaf components (waveguide, bend, mmi …) have now pins, for circuit simulation</p></li>
+</ul>
+</section>
+<section id="id258">
+<h2>1.1.7<a class="headerlink" href="#id258" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>flake8 is passing now</p></li>
+<li><p>added flake8 to pre-commit hook</p></li>
+<li><p>simpler JSON file for mask metadata mask.tp.json</p></li>
+<li><p>added container decorator, can inherit ports, settings, test and data analysis protocols and still have a different name to avoid name collisions</p></li>
+<li><p>samples run as part of the test suite, moved samples into pp</p></li>
+<li><p>cell sorts kwarg keys by alphabetical order</p></li>
+<li><p>added cell tests</p></li>
+<li><p>cell accepts max_name_length and ignore_from_name kwargs</p></li>
+<li><p>pp.generate_does raises error if component does not exist in factory</p></li>
+<li><p>replaces name_W20_L30 by name_hash for cell names &gt; 32</p></li>
+<li><p>zz_conn cleaner name using <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">pp.cell</span> <span class="pre">import</span> <span class="pre">clean_name</span></code> no slashes in the name</p></li>
+<li><p>add_io is a container</p></li>
+<li><p>write labels settings in the middle of the component by default, you can always turn it off by adding <code class="docutils literal notranslate"><span class="pre">config.yml</span></code> in your project</p></li>
+<li><p>added pytest-regression for component setting and ports</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">with_settings_label</span><span class="p">:</span> <span class="kc">False</span>
+
+</pre></div>
+</div>
+</section>
+<section id="id259">
+<h2>1.1.6<a class="headerlink" href="#id259" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>mask JSON works with cached GDS files for the klayout placer</p></li>
+<li><p>added layers to CONFIG[‘layers’]</p></li>
+<li><p>write_labels gets layer from <code class="docutils literal notranslate"><span class="pre">CONFIG['layers']['LABEL']</span></code></p></li>
+<li><p>add_padding works over the same component –&gt; this was not a good idea, reverted in 1.1.7 to avoid name collisions</p></li>
+<li><p>import_gds can snap points to a design grid</p></li>
+</ul>
+</section>
+<section id="id260">
+<h2>1.1.5<a class="headerlink" href="#id260" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>added pre-commit hook for code consistency</p></li>
+<li><p>waveguide and bend allow a list of cladding layers</p></li>
+<li><p>all layers are defined as tuples using pp.LAYER.WG, pp.LAYER.WGCLAD</p></li>
+</ul>
+</section>
+<section id="id261">
+<h2>1.1.4<a class="headerlink" href="#id261" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>bug fixes</p></li>
+<li><p>new coupler with less snaping errors</p></li>
+<li><p>adding Klayout generic DRC rule deck</p></li>
+</ul>
+</section>
+<section id="id262">
+<h2>1.1.1<a class="headerlink" href="#id262" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>first public release</p></li>
+</ul>
+</section>
+<section id="id263">
+<h2>1.0.2<a class="headerlink" href="#id263" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>test components using gdshash</p></li>
+<li><p>new CLI commands for <code class="docutils literal notranslate"><span class="pre">pf</span></code></p>
+<ul>
+<li><p>pf library lock</p></li>
+<li><p>pf library pull</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id264">
+<h2>1.0.1<a class="headerlink" href="#id264" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>autoplacer and yaml placer</p></li>
+<li><p>mask_merge functions (merge metadata, test protocols)</p></li>
+<li><p>added mask samples</p></li>
+<li><p>all the mask can be build now from a config.yml in the current directory using <code class="docutils literal notranslate"><span class="pre">pf</span> <span class="pre">mask</span> <span class="pre">write</span></code></p></li>
+</ul>
+</section>
+<section id="id265">
+<h2>1.0.0<a class="headerlink" href="#id265" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>first release</p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          <a class="prev-page" href="contribution.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Contributing</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">CHANGELOG</a><ul>
+<li><a class="reference internal" href="#id1">4.4.7</a></li>
+<li><a class="reference internal" href="#id2">4.4.6</a></li>
+<li><a class="reference internal" href="#id3">4.4.5</a></li>
+<li><a class="reference internal" href="#id4">4.4.4</a></li>
+<li><a class="reference internal" href="#id5">4.4.3</a></li>
+<li><a class="reference internal" href="#id6">4.4.2</a></li>
+<li><a class="reference internal" href="#id7">4.4.0</a></li>
+<li><a class="reference internal" href="#id8">4.3.10</a></li>
+<li><a class="reference internal" href="#id9">4.3.8</a></li>
+<li><a class="reference internal" href="#id10">4.3.7</a></li>
+<li><a class="reference internal" href="#id11">4.3.6</a></li>
+<li><a class="reference internal" href="#id12">4.3.5</a></li>
+<li><a class="reference internal" href="#id13">4.3.4</a></li>
+<li><a class="reference internal" href="#id14">4.3.3</a></li>
+<li><a class="reference internal" href="#id15">4.3.1</a></li>
+<li><a class="reference internal" href="#id16">4.3.0</a></li>
+<li><a class="reference internal" href="#id17">4.2.17</a></li>
+<li><a class="reference internal" href="#id18">4.2.16</a></li>
+<li><a class="reference internal" href="#id19">4.2.15</a></li>
+<li><a class="reference internal" href="#id20">4.2.14</a></li>
+<li><a class="reference internal" href="#id21">4.2.13</a></li>
+<li><a class="reference internal" href="#id22">4.2.13</a></li>
+<li><a class="reference internal" href="#id23">4.2.12</a></li>
+<li><a class="reference internal" href="#id24">4.2.11</a></li>
+<li><a class="reference internal" href="#id25">4.2.10</a></li>
+<li><a class="reference internal" href="#id26">4.2.9</a></li>
+<li><a class="reference internal" href="#id27">4.2.8</a></li>
+<li><a class="reference internal" href="#id28">4.2.7</a></li>
+<li><a class="reference internal" href="#id29">4.2.6</a></li>
+<li><a class="reference internal" href="#id30">4.2.5</a></li>
+<li><a class="reference internal" href="#id31">4.2.4</a></li>
+<li><a class="reference internal" href="#id32">4.2.3</a></li>
+<li><a class="reference internal" href="#id33">4.2.2</a></li>
+<li><a class="reference internal" href="#id34">4.2.1</a></li>
+<li><a class="reference internal" href="#id35">4.2.0</a></li>
+<li><a class="reference internal" href="#id36">4.1.5</a></li>
+<li><a class="reference internal" href="#id37">4.1.4</a></li>
+<li><a class="reference internal" href="#id38">4.1.3</a></li>
+<li><a class="reference internal" href="#id39">4.1.2</a></li>
+<li><a class="reference internal" href="#id40">4.1.0</a></li>
+<li><a class="reference internal" href="#id41">4.0.18</a></li>
+<li><a class="reference internal" href="#id42">4.0.17</a></li>
+<li><a class="reference internal" href="#id43">4.0.14</a></li>
+<li><a class="reference internal" href="#id44">4.0.13</a></li>
+<li><a class="reference internal" href="#id45">4.0.12</a></li>
+<li><a class="reference internal" href="#id46">4.0.8</a></li>
+<li><a class="reference internal" href="#id47">4.0.7</a></li>
+<li><a class="reference internal" href="#id48">4.0.4</a></li>
+<li><a class="reference internal" href="#id49">4.0.3</a></li>
+<li><a class="reference internal" href="#id50">4.0.2</a></li>
+<li><a class="reference internal" href="#id51">4.0.1</a></li>
+<li><a class="reference internal" href="#id52">4.0.0</a></li>
+<li><a class="reference internal" href="#id53">3.12.9</a></li>
+<li><a class="reference internal" href="#id54">3.12.8</a></li>
+<li><a class="reference internal" href="#id55">3.12.7</a></li>
+<li><a class="reference internal" href="#id56">3.12.6</a></li>
+<li><a class="reference internal" href="#id57">3.12.3</a></li>
+<li><a class="reference internal" href="#id58">3.12.1</a></li>
+<li><a class="reference internal" href="#id59">3.12.0</a></li>
+<li><a class="reference internal" href="#id60">3.11.5</a></li>
+<li><a class="reference internal" href="#id61">3.11.4</a></li>
+<li><a class="reference internal" href="#id62">3.11.3</a></li>
+<li><a class="reference internal" href="#id63">3.11.2</a></li>
+<li><a class="reference internal" href="#id64">3.11.0</a></li>
+<li><a class="reference internal" href="#id65">3.10.12</a></li>
+<li><a class="reference internal" href="#id66">3.10.11</a></li>
+<li><a class="reference internal" href="#id67">3.10.10</a></li>
+<li><a class="reference internal" href="#id68">3.10.9</a></li>
+<li><a class="reference internal" href="#id69">3.10.8</a></li>
+<li><a class="reference internal" href="#id70">3.10.7</a></li>
+<li><a class="reference internal" href="#id71">3.10.6</a></li>
+<li><a class="reference internal" href="#id72">3.10.5</a></li>
+<li><a class="reference internal" href="#id73">3.10.4</a></li>
+<li><a class="reference internal" href="#id74">3.10.3</a></li>
+<li><a class="reference internal" href="#id75">3.10.2</a></li>
+<li><a class="reference internal" href="#id76">3.10.1</a></li>
+<li><a class="reference internal" href="#id77">3.10.0</a></li>
+<li><a class="reference internal" href="#id78">3.9.28</a></li>
+<li><a class="reference internal" href="#id79">3.9.27</a></li>
+<li><a class="reference internal" href="#id80">3.9.26</a></li>
+<li><a class="reference internal" href="#id81">3.9.25</a></li>
+<li><a class="reference internal" href="#id82">3.9.23</a></li>
+<li><a class="reference internal" href="#id83">3.9.22</a></li>
+<li><a class="reference internal" href="#id84">3.9.21</a></li>
+<li><a class="reference internal" href="#id85">3.9.20</a></li>
+<li><a class="reference internal" href="#id86">3.9.19</a></li>
+<li><a class="reference internal" href="#id87">3.9.18</a></li>
+<li><a class="reference internal" href="#id88">3.9.17</a></li>
+<li><a class="reference internal" href="#id89">3.9.16</a></li>
+<li><a class="reference internal" href="#id90">3.9.15</a></li>
+<li><a class="reference internal" href="#id91">3.9.14</a></li>
+<li><a class="reference internal" href="#id92">3.9.13</a></li>
+<li><a class="reference internal" href="#id93">3.9.12</a></li>
+<li><a class="reference internal" href="#id94">3.9.11</a></li>
+<li><a class="reference internal" href="#id95">3.9.10</a></li>
+<li><a class="reference internal" href="#id96">3.9.9</a></li>
+<li><a class="reference internal" href="#id97">3.9.8</a></li>
+<li><a class="reference internal" href="#id98">3.9.7</a></li>
+<li><a class="reference internal" href="#id99">3.9.6</a></li>
+<li><a class="reference internal" href="#id100">3.9.5</a></li>
+<li><a class="reference internal" href="#id101">3.9.4</a></li>
+<li><a class="reference internal" href="#id102">3.9.3</a></li>
+<li><a class="reference internal" href="#id103">3.9.2</a></li>
+<li><a class="reference internal" href="#id104">3.9.1</a></li>
+<li><a class="reference internal" href="#id105">3.9.0</a></li>
+<li><a class="reference internal" href="#id106">3.8.15</a></li>
+<li><a class="reference internal" href="#id107">3.8.14</a></li>
+<li><a class="reference internal" href="#id108">3.8.13</a></li>
+<li><a class="reference internal" href="#id109">3.8.12</a></li>
+<li><a class="reference internal" href="#id110">3.8.11</a></li>
+<li><a class="reference internal" href="#id111">3.8.10</a></li>
+<li><a class="reference internal" href="#id112">3.8.9</a></li>
+<li><a class="reference internal" href="#id113">3.8.8</a></li>
+<li><a class="reference internal" href="#id114">3.8.7</a></li>
+<li><a class="reference internal" href="#id115">3.8.6</a></li>
+<li><a class="reference internal" href="#id116">3.8.5</a></li>
+<li><a class="reference internal" href="#id117">3.8.4</a></li>
+<li><a class="reference internal" href="#id118">3.8.3</a></li>
+<li><a class="reference internal" href="#id119">3.8.2</a></li>
+<li><a class="reference internal" href="#id120">3.8.1</a></li>
+<li><a class="reference internal" href="#id121">3.8.0</a></li>
+<li><a class="reference internal" href="#id122">3.7.8</a></li>
+<li><a class="reference internal" href="#id123">3.7.7</a></li>
+<li><a class="reference internal" href="#id124">3.7.6</a></li>
+<li><a class="reference internal" href="#id125">3.7.5</a></li>
+<li><a class="reference internal" href="#id126">3.7.4</a></li>
+<li><a class="reference internal" href="#id127">3.7.3</a></li>
+<li><a class="reference internal" href="#id128">3.7.2</a></li>
+<li><a class="reference internal" href="#id129">3.7.1</a></li>
+<li><a class="reference internal" href="#id130">3.7.0</a></li>
+<li><a class="reference internal" href="#id131">3.6.8</a></li>
+<li><a class="reference internal" href="#id132">3.6.7</a></li>
+<li><a class="reference internal" href="#id133">3.6.6</a></li>
+<li><a class="reference internal" href="#id134">3.6.5</a></li>
+<li><a class="reference internal" href="#id135">3.6.3</a></li>
+<li><a class="reference internal" href="#id136">3.6.2</a></li>
+<li><a class="reference internal" href="#id137">3.6.1</a></li>
+<li><a class="reference internal" href="#id138">3.6.0</a></li>
+<li><a class="reference internal" href="#id139">3.5.12</a></li>
+<li><a class="reference internal" href="#id140">3.5.10</a></li>
+<li><a class="reference internal" href="#id141">3.5.9</a></li>
+<li><a class="reference internal" href="#id142">3.5.9</a></li>
+<li><a class="reference internal" href="#id143">3.5.8</a></li>
+<li><a class="reference internal" href="#id144">3.5.6</a></li>
+<li><a class="reference internal" href="#id145">3.5.5</a></li>
+<li><a class="reference internal" href="#id146">3.5.3</a></li>
+<li><a class="reference internal" href="#id147">3.5.1</a></li>
+<li><a class="reference internal" href="#id148">3.5.0</a></li>
+<li><a class="reference internal" href="#id149">3.4.9</a></li>
+<li><a class="reference internal" href="#id150">3.4.8</a></li>
+<li><a class="reference internal" href="#id151">3.4.6</a></li>
+<li><a class="reference internal" href="#id152">3.4.5</a></li>
+<li><a class="reference internal" href="#id153">3.4.4</a></li>
+<li><a class="reference internal" href="#id154">3.4.3</a></li>
+<li><a class="reference internal" href="#id155">3.4.2</a></li>
+<li><a class="reference internal" href="#id156">3.4.0</a></li>
+<li><a class="reference internal" href="#id157">3.3.9</a></li>
+<li><a class="reference internal" href="#id158">3.3.8</a></li>
+<li><a class="reference internal" href="#id159">3.3.5</a></li>
+<li><a class="reference internal" href="#id160">3.3.4</a></li>
+<li><a class="reference internal" href="#id161">3.3.3</a></li>
+<li><a class="reference internal" href="#id162">3.3.2</a></li>
+<li><a class="reference internal" href="#id163">3.3.1</a></li>
+<li><a class="reference internal" href="#id164">3.3.0</a></li>
+<li><a class="reference internal" href="#id165">3.2.9</a></li>
+<li><a class="reference internal" href="#id166">3.2.8</a></li>
+<li><a class="reference internal" href="#id167">3.2.7</a></li>
+<li><a class="reference internal" href="#id168">3.2.6</a></li>
+<li><a class="reference internal" href="#id169">3.2.5</a></li>
+<li><a class="reference internal" href="#id170">3.2.4</a></li>
+<li><a class="reference internal" href="#id171">3.2.3</a></li>
+<li><a class="reference internal" href="#id172">3.2.2</a></li>
+<li><a class="reference internal" href="#id173">3.2.1</a></li>
+<li><a class="reference internal" href="#id174">3.2.0</a></li>
+<li><a class="reference internal" href="#id175">3.1.10</a></li>
+<li><a class="reference internal" href="#id176">3.1.9</a></li>
+<li><a class="reference internal" href="#id177">3.1.8</a></li>
+<li><a class="reference internal" href="#id178">3.1.7</a></li>
+<li><a class="reference internal" href="#id179">3.1.6</a></li>
+<li><a class="reference internal" href="#id180">3.1.5</a></li>
+<li><a class="reference internal" href="#id181">3.1.4</a></li>
+<li><a class="reference internal" href="#id182">3.1.3</a></li>
+<li><a class="reference internal" href="#id183">3.1.2</a></li>
+<li><a class="reference internal" href="#id184">3.1.1</a></li>
+<li><a class="reference internal" href="#id185">3.1.0</a></li>
+<li><a class="reference internal" href="#id186">3.0.3</a></li>
+<li><a class="reference internal" href="#id187">3.0.2</a></li>
+<li><a class="reference internal" href="#id188">3.0.1</a></li>
+<li><a class="reference internal" href="#id189">3.0.0</a></li>
+<li><a class="reference internal" href="#id190">2.7.8</a></li>
+<li><a class="reference internal" href="#id191">2.7.7</a></li>
+<li><a class="reference internal" href="#id192">2.7.6</a></li>
+<li><a class="reference internal" href="#id193">2.7.5</a></li>
+<li><a class="reference internal" href="#id194">2.7.4</a></li>
+<li><a class="reference internal" href="#id195">2.7.3</a></li>
+<li><a class="reference internal" href="#id196">2.7.2</a></li>
+<li><a class="reference internal" href="#id197">2.7.1</a></li>
+<li><a class="reference internal" href="#id198">2.7.0</a></li>
+<li><a class="reference internal" href="#id199">2.6.10</a></li>
+<li><a class="reference internal" href="#id200">2.6.9</a></li>
+<li><a class="reference internal" href="#id201">2.6.8</a></li>
+<li><a class="reference internal" href="#id202">2.6.7</a></li>
+<li><a class="reference internal" href="#id203">2.6.6</a></li>
+<li><a class="reference internal" href="#id204">2.6.5</a></li>
+<li><a class="reference internal" href="#id205">2.6.4</a></li>
+<li><a class="reference internal" href="#id206">2.6.3</a></li>
+<li><a class="reference internal" href="#id207">2.6.2</a></li>
+<li><a class="reference internal" href="#id208">2.6.0</a></li>
+<li><a class="reference internal" href="#id209">2.5.7</a></li>
+<li><a class="reference internal" href="#id210">2.5.6</a></li>
+<li><a class="reference internal" href="#id211">2.5.5</a></li>
+<li><a class="reference internal" href="#id212">2.5.4</a></li>
+<li><a class="reference internal" href="#id213">2.5.3</a></li>
+<li><a class="reference internal" href="#id214">2.5.2</a></li>
+<li><a class="reference internal" href="#id215">2.5.1</a></li>
+<li><a class="reference internal" href="#id216">2.5.0</a></li>
+<li><a class="reference internal" href="#id217">2.4.9</a></li>
+<li><a class="reference internal" href="#id218">2.4.8</a></li>
+<li><a class="reference internal" href="#id219">2.4.7</a></li>
+<li><a class="reference internal" href="#id220">2.4.6</a></li>
+<li><a class="reference internal" href="#id221">2.4.5</a></li>
+<li><a class="reference internal" href="#id222">2.4.4</a></li>
+<li><a class="reference internal" href="#id223">2.4.3</a></li>
+<li><a class="reference internal" href="#id224">2.4.2</a></li>
+<li><a class="reference internal" href="#id225">2.4.0</a></li>
+<li><a class="reference internal" href="#id226">2.3.4</a></li>
+<li><a class="reference internal" href="#id227">2.3.3</a></li>
+<li><a class="reference internal" href="#id228">2.3.2</a></li>
+<li><a class="reference internal" href="#id229">2.3.1</a></li>
+<li><a class="reference internal" href="#id230">2.3.0</a></li>
+<li><a class="reference internal" href="#id231">2.2.9</a></li>
+<li><a class="reference internal" href="#id232">2.2.8</a></li>
+<li><a class="reference internal" href="#id233">2.2.7</a></li>
+<li><a class="reference internal" href="#id234">2.2.6</a></li>
+<li><a class="reference internal" href="#id235">2.2.5</a></li>
+<li><a class="reference internal" href="#id236">2.2.4</a></li>
+<li><a class="reference internal" href="#id237">2.2.3</a></li>
+<li><a class="reference internal" href="#id238">2.2.2</a></li>
+<li><a class="reference internal" href="#id239">2.2.1</a></li>
+<li><a class="reference internal" href="#id240">2.2.0</a></li>
+<li><a class="reference internal" href="#id241">2.1.4</a></li>
+<li><a class="reference internal" href="#id242">2.1.3</a></li>
+<li><a class="reference internal" href="#id243">2.1.2</a></li>
+<li><a class="reference internal" href="#id244">2.1.0</a></li>
+<li><a class="reference internal" href="#id245">2.0.2</a></li>
+<li><a class="reference internal" href="#id246">2.0.0</a></li>
+<li><a class="reference internal" href="#id247">1.4.4</a></li>
+<li><a class="reference internal" href="#id248">1.4.3</a></li>
+<li><a class="reference internal" href="#id249">1.4.2</a></li>
+<li><a class="reference internal" href="#id250">1.4.0</a></li>
+<li><a class="reference internal" href="#id251">1.3.2</a></li>
+<li><a class="reference internal" href="#id252">1.3.1</a></li>
+<li><a class="reference internal" href="#id253">1.3.0</a></li>
+<li><a class="reference internal" href="#id254">1.2.1</a></li>
+<li><a class="reference internal" href="#id255">1.2.0</a></li>
+<li><a class="reference internal" href="#id256">1.1.9</a></li>
+<li><a class="reference internal" href="#id257">1.1.8</a></li>
+<li><a class="reference internal" href="#id258">1.1.7</a></li>
+<li><a class="reference internal" href="#id259">1.1.6</a></li>
+<li><a class="reference internal" href="#id260">1.1.5</a></li>
+<li><a class="reference internal" href="#id261">1.1.4</a></li>
+<li><a class="reference internal" href="#id262">1.1.1</a></li>
+<li><a class="reference internal" href="#id263">1.0.2</a></li>
+<li><a class="reference internal" href="#id264">1.0.1</a></li>
+<li><a class="reference internal" href="#id265">1.0.0</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    </body>
+</html>

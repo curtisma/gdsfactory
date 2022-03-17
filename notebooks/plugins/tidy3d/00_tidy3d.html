@@ -1,0 +1,2492 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="SAX circuit simulator" href="../sax/sax.html" /><link rel="prev" title="FDTD Meep gratings" href="../meep/002_gratings.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>FDTD tidy3d - gdsfactory 4.4.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">gdsfactory 4.4.12 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">gdsfactory 4.4.12 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">gdsfactory 4.4.12</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../git.html">Git Python Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../00__git.html">Git: Version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../00__python_intro.html">Python intro</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notebooks.html">Layout Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../00_geometry.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02_movement.html">Movement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03_cells_autoname_and_cache.html">Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03_layers.html">Technology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03_waveguides_paths_crossections.html">Paths and straights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_components_.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_components_hierarchy.html">Components with hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../041_routing_electical.html">Routing (electrical)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../05_GDS.html">GDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06_component_circuit_mask.html">Component -&gt; Circuit -&gt; Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06_mask.html">Masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../07_yaml_component.html">Netlist driven flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common_mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../plugins.html">Plugins</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../mpb/001_mpb_waveguide.html">MPB mode-solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lumerical/1_fdtd_sparameters.html">FDTD Lumerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../meep/001_meep_sparameters.html">FDTD Meep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../meep/002_gratings.html">FDTD Meep gratings</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">FDTD tidy3d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sax/sax.html">SAX circuit simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simphony/01_components.html">Simphony circuit simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../component_intro.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../yaml.html">YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">gf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">CHANGELOG</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="FDTD-tidy3d">
+<h1>FDTD tidy3d<a class="headerlink" href="#FDTD-tidy3d" title="Permalink to this headline">#</a></h1>
+<p>gdsfactory simulation plugin for tidy3d <a class="reference external" href="https://simulation.cloud/">tidy3D is a FDTD web based software</a></p>
+<section id="Materials">
+<h2>Materials<a class="headerlink" href="#Materials" title="Permalink to this headline">#</a></h2>
+<p>tidy3d provides you with a material database of dispersive materials.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># basic ipython configuration (reload source code automatically and plots inline)</span>
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">tidy3d</span> <span class="k">as</span> <span class="nn">td</span>
+<span class="kn">from</span> <span class="nn">tidy3d</span> <span class="kn">import</span> <span class="n">web</span>
+
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.gtidy3d</span> <span class="k">as</span> <span class="nn">gt</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation</span> <span class="k">as</span> <span class="nn">sim</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #7fbfbf; text-decoration-color: #7fbfbf">[04:16:26] </span><span style="color: #000080; text-decoration-color: #000080">INFO    </span> NumExpr defaulting to <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span> threads.                             <a href="file:///usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/numexpr/utils.py" target="_blank"><span style="color: #7f7f7f; text-decoration-color: #7f7f7f">utils.py</span></a><span style="color: #7f7f7f; text-decoration-color: #7f7f7f">:</span><a href="file:///usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/numexpr/utils.py#159" target="_blank"><span style="color: #7f7f7f; text-decoration-color: #7f7f7f">159</span></a>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using Tidy3D credentials from enviornment
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:29.428 | INFO     | gdsfactory.config:&lt;module&gt;:52 - Load '/home/runner/work/gdsfactory/gdsfactory/gdsfactory' 4.4.12
+2022-03-17 04:16:30.358 | INFO     | gdsfactory.simulation.gtidy3d:&lt;module&gt;:51 - Tidy3d '1.1.1' installed at ['/usr/share/miniconda/envs/anaconda-client-env/lib/python3.9/site-packages/tidy3d']
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nm</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">1600</span><span class="p">)</span> <span class="o">*</span> <span class="n">nm</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">C_0</span> <span class="o">/</span> <span class="n">wavelength</span>
+<span class="n">eps_complex</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">materials</span><span class="o">.</span><span class="n">material_library</span><span class="p">[</span><span class="s2">"cSi"</span><span class="p">][</span><span class="s2">"Li1993_293K"</span><span class="p">]</span><span class="o">.</span><span class="n">eps_model</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">Medium</span><span class="o">.</span><span class="n">eps_complex_to_nk</span><span class="p">(</span><span class="n">eps_complex</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"cSi crystalline silicon"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"wavelength"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Text</span><span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.5</span>, <span style="color: #008000; text-decoration-color: #008000">'n'</span><span style="font-weight: bold">)</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_2_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_2_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eps_complex</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">materials</span><span class="o">.</span><span class="n">material_library</span><span class="p">[</span><span class="s2">"Si3N4"</span><span class="p">][</span><span class="s2">"Luke2015"</span><span class="p">]</span><span class="o">.</span><span class="n">eps_model</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">Medium</span><span class="o">.</span><span class="n">eps_complex_to_nk</span><span class="p">(</span><span class="n">eps_complex</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"SiN"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"wavelength"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Text</span><span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.5</span>, <span style="color: #008000; text-decoration-color: #008000">'n'</span><span style="font-weight: bold">)</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_3_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_3_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eps_complex</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">materials</span><span class="o">.</span><span class="n">material_library</span><span class="p">[</span><span class="s2">"SiO2"</span><span class="p">][</span><span class="s2">"Horiba"</span><span class="p">]</span><span class="o">.</span><span class="n">eps_model</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">Medium</span><span class="o">.</span><span class="n">eps_complex_to_nk</span><span class="p">(</span><span class="n">eps_complex</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"SiO2"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"wavelength"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Text</span><span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.5</span>, <span style="color: #008000; text-decoration-color: #008000">'n'</span><span style="font-weight: bold">)</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_4_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_4_2.png"/>
+</div>
+</div>
+</section>
+<section id="get_simulation">
+<h2>get_simulation<a class="headerlink" href="#get_simulation" title="Permalink to this headline">#</a></h2>
+<p>You can run <code class="docutils literal notranslate"><span class="pre">get_simulation</span></code> to convert a gdsfactory planar Component into a tidy3d simulation and make sure the simulation looks correct before running it</p>
+<p><code class="docutils literal notranslate"><span class="pre">get_simulation</span></code> also has a <code class="docutils literal notranslate"><span class="pre">plot_modes</span></code> option so you can make sure you are monitoring the desired mode.</p>
+<section id="2D">
+<h3>2D<a class="headerlink" href="#2D" title="Permalink to this headline">#</a></h3>
+<p>2D planar simulations run faster than 3D. When running in 2D we don’t consider the component thickness in the z dimension</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">mmi1x2</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:31.055 | INFO     | gdsfactory.show:show:36 - Klayout show mmi1x2_add_padding_cont_3586176e: uid 6, ports ['o1', 'o2', 'o3'], aliases [], 3 polygons, 1 references
+2022-03-17 04:16:31.058 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = -1.0000000200408773e+20, zmax = 1.0000000200408773e+20
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_7_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_7_2.png"/>
+</div>
+</div>
+</section>
+<section id="3D">
+<h3>3D<a class="headerlink" href="#3D" title="Permalink to this headline">#</a></h3>
+<p>By default all simulations run in 3D unless indicated otherwise with the <code class="docutils literal notranslate"><span class="pre">is_3d</span></code> argument. 3D simulations still run quite fast thanks to the GPU solver on the server side.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on cython_function_or_method in module gdsfactory.simulation.gtidy3d.get_simulation:
+
+get_simulation(component: Union[Callable[..., gdsfactory.component.Component], gdsfactory.component.Component], port_extension: Optional[float] = 4.0, layer_stack: gdsfactory.tech.LayerStack = {'core': LayerLevel(layer=(1, 0), thickness=0.22, zmin=0.0, material='si', sidewall_angle=0), 'clad': LayerLevel(layer=(111, 0), thickness=None, zmin=0.0, material='sio2', sidewall_angle=0), 'slab150': LayerLevel(layer=(2, 0), thickness=0.15, zmin=0.0, material='si', sidewall_angle=0), 'slab90': LayerLevel(layer=(3, 0), thickness=0.09, zmin=0.0, material='si', sidewall_angle=0), 'nitride': LayerLevel(layer=(34, 0), thickness=0.35, zmin=0.32, material='sin', sidewall_angle=0), 'ge': LayerLevel(layer=(5, 0), thickness=0.5, zmin=0.22, material='ge', sidewall_angle=0), 'via_contact': LayerLevel(layer=(40, 0), thickness=1.1, zmin=0.09, material='Aluminum', sidewall_angle=0), 'metal1': LayerLevel(layer=(41, 0), thickness=0.75, zmin=1.32, material='Aluminum', sidewall_angle=0), 'heater': LayerLevel(layer=(47, 0), thickness=0.75, zmin=1.32, material='TiN', sidewall_angle=0), 'viac': LayerLevel(layer=(44, 0), thickness=1.5, zmin=2.0700000000000003, material='Aluminum', sidewall_angle=0), 'metal2': LayerLevel(layer=(45, 0), thickness=2.0, zmin=3.5700000000000003, material='Aluminum', sidewall_angle=0)}, thickness_pml: float = 1.0, xmargin: float = 0, ymargin: float = 0, xmargin_left: float = 0, xmargin_right: float = 0, ymargin_top: float = 0, ymargin_bot: float = 0, zmargin: float = 1.0, clad_material: str = 'sio2', port_source_name: str = 'o1', port_margin: float = 0.5, port_source_offset: float = 0.1, distance_source_to_monitors: float = 0.2, resolution: float = 50, wavelength_start: float = 1.5, wavelength_stop: float = 1.6, wavelength_points: int = 50, plot_modes: bool = False, num_modes: int = 2, run_time_ps: float = 10.0, dispersive: bool = False, material_name_to_tidy3d_index: Dict[str, float] = {'si': 3.47, 'sio2': 1.44, 'sin': 2.0}, material_name_to_tidy3d_name: Dict[str, str] = {'si': 'cSi', 'sio2': 'SiO2', 'sin': 'Si3N4'}, is_3d: bool = True, with_all_monitors: bool = False) -&gt; tidy3d.components.simulation.Simulation
+    Returns Simulation object from gdsfactory.component
+
+    based on GDS example
+    https://simulation.cloud/docs/html/examples/ParameterScan.html
+
+    .. code::
+
+         top view
+              ________________________________
+             |                               |
+             | xmargin_left                  | port_extension
+             |&lt;------&gt;          port_margin ||&lt;--&gt;
+          ___|___________          _________||___
+             |           \        /          |
+             |            \      /           |
+             |             ======            |
+             |            /      \           |
+          ___|___________/        \__________|___
+             |   |                 &lt;--------&gt;|
+             |   |ymargin_bot   xmargin_right|
+             |   |                           |
+             |___|___________________________|
+
+        side view
+              ________________________________
+             |                     |         |
+             |                     |         |
+             |                   zmargin_top |
+             |xmargin_left         |         |
+             |&lt;---&gt; _____         _|___      |
+             |     |     |       |     |     |
+             |     |     |       |     |     |
+             |     |_____|       |_____|     |
+             |       |                       |
+             |       |                       |
+             |       |zmargin_bot            |
+             |       |                       |
+             |_______|_______________________|
+
+
+    Args:
+        component: gdsfactory Component.
+        port_extension: extend ports beyond the PML.
+        layer_stack: contains layer numbers (int, int) to thickness, zmin.
+        thickness_pml: PML thickness (um).
+        xmargin: left/right distance from component to PML.
+        xmargin_left: left distance from component to PML.
+        xmargin_right: right distance from component to PML.
+        ymargin: left/right distance from component to PML.
+        ymargin_top: top distance from component to PML.
+        ymargin_bot: bottom distance from component to PML.
+        zmargin: thickness for cladding above and below core.
+        clad_material: material for cladding.
+        port_source_name: input port name.
+        port_margin: margin on each side of the port.
+        distance_source_to_monitors: in (um) source goes before monitors.
+        port_source_offset: mode solver workaround.
+            positive moves source forward, negative moves source backward.
+        resolution: in pixels/um (20: for coarse, 120: for fine)
+        wavelength_start: in (um).
+        wavelength_stop: in (um).
+        wavelength_points: number of wavelengths.
+        plot_modes: plot source modes.
+        num_modes: number of modes to plot.
+        run_time_ps: make sure it's sufficient for the fields to decay.
+            defaults to 10ps and counts on automatic shutoff to stop earlier if needed.
+        dispersive: False uses constant refractive index materials.
+            True adds wavelength depending materials.
+            Dispersive materials require more computation.
+        material_name_to_tidy3d_index: not dispersive materials have a constant index.
+        material_name_to_tidy3d_name: dispersive materials have a wavelength
+            dependent index. Maps layer_stack names with tidy3d material database names.
+        is_3d: if False, does not consider Z dimension for faster simulations.
+        with_all_monitors: if True, includes field monitors which increase results file size.
+
+    .. code::
+
+        import matplotlib.pyplot as plt
+        import gdsfactory as gf
+        import gdsfactory.simulation.tidy3d as gt
+
+        c = gf.components.bend_circular()
+        sim = gt.get_simulation(c)
+        gt.plot_simulation(sim)
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">mmi1x2</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:31.394 | INFO     | gdsfactory.show:show:36 - Klayout show mmi1x2_add_padding_cont_3586176e: uid 6, ports ['o1', 'o2', 'o3'], aliases [], 3 polygons, 1 references
+2022-03-17 04:16:31.398 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_10_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_10_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">coupler_ring</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:31.748 | INFO     | gdsfactory.show:show:36 - Klayout show coupler_ring_add_paddin_16da86d9: uid 20, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 4 polygons, 1 references
+2022-03-17 04:16:31.751 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_11_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_11_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_circular</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:32.134 | INFO     | gdsfactory.show:show:36 - Klayout show bend_circular_706a361a__3f162bbd: uid 27, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:32.136 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_12_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_12_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:32.478 | INFO     | gdsfactory.show:show:36 - Klayout show straight_add_padding_co_4a9667c1: uid 34, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:32.480 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_13_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_13_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">tidy3d</span> <span class="k">as</span> <span class="nn">td</span>
+<span class="kn">from</span> <span class="nn">tidy3d</span> <span class="kn">import</span> <span class="n">web</span>
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.gtidy3d</span> <span class="k">as</span> <span class="nn">gt</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">plot_modes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">port_margin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ymargin</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation_xz</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:32.816 | INFO     | gdsfactory.show:show:36 - Klayout show straight_2dcab9f2_add_p_9f88bec2: uid 39, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:32.818 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Effective index of computed modes:  2.4433, 1.7670
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 864x864 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_14_3.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_14_3.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_14_5.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_14_5.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight_rib</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">plot_modes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation_xz</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:35.589 | INFO     | gdsfactory.show:show:36 - Klayout show straight_6a0db720_add_p_914fed41: uid 44, ports ['o1', 'o2'], aliases [], 6 polygons, 1 references
+2022-03-17 04:16:35.591 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+2022-03-17 04:16:35.594 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (3, 0), 3.47, index = 3.470, thickness = 0.09, zmin = 0.0, zmax = 0.09
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Effective index of computed modes:  2.5524, 2.0618
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 864x864 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_15_3.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_15_3.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_15_5.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_15_5.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">tidy3d</span> <span class="k">as</span> <span class="nn">td</span>
+<span class="kn">from</span> <span class="nn">tidy3d</span> <span class="kn">import</span> <span class="n">web</span>
+
+<span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.gtidy3d</span> <span class="k">as</span> <span class="nn">gt</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation</span> <span class="k">as</span> <span class="nn">sim</span>
+<span class="kn">from</span> <span class="nn">gdsfactory.components.taper</span> <span class="kn">import</span> <span class="n">taper_sc_nc</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">taper_sc_nc</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">plot_modes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation_xz</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:37.497 | INFO     | gdsfactory.show:show:36 - Klayout show taper_strip_to_ridge_18_cfe02cd0: uid 52, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:37.499 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+2022-03-17 04:16:37.501 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (34, 0), 2.0, index = 2.000, thickness = 0.35, zmin = 0.32, zmax = 0.6699999999999999
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Effective index of computed modes:  2.4441, 1.8051
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 864x864 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_16_3.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_16_3.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_16_5.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_16_5.png"/>
+</div>
+</div>
+<p>Lets make sure the mode also looks correct on the Nitride side</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">taper_sc_nc</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">port_source_name</span><span class="o">=</span><span class="s2">"o2"</span><span class="p">,</span> <span class="n">plot_modes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation_xz</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:39.429 | INFO     | gdsfactory.show:show:36 - Klayout show taper_strip_to_ridge_18_cfe02cd0: uid 52, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:39.433 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+2022-03-17 04:16:39.435 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (34, 0), 2.0, index = 2.000, thickness = 0.35, zmin = 0.32, zmax = 0.6699999999999999
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Effective index of computed modes:  1.6114, 1.5403
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 864x864 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_18_3.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_18_3.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_18_5.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_18_5.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">components</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"bend_euler"</span><span class="p">,</span>
+    <span class="s2">"bend_s"</span><span class="p">,</span>
+    <span class="s2">"coupler"</span><span class="p">,</span>
+    <span class="s2">"coupler_ring"</span><span class="p">,</span>
+    <span class="s2">"crossing"</span><span class="p">,</span>
+    <span class="s2">"mmi1x2"</span><span class="p">,</span>
+    <span class="s2">"mmi2x2"</span><span class="p">,</span>
+    <span class="s2">"taper"</span><span class="p">,</span>
+    <span class="s2">"straight"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">component_name</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">component_name</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">factory</span><span class="p">[</span><span class="n">component_name</span><span class="p">]()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:42.065 | INFO     | gdsfactory.show:show:36 - Klayout show bend_euler_add_padding__b811d9f6: uid 60, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:42.067 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+bend_euler
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_4.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_4.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:42.392 | INFO     | gdsfactory.show:show:36 - Klayout show bezier_9829f357_bend_s__e72649b4: uid 65, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:42.394 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+bend_s
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_9.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_9.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:42.701 | INFO     | gdsfactory.show:show:36 - Klayout show coupler_add_padding_con_ebd7dd08: uid 75, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 4 polygons, 1 references
+2022-03-17 04:16:42.703 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+coupler
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_14.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_14.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:43.012 | INFO     | gdsfactory.show:show:36 - Klayout show coupler_ring_add_paddin_16da86d9: uid 20, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 4 polygons, 1 references
+2022-03-17 04:16:43.016 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+coupler_ring
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_19.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_19.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:43.357 | INFO     | gdsfactory.show:show:36 - Klayout show crossing_add_padding_co_04ba53a0: uid 82, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 4 polygons, 1 references
+2022-03-17 04:16:43.360 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+2022-03-17 04:16:43.362 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (2, 0), 3.47, index = 3.470, thickness = 0.15, zmin = 0.0, zmax = 0.15
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+crossing
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_24.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_24.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:43.919 | INFO     | gdsfactory.show:show:36 - Klayout show mmi1x2_add_padding_cont_3586176e: uid 6, ports ['o1', 'o2', 'o3'], aliases [], 3 polygons, 1 references
+2022-03-17 04:16:43.921 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+mmi1x2
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_29.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_29.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:44.220 | INFO     | gdsfactory.show:show:36 - Klayout show mmi2x2_add_padding_cont_f39be294: uid 87, ports ['o1', 'o2', 'o3', 'o4'], aliases [], 4 polygons, 1 references
+2022-03-17 04:16:44.222 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+mmi2x2
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_34.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_34.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:44.526 | INFO     | gdsfactory.show:show:36 - Klayout show taper_add_padding_conta_73b75137: uid 91, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:44.528 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+taper
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_39.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_39.png"/>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:44.827 | INFO     | gdsfactory.show:show:36 - Klayout show straight_add_padding_co_4a9667c1: uid 34, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:44.829 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+straight
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_44.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_19_44.png"/>
+</div>
+</div>
+</section>
+</section>
+<section id="write_sparameters">
+<h2>write_sparameters<a class="headerlink" href="#write_sparameters" title="Permalink to this headline">#</a></h2>
+<p>You can write Sparameters from a simulation as well as a group of simulations in paralell.</p>
+<p>Each Sparameter runs on a different thread as it needs to monitor each job sent to the tidy3d server.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">straight</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_sparameters</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">component_name</span><span class="p">,</span> <span class="n">component_factory</span> <span class="ow">in</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">_factory_passives</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">component_factory</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_sparameters</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">bend_circular</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:45.158 | INFO     | gdsfactory.show:show:36 - Klayout show bend_circular_706a361a__3f162bbd: uid 27, ports ['o1', 'o2'], aliases [], 2 polygons, 1 references
+2022-03-17 04:16:45.160 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_22_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_22_2.png"/>
+</div>
+</div>
+<p>For a 2 port reciprocal passive component you can always asume <code class="docutils literal notranslate"><span class="pre">s21</span> <span class="pre">=</span> <span class="pre">s12</span></code></p>
+<p>Another approximation you can make for planar devices is that <code class="docutils literal notranslate"><span class="pre">s11</span> <span class="pre">=</span> <span class="pre">s22</span></code>, which saves 1 extra simulation</p>
+<p>This approximation only works well for straight and bends</p>
+<p>we call this <code class="docutils literal notranslate"><span class="pre">1x1</span></code> port symmetry</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">write_sparameters_1x1</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:45.486 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters:write_sparameters:152 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/bend_circular_706a361a_7022156e.csv')
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_24_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_24_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">(</span><span class="s2">"s21m"</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_25_1.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_25_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">mmi1x2</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">write_sparameters</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:46.178 | INFO     | gdsfactory.show:show:36 - Klayout show mmi1x2_add_padding_cont_3586176e: uid 6, ports ['o1', 'o2', 'o3'], aliases [], 3 polygons, 1 references
+2022-03-17 04:16:46.180 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation:get_simulation:232 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_26_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_26_2.png"/>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:46.696 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters:write_sparameters:152 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/mmi1x2_7022156e.csv')
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_27_1.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_27_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">(</span><span class="s2">"s12m"</span><span class="p">,</span> <span class="s2">"s13m"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_28_1.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_28_1.png"/>
+</div>
+</div>
+</section>
+<section id="write_sparameters_batch">
+<h2>write_sparameters_batch<a class="headerlink" href="#write_sparameters_batch" title="Permalink to this headline">#</a></h2>
+<p>You can also send a batch of component simulations in paralell to the tidy3d server.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="n">gf</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mf">1.11</span> <span class="o">+</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">write_sparameters_batch_1x1</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:47.481 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters:write_sparameters:152 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/straight_06d431c8_7022156e.csv')
+2022-03-17 04:16:47.483 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters:write_sparameters:152 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/straight_0437acf8_7022156e.csv')
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_31_1.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_31_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_sparameters</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_32_1.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_32_1.png"/>
+</div>
+</div>
+</section>
+<section id="get_simulation_grating_coupler">
+<h2>get_simulation_grating_coupler<a class="headerlink" href="#get_simulation_grating_coupler" title="Permalink to this headline">#</a></h2>
+<p>You can also expand the planar component simulations to simulate an out-of-plane grating coupler.</p>
+<p>The following simulations run in 2D but can also run in 3D.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">gt</span><span class="o">.</span><span class="n">get_simulation_grating_coupler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on function get_simulation_grating_coupler in module gdsfactory.simulation.gtidy3d.get_simulation_grating_coupler:
+
+get_simulation_grating_coupler(component: gdsfactory.component.Component, port_extension: Optional[float] = 15.0, layer_stack: gdsfactory.tech.LayerStack = {'core': LayerLevel(layer=(1, 0), thickness=0.22, zmin=0.0, material='si', sidewall_angle=0), 'clad': LayerLevel(layer=(111, 0), thickness=None, zmin=0.0, material='sio2', sidewall_angle=0), 'slab150': LayerLevel(layer=(2, 0), thickness=0.15, zmin=0.0, material='si', sidewall_angle=0), 'slab90': LayerLevel(layer=(3, 0), thickness=0.09, zmin=0.0, material='si', sidewall_angle=0), 'nitride': LayerLevel(layer=(34, 0), thickness=0.35, zmin=0.32, material='sin', sidewall_angle=0), 'ge': LayerLevel(layer=(5, 0), thickness=0.5, zmin=0.22, material='ge', sidewall_angle=0), 'via_contact': LayerLevel(layer=(40, 0), thickness=1.1, zmin=0.09, material='Aluminum', sidewall_angle=0), 'metal1': LayerLevel(layer=(41, 0), thickness=0.75, zmin=1.32, material='Aluminum', sidewall_angle=0), 'heater': LayerLevel(layer=(47, 0), thickness=0.75, zmin=1.32, material='TiN', sidewall_angle=0), 'viac': LayerLevel(layer=(44, 0), thickness=1.5, zmin=2.0700000000000003, material='Aluminum', sidewall_angle=0), 'metal2': LayerLevel(layer=(45, 0), thickness=2.0, zmin=3.5700000000000003, material='Aluminum', sidewall_angle=0)}, thickness_pml: float = 1.0, xmargin: float = 0, ymargin: float = 0, xmargin_left: float = 0, xmargin_right: float = 0, ymargin_top: float = 0, ymargin_bot: float = 0, zmargin: float = 1.0, clad_material: str = 'sio2', box_material: str = 'sio2', box_thickness: float = 2.0, substrate_material: str = 'si', port_waveguide_name: str = 'o1', port_margin: float = 0.5, port_waveguide_offset: float = 0.1, distance_source_to_monitors: float = 0.2, resolution: float = 50, wavelength: Optional[float] = 1.55, wavelength_start: float = 1.2, wavelength_stop: float = 1.8, wavelength_points: int = 256, plot_modes: bool = False, num_modes: int = 2, run_time_ps: float = 10.0, fiber_port_name: str = 'vertical_te', fiber_xoffset: float = 0, fiber_z: float = 2, fiber_mfd: float = 5.2, fiber_angle_deg: float = 20.0, dispersive: bool = False, material_name_to_tidy3d_index: Dict[str, float] = {'si': 3.47, 'sio2': 1.44, 'sin': 2.0}, material_name_to_tidy3d_name: Dict[str, str] = {'si': 'cSi', 'sio2': 'SiO2', 'sin': 'Si3N4'}, is_3d: bool = True, with_all_monitors: bool = False) -&gt; tidy3d.components.simulation.Simulation
+    Returns Simulation object from a gdsfactory grating coupler component
+
+    injects a Gaussian beam from above and monitors the transmission into the waveguide.
+
+    based on grating coupler example
+    https://docs.simulation.cloud/projects/tidy3d/en/latest/notebooks/GratingCoupler.html
+
+    .. code::
+
+         top view
+              ________________________________
+             |                               |
+             | xmargin_left                  |
+             |&lt;------&gt;                       |
+             |           ________________    |
+             |          /   |  |  |  |  |    |
+             |         /    |  |  |  |  |    |
+             |=========     |  |  |  |  |    |
+             |         \    |  |  |  |  |    |
+             |   _ _ _ _\___|__|__|__|__|    |
+             |   |                       &lt;--&gt;|
+             |   |ymargin_bot   xmargin_right|
+             |   |                           |
+             |___|___________________________|
+
+
+        side view
+
+              fiber_xoffset
+                 |&lt;---&gt;|
+            fiber_port_name
+                 |
+                         fiber_angle_deg &gt; 0
+                        |  /
+                        | /
+                        |/
+                 /              /       |
+                /  fiber_mfd   /        |
+               /&lt;------------&gt;/    _ _ _| _ _ _ _ _ _ _
+                                        |
+                   clad_material        | fiber_z
+                    _   _   _      _ _ _|_ _ _ _ _ _ _
+                   | | | | | |          ||wg_thickness
+                  _| |_| |_| |__________||___
+                                        || |
+        waveguide            |          || | slab_thickness
+              ____________________ _ _ _||_|_
+                             |          |
+                   box_material         |box_thickness
+              _______________|____ _ _ _|_ _ _ _ _ _ _
+                             |          |
+                 substrate_material     |substrate_thickness
+             ________________|____ _ _ _|_ _ _ _ _ _ _
+                             |
+        |--------------------|&lt;--------&gt;
+                                xmargin
+
+    Args:
+        component: gdsfactory Component.
+        port_extension: extend ports beyond the PML.
+        layer_stack: contains layer numbers (int, int) to thickness, zmin.
+        thickness_pml: PML thickness (um).
+        xmargin: left/right distance from component to PML.
+        xmargin_left: left distance from component to PML.
+        xmargin_right: right distance from component to PML.
+        ymargin: left/right distance from component to PML.
+        ymargin_top: top distance from component to PML.
+        ymargin_bot: bottom distance from component to PML.
+        zmargin: thickness for cladding above and below core.
+        clad_material: material for cladding.
+        box_material:
+        substrate_material:
+        box_thickness: (um)
+        substrate_thickness: (um)
+        port_waveguide_name: input port name.
+        port_margin: margin on each side of the port.
+        distance_source_to_monitors: in (um) source goes before monitors.
+        port_waveguide_offset: mode solver workaround.
+            positive moves source forward, negative moves source backward.
+        resolution: in pixels/um (20: for coarse, 120: for fine)
+        wavelength: source center wavelength (um)
+            if None takes mean between wavelength_start, wavelength_stop
+        wavelength_start: in (um).
+        wavelength_stop: in (um).
+        wavelength_points: number of wavelengths.
+        plot_modes: plot source modes.
+        num_modes: number of modes to plot.
+        run_time_ps: make sure it's sufficient for the fields to decay.
+            defaults to 10ps and automatic shutoff stops earlier if needed.
+        fiber_port_name:
+        fiber_xoffset: fiber center xoffset to fiber_port_name
+        fiber_z: fiber zoffset from grating zmax
+        fiber_mfd: fiber mode field diameter (um)
+        fiber_angle_deg: fiber_angle in degrees with respect to normal.
+            Positive for west facing, Negative for east facing sources.
+        dispersive: False uses constant refractive index materials.
+            True adds wavelength depending materials.
+            Dispersive materials require more computation.
+        material_name_to_tidy3d_index: not dispersive materials have a constant index.
+        material_name_to_tidy3d_name: dispersive materials have a wavelength
+            dependent index. Maps layer_stack names with tidy3d material database names.
+        is_3d: if False collapses the Y direction for a 2D simulation.
+        with_all_monitors: if True, includes field monitors which increase results file size.
+
+    .. code::
+
+        import matplotlib.pyplot as plt
+        import gdsfactory as gf
+        import gdsfactory.simulation.tidy3d as gt
+
+        c = gf.components.grating_coupler_elliptical_arbitrary(
+            widths=[0.343] * 25, gaps=[0.345] * 25
+        )
+        sim = gt.get_simulation(c)
+        gt.plot_simulation(sim)
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdsfactory</span> <span class="k">as</span> <span class="nn">gf</span>
+<span class="kn">import</span> <span class="nn">gdsfactory.simulation.gtidy3d</span> <span class="k">as</span> <span class="nn">gt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">grating_coupler_elliptical_lumerical</span><span class="p">()</span>
+<span class="p">)</span>  <span class="c1"># inverse design grating apodized</span>
+<span class="n">fiber_angle_deg</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation_grating_coupler</span><span class="p">(</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span><span class="p">,</span> <span class="n">fiber_xoffset</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:48.259 | INFO     | gdsfactory.show:show:36 - Klayout show grating_coupler_ellipti_7f8abd10: uid 103, ports ['o1', 'vertical_te'], aliases [], 1 polygons, 1 references
+2022-03-17 04:16:48.263 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation_grating_coupler:get_simulation_grating_coupler:287 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+2022-03-17 04:16:48.281 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation_grating_coupler:get_simulation_grating_coupler:287 - Add (2, 0), 3.47, index = 3.470, thickness = 0.15, zmin = 0.0, zmax = 0.15
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_36_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_36_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_37_1.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_37_1.png"/>
+</div>
+</div>
+<p>Lets compare the xtolerance of a constant pitch vs an apodized grating.</p>
+<p>We run simulations in 2D for faster.</p>
+<p>Lets simulate 2 different grating couplers:</p>
+<ul class="simple">
+<li><p>apodized inverse design example from lumerical website (5 degrees fiber angle)</p></li>
+<li><p>constant pitch grating from gdsfactory generic PDK (20 degrees fiber angle)</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation_grating_coupler</span><span class="p">(</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span><span class="p">,</span> <span class="n">fiber_xoffset</span><span class="o">=-</span><span class="mi">5</span>
+<span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:48.708 | INFO     | gdsfactory.show:show:36 - Klayout show grating_coupler_ellipti_7f8abd10: uid 103, ports ['o1', 'vertical_te'], aliases [], 1 polygons, 1 references
+2022-03-17 04:16:48.712 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation_grating_coupler:get_simulation_grating_coupler:287 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+2022-03-17 04:16:48.730 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation_grating_coupler:get_simulation_grating_coupler:287 - Add (2, 0), 3.47, index = 3.470, thickness = 0.15, zmin = 0.0, zmax = 0.15
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_39_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_39_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation_grating_coupler</span><span class="p">(</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span><span class="p">,</span> <span class="n">fiber_xoffset</span><span class="o">=+</span><span class="mi">5</span>
+<span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:49.010 | INFO     | gdsfactory.show:show:36 - Klayout show grating_coupler_ellipti_7f8abd10: uid 103, ports ['o1', 'vertical_te'], aliases [], 1 polygons, 1 references
+2022-03-17 04:16:49.016 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation_grating_coupler:get_simulation_grating_coupler:287 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+2022-03-17 04:16:49.036 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation_grating_coupler:get_simulation_grating_coupler:287 - Add (2, 0), 3.47, index = 3.470, thickness = 0.15, zmin = 0.0, zmax = 0.15
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 792x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_40_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_40_2.png"/>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">component</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+        <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span><span class="p">,</span>
+        <span class="n">fiber_xoffset</span><span class="o">=</span><span class="n">fiber_xoffset</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">fiber_xoffset</span> <span class="ow">in</span> <span class="n">offsets</span>
+<span class="p">]</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">write_sparameters_grating_coupler_batch</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:49.321 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_cf760b02.csv')
+2022-03-17 04:16:49.321 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_35ed2fef.csv')
+2022-03-17 04:16:49.322 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_f401be50.csv')
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">offsets</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">write_sparameters_grating_coupler</span><span class="p">(</span>
+        <span class="n">c</span><span class="p">,</span> <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span><span class="p">,</span> <span class="n">fiber_xoffset</span><span class="o">=</span><span class="n">offset</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">s21m</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"wavelength (um"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Transmission (dB)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"transmission vs fiber xoffset"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:49.394 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_35ed2fef.csv')
+2022-03-17 04:16:49.455 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_cf760b02.csv')
+2022-03-17 04:16:49.504 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_f401be50.csv')
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">matplotlib.legend.Legend</span><span style="color: #000000; text-decoration-color: #000000"> object at </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0x7f8e10a7dac0</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_44_3.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_44_3.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fiber_angles</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">fiber_angle_deg</span> <span class="ow">in</span> <span class="n">fiber_angles</span>
+<span class="p">]</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">write_sparameters_grating_coupler_batch</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:49.722 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_837ef9d9.csv')
+2022-03-17 04:16:49.722 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_39855286.csv')
+2022-03-17 04:16:49.723 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_af975297.csv')
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">fiber_angle_deg</span> <span class="ow">in</span> <span class="n">fiber_angles</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">write_sparameters_grating_coupler</span><span class="p">(</span>
+        <span class="n">c</span><span class="p">,</span> <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">s21m</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">fiber_angle_deg</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"wavelength (um"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Transmission (dB)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"transmission vs fiber angle (degrees)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:49.766 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_837ef9d9.csv')
+2022-03-17 04:16:49.829 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_af975297.csv')
+2022-03-17 04:16:49.879 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_9d85a0c6_39855286.csv')
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">matplotlib.legend.Legend</span><span style="color: #000000; text-decoration-color: #000000"> object at </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0x7f8e10cea1f0</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_46_3.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_46_3.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">grating_coupler_elliptical_arbitrary</span><span class="p">(</span>
+    <span class="n">widths</span><span class="o">=</span><span class="p">[</span><span class="mf">0.343</span><span class="p">]</span> <span class="o">*</span> <span class="mi">25</span><span class="p">,</span> <span class="n">gaps</span><span class="o">=</span><span class="p">[</span><span class="mf">0.345</span><span class="p">]</span> <span class="o">*</span> <span class="mi">25</span>
+<span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_48_1.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_48_1.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fiber_angle_deg</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_simulation_grating_coupler</span><span class="p">(</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span><span class="p">,</span> <span class="n">fiber_xoffset</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">plot_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:50.295 | INFO     | gdsfactory.show:show:36 - Klayout show grating_coupler_ellipti_58781c87: uid 111, ports ['o1', 'vertical_te'], aliases [], 1 polygons, 1 references
+2022-03-17 04:16:50.298 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation_grating_coupler:get_simulation_grating_coupler:287 - Add (1, 0), 3.47, index = 3.470, thickness = 0.22, zmin = 0.0, zmax = 0.22
+2022-03-17 04:16:50.316 | DEBUG    | gdsfactory.simulation.gtidy3d.get_simulation_grating_coupler:get_simulation_grating_coupler:287 - Add (2, 0), 3.47, index = 3.470, thickness = 0.15, zmin = 0.0, zmax = 0.15
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 1584x576 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_49_2.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_49_2.png"/>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">offsets</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">array</span><span style="font-weight: bold">([</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-10</span>,  <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-5</span>,   <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,   <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>,  <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10</span><span style="font-weight: bold">])</span>
+</pre></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">component</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+        <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span><span class="p">,</span>
+        <span class="n">fiber_xoffset</span><span class="o">=</span><span class="n">fiber_xoffset</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">fiber_xoffset</span> <span class="ow">in</span> <span class="n">offsets</span>
+<span class="p">]</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">write_sparameters_grating_coupler_batch</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:50.637 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_c215a6be.csv')
+2022-03-17 04:16:50.638 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_b9e0fa6b.csv')
+2022-03-17 04:16:50.638 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_a826292e.csv')
+2022-03-17 04:16:50.639 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_6487ff06.csv')
+2022-03-17 04:16:50.640 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_7b564254.csv')
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">offsets</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">write_sparameters_grating_coupler</span><span class="p">(</span>
+        <span class="n">c</span><span class="p">,</span> <span class="n">is_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fiber_angle_deg</span><span class="o">=</span><span class="n">fiber_angle_deg</span><span class="p">,</span> <span class="n">fiber_xoffset</span><span class="o">=</span><span class="n">offset</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">s21m</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"wavelength (um"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Transmission (dB)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"transmission vs xoffset"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2022-03-17 04:16:50.692 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_b9e0fa6b.csv')
+2022-03-17 04:16:50.760 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_c215a6be.csv')
+2022-03-17 04:16:50.819 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_6487ff06.csv')
+2022-03-17 04:16:50.885 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_a826292e.csv')
+2022-03-17 04:16:50.946 | INFO     | gdsfactory.simulation.gtidy3d.write_sparameters_grating_coupler:write_sparameters_grating_coupler:93 - Simulation loaded from PosixPath('/home/runner/work/gdsfactory/gdsfactory/gdslib/sp/grating_coupler_ellipti_da2e2127_7b564254.csv')
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">matplotlib.legend.Legend</span><span style="color: #000000; text-decoration-color: #000000"> object at </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0x7f8e10a03a90</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">&lt;</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">Figure</span><span style="color: #000000; text-decoration-color: #000000"> size 432x288 with </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="color: #000000; text-decoration-color: #000000"> Axes</span><span style="font-weight: bold">&gt;</span>
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_52_3.png" src="../../../_images/notebooks_plugins_tidy3d_00_tidy3d_52_3.png"/>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../sax/sax.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">SAX circuit simulator</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../meep/002_gratings.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">FDTD Meep gratings</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2019, PsiQ
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">FDTD tidy3d</a><ul>
+<li><a class="reference internal" href="#Materials">Materials</a></li>
+<li><a class="reference internal" href="#get_simulation">get_simulation</a><ul>
+<li><a class="reference internal" href="#2D">2D</a></li>
+<li><a class="reference internal" href="#3D">3D</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#write_sparameters">write_sparameters</a></li>
+<li><a class="reference internal" href="#write_sparameters_batch">write_sparameters_batch</a></li>
+<li><a class="reference internal" href="#get_simulation_grating_coupler">get_simulation_grating_coupler</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
